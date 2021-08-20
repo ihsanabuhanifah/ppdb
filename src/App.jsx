@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Register from "./pages/auth/register";
 import Login from "./pages/auth/login";
+import PPDB from "./layout/ppdb";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 function App() {
@@ -17,6 +18,9 @@ function App() {
           </Route>
           <Route path="/admin">
             <p>admin</p>
+          </Route>
+          <Route path="/ppdb">
+            <PPDB></PPDB>
           </Route>
           <Redirect from="/" to="/login" />
           <Redirect from="*" to="/login" />

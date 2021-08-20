@@ -3,6 +3,7 @@ import Layout from "../../layout/auth";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 const RegisterSchema = Yup.object().shape({
   name: Yup.string().required("Nama Lengkap wajib diisi"),
   email: Yup.string()

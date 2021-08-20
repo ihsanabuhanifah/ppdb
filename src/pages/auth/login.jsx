@@ -130,6 +130,8 @@ export default function Register() {
             Mendaftar
           </Link>{" "}
         </p>
+        <Link className="text-green-500 text-lg font-bold" to="/ppdb/tes">
+            ppdb          </Link>{" "}
       </div>
     </Layout>
   );

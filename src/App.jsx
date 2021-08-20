@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Register from "./pages/auth/register";
 import Login from "./pages/auth/login";
 import store from "./redux/store";
@@ -18,6 +18,8 @@ function App() {
           <Route path="/admin">
             <p>admin</p>
           </Route>
+          <Redirect from="/" to="/login" />
+          <Redirect from="*" to="/login" />
         </Switch>
       </BrowserRouter>
     </Provider>

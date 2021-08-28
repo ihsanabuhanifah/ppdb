@@ -34,7 +34,7 @@ export default function Layout({ children, page }) {
           {children}
         </div>
       </div>
-      <div className="absolute right-4 bottom-4">
+      <div className="fixed right-4 bottom-4">
         <ReactWhatsapp number={"+6285888222457"} message={message}>
           <Tooltip
             fontSize="lg"

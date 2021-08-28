@@ -74,7 +74,7 @@ export default function Register() {
   };
   return (
     <Layout page="login">
-      <div className="w-full px-3 lg:px-10 grid grid-cols-1 gap-5">
+      <div className="w-full px-3 lg:px-12 grid grid-cols-1 gap-5">
         <div>
         <h3 className="text-xl lg:text-3xl font-bold uppercase "><span className="text-gray-500">Masuk Portal</span> <span className="text-green-500"> PPDB</span></h3>
           <p className="text-lg lg:text-xl italic text-green-500">Silahkan Melakukan Masuk disini</p>

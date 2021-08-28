@@ -9,7 +9,7 @@ import qs from "qs";
   }
 
 let client = axios.create({
-  baseURL: `http://localhost:8000/api`,
+  baseURL: `https://psb-api.smkmadinatulquran.sch.id/api`,
   headers,
   paramsSerializer: function (params) {
     return qs.stringify(params, { encode: false, skipNulls: true });
@@ -37,3 +37,4 @@ export default client;
 // https://mysmk-be.herokuapp.com/api
 // http://localhost:8000/api
 //http://psb-online.herokuapp.com/api
+//

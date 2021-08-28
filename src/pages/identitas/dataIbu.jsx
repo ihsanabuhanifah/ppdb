@@ -7,14 +7,9 @@ import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import Loading from "../../components/loading";
 const RegisterSchema = Yup.object().shape({
-  // nik_siswa: Yup.number()
-  //   .typeError("NIK wajib dengan angka")
-
-  //   .required("NIK Wajib diisi"),
-  // // nik_ibu: Yup.number()
-  //   .typeError("NIK wajib dengan angka")
-
-  //   .required("NIK Wajib diisi"),
+  nik_ibu: Yup.string()
+    .length(16, "NIK Wajib 16 digit")
+    .typeError("NIK wajib dengan angka"),
   name_ibu: Yup.string().required("Nama Lengkap wajib diisi"),
 
   // tempat_lahir_ibu: Yup.string().required("Tempat Lahir wajib diisi"),
@@ -57,7 +52,7 @@ export default function DataSiswa() {
         duration: 4000,
         isClosable: true,
       });
-      history.push("/identitas/data-sekolah-asal");
+      history.push("/identitas/data-wali");
     }
     if (result.response.status === 401) {
       setErrorPost(result.response.data);
@@ -74,7 +69,7 @@ export default function DataSiswa() {
   console.log(focus);
   return (
     <React.Fragment>
-      <div className="mb-6 pb-5 border-b-2">
+      <div className="mb-6 pb-5 ">
         <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">
           Lengkapi Data ibu Santri
         </h1>
@@ -142,11 +137,12 @@ export default function DataSiswa() {
                 onBlur={handleBlur}
                 value={values.nik_ibu}
                 focus={focus}
+                type="number"
               >
                 {" "}
-                {errors.nik_siswa && touched.nik_siswa && (
+                {errors.nik_ibu && touched.nik_ibu && (
                   <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.nik_siswa}
+                    {errors.nik_ibu}
                   </p>
                 )}
               </Input>
@@ -165,7 +161,6 @@ export default function DataSiswa() {
                 onBlur={handleBlur}
                 value={values.tempat_lahir_ibu}
                 focus={focus}
-                
               >
                 {" "}
                 {errors.tempat_lahir_ibu && touched.tempat_lahir_ibu && (
@@ -182,9 +177,7 @@ export default function DataSiswa() {
                 placeholder="Tanggal lahir"
                 tabIndex="2"
                 type="date"
-                error={
-                  errors.tanggal_lahir_ibu && touched.tanggal_lahir_ibu
-                }
+                error={errors.tanggal_lahir_ibu && touched.tanggal_lahir_ibu}
                 onFocus={() => {
                   setFocus("tanggal_lahir_ibu");
                 }}
@@ -192,7 +185,6 @@ export default function DataSiswa() {
                 onBlur={handleBlur}
                 value={values.tanggal_lahir_ibu}
                 focus={focus}
-               
               >
                 {" "}
                 {errors.tanggal_lahir_ibu && touched.tanggal_lahir_ibu && (
@@ -209,9 +201,7 @@ export default function DataSiswa() {
                 placeholder="Nomor Handphone ibu"
                 tabIndex="2"
                 type="text"
-                error={
-                  errors.nomor_telepon_ibu && touched.nomor_telepon_ibu
-                }
+                error={errors.nomor_telepon_ibu && touched.nomor_telepon_ibu}
                 onFocus={() => {
                   setFocus("nomor_telepon_ibu");
                 }}
@@ -236,9 +226,7 @@ export default function DataSiswa() {
                 placeholder="Pekerjaan ibu"
                 tabIndex="2"
                 type="text"
-                error={
-                  errors.pekerjaan_ibu && touched.pekerjaan_ibu
-                }
+                error={errors.pekerjaan_ibu && touched.pekerjaan_ibu}
                 onFocus={() => {
                   setFocus("pekerjaan_ibu");
                 }}
@@ -246,7 +234,6 @@ export default function DataSiswa() {
                 onBlur={handleBlur}
                 value={values.pekerjaan_ibu}
                 focus={focus}
-                
               >
                 {" "}
                 {errors.pekerjaan_ibu && touched.pekerjaan_ibu && (
@@ -275,29 +262,61 @@ export default function DataSiswa() {
                     value={values.penghasilan_ibu}
                     error={errors.penghasilan_ibu && touched.penghasilan_ibu}
                   >
-                    <option >Pilih</option>
-                    <option value={"kurang dari 5000000"}> {" Kurang dari Rp. 5.000.000"}</option>
-                    <option value={"lebih dari 5000000 dan kurang dari 10000000"}> {" Lebih dari Rp. 5.000.000 dan Kurang dari Rp. 10.000.000" }</option>
-                    <option value={"lebih dari 10000000 dan kurang dari 20000000"}> {" Lebih dari Rp. 10.000.000 dan Kurang dari Rp. 20.000.000" }</option>
-                    <option value={"lebih dari 20000000"}> {" Lebih dari Rp. 20.000.000" }</option>
-                    <option value={"lebih dari 30000000"}> {" Lebih dari Rp. 30.000.000" }</option>
-                    <option value={"lebih dari 40000000"}> {" Lebih dari Rp. 40.000.000" }</option>
+                    <option>Pilih</option>
+                    <option value={"kurang dari 5000000"}>
+                      {" "}
+                      {" Kurang dari Rp. 5.000.000"}
+                    </option>
+                    <option
+                      value={"lebih dari 5000000 dan kurang dari 10000000"}
+                    >
+                      {" "}
+                      {
+                        " Lebih dari Rp. 5.000.000 dan Kurang dari Rp. 10.000.000"
+                      }
+                    </option>
+                    <option
+                      value={"lebih dari 10000000 dan kurang dari 20000000"}
+                    >
+                      {" "}
+                      {
+                        " Lebih dari Rp. 10.000.000 dan Kurang dari Rp. 20.000.000"
+                      }
+                    </option>
+                    <option value={"lebih dari 20000000"}>
+                      {" "}
+                      {" Lebih dari Rp. 20.000.000"}
+                    </option>
+                    <option value={"lebih dari 30000000"}>
+                      {" "}
+                      {" Lebih dari Rp. 30.000.000"}
+                    </option>
+                    <option value={"lebih dari 40000000"}>
+                      {" "}
+                      {" Lebih dari Rp. 40.000.000"}
+                    </option>
                   </select>
                   {errors.penghasilan_ibu && touched.penghasilan_ibu && (
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.penghasilan_ibu}
-                  </p>
-                )}
+                    <p className="text-red-500 italic font-bold  text-sm mt-1">
+                      {errors.penghasilan_ibu}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
-           
-            <div>
 
-            </div>
             <div></div>
-            
+            <div></div>
 
+            <div className="col-span-1 lg:col-span-3">
+              {errorPost?.message && (
+                <p className="text-red-500 italic font-bold  text-md mb-5 mt-1">
+                  {errorPost?.message?.split(",").map((er, index) => (
+                    <p key={index}>{er}</p>
+                  ))}
+                </p>
+              )}
+            </div>
             <div className="col-start-1 lg:col-start-3">
               <button
                 type="submit"

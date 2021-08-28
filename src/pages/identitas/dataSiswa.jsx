@@ -7,20 +7,21 @@ import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import Loading from "../../components/loading";
 const RegisterSchema = Yup.object().shape({
-  nik_siswa: Yup.number()
+  nik_siswa: Yup.string()
+  .length(16, 'NIK Wajib 16 digit')
     .typeError("NIK wajib dengan angka")
 
     .required("NIK Wajib diisi"),
   name_siswa: Yup.string().required("Nama Lengkap wajib diisi"),
-
+  jurusan: Yup.string().required("Jurusan wajib diisi"),
   tempat_lahir_siswa: Yup.string().required("Tempat Lahir wajib diisi"),
   tanggal_lahir_siswa: Yup.string().required("Tanggal Lahir wajib diisi"),
   jenis_kelamin: Yup.string().required("Nama Lengkap wajib diisi"),
   // golongan_darah: Yup.string().required("Nama Lengkap wajib diisi"),
   alamat_siswa: Yup.string().required("Alamat siswa wajin diisi"),
   nomor_telepon_siswa: Yup.number()
-    .typeError("Nomor Handphone wajib dengan angka")
-    .required("Nomor Handphone wajib diisi"),
+    .typeError("Nomor Handphone wajib dengan angka"),
+    
     tinggi_badan: Yup.number()
     .typeError("Tinggi Badan wajib dengan angka")
     .required("Tinggi Badan wajib diisi"),
@@ -57,7 +58,8 @@ export default function DataSiswa() {
     tinggi_badan: "",
     berat_badan: "",
     ukuran_baju: "xl",
-    cita_cita: "programmer",
+    cita_cita: "",
+    jurusan:""
   };
   let toast = useToast();
   const onSubmit = async (values) => {
@@ -92,7 +94,7 @@ export default function DataSiswa() {
   console.log(focus);
   return (
     <React.Fragment>
-    <div className="mb-6 pb-5 border-b-2">
+    <div className="mb-6 pb-5 ">
     <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">Lengkapi Data Santri</h1>
     <p className="text-green-500 text-sm lg:text-xl font-semibold italic mt-1">Silahkan lengkapi data santri di pada form di bawah</p>
     </div>
@@ -153,6 +155,7 @@ export default function DataSiswa() {
                   setFieldValue('nik_siswa' , e.target.value)
                  return  localStorage.setItem('nik_siswa' , e.target.value)
                 }}
+                type="number"
                 onBlur={handleBlur}
                 value={values.nik_siswa}
                 focus={focus}
@@ -216,6 +219,31 @@ export default function DataSiswa() {
                   </p>
                 )}
               </Input>
+            </div>
+            <div>
+              <div className="mt-3  items-center">
+                <label
+                  className="font-bold  text-green-500 "
+                  htmlFor="jurusan"
+                >
+                  <span className="uppercase">Jurusan dipilih</span> <span className="italic text-md text-red-500">(wajib)</span>
+                </label>
+                <div className="mt-5">
+                  <select
+                    className="w-full text-lg  border py-4 px-5 focus:bg-blue-100 "
+                    id="jurusan"
+                    name="jurusan"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.jurusan}
+                    error={errors.jurusan && touched.jurusan}
+                  >
+                    <option >Pilih</option>
+                    <option value={1}>Teknik Komputer dan Jaringan</option>
+                    <option value={2}>Rekayasa Perangkat Lunak</option>
+                  </select>
+                </div>
+              </div>
             </div>
             <div>
               <div className="mt-3  items-center">
@@ -410,7 +438,15 @@ export default function DataSiswa() {
               )}
             </div>
            
-               
+            <div className="col-span-1 lg:col-span-3">
+              {errorPost?.message && (
+                <p className="text-red-500 italic font-bold  text-md mb-5 mt-1">
+                  {errorPost?.message?.split(",").map((er, index) => (
+                    <p key={index}>{er}</p>
+                  ))}
+                </p>
+              )}
+            </div>
             <div className="col-start-1 lg:col-start-3">
               <button
                 type="submit"

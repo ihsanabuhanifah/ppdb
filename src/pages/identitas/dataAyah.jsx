@@ -7,11 +7,13 @@ import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import Loading from "../../components/loading";
 const RegisterSchema = Yup.object().shape({
-  // nik_siswa: Yup.number()
-  //   .typeError("NIK wajib dengan angka")
+ 
+  //   .required("NI Wajib diisi"),
+  nik_ayah: Yup.string()
+  .length(16, 'NIK Wajib 16 digit')
+    .typeError("NIK wajib dengan angka"),
 
-  //   .required("NIK Wajib diisi"),
-  // // nik_ayah: Yup.number()
+  
   //   .typeError("NIK wajib dengan angka")
 
   //   .required("NIK Wajib diisi"),
@@ -23,8 +25,8 @@ const RegisterSchema = Yup.object().shape({
   nomor_telepon_ayah: Yup.number()
     .typeError("Nomor Handphone wajib dengan angka")
     .required("Nomor Handphone wajib diisi"),
-  // pekerjaan: Yup.string().required("Pekerjaan siswa wajin diisi"),
-  // penghasilan_ayah: Yup.string().required("Penghasilan ayah wajib diisi"),
+  pekerjaan_ayah: Yup.string().required("Pekerjaan siswa wajin diisi"),
+  penghasilan_ayah: Yup.string().required("Penghasilan ayah wajib diisi"),
 });
 
 export default function DataSiswa() {
@@ -57,7 +59,7 @@ export default function DataSiswa() {
         duration: 4000,
         isClosable: true,
       });
-      history.push("/identitas/data-sekolah-asal");
+      history.push("/identitas/data-ibu");
     }
     if (result.response.status === 401) {
       setErrorPost(result.response.data);
@@ -74,7 +76,7 @@ export default function DataSiswa() {
   console.log(focus);
   return (
     <React.Fragment>
-      <div className="mb-6 pb-5 border-b-2">
+      <div className="mb-6 pb-5 ">
         <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">
           Lengkapi Data Ayah Santri
         </h1>
@@ -139,14 +141,15 @@ export default function DataSiswa() {
                   setFieldValue("nik_ayah", e.target.value);
                   return localStorage.setItem("nik_ayah", e.target.value);
                 }}
+                type="number"
                 onBlur={handleBlur}
                 value={values.nik_ayah}
                 focus={focus}
               >
                 {" "}
-                {errors.nik_siswa && touched.nik_siswa && (
+                {errors. nik_ayah && touched. nik_ayah && (
                   <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.nik_siswa}
+                    {errors. nik_ayah}
                   </p>
                 )}
               </Input>
@@ -246,6 +249,7 @@ export default function DataSiswa() {
                 onBlur={handleBlur}
                 value={values.pekerjaan_ayah}
                 focus={focus}
+                required
                 
               >
                 {" "}
@@ -263,7 +267,7 @@ export default function DataSiswa() {
                   htmlFor="penghasilan_ayah"
                 >
                   <span className="uppercase">Penghasilan Ayah</span>{" "}
-                  {/* <span className="italic text-md text-red-500">(wajib)</span> */}
+                  <span className="italic text-md text-red-500">(wajib)</span>
                 </label>
                 <div className="mt-5">
                   <select
@@ -297,7 +301,15 @@ export default function DataSiswa() {
             </div>
             <div></div>
            
-
+            <div className="col-span-1 lg:col-span-3">
+              {errorPost?.message && (
+                <p className="text-red-500 italic font-bold  text-md mb-5 mt-1">
+                  {errorPost?.message?.split(",").map((er, index) => (
+                    <p key={index}>{er}</p>
+                  ))}
+                </p>
+              )}
+            </div>
             <div className="col-start-1 lg:col-start-3">
               <button
                 type="submit"

@@ -8,15 +8,12 @@ import { syncToken } from "../../api/axios";
 import { useHistory } from "react-router-dom";
 import Loading from "../../components/loading";
 const RegisterSchema = Yup.object().shape({
-  nik_siswa: Yup.number()
-    .typeError("NIK wajib dengan angka"),
-    nisn: Yup.number()
-    .typeError("NSN wajib dengan angka")
-
-    .required("NIK Wajib diisi"),
+ 
 asal_sekolah: Yup.string().required("Nama Lengkap wajib diisi"),
   npsn: Yup.string().required("NPSN wajib diisi"),
-
+  nisn: Yup.string()
+  .length(10, 'NISN Wajib 10 digit')
+    .typeError("NIK wajib dengan angka").required("NISN wajib diisi"),
 
   // golongan_darah: Yup.string().required("Nama Lengkap wajib diisi"),
   alamat_sekolah: Yup.string().required("Alamat siswa wajib diisi"),
@@ -32,7 +29,7 @@ export default function PendidikanTerakhir() {
   const [isLoading, setIsLoading] = React.useState(false)
   let history = useHistory()
   const initialValues = {
-    nik_siswa: "11111",
+    
     asal_sekolah: "",
     nomor_telepon_sekolah: "",
     nisn: "",
@@ -73,7 +70,7 @@ export default function PendidikanTerakhir() {
   console.log(focus);
   return (
     <React.Fragment>
-      <div className="mb-6 pb-5 border-b-2">
+      <div className="mb-6 pb-5 ">
         <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">
           Lengkapi Data Sekolah Asal
         </h1>
@@ -197,6 +194,7 @@ export default function PendidikanTerakhir() {
                 onBlur={handleBlur}
                 value={values.npsn}
                 focus={focus}
+                required
               >
                 {" "}
                 {errors.npsn && touched.npsn && (
@@ -233,7 +231,16 @@ export default function PendidikanTerakhir() {
                 </p>
               )}
             </div>
-           
+            
+            <div className="col-span-1 lg:col-span-3">
+              {errorPost?.message && (
+                <p className="text-red-500 italic font-bold  text-md mb-5 mt-1">
+                  {errorPost?.message?.split(",").map((er, index) => (
+                    <p key={index}>{er}</p>
+                  ))}
+                </p>
+              )}
+            </div>
             <div className="col-start-1 lg:col-start-3">
             <button
                 type="submit"

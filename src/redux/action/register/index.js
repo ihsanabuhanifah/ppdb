@@ -1,5 +1,6 @@
 import { register } from "../../../api/register";
 import Cookies from "js-cookie";
+import { syncToken } from "../../../api/axios";
 export function authRegister(payload) {
 
   return async (dispatch) => {
@@ -10,6 +11,7 @@ export function authRegister(payload) {
      console.log(data)
       dispatch(registerAuth(data));
       Cookies.set("token-ppdb", data.token);
+      syncToken();
       localStorage.setItem('data' , JSON.stringify([{
         name : data?.user?.name,
         email : data?.user?.email,

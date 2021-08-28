@@ -76,8 +76,8 @@ export default function Register() {
     <Layout page="login">
       <div className="w-full px-3 lg:px-10 grid grid-cols-1 gap-5">
         <div>
-          <h3 className="text-2xl font-bold ">Masuk ke Portal PSB</h3>
-          <p className="text-xl italic">Silahkan Melakukan pendaftran disini</p>
+        <h3 className="text-xl lg:text-3xl font-bold uppercase "><span className="text-gray-500">Masuk Portal</span> <span className="text-green-500"> PPDB</span></h3>
+          <p className="text-lg lg:text-xl italic text-green-500">Silahkan Melakukan Masuk disini</p>
         </div>
         <Formik
           initialValues={initialValues}
@@ -179,9 +179,7 @@ export default function Register() {
             Mendaftar
           </Link>{" "}
         </p>
-        <Link className="text-green-500 text-lg font-bold" to="/ppdb/tes">
-          ppdb{" "}
-        </Link>{" "}
+       
       </div>
     </Layout>
   );

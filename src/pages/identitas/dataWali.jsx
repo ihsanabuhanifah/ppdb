@@ -7,14 +7,9 @@ import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import Loading from "../../components/loading";
 const RegisterSchema = Yup.object().shape({
-  // nik_siswa: Yup.number()
-  //   .typeError("NIK wajib dengan angka")
-
-  //   .required("NIK Wajib diisi"),
-  // // nik_wali: Yup.number()
-  //   .typeError("NIK wajib dengan angka")
-
-  //   .required("NIK Wajib diisi"),
+  nik_wali: Yup.string()
+  .length(16, 'NIK Wajib 16 digit')
+    .typeError("NIK wajib dengan angka"),
   name_wali: Yup.string().required("Nama Lengkap wajib diisi"),
 
   // tempat_lahir_wali: Yup.string().required("Tempat Lahir wajib diisi"),
@@ -57,7 +52,7 @@ export default function DataSiswa() {
         duration: 4000,
         isClosable: true,
       });
-      history.push("/identitas/data-sekolah-asal");
+      history.push("/ppdb/dashboard");
     }
     if (result.response.status === 401) {
       setErrorPost(result.response.data);
@@ -74,7 +69,7 @@ export default function DataSiswa() {
   console.log(focus);
   return (
     <React.Fragment>
-      <div className="mb-6 pb-5 border-b-2">
+      <div className="mb-6 pb-5 ">
         <h1 className="text-xl lg:text-4xl font-bold  text-green-500">
           <span  className="uppercase">Lengkapi Data wali Santri</span> 
           <span className="text-md ml-4 italic text-red-500">(Tidak Wajib)</span>
@@ -145,9 +140,9 @@ export default function DataSiswa() {
                 focus={focus}
               >
                 {" "}
-                {errors.nik_siswa && touched.nik_siswa && (
+                {errors.nik_wali && touched.nik_wali && (
                   <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.nik_siswa}
+                    {errors.nik_wali}
                   </p>
                 )}
               </Input>
@@ -297,13 +292,15 @@ export default function DataSiswa() {
 
             </div>
             
-            {errorPost?.message && (
-              <p className="text-red-500 italic font-bold  text-sm mb-5 mt-1">
-                {errorPost?.message?.split(",").map((er, index) => (
-                  <span key={index}>{er}</span>
-                ))}
-              </p>
-            )}
+            <div className="col-span-1 lg:col-span-3">
+              {errorPost?.message && (
+                <p className="text-red-500 italic font-bold  text-md mb-5 mt-1">
+                  {errorPost?.message?.split(",").map((er, index) => (
+                    <p key={index}>{er}</p>
+                  ))}
+                </p>
+              )}
+            </div>
 
             <div className="col-start-1 lg:col-start-2">
               <button

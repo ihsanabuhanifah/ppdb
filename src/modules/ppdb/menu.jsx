@@ -44,7 +44,7 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
         onClick={() => {
           setLogout(true)
         }}
-        className="flex items-center text-lg text-white  lg:text-xl font-bold p-3 lg:p-5 lg:rounded-l-full  "
+        className="flex items-center text-lg text-white  lg:text-xl font-bold p-3 lg:p-5 lg:rounded-l-full w-fullphp  "
       
       >
         <LogoutIcon className="lg:h-10 lg:w-10 w-8 h-8 mr-5 " />

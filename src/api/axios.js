@@ -1,10 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-// import qs from "qs";
+import qs from "qs";
 
  let headers = {
     Accept: "application/json",
-    Authorization: "Bearer " + Cookies.get("token"),
+    Authorization: "Bearer " + Cookies.get("token-ppdb"),
     "Content-Type": "application/json",
   }
 
@@ -16,16 +16,17 @@ let client = axios.create({
   },
 });
 
-// export const syncToken = () => {
-//   //auth
-//   client.defaults.headers["X-Authorization"] = `Bearer ${Cookies.get(
-//     "X-Authorization"
-//   )}`;
-//   client.defaults.headers["X-Yakes-Authorization"] = Cookies.get(
-//     "X-Yakes-Authorization"
-//   );
+console.log(Cookies.get("token-ppdb"))
+export const syncToken = () => {
+  //auth
+  console.log("ok siap")
+  console.log(client.defaults)
+  client.defaults.headers.Authorization = `Bearer ${Cookies.get(
+    "token-ppdb"
+  )}`;
+  console.log(client.defaults)
 
-// };
+};
 // export const clearToken = () => {
 //   delete client.defaults.headers["X-Authorization"];
 //   delete client.defaults.headers["X-Yakes-Authorization"];

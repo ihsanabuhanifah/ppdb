@@ -1,32 +1,37 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Register from "./pages/auth/register";
 import Login from "./pages/auth/login";
+
 import PPDB from "./layout/ppdb";
-import store from "./redux/store";
-import { Provider } from "react-redux";
+import Identitas from "./layout/identitas";
+
+import { SiswaPageProtected, AuthProtected } from "./layout/ProtetedRoute";
+import { useSelector } from "react-redux";
+import LoadingPage from "./pages/auth/loadingPage,";
 function App() {
+  const isAuth = useSelector((state) => state.auth.isAuth);
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/login">
-            <Login></Login>
-          </Route>
-          <Route path="/register">
-            <Register></Register>
-          </Route>
-          <Route path="/admin">
-            <p>admin</p>
-          </Route>
-          <Route path="/ppdb">
-            <PPDB></PPDB>
-          </Route>
-          <Redirect from="/" to="/login" />
-          <Redirect from="*" to="/login" />
-        </Switch>
-      </BrowserRouter>
-    </Provider>
+    <Switch>
+      <Route path="/login">
+        <Login></Login>
+      </Route>
+
+      <Route path="/register">
+        <Register></Register>
+      </Route>
+      <SiswaPageProtected path="/admin">
+        <p>admin</p>
+      </SiswaPageProtected>
+      <SiswaPageProtected path="/ppdb">
+        {isAuth ? <PPDB></PPDB> : <LoadingPage></LoadingPage>}
+      </SiswaPageProtected>
+      <SiswaPageProtected path="/identitas">
+        <Identitas></Identitas>
+      </SiswaPageProtected>
+      <Redirect from="/" to="/login" />
+      <Redirect from="*" to="/login" />
+    </Switch>
   );
 }
 

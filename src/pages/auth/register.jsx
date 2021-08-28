@@ -1,9 +1,14 @@
 import React from "react";
 import Layout from "../../layout/auth";
+
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
+import { useToast } from "@chakra-ui/react";
+import { useSelector, useDispatch } from "react-redux";
+import { authRegister } from "../../redux/action/register";
+import { useHistory } from "react-router";
+import Loading from "../../components/loading";
 const RegisterSchema = Yup.object().shape({
   name: Yup.string().required("Nama Lengkap wajib diisi"),
   email: Yup.string()
@@ -22,6 +27,12 @@ const RegisterSchema = Yup.object().shape({
 });
 export default function Register() {
   const [focus, setFocus] = React.useState("");
+  const [errorReg, setErrorReg] = React.useState();
+  let dispatch = useDispatch();
+  let toast = useToast();
+  let history = useHistory();
+  const isLoading = useSelector((state) => state.auth.isLoading);
+  console.log(isLoading);
   const initialValues = {
     name: "",
     email: "",
@@ -31,9 +42,31 @@ export default function Register() {
     role: 2,
   };
   const onSubmit = async (values) => {
-    setTimeout(() => {
-      console.log("ok");
-    }, 10000);
+    let result = await dispatch(authRegister(values));
+    console.log(result);
+    if (result.message === "Berhasil Membuat Akun") {
+      toast({
+        position: "top-right",
+        title: "Berhasil",
+        description: "Selamat Anda telah berhasil Registrasi",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+      history.push("/identitas");
+    }
+    if (result.response.status === 401) {
+      console.log(result.response);
+      setErrorReg(result.response.data);
+      toast({
+        position: "top-right",
+        title: "Gagal",
+        description: result.response?.data?.message,
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
   };
   return (
     <Layout page="register">
@@ -55,6 +88,7 @@ export default function Register() {
             handleChange,
             handleBlur,
             handleSubmit,
+            setFieldValue,
             isSubmitting,
           }) => (
             <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-2">
@@ -62,7 +96,7 @@ export default function Register() {
                 onFocus={() => {
                   setFocus("name");
                 }}
-                className="mt-3 flex flex-col border shadow-md px-5 py-3 border relative"
+                className="mt-3 flex flex-col border shadow-md px-5 py-3 relative"
               >
                 <label className="font-bold text-green-500" htmlFor="name">
                   Nama Lengkap
@@ -77,6 +111,7 @@ export default function Register() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.name}
+                  disabled={isSubmitting}
                 />
                 {focus === "name" ? (
                   <div className="bg-green-500 w-2 h-full absolute bottom-0  left-0"></div>
@@ -93,7 +128,7 @@ export default function Register() {
                 onFocus={() => {
                   setFocus("email");
                 }}
-                className="mt-3 flex flex-col border shadow-md px-5 py-3 border relative"
+                className="mt-3 flex flex-col border shadow-md px-5 py-3 relative"
               >
                 <label className="font-bold text-green-500" htmlFor="email">
                   Alamat Email
@@ -105,7 +140,12 @@ export default function Register() {
                   id="email"
                   tabIndex="2"
                   error={errors.email && touched.email}
-                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  onChange={(e) => {
+            
+                    setFieldValue("email",e.target.value)
+                    return setErrorReg()
+                  }}
                   onBlur={handleBlur}
                   value={values.email}
                 />
@@ -120,11 +160,13 @@ export default function Register() {
                   {errors.email}
                 </p>
               )}
+
+              {}
               <div
                 onFocus={() => {
                   setFocus("phone");
                 }}
-                className="mt-3 flex flex-col border shadow-md px-5 py-3 border relative"
+                className="mt-3 flex flex-col border shadow-md px-5 py-3  relative"
               >
                 <label className="font-bold text-green-500" htmlFor="phone">
                   Nomor Handphone
@@ -135,8 +177,12 @@ export default function Register() {
                   placeholder="Nomor Handphone"
                   id="phone"
                   tabIndex="3"
+                  disabled={isSubmitting}
                   error={errors.phone && touched.phone}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    setFieldValue("phone", e.target.value)
+                    return setErrorReg()
+                  }}
                   onBlur={handleBlur}
                   value={values.phone}
                 />
@@ -151,21 +197,23 @@ export default function Register() {
                   {errors.phone}
                 </p>
               )}
+
               <div
                 onFocus={() => {
                   setFocus("password");
                 }}
-                className="mt-3 flex flex-col border shadow-md px-5 py-3 border relative"
+                className="mt-3 flex flex-col border shadow-md px-5 py-3  relative"
               >
                 <label className="font-bold text-green-500" htmlFor="password">
                   Password
                 </label>
                 <input
                   className="inline-flex w-full rounded-lg text-lg focus:outline-none"
-                  type="password"
+                  type="text"
                   placeholder="*********"
                   id="password"
                   tabIndex="4"
+                  disabled={isSubmitting}
                   error={errors.password && touched.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -186,7 +234,7 @@ export default function Register() {
                 onFocus={() => {
                   setFocus("password_confirmation");
                 }}
-                className="mt-3 flex flex-col border shadow-md px-5 py-3 border relative"
+                className="mt-3 flex flex-col border shadow-md px-5 py-3  relative"
               >
                 <label
                   className="font-bold text-green-500"
@@ -196,10 +244,11 @@ export default function Register() {
                 </label>
                 <input
                   className="inline-flex w-full rounded-lg text-lg focus:outline-none"
-                  type="password"
+                  type="text"
                   placeholder="*********"
                   id="password_confirmation"
                   tabIndex="5"
+                  disabled={isSubmitting}
                   error={
                     errors.password_confirmation &&
                     touched.password_confirmation
@@ -222,11 +271,20 @@ export default function Register() {
                 )}
 
               <div>
+                {errorReg?.message && (
+                  <p className="text-red-500 italic font-bold  text-sm mb-5 mt-1">
+                    {errorReg?.message?.split(",").map((er, index) => (
+                      <span key={index}>{er}</span>
+                    ))}
+                  </p>
+                )}
+
                 <button
+                disabled={isSubmitting}
                   type="submit"
-                  className="w-full border text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
+                  className="w-full border flex justify-center items-center text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
                 >
-                  Daftar
+                  {isLoading ? (<Loading/>) : "Daftar"}
                 </button>
               </div>
             </form>

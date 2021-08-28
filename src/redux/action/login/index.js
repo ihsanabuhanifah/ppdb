@@ -1,14 +1,19 @@
-import { Login, AuthMe } from "../../../api/auth";
+import { login, authMeProcess } from "../../../api/login";
 import Cookies from "js-cookie";
+import { syncToken } from "../../../api/axios";
 export function authLogin(payload) {
   return async (dispatch) => {
+    dispatch(isLoading());
     try {
-      let response = await Login(payload);
+      let response = await login(payload);
       let data = response.data;
-      dispatch(login(data));
-      Cookies.set("token", data.token, { expires: 7 });
+      dispatch(loginProcess(data));
+      Cookies.set("token-ppdb", data.token);
+      syncToken();
+      dispatch(finish());
       return data;
     } catch (err) {
+      dispatch(finish());
       return err;
     }
   };
@@ -16,10 +21,14 @@ export function authLogin(payload) {
 export function authMe(payload) {
   return async (dispatch) => {
     try {
-      let response = await AuthMe(payload);
+      let response = await authMeProcess(payload);
+      console.log('authMe Berjasil 1')
       let data = response.data;
-      dispatch(login(data));
-      Cookies.set("token", data.token, { expires: 7 });
+      console.log('data ' , data)
+      dispatch(loginProcess(data));
+    
+      Cookies.set("token-ppdb", data.token);
+      syncToken();
       return data;
     } catch (err) {
       return err;
@@ -27,17 +36,27 @@ export function authMe(payload) {
   };
 }
 
-export const login = (data) => {
+export const loginProcess = (data) => {
   return {
     type: "LOGIN",
-    identitas : data.identitas,
-    username: data.user.nama_user,
-    email: data.user.email,
-    token: data.token,
-    message: data.message,
-    role: data.user.roles,
-    status: data.user.status,
-   
+    message: data?.message,
+    name: data?.user?.name,
+    email: data?.user?.email,
+    phone: data?.user?.phone,
+    token: data?.token,
+    role: data?.user?.roles[0].name,
+    identitas : data?.identitas,
     isLoading: false,
   };
 };
+
+export const isLoading = () => {
+  return {
+    type: "PROCESS",
+  };
+};
+export const finish = () => {
+    return {
+      type: "FINISH",
+    };
+  };

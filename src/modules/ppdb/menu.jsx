@@ -1,40 +1,51 @@
 import React from "react";
 import { EyeIcon, LogoutIcon } from "@heroicons/react/outline";
-import { NavLink } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
+  const isPayment = useSelector((state) => state.auth.isPayment);
   const menus = [
     {
-      to: "/ppdb/dashboard",
-      name: "Dashboard",
+      to: "/ppdb/salam",
+      name: "Salam",
+      disabled : true
     },
     {
-      to: "/ppdb/tes",
-      name: "Tes",
+      to: "/ppdb/tes-umum",
+      name: "Tes Umum",
+      disabled : isPayment
     },
     {
-      to: "/ppdb/identitas",
-      name: "Identitas",
+      to: "/ppdb/tes-diniyah",
+      name: "Tes Diniyah",
+      disabled : isPayment
     },
   ];
- 
+  
+ let history = useHistory()
   return (
     <React.Fragment>
       <nav className="h-5/6">
         <div className="grid grid-cols-1 gap  text-white">
           {menus.map((menu, index) => {
             return (
-              <NavLink
+              <button
+              key={index}
                 onClick={() => {
                   setHiddenMenu(!hiddenMenu);
+                  if(menu.disabled === false){
+                    return history.push("/ppdb/konfirmasi-pembayaran-ppdb")
+                  }
+                  return history.push(menu.to)
                 }}
-                className="flex items-center text-md  lg:text-xl font-bold p-3 lg:p-5 lg:rounded-l-full  "
-                activeClassName="text-green-500 font-bold bg-white"
-                to={menu.to}
+                className={`flex items-center text-md  lg:text-xl font-bold p-3 lg:p-5 lg:rounded-l-full ${history.location.pathname === menu.to ? "text-green-500 font-bold bg-white" : ""}`}
+              
+               
+               
               >
                 <EyeIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
                 <p>{menu.name}</p>
-              </NavLink>
+              </button>
             );
           })}
         </div>

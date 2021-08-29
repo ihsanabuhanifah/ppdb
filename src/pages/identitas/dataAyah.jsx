@@ -147,9 +147,9 @@ export default function DataSiswa() {
                 focus={focus}
               >
                 {" "}
-                {errors. nik_ayah && touched. nik_ayah && (
+                {errors.nik_ayah && touched.nik_ayah && (
                   <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors. nik_ayah}
+                    {errors.nik_ayah}
                   </p>
                 )}
               </Input>

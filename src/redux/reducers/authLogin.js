@@ -8,6 +8,7 @@ const initialState = {
   identitas : "",
   isLoading: false,
   isAuth:false,
+  isPayment : false
 };
 
 export default function authLogin(state = initialState, action) {
@@ -23,6 +24,7 @@ export default function authLogin(state = initialState, action) {
       identitas:action.identitas,
       isAuth:true,
       isLoading: action.isLoading,
+      isPayment : action.isPayment
     };
   }
   if (action.type === "REGISTER") {

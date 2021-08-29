@@ -24,7 +24,7 @@ export default function Layout({ children, page }) {
             page === "login" ? "order-1" : "order-2"
           }`}
         >
-          <img className="h-full w-full"  src={image1} />
+          <img className="h-full w-full"  alt="imagesmk.png" src={image1} />
         </div>
         <div
           className={`flex justify-center items-center col-span-11 lg:col-span-2 ${
@@ -34,7 +34,7 @@ export default function Layout({ children, page }) {
           {children}
         </div>
       </div>
-      <div className="fixed right-4 bottom-4">
+      <div className="fixed right-10 bottom-4">
         <ReactWhatsapp number={"+6285888222457"} message={message}>
           <Tooltip
             fontSize="lg"
@@ -44,7 +44,7 @@ export default function Layout({ children, page }) {
             label="informasi PPDB"
             aria-label="A tooltip"
           >
-            <img className="w-16 h-16 " src={wa} alt="" />
+            <img className="w-16 h-16 animate-bounce shadow-xl " src={wa} alt="whatsapp.png" />
           </Tooltip>
         </ReactWhatsapp>
       </div>

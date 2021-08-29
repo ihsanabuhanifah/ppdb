@@ -423,7 +423,7 @@ export default function DataSiswa() {
                 className="w-full text-lg mt-5  border py-4 px-5 focus:bg-blue-100 "
                 name="alamat_siswa"
                 id="alamat_siswa"
-                name="alamat_siswa"
+             
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.alamat_siswa}

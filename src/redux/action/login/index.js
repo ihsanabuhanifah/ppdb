@@ -46,6 +46,7 @@ export const loginProcess = (data) => {
     token: data?.token,
     role: data?.user?.roles[0].name,
     identitas : data?.identitas,
+    isPayment : false,
     isLoading: false,
   };
 };

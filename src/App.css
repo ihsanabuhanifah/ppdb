@@ -1,38 +1,123 @@
-.App {
-  text-align: center;
+main::-webkit-scrollbar{
+  width: 5px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+main::-webkit-scrollbar-track{
+  border-radius: 5px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+main::-webkit-scrollbar-thumb{
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0);
+}
+
+div::-webkit-scrollbar{
+  width: 5px;
+}
+
+div::-webkit-scrollbar-track{
+  border-radius: 5px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0);
+}
+
+div::-webkit-scrollbar-thumb{
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0);
+}
+#scroll::-webkit-scrollbar{
+  width: 5px;
+}
+ 
+#scroll::-webkit-scrollbar-track{
+  border-radius: 5px;
+ 
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+#scroll::-webkit-scrollbar-thumb{
+  border-radius: 5px;
+  background-color: #00917C;
+}
+
+#modal-content::-webkit-scrollbar, #modal-content-two::-webkit-scrollbar, #task-list::-webkit-scrollbar, #scroll-create-group::-webkit-scrollbar {
+  width: 5px;
+}
+
+#scroll-create-group::-webkit-scrollbar-thumb {
+  background: rgb(141, 141, 141);
+  border-radius: 10px;
+}
+#scroll-create-group::-webkit-scrollbar-track {
+box-shadow: inset 0 0 5px grey; 
+border-radius: 10px;
+}
+
+
+input:focus{
+  outline: none;
+}
+textarea:focus{
+  outline: none;
+}
+.new-button {
+  display: inline-block;
+  padding: 8px 12px; 
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #9c27b0;
+  font-size: 16px;
+  color: #fff;
+}
+input[type="file"] {
+position: absolute;
+z-index: -1;
+top: 6px;
+left: 0;
+font-size: 15px;
+color: rgb(153,153,153);
+}
+.button-wrap {
+position: relative;
+}
+
+@media (max-width: 640px) { 
+  #scroll::-webkit-scrollbar{
+      width: 5px;
+  }
+  
+  #scroll::-webkit-scrollbar-track{
+      border-radius: 5px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0);
+  }
+  
+  #scroll::-webkit-scrollbar-thumb{
+      border-radius: 5px;
+      background-color: rgba(0,0,0,0);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+
+/*^ Search */
+
+/* width */
+#scroll-search::-webkit-scrollbar {
+  width: 6px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Track */
+#scroll-search::-webkit-scrollbar-track {
+background: #bdbdbd;
+border-radius: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Handle */
+#scroll-search::-webkit-scrollbar-thumb {
+background: #757575; 
+border-radius: 10px;
+}
+
+/* Handle on hover */
+#scroll-search::-webkit-scrollbar-thumb:hover {
+background: #5a5959; 
 }

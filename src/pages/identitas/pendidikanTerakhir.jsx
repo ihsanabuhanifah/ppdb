@@ -4,7 +4,6 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { postSekolahAsal } from "../../api/santri";
 import { useToast } from "@chakra-ui/react";
-import { syncToken } from "../../api/axios";
 import { useHistory } from "react-router-dom";
 import Loading from "../../components/loading";
 const RegisterSchema = Yup.object().shape({
@@ -217,7 +216,7 @@ export default function PendidikanTerakhir() {
                 className="w-full text-lg mt-5  border py-4 px-5 focus:bg-blue-100 "
                 name="alamat_sekolah"
                 id="alamat_sekolah"
-                name="alamat_sekolah"
+           
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.alamat_sekolah}

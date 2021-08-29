@@ -6,13 +6,14 @@ import Login from "./pages/auth/login";
 import PPDB from "./layout/ppdb";
 import Identitas from "./layout/identitas";
 
-import { SiswaPageProtected, AuthProtected } from "./layout/ProtetedRoute";
+import { SiswaPageProtected } from "./layout/ProtetedRoute";
 import { useSelector } from "react-redux";
 import LoadingPage from "./pages/auth/loadingPage,";
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   return (
-    <Switch>
+   <main className="text-md h-screen">
+      <Switch>
       <Route path="/login">
         <Login></Login>
       </Route>
@@ -32,6 +33,7 @@ function App() {
       <Redirect from="/" to="/login" />
       <Redirect from="*" to="/login" />
     </Switch>
+   </main>
   );
 }
 

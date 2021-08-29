@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Redirect, Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authMe } from "../../redux/action/login";
@@ -24,20 +24,20 @@ export const SiswaPageProtected = ({ children, ...rest }) => {
       
         return history.push("/identitas/data-sekolah-asal");
       } else if (identitas.length === 2) {
-        return history.push("/ppdb/dashboard");
+       
         return history.push("/identitas/data-ayah");
       } else if (identitas.length === 3) {
        
         return history.push("/identitas/data-ibu");
       } else {
-        return history.push("/ppdb/dashboard");
+        return history.push("/ppdb/salam");
       }
     }
   };
 
   React.useEffect(() => {
     if (!isAuth) {
-      console.log("ok");
+     
       onLoaded();
     }
   }, []);

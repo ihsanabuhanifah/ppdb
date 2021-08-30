@@ -19,7 +19,7 @@ let client = axios.create({
 console.log(Cookies.get("token-ppdb"))
 export const syncToken = () => {
   //auth
-  console.log("ok siap")
+ 
   console.log(client.defaults)
   client.defaults.headers.Authorization = `Bearer ${Cookies.get(
     "token-ppdb"
@@ -38,3 +38,7 @@ export default client;
 // http://localhost:8000/api
 //http://psb-online.herokuapp.com/api
 //
+
+// baseURL: `https://psb-api.smkmadinatulquran.sch.id/api`,
+
+// baseURL: `http://localhost:8000/api`,

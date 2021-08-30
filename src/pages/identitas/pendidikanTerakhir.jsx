@@ -71,7 +71,8 @@ export default function PendidikanTerakhir() {
     <React.Fragment>
       <div className="mb-6 pb-5 ">
         <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">
-          Lengkapi Data Sekolah Asal
+        <span  className="uppercase">Lengkapi Data Sekolah Asal</span>  
+          <span className="text-md ml-4 italic text-red-500">(Tidak Wajib)</span>
         </h1>
         <p className="text-green-500 text-sm lg:text-xl font-semibold italic mt-1">
           Silahkan lengkapi data Sekolah asal di pada form di bawah
@@ -113,7 +114,7 @@ export default function PendidikanTerakhir() {
                 onBlur={handleBlur}
                 value={values.nisn}
                 focus={focus}
-                required
+                // required
               >
                 {" "}
                 {errors.nisn && touched.nisn && (
@@ -193,7 +194,7 @@ export default function PendidikanTerakhir() {
                 onBlur={handleBlur}
                 value={values.npsn}
                 focus={focus}
-                required
+               
               >
                 {" "}
                 {errors.npsn && touched.npsn && (
@@ -240,12 +241,24 @@ export default function PendidikanTerakhir() {
                 </p>
               )}
             </div>
-            <div className="col-start-1 lg:col-start-3">
-            <button
+            <div className="col-start-1 lg:col-start-2">
+              <button
                 type="submit"
+                className="w-full border flex items-center justify-center text-white bg-green-300 h-16 text-lg font-bold rounded-md hover:bg-green-600"
+              >
+                {isLoading ? <Loading></Loading> : " Simpan dan Lanjutkan"}
+              </button>
+            </div>
+            <div className="col-start-1 lg:col-start-3">
+              <button
+                type="button"
+                onClick={()=> {
+                    history.push("/ppdb/salam")
+                }}
                 className="w-full border flex items-center justify-center text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
               >
-               {isLoading ? (<Loading></Loading>) : " Simpan dan Lanjutkan"}
+                  Lanjut Ke Dashbord
+                
               </button>
             </div>
             

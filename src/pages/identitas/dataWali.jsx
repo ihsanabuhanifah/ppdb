@@ -52,7 +52,7 @@ export default function DataSiswa() {
         duration: 4000,
         isClosable: true,
       });
-      history.push("/ppdb/dashboard");
+      history.push("/ppdb/salam");
     }
     if (result.response.status === 401) {
       setErrorPost(result.response.data);
@@ -314,7 +314,7 @@ export default function DataSiswa() {
               <button
                 type="button"
                 onClick={()=> {
-                    history.push("/ppdb")
+                    history.push("/ppdb/salam")
                 }}
                 className="w-full border flex items-center justify-center text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
               >

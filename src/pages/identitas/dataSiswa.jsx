@@ -7,11 +7,11 @@ import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import Loading from "../../components/loading";
 const RegisterSchema = Yup.object().shape({
-  nik_siswa: Yup.string()
-  .length(16, 'NIK Wajib 16 digit')
-    .typeError("NIK wajib dengan angka")
+  // nik_siswa: Yup.string()
+  // .length(16, 'NIK Wajib 16 digit')
+  //   .typeError("NIK wajib dengan angka")
 
-    .required("NIK Wajib diisi"),
+  //   .required("NIK Wajib diisi"),
   name_siswa: Yup.string().required("Nama Lengkap wajib diisi"),
   jurusan: Yup.string().required("Jurusan wajib diisi"),
   tempat_lahir_siswa: Yup.string().required("Tempat Lahir wajib diisi"),
@@ -19,15 +19,16 @@ const RegisterSchema = Yup.object().shape({
   jenis_kelamin: Yup.string().required("Nama Lengkap wajib diisi"),
   // golongan_darah: Yup.string().required("Nama Lengkap wajib diisi"),
   alamat_siswa: Yup.string().required("Alamat siswa wajin diisi"),
-  nomor_telepon_siswa: Yup.number()
-    .typeError("Nomor Handphone wajib dengan angka"),
-    
-    tinggi_badan: Yup.number()
-    .typeError("Tinggi Badan wajib dengan angka")
-    .required("Tinggi Badan wajib diisi"),
-    berat_badan: Yup.number()
-    .typeError("Berat Badan wajib dengan angka")
-    .required("Berat Badan wajib diisi"),
+  nomor_telepon_siswa: Yup.number().typeError(
+    "Nomor Handphone wajib dengan angka"
+  ),
+
+  // tinggi_badan: Yup.number()
+  // .typeError("Tinggi Badan wajib dengan angka")
+  // .required("Tinggi Badan wajib diisi"),
+  // berat_badan: Yup.number()
+  // .typeError("Berat Badan wajib dengan angka")
+  // .required("Berat Badan wajib diisi"),
   pihak_yg_dihubungi: Yup.string().required("Pihak dihubungi wajib diisi"),
   //
   // ukuran_baju: Yup.number()
@@ -41,8 +42,8 @@ const RegisterSchema = Yup.object().shape({
 export default function DataSiswa() {
   const [focus, setFocus] = React.useState("");
   const [errorPost, setErrorPost] = React.useState();
-  const [isLoading, setIsLoading] = React.useState(false)
-  let history = useHistory()
+  const [isLoading, setIsLoading] = React.useState(false);
+  let history = useHistory();
   const initialValues = {
     nik_siswa: "",
     name_siswa: "",
@@ -59,45 +60,49 @@ export default function DataSiswa() {
     berat_badan: "",
     ukuran_baju: "xl",
     cita_cita: "",
-    jurusan:""
+    jurusan: "",
   };
   let toast = useToast();
   const onSubmit = async (values) => {
-    setIsLoading(true)
-    let result = await postSantiBaru(values)
-    setIsLoading(false)
+    setIsLoading(true);
+    let result = await postSantiBaru(values);
+    setIsLoading(false);
     if (result?.message === "Berhasil Menyimpan Data") {
-        toast({
-          position: "top-right",
-          title: "Success",
-          description: "Berhasil Menyimpan Data",
-          status: "success",
-          duration: 4000,
-          isClosable: true,
-        });
-        history.push("/identitas/data-sekolah-asal")
-        
-      }
-      if (result.response.status === 401) {
-      
-        setErrorPost(result.response.data)
-        toast({
-          position: "top-right",
-          title: "Fail",
-          description: result.response.data.message,
-          status: "error",
-          duration: 10000,
-          isClosable: true,
-        });
-      }
+      toast({
+        position: "top-right",
+        title: "Success",
+        description: "Berhasil Menyimpan Data",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+
+      return history.push("/ppdb/salam");
+      history.push("/identitas/data-sekolah-asal");
+    }
+    if (result.response.status === 401) {
+      setErrorPost(result.response.data);
+      toast({
+        position: "top-right",
+        title: "Fail",
+        description: result.response.data.message,
+        status: "error",
+        duration: 10000,
+        isClosable: true,
+      });
+    }
   };
   console.log(focus);
   return (
     <React.Fragment>
-    <div className="mb-6 pb-5 ">
-    <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">Lengkapi Data Santri</h1>
-    <p className="text-green-500 text-sm lg:text-xl font-semibold italic mt-1">Silahkan lengkapi data santri di pada form di bawah</p>
-    </div>
+      <div className="mb-6 pb-5 ">
+        <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">
+          Lengkapi Data Santri
+        </h1>
+        <p className="text-green-500 text-sm lg:text-xl font-semibold italic mt-1">
+          Silahkan lengkapi data santri di pada form di bawah
+        </p>
+      </div>
       <Formik
         initialValues={initialValues}
         validationSchema={RegisterSchema}
@@ -151,15 +156,14 @@ export default function DataSiswa() {
                 onFocus={() => {
                   setFocus("nik_siswa");
                 }}
-                onChange={(e)=> {
-                  setFieldValue('nik_siswa' , e.target.value)
-                 return  localStorage.setItem('nik_siswa' , e.target.value)
+                onChange={(e) => {
+                  setFieldValue("nik_siswa", e.target.value);
+                  return localStorage.setItem("nik_siswa", e.target.value);
                 }}
                 type="number"
                 onBlur={handleBlur}
                 value={values.nik_siswa}
                 focus={focus}
-               
               >
                 {" "}
                 {errors.nik_siswa && touched.nik_siswa && (
@@ -222,11 +226,9 @@ export default function DataSiswa() {
             </div>
             <div>
               <div className="mt-3  items-center">
-                <label
-                  className="font-bold  text-green-500 "
-                  htmlFor="jurusan"
-                >
-                  <span className="uppercase">Jurusan dipilih</span> <span className="italic text-md text-red-500">(wajib)</span>
+                <label className="font-bold  text-green-500 " htmlFor="jurusan">
+                  <span className="uppercase">Jurusan dipilih</span>{" "}
+                  <span className="italic text-md text-red-500">(wajib)</span>
                 </label>
                 <div className="mt-5">
                   <select
@@ -238,7 +240,7 @@ export default function DataSiswa() {
                     value={values.jurusan}
                     error={errors.jurusan && touched.jurusan}
                   >
-                    <option >Pilih</option>
+                    <option>Pilih</option>
                     <option value={1}>Teknik Komputer dan Jaringan</option>
                     <option value={2}>Rekayasa Perangkat Lunak</option>
                   </select>
@@ -251,7 +253,8 @@ export default function DataSiswa() {
                   className="font-bold  text-green-500 "
                   htmlFor="jenis_kelamin"
                 >
-                  <span className="uppercase">Jenis Kelamin santri</span> <span className="italic text-md text-red-500">(wajib)</span>
+                  <span className="uppercase">Jenis Kelamin santri</span>{" "}
+                  <span className="italic text-md text-red-500">(wajib)</span>
                 </label>
                 <div className="mt-5">
                   <select
@@ -338,7 +341,6 @@ export default function DataSiswa() {
                   onBlur={handleBlur}
                   value={values.tinggi_badan}
                   focus={focus}
-                  required
                 >
                   {" "}
                   {errors.tinggi_badan && touched.tinggi_badan && (
@@ -361,7 +363,6 @@ export default function DataSiswa() {
                   onBlur={handleBlur}
                   value={values.berat_badan}
                   focus={focus}
-                  required
                 >
                   {" "}
                   {errors.berat_badan && touched.berat_badan && (
@@ -378,10 +379,8 @@ export default function DataSiswa() {
                   className="font-bold  text-green-500 "
                   htmlFor="pihak_yg_dihubungi"
                 >
-                
-                  <span className="uppercase">  Pihak yang dihubungi</span> <span className="italic text-md text-red-500">(wajib)</span>
-                
-              
+                  <span className="uppercase"> Pihak yang dihubungi</span>{" "}
+                  <span className="italic text-md text-red-500">(wajib)</span>
                 </label>
                 <div className="mt-5">
                   <select
@@ -390,7 +389,6 @@ export default function DataSiswa() {
                     name="pihak_yg_dihubungi"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    
                     value={values.pihak_yg_dihubungi}
                     error={
                       errors.pihak_yg_dihubungi && touched.pihak_yg_dihubungi
@@ -409,21 +407,20 @@ export default function DataSiswa() {
                 )}
               </div>
             </div>
-            
+
             <div className="col-span-1 lg:col-span-3 ">
               <label
                 className="font-bold uppercase text-green-500 "
                 htmlFor="pihak_yg_dihubungi"
               >
-                 <span className="uppercase">Alamat</span> <span className="italic text-md text-red-500">(wajib)</span>
-              
+                <span className="uppercase">Alamat</span>{" "}
+                <span className="italic text-md text-red-500">(wajib)</span>
               </label>
-              
+
               <textarea
                 className="w-full text-lg mt-5  border py-4 px-5 focus:bg-blue-100 "
                 name="alamat_siswa"
                 id="alamat_siswa"
-             
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.alamat_siswa}
@@ -437,7 +434,7 @@ export default function DataSiswa() {
                 </p>
               )}
             </div>
-           
+
             <div className="col-span-1 lg:col-span-3">
               {errorPost?.message && (
                 <p className="text-red-500 italic font-bold  text-md mb-5 mt-1">
@@ -452,7 +449,7 @@ export default function DataSiswa() {
                 type="submit"
                 className="w-full border flex items-center justify-center text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
               >
-               {isLoading ? (<Loading></Loading>) : " Simpan dan Lanjutkan"}
+                {isLoading ? <Loading></Loading> : " Simpan dan Lanjutkan"}
               </button>
             </div>
           </form>

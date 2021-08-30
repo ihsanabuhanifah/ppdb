@@ -27,7 +27,7 @@ export default function Identitas() {
         isOpen={logout}
       ></AlertLogout>
       <div className=" px-5 lg:px-28 py-5 h-full lg:py-10 overflow-hidden ">
-        <div className="flex justify-end items-center border-b-2 pb-6 mb-5 h-1/6">
+        <div className="flex justify-end items-center border-b-2 pb-6 mb-5">
         
           <div>
             <button onClick={()=> {

@@ -4,39 +4,26 @@ import { useSelector, useDispatch } from "react-redux";
 import { authMe } from "../../redux/action/login";
 
 import Cookies from "js-cookie";
-export const SiswaPageProtected = ({ children, ...rest }) => {
+export const AdminPageProtected = ({ children, ...rest }) => {
   const isAuth = useSelector((state) => state.auth.isAuth);
- 
+  
   let dispatch = useDispatch();
   let history = useHistory();
-
+  
   const onLoaded = async (values) => {
     let result = await dispatch(authMe(values));
-    
+    console.log(result);
     if(result.response?.status === 401){
       return history.push("/login")
     }
-    if(result?.user?.roles[0].name === "admin"){
-      return history.push("/admin/dashboard")
+    console.log("jalan")
+    if(result?.user?.roles[0].name === "user"){
+      return history.push("/ppdb/salam")
     }
-    const identitas = result.identitas;
+    return history.push("/admin")
+   
  
-    if (identitas !== undefined) {
-      if (identitas.length === 0) {
-        return history.push("/identitas");
-      } else if (identitas.length === 1) {
-        return history.push("/ppdb/salam");
-        return history.push("/identitas/data-sekolah-asal");
-      } else if (identitas.length === 2) {
-       
-        return history.push("/identitas/data-ayah");
-      } else if (identitas.length === 3) {
-       
-        return history.push("/identitas/data-ibu");
-      } else {
-        return history.push("/ppdb/salam");
-      }
-    }
+   
   };
 
   React.useEffect(() => {
@@ -53,7 +40,7 @@ export const SiswaPageProtected = ({ children, ...rest }) => {
   }
 };
 
-export default SiswaPageProtected;
+export default AdminPageProtected;
 
 {
   /* <Route {...rest}>{!isAuth ? <Redirect to="/login" /> : children}</Route> */

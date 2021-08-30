@@ -16,7 +16,6 @@ export async function postSekolahAsal(values) {
   } catch (err) {
     return err;
   }
- 
 }
 export async function postDataAyah(values) {
   try {
@@ -25,7 +24,6 @@ export async function postDataAyah(values) {
   } catch (err) {
     return err;
   }
- 
 }
 export async function postDataIbu(values) {
   try {
@@ -34,7 +32,6 @@ export async function postDataIbu(values) {
   } catch (err) {
     return err;
   }
- 
 }
 export async function postDataWali(values) {
   try {
@@ -43,5 +40,47 @@ export async function postDataWali(values) {
   } catch (err) {
     return err;
   }
- 
 }
+
+export async function uploadBuktiTransfer(values) {
+  let form = new FormData();
+
+  form.append("url_img", values["files"]);
+  form.append("status", "0");
+  try {
+    let response = await axios.post("/uploadBukti/save", form, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
+
+export async function detailBuktiTransfer() {
+  let respone = await axios.get("/uploadBukti/detail");
+ console.log(respone)
+  return respone.data
+}
+
+//tes diniyah
+export async function postTesDiniyyah(values) {
+  try {
+    let response = await axios.post("/tesDiniyah", values);
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
+
+
+export async function getTesDiniyah() {
+  let respone = await axios.get("/tesDiniyahSaya/tes-saya");
+ console.log(respone)
+  return respone.data
+}
+
+//  

@@ -29,7 +29,7 @@ export default function Dashboard() {
         <p className="text-justify mt-4">
           {" "}
           Untuk Selanjutnya, Silahkan untuk lakukan pembayaran uang pendaftaran
-          sebesar Rp. 350.000 , 00 untuk mengerjakan tes pelajaran umum secara
+          sebesar Rp. 350.000,00 untuk mengerjakan tes pelajaran umum secara
           online dan menjadwalkan tes diniyah{" "}
         </p>
         <div className="mt-5 border w-full p-10 text-center">
@@ -38,7 +38,7 @@ export default function Dashboard() {
           <p>
             {" "}
             {isPayment === true ? (
-              <span className="bg-green-400 hover:bg-green-500 py-2 px-5 font-bold rounded-md text-white">Confirm</span>
+              <span className="bg-green-400 hover:bg-green-500 py-2 px-5 font-bold rounded-md text-white">Pendaftaran Confirm</span>
             ) : (
                 <span className="bg-red-400 hover:bg-red-500 py-2 px-5 font-bold rounded-md text-white">Belum</span>
             )}

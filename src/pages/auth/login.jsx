@@ -41,12 +41,16 @@ export default function Register() {
         isClosable: true,
       });
 
+      if(result.user.roles[0].name === "admin"){
+        return history.push('/admin')
+      }
+
       const identitas = result.identitas;
       if (identitas !== undefined) {
         if (identitas.length === 0) {
           return history.push("/identitas");
         } else if (identitas.length === 1) {
-        
+          return history.push("/ppdb/salam");
           return history.push("/identitas/data-sekolah-asal");
         } else if (identitas.length === 2) {
          

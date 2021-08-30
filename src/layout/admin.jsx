@@ -1,8 +1,8 @@
 import React from "react";
-import Menu from "../modules/ppdb/menu";
+import Menu from "../modules/admin/menu";
 import { Switch, Route, useHistory } from "react-router-dom";
 import TesUmum from "../pages/ppdb/tes-umum";
-import Dashboard from "../pages/ppdb/dashboard";
+import Dashboard from "../pages/admin/dashboard";
 import Payment from "../pages/ppdb/payment";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import AlertLogout from "../components/AlertLogout";
@@ -36,7 +36,7 @@ export default function LayoutPPDB() {
         <header className=" lg:hidden text-xl text-white font-bold flex items-center justify-between bg-green-500 px-5 py-2 border-b lg:border-none pb-3 lg:pb-0">
           <h1>
             {" "}
-            PPDB <br />{" "}
+            ADMIN <br />{" "}
             <span className="hidden lg:block">SMK MADINATULQURAN</span>
           </h1>
           <button
@@ -58,10 +58,10 @@ export default function LayoutPPDB() {
               hiddenMenu ? "transform -translate-x-full lg:transform " : "transform -translate-x-0 transition  duration-500"
             } lg:block h-full py-5 pl-1  bg-green-500`}
           >
-            <header className=" hidden lg:block text-lg text-white font-bold  items-center justify-between border-b lg:border-none pb-3 lg:pb-0">
+            <header className=" hidden lg:block text-xl text-white font-bold items-center justify-between border-b lg:border-none pb-3 lg:pb-0">
               <h1>
                 {" "}
-                PPDB <br />{" "}
+                ADMIN <br />{" "}
                 <span className="hidden lg:block">SMK MADINATULQURAN</span>
               </h1>
             </header>
@@ -80,21 +80,13 @@ export default function LayoutPPDB() {
             className="lg:col-span-10 h-9/10 lg:h-full mt-5 lg:mt-0 bg-white px-5 p-10 lg:p-10 rounded-xl overflow-y-auto"
           >
             <Switch>
-              <Route path="/ppdb/salam">
-                <Dashboard></Dashboard>
+              <Route path="/admin/dashboard">
+               <Dashboard></Dashboard>
               </Route>
-              <Route path="/ppdb/tes-umum">
-                Mohon maaf halaman masih dalam tahap pengerjaan
-                {/* <TesUmum></TesUmum> */}
+              <Route path="/admin/daftar">
+               <p>ini datar</p>
               </Route>
-              <Route path="/ppdb/tes-diniyah-dan-interview">
-            <TesDiniyah></TesDiniyah>
-              </Route>
-              <Route path="/ppdb/konfirmasi-pembayaran-ppdb">
-              <Payment></Payment>
-                
-                
-              </Route>
+             
             </Switch>
           </div>
         </div>

@@ -42,7 +42,7 @@ export default function Register() {
       });
 
       if(result.user.roles[0].name === "admin"){
-        return history.push('/admin')
+        return history.push('/admin/dashboard')
       }
 
       const identitas = result.identitas;

@@ -9,7 +9,10 @@ export const AdminPageProtected = ({ children, ...rest }) => {
   
   let dispatch = useDispatch();
   let history = useHistory();
-  
+  if (isAuth) {
+    Cookies.set("url", history.location.pathname);
+    var url = Cookies.get("url")
+  }
   const onLoaded = async (values) => {
     let result = await dispatch(authMe(values));
     console.log(result);
@@ -20,7 +23,7 @@ export const AdminPageProtected = ({ children, ...rest }) => {
     if(result?.user?.roles[0].name === "user"){
       return history.push("/ppdb/salam")
     }
-    return history.push("/admin")
+    return history.push(url)
    
  
    

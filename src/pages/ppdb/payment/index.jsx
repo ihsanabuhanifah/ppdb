@@ -92,7 +92,7 @@ export default function Payment() {
               </div>
 
               <div className="ml-5 col-span-6 lg:col-span-4">
-                (145) Bank Muamalat
+                (147) Bank Muamalat
               </div>
             </div>
             <div className="grid grid-cols-12 font-bold mt-5 lg:mt-2 ">

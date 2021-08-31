@@ -7,6 +7,7 @@ import TableHeader from "../../../components/TableHeader";
 import { Link, useHistory } from "react-router-dom";
 import { getUser } from "../../../api/admin";
 import { formatDate } from "../../../utils";
+import ReactWhatsapp from "react-whatsapp";
 export default function Pendaftar() {
  
   const [page, setPage] = React.useState(1);
@@ -45,8 +46,10 @@ export default function Pendaftar() {
         </h1>
       </div>
       {/* table */}
-      <TableHeader></TableHeader>
-      <div className="p-1 lg:p-10 overflow-auto ">
+     <div className="p-1n ">
+     <TableHeader></TableHeader>
+     </div>
+      <div className="p-1  overflow-auto ">
       
       
       
@@ -105,7 +108,12 @@ export default function Pendaftar() {
                   {dt.email}
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  {dt.phone}
+                <ReactWhatsapp number={"+6285888222457"} message={"bismillah"}>
+                  <button className="hover:text-green-500 hover:font-bold hover:text-lg">{dt.phone}</button>
+         
+        </ReactWhatsapp>
+                 
+               
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                   {formatDate(dt.created_at)}

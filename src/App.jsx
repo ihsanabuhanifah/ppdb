@@ -2,11 +2,11 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Register from "./pages/auth/register";
 import Login from "./pages/auth/login";
-import Testpage from "./pages/tes/TesMAtematika";
+import {TestMatematika, TestDiniyahDasar, TestAnalogi} from "./pages/tes";
 import PPDB from "./layout/ppdb";
 import Identitas from "./layout/identitas";
 import Admin from "./layout/admin"
-import { SiswaPageProtected, AdminPageProtected } from "./layout/ProtetedRoute";
+import { SiswaPageProtected, AdminPageProtected, TesPageProtected } from "./layout/ProtetedRoute";
 import { useSelector } from "react-redux";
 import LoadingPage from "./pages/auth/loadingPage,";
 
@@ -27,9 +27,15 @@ function App() {
       <SiswaPageProtected path="/ppdb">
         {isAuth ? <PPDB></PPDB> : <LoadingPage></LoadingPage>}
       </SiswaPageProtected>
-       <SiswaPageProtected path="/tes/matematika">
-        {isAuth ? <Testpage></Testpage> : <LoadingPage></LoadingPage>}
-      </SiswaPageProtected>
+       <TesPageProtected path="/tes/matematika">
+        {isAuth ? <TestMatematika></TestMatematika> : <LoadingPage></LoadingPage>}
+      </TesPageProtected>
+      <TesPageProtected path="/tes/diniyah-dasar">
+        {isAuth ? <TestDiniyahDasar></TestDiniyahDasar> : <LoadingPage></LoadingPage>}
+      </TesPageProtected>
+      <TesPageProtected path="/tes/tes-analogi">
+        {isAuth ? <TestAnalogi></TestAnalogi> : <LoadingPage></LoadingPage>}
+      </TesPageProtected>
       <SiswaPageProtected path="/identitas">
         <Identitas></Identitas>
       </SiswaPageProtected>

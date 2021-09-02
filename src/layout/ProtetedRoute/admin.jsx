@@ -12,14 +12,15 @@ export const AdminPageProtected = ({ children, ...rest }) => {
   if (isAuth) {
     Cookies.set("url", history.location.pathname);
     var url = Cookies.get("url")
+    
   }
   const onLoaded = async (values) => {
     let result = await dispatch(authMe(values));
-    console.log(result);
+   
     if(result.response?.status === 401){
       return history.push("/login")
     }
-    console.log("jalan")
+    
     if(result?.user?.roles[0].name === "user"){
       return history.push("/ppdb/salam")
     }

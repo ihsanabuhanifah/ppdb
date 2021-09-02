@@ -1,4 +1,4 @@
-main::-webkit-scrollbar{
+/* main::-webkit-scrollbar{
   width: 5px;
 }
 
@@ -101,23 +101,23 @@ position: relative;
 /*^ Search */
 
 /* width */
-#scroll-search::-webkit-scrollbar {
+/* #scroll-search::-webkit-scrollbar {
   width: 6px;
-}
+} */
 
 /* Track */
-#scroll-search::-webkit-scrollbar-track {
+/* #scroll-search::-webkit-scrollbar-track {
 background: #bdbdbd;
 border-radius: 10px;
-}
+} */
 
 /* Handle */
-#scroll-search::-webkit-scrollbar-thumb {
+/* #scroll-search::-webkit-scrollbar-thumb {
 background: #757575; 
 border-radius: 10px;
-}
+} */
 
 /* Handle on hover */
-#scroll-search::-webkit-scrollbar-thumb:hover {
+/* #scroll-search::-webkit-scrollbar-thumb:hover {
 background: #5a5959; 
-}
+} */

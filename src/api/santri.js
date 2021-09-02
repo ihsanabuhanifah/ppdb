@@ -1,5 +1,5 @@
 import axios from "./axios";
-
+import {syncToken} from "./axios"
 export async function postSantiBaru(values) {
   try {
     let response = await axios.post("/dataSiswa/save", values);
@@ -83,4 +83,30 @@ export async function getTesDiniyah() {
   return respone.data
 }
 
-//  
+//tes umum
+
+export async function postTesUmum(values) {
+  syncToken()
+  try {
+    let response = await axios.post("/tesMasuk/save", values);
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
+
+export async function putTesUmum(values) {
+  syncToken()
+  try {
+    let response = await axios.post("/tesMasuk/update", values);
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
+export async function getTesUmum(kode) {
+  syncToken()
+  let respone = await axios.get(`/tesMasuk/${kode}`);
+ console.log(respone)
+  return respone.data
+}

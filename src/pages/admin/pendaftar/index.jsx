@@ -1,34 +1,42 @@
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { Collapse } from "@chakra-ui/react";
 import Pagination from "../../../components/Pagination";
 import PaginationInfo from "../../../components/paginationInfo";
 import TableHeader from "../../../components/TableHeader";
+import LoadingBar from "../../../components/loadingBar"
 import { Link, useHistory } from "react-router-dom";
 import { getUser } from "../../../api/admin";
+import { konfirmBukti } from "../../../api/admin";
 import { formatDate } from "../../../utils";
 import ReactWhatsapp from "react-whatsapp";
+import { useToast } from "@chakra-ui/react";
+import useDebounce from "../../../hooks/useDebounce"
 export default function Pendaftar() {
- 
   const [page, setPage] = React.useState(1);
-  const [pageSize, setPageSize] = React.useState(10);
-  const [keyword, setKeyword] = React.useState("")
+ ;
+  const [per_page, setPer_page] = React.useState(10)
+  const [isLoadingKonfirmasi, setIsLoadingKonfirmasi] = React.useState(false)
+  const [keyword, setKeyword] = React.useState("");
+  let debouncedKeyword = useDebounce(keyword, 500);
+  const [statusBukti, setStatusBukti] = React.useState("");
+  let queryClient = useQueryClient();
   const { isLoading, isError, data, isFetching } = useQuery(
     //query key
     [
       "list_user",
       {
         page: page,
-        limit: pageSize,
-        keyword: keyword,
+        per_page: per_page,
+        search: debouncedKeyword,
       },
     ],
 
     () =>
       getUser({
         page: page,
-        limit: pageSize,
-        keyword: keyword,
+        per_page: per_page,
+        keyword: debouncedKeyword,
       }),
 
     {
@@ -37,7 +45,25 @@ export default function Pendaftar() {
     }
   );
 
-  console.log(data)
+  let toast = useToast();
+  const updateStatus = async (id) => {
+    let result = await konfirmBukti(id);
+    queryClient.invalidateQueries("provider_document")
+    queryClient.invalidateQueries("list_user");
+    if (result?.status === "success") {
+      toast({
+        position: "top-right",
+        title: "Berhasil",
+        description: "Pembayaran Terkonfirmasi",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+      setIsLoadingKonfirmasi(false)
+    }
+  };
+
+  console.log(data);
   return (
     <div className="text-green-500 grid grid-cols-1 gap-5">
       <div className="border-b-2 pb-10">
@@ -46,20 +72,18 @@ export default function Pendaftar() {
         </h1>
       </div>
       {/* table */}
-     <div className="p-1n ">
-     <TableHeader></TableHeader>
-     </div>
+      <div className="p-1n ">
+        <TableHeader setKeyword={setKeyword} setPer_page={setPer_page}></TableHeader>
+      </div>
       <div className="p-1  overflow-auto ">
-      
-      
-      
+     
         <table className="min-w-full relative ">
           <thead>
             <tr className="uppercase">
               <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-green-500 tracking-wider">
                 No
               </th>
-             
+
               <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                 Nama
               </th>
@@ -76,7 +100,10 @@ export default function Pendaftar() {
                 Status Transfer
               </th>
               <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                Konfirmasi
+                Bukti Transfer
+              </th>
+              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
+                Terkonfirmasi
               </th>
               <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                 Jadwal Tes
@@ -89,40 +116,76 @@ export default function Pendaftar() {
                 </th> */}
             </tr>
           </thead>{" "}
-          <tbody className="bg-white relative">
+         
+        </table>
+
+        {isFetching ? (<LoadingBar></LoadingBar>) : ( <tbody className="bg-white relative">
             {}
             {data?.data?.map((dt, index) => (
               <tr key={index} className="hover:bg-gray-200">
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div className="flex items-center">
                     <div>
-                      <div className="text-sm leading-5 text-gray-800">{(page - 1) * pageSize + index + 1}</div>
+                      <div className="text-sm leading-5 text-gray-800">
+                        {(page - 1) * per_page + index + 1}
+                      </div>
                     </div>
                   </div>
                 </td>
 
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div className="text-sm leading-5 text-blue-900">{dt.name}</div>
+                  <div className="text-sm leading-5 text-blue-900">
+                    {dt.name}
+                  </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                   {dt.email}
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                <ReactWhatsapp number={"+6285888222457"} message={"bismillah"}>
-                  <button className="hover:text-green-500 hover:font-bold hover:text-lg">{dt.phone}</button>
-         
-        </ReactWhatsapp>
-                 
-               
+                  <ReactWhatsapp number={dt.phone} message={"bismillah"}>
+                    <p className="hover:text-green-500 hover:font-bold hover:text-lg">
+                      {dt.phone}
+                    </p>
+                  </ReactWhatsapp>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                   {formatDate(dt.created_at)}
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  pl
+                  {dt.bukti === null ? "-" : <p>Sudah Upload</p>}
                 </td>
                 <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  poook
+                  {dt.bukti === null ? (
+                    "-"
+                  ) : (
+                    <a
+                      target="_blank"
+                      className="hover:text-green-500 font-bold"
+                      href={dt.bukti?.url_img}
+                    >
+                      Lihat Bukti
+                    </a>
+                  )}
+                </td>
+                <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
+                  {dt.bukti === null ? (
+                    "-"
+                  ) : (
+                    <button
+                      disabled={dt.bukti?.status === 0 ? false : true}
+                      onClick={() => {
+                        setIsLoadingKonfirmasi(true)
+                        updateStatus(dt.bukti?.user_id);
+                      }}
+                      className={`0 font-bold p-2 ${
+                        dt.bukti?.status === 0
+                          ? "bg-red-500 hover:bg-red-500"
+                          : "bg-green-500 hover:bg-green-600"
+                      } rounded-md text-white`}
+                    >
+                      {isLoadingKonfirmasi ? "Memperbaharui" : dt.bukti?.status === 0 ? "Belum" : "Sudah"}
+                    </button>
+                  )}
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                   pl
@@ -130,17 +193,15 @@ export default function Pendaftar() {
                 <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
                   poook
                 </td>
-               
               </tr>
             ))}
-          </tbody>
-        </table>
+          </tbody>)}
 
         <div className="flex items-center justify-between mt-5 text-green-500">
           <PaginationInfo
             totalItems={5}
             currentPage={1}
-            pageSize={pageSize}
+            pageSize={per_page}
           ></PaginationInfo>
           {/* <Pagination
             totalItems={20}

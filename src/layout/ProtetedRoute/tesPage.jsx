@@ -4,28 +4,26 @@ import { useSelector, useDispatch } from "react-redux";
 import { authMe } from "../../redux/action/login";
 
 import Cookies from "js-cookie";
-export const SiswaPageProtected = ({ children, ...rest }) => {
+export const TesPageProtected = ({ children, ...rest }) => {
   const isAuth = useSelector((state) => state.auth.isAuth);
+  const isPayment = useSelector((state) => state.auth.isPayment);
 
   let dispatch = useDispatch();
   let history = useHistory();
- 
- 
+
   if (isAuth) {
     Cookies.set("url", history.location.pathname);
-    var url = Cookies.get("url")
-    let exam = Cookies.get("exam");
-  
-    if (exam !== undefined) {
-      history.push(exam);
-    }
+    Cookies.set("exam", history.location.pathname);
+    var url = Cookies.get("url");
    
   }
-  
- 
+
   const onLoaded = async (values) => {
     let result = await dispatch(authMe(values));
-
+   
+    if (result?.pendaftaran == 0) {
+      return history.push("/ppdb/konfirmasi-pembayaran-ppdb");
+    }
     if (result.response?.status === 401) {
       return history.push("/login");
     }
@@ -54,10 +52,12 @@ export const SiswaPageProtected = ({ children, ...rest }) => {
     if (!isAuth) {
       onLoaded();
     }
-    
-  }, []);
 
-  
+    var ex = Cookies.get("exam");
+    // if(ex !== null) {
+    //   return history.push(url)
+    // }
+  }, []);
 
   if (Cookies.get("token-ppdb")) {
     return <Route {...rest}>{children}</Route>;
@@ -66,7 +66,7 @@ export const SiswaPageProtected = ({ children, ...rest }) => {
   }
 };
 
-export default SiswaPageProtected;
+export default TesPageProtected;
 
 {
   /* <Route {...rest}>{!isAuth ? <Redirect to="/login" /> : children}</Route> */

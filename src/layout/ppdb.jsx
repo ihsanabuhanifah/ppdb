@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "../modules/ppdb/menu";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import TesUmum from "../pages/ppdb/tes-umum";
 import Dashboard from "../pages/ppdb/dashboard";
 import Payment from "../pages/ppdb/payment";
@@ -84,8 +84,8 @@ export default function LayoutPPDB() {
                 <Dashboard></Dashboard>
               </Route>
               <Route path="/ppdb/tes-umum">
-                Mohon maaf halaman masih dalam tahap pengerjaan
-                {/* <TesUmum></TesUmum> */}
+                {/* Mohon maaf halaman masih dalam tahap pengerjaan */}
+                <TesUmum></TesUmum>
               </Route>
               <Route path="/ppdb/tes-diniyah-dan-interview">
             <TesDiniyah></TesDiniyah>
@@ -95,6 +95,7 @@ export default function LayoutPPDB() {
                 
                 
               </Route>
+              <Redirect from="/ppdb" to="/ppdb/salam" />
             </Switch>
           </div>
         </div>

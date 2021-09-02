@@ -1,0 +1,173 @@
+export const soalDiniyah = [
+    {
+      soal: "Rukun Islam yang ke-3 adalah …",
+      a: "Haji",
+      b: "Sholat",
+      c: "Zakat",
+      d: "Puasa",
+      answer: "c",
+    },
+    {
+      soal: "Berikut merupakan anggota tubuh yang termasuk rukun wudhu, kecuali ….",
+      a: "Wajaih",
+      b: "Kepala",
+      c: "Telinga",
+      d: "Kaki",
+    
+      answer: "c",
+    },
+    {
+      soal: "Berikut merupakan anggota sujud, kecuali ….",
+      a: "Dahi",
+      b: "Hidung",
+      c: "Tepalak Tangan",
+      d: "Kedua Lutut",
+    
+      answer: "b",
+    },
+    {
+      soal: "Berikut merupakan pembatal puasa, kecuali ….",
+      a: "Melahirkan",
+      b: "Makan",
+      c: "Minum",
+      d: "Berkata kasar",
+      
+      answer: "d",
+    },
+    {
+      soal: "Rukun iman yang ke-4 adalah percaya kepada ….",
+      a: "Malaikat",
+      b: "Kitab-kitab",
+      c: "Rasul-rasul",
+      d: "Hari Akhir",
+     
+      answer: "c",
+    },
+    {
+      soal: "Meyakini bahwa Allah adalah pencipta langit dan bumi beserta segala macam isinya merupakan bagian dari tauhid …",
+      a: "Asma",
+      b: "Rububiyyah",
+      c: "Sifat",
+      d: "Uluhiyyah",
+    
+      answer: "b",
+    },
+    {
+      soal: "Meyakini bahwa hanya Allah yang berhak diibadahi merupakan bagian dari tauhid …",
+      a: "Asma",
+      b: "Rububiyyah",
+      c: "Sifat",
+      d: "Uluhiyyah",
+      answer: "d",
+    },
+    {
+      soal: "Kitab yang diturunkan kepada nabi Musa alaihissalam adalah ….",
+      a: "Al-Qur’an",
+      b: "Injut",
+      c: "Taurat",
+      d: "Zabut",
+     
+      answer: "c",
+    },
+    {
+      soal: "Kitab yag diturunkan kepada nabi Daud alaihissalam adalah ….",
+      a: "Al-Qur’an",
+      b: "Injut",
+      c: "Taurat",
+      d: "Zabut",
+      answer: "d",
+    },
+    {
+      soal: "Berikut merupakan nama-nama ulul ‘azmi, kecuali …",
+      a: "Nuh",
+      b: "Yusuf",
+      c: "Daud",
+      d: "Sulaiman",
+     
+      answer: "c",
+    },
+    {
+      soal: "Berikut merupakan sifat seorang nabi, kecuali ….",
+      a: "Shiddiq",
+      b: "Amanah",
+      c: "Kadzib",
+      d: "Fathanah",
+    
+      answer: "c",
+    },
+    {
+      soal: "Di antara huruf-huruf berikut yang dibaca idgham saat didahului nun sukun atau tanwin adalah ….",
+      a: "ب",
+      b: "س",
+      c: "غ",
+      d: "م",
+   
+      answer: "d",
+    },
+    {
+      soal: "Di antara huruf-huruf berikut yang dibaca ikhfa’ saat didahului nun sukun atau tanwin adalah ….",
+      a: "ب",
+      b: "س",
+      c: "غ",
+      d: "م",
+      answer: "b",
+    },
+    {
+      soal: "Di antara huruf-huruf berikut yang dibaca izhar saat didahului nun sukun atau tanwin adalah ….",
+      a: "ب",
+      b: "س",
+      c: "غ",
+      d: "م",
+      answer: "c",
+    },
+    {
+      soal: "Di antara huruf-huruf berikut yang dibaca iqlab saat didahului nun sukun atau tanwin adalah ….",
+      a: "ب",
+      b: "س",
+      c: "غ",
+      d: "م",
+      answer: "a",
+    },
+    {
+      soal: "Di antara huruf-huruf berikut yang dibaca idgham saat didahului mim sukun adalah ….",
+      a: "ب",
+      b: "س",
+      c: "غ",
+      d: "م",
+      answer: "d",
+    },
+    {
+      soal: "Di antara huruf-huruf berikut yang dibaca ikhfa’ saat didahului mim sukun adalah ….",
+      a: "ب",
+      b: "س",
+      c: "غ",
+      d: "م",
+      answer: "a",
+    },
+    {
+      soal: "Di antara huruf-huruf berikut yang dibaca qolqolah adalah ….",
+      a: "ب",
+      b: "س",
+      c: "غ",
+      d: "م",
+      answer: "a",
+    },
+    {
+      soal: "اليوم بعد يوم الأربعاء هو يوم ....",
+      a: "الثلاثاء",
+      b: "الخامس",
+      c: "الأحد",
+      d: "السبت",
+     
+      answer: "b",
+    },
+    {
+      soal: "اليوم قبل يوم الأربعاء هو يوم ....",
+      a: "الثلاثاء",
+      b: "الخامس",
+      c: "الأحد",
+      d: "السبت",
+      answer: "a",
+    },
+  ];
+  

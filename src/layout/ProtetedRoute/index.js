@@ -1,4 +1,5 @@
 import SiswaPageProtected from "./siswa";
 import AuthProtected from "./Auth";
 import { AdminPageProtected } from "./admin";
-export {SiswaPageProtected, AuthProtected, AdminPageProtected}
+import TesPageProtected from "./tesPage";
+export {SiswaPageProtected, AuthProtected, AdminPageProtected, TesPageProtected}

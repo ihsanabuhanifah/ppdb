@@ -109,6 +109,9 @@ export default function Pendaftar() {
                 Jadwal Tes
               </th>
               <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
+                Method ujian
+              </th>
+              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                 Kirim Jadwal
               </th>
               {/* <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
@@ -179,7 +182,7 @@ export default function Pendaftar() {
                       }}
                       className={`0 font-bold p-2 ${
                         dt.bukti?.status === 0
-                          ? "bg-red-500 hover:bg-red-500"
+                          ? "bg-red-500 hover:bg-red-500" 
                           : "bg-green-500 hover:bg-green-600"
                       } rounded-md text-white`}
                     >
@@ -188,7 +191,12 @@ export default function Pendaftar() {
                   )}
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  pl
+                {dt?.tes_diniyyah === null ? (<p className="text-red-500 italic">Belum Membuat Jadwal</p>) : formatDate(dt?.tes_diniyyah?.tanggal)}
+               
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                {dt?.tes_diniyyah === null ? (<p className="text-red-500 italic">-</p>) : dt?.tes_diniyyah?.metode === 1 ? 'Offline' : 'Online'}
+               
                 </td>
                 <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
                   poook

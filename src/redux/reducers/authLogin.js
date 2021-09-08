@@ -8,7 +8,7 @@ const initialState = {
   identitas : "",
   isLoading: false,
   isAuth:false,
-  isPayment : false
+  isPayment : "belum_transfer"
 };
 
 export default function authLogin(state = initialState, action) {
@@ -54,6 +54,13 @@ export default function authLogin(state = initialState, action) {
       ...state,
 
       isLoading: false,
+    };
+  }
+  if (action.type === "PAYMENT_UPDATE") {
+    return {
+      ...state,
+
+      isPayment : false
     };
   }
   return state;

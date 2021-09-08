@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Register from "./pages/auth/register";
 import Login from "./pages/auth/login";
-import {TestMatematika, TestDiniyahDasar, TestAnalogi} from "./pages/tes";
+import {TestMatematika, TestDiniyahDasar, TestAnalogi, TestBahasaInggris} from "./pages/tes";
 import PPDB from "./layout/ppdb";
 import Identitas from "./layout/identitas";
 import Admin from "./layout/admin"
@@ -35,6 +35,9 @@ function App() {
       </TesPageProtected>
       <TesPageProtected path="/tes/tes-analogi">
         {isAuth ? <TestAnalogi></TestAnalogi> : <LoadingPage></LoadingPage>}
+      </TesPageProtected>
+      <TesPageProtected path="/tes/tes-bahasa-inggris">
+        {isAuth ? <TestBahasaInggris></TestBahasaInggris> : <LoadingPage></LoadingPage>}
       </TesPageProtected>
       <SiswaPageProtected path="/identitas">
         <Identitas></Identitas>

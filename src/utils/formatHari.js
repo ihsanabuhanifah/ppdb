@@ -23,5 +23,5 @@ export function formatDate(timeStamps){
     if(hari === "Sunday"){
         hari = "Minggu"
     }
-    return  `${hari} , ${dayjs(timeStamps).format("DD-MM-YYYY " )}`
+    return  `${hari} , ${dayjs(timeStamps).format("DD-MM-YYYY hh:mm")}`
 }

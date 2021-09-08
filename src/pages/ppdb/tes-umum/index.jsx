@@ -2,6 +2,7 @@ import React from "react";
 import Matematika from "../../../image/matematika.jpg";
 import Alquran from "../../../image/alquran.jpg";
 import Analogi from "../../../image/analogi.JPG";
+import BInggris from "../../../image/bahasainggris.JPG"
 import { useHistory } from "react-router-dom";
 import AlertLogout from "../../../components/AlertLogout";
 import { getTesUmum, postTesUmum } from "../../../api/santri";
@@ -24,6 +25,9 @@ export default function Tes() {
     }
     if (kode === "Tes003") {
       tes = "tes-analogi";
+    }
+    if (kode === "Tes004") {
+      tes = "tes-bahasa-inggris";
     }
     let values = {
       kode_mapel : kode,
@@ -48,6 +52,9 @@ export default function Tes() {
       }
       if (kode === "Tes003") {
         return history.push("/tes/tes-analogi");
+      }
+      if (kode === "Tes004") {
+        return history.push("/tes/tes-bahasa-inggris");
       }
     }
     
@@ -99,11 +106,7 @@ export default function Tes() {
               />
               <div className="px-5 pb-6">
                 <h2 className="pt-3 font-bold text-2xl">MATEMATIKA</h2>
-                <p className="pt-2 font-semibold">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Delectus dicta, sequi sint maxime dignissimos dolorem quidem
-                  voluptate eum magnam earum.
-                </p>
+               
                 <button
                   onClick={() => {
                     setKode("Tes001");
@@ -127,11 +130,7 @@ export default function Tes() {
               />
               <div className="px-5 pb-6">
                 <h2 className="pt-3 font-bold text-2xl">DINIYAH DASAR</h2>
-                <p className="pt-2 font-semibold">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Delectus dicta, sequi sint maxime dignissimos dolorem quidem
-                  voluptate eum magnam earum.
-                </p>
+               
                 <button
                   onClick={() => {
                     setKode("Tes002");
@@ -155,11 +154,7 @@ export default function Tes() {
               />
               <div className="px-5 pb-6">
                 <h2 className="pt-3 font-bold text-2xl">TES ANALOGI</h2>
-                <p className="pt-2 font-semibold">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Delectus dicta, sequi sint maxime dignissimos dolorem quidem
-                  voluptate eum magnam earum.
-                </p>
+                
                 <button
                   onClick={() => {
                     setKode("Tes003");
@@ -172,8 +167,36 @@ export default function Tes() {
                 </button>
               </div>
             </div>
+            
+          </div>
+          {/* bahasa */}
+          <div className="relative">
+            <div className="relative  h-full rounded-md shadow-md">
+              <img
+                className="rounded-t-md w-full"
+                style={{ height: "240px " }}
+                src={BInggris}
+                alt="bahasainggris.jpg"
+              />
+              <div className="px-5 pb-6">
+                <h2 className="pt-3 font-bold text-2xl">TES BAHASA INGGRIS</h2>
+                
+                <button
+                  onClick={() => {
+                    setKode("Tes004");
+                    return setLogout(true);
+                    return history.push("/tes/tes-analogi");
+                  }}
+                  className="inline-flex w-full hover:bg-green-500 text-white bg-green-500 py-3 rounded-lg mt-4 flex items-center justify-center text-xl uppercase font-bold"
+                >
+                  Mulai
+                </button>
+              </div>
+            </div>
+            
           </div>
         </div>
+        
       </section>
     </React.Fragment>
   );

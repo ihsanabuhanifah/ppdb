@@ -46,7 +46,7 @@ export const loginProcess = (data) => {
     token: data?.token,
     role: data?.user?.roles[0].name,
     identitas : data?.identitas,
-    isPayment : data?.pendaftaran === 0 ? false :true,
+    isPayment : data?.pendaftaran === 0 ? false : data?.pendaftaran === 1 ? true : 'belum_transfer'  ,
     isLoading: false,
   };
 };
@@ -61,3 +61,9 @@ export const finish = () => {
       type: "FINISH",
     };
   };
+
+  export const payment = () => {
+    return {
+      type: "PAYMENT_UPDATE",
+    };
+  }

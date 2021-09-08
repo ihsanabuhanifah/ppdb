@@ -6,6 +6,8 @@ import Loading from "../../../components/loading";
 import { uploadBuktiTransfer, detailBuktiTransfer } from "../../../api/santri";
 import { useHistory } from "react-router-dom";
 import { useToast, useClipboard } from "@chakra-ui/react";
+import {payment} from "../../../redux/action/login"
+import { useSelector, useDispatch } from "react-redux";
 let fileSchema = Yup.object().shape({
   files: Yup.string().required("Bukti Transfer wajib di Upload"),
 });
@@ -15,7 +17,7 @@ export default function Payment() {
   const [statusTransfer, setStatusTransfer] = React.useState(false);
   const [value, setValue] = React.useState(3310006100)
   const { hasCopied, onCopy } = useClipboard(value);
-  
+  let dispatch = useDispatch();
   let history = useHistory();
   let toast = useToast();
   let initialValues = {
@@ -35,6 +37,7 @@ export default function Payment() {
         duration: 4000,
         isClosable: true,
       });
+      dispatch(payment())
       return setStatusTransfer(true);
       // history.push("/identitas/data-ibu");
     }
@@ -53,13 +56,15 @@ export default function Payment() {
 
   const bukti = async () => {
     let result = await detailBuktiTransfer();
-    if (result?.data !== null) {
+    console.log(result)
+    if (result !== "") {
       return setStatusTransfer(true);
       // history.push("/identitas/data-ibu");
     }
   };
   React.useEffect(() => {
     bukti();
+    console.log(statusTransfer)
   }, []);
   return (
     <div className="p-2 lg:px-32 font-semibold relative">

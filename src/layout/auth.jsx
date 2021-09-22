@@ -9,6 +9,7 @@ import { Tooltip } from "@chakra-ui/react";
 // import { Zoom } from "react-slideshow-image";
 export default function Layout({ children, page }) {
   const message = "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh";
+  const [hidden, setHidden] = React.useState(false);
   // const images = [image1, image2, image3];
 
   // const zoomOutProperties = {
@@ -18,13 +19,13 @@ export default function Layout({ children, page }) {
   return (
     <React.Fragment>
       <div className="grid grid-cols-12 lg:grid-cols-7 w-full h-screen  ">
-      <div className="w-full h-full block lg:hidden bg-green-500"></div>
+        <div className="w-full h-full block lg:hidden bg-green-500"></div>
         <div
           className={`col-span-5 hidden lg:block   h-full h-screen ${
             page === "login" ? "order-1" : "order-2"
           }`}
         >
-          <img className="h-full w-full"  alt="imagesmk.png" src={image1} />
+          <img className="h-full w-full" alt="imagesmk.png" src={image1} />
         </div>
         <div
           className={`flex justify-center items-center col-span-11 lg:col-span-2 ${
@@ -35,18 +36,58 @@ export default function Layout({ children, page }) {
         </div>
       </div>
       <div className="fixed right-10 bottom-4">
-        <ReactWhatsapp number={"+6285888222457"} message={message}>
-          <Tooltip
-            fontSize="lg"
-            bg="gray.300"
-            color="black"
-            hasArrow
-            label="informasi PPDB"
-            aria-label="A tooltip"
-          >
-            <img className="w-16 h-16 animate-bounce shadow-xl " src={wa} alt="whatsapp.png" />
-          </Tooltip>
-        </ReactWhatsapp>
+        {" "}
+        <Tooltip
+          fontSize="lg"
+          bg="gray.300"
+          color="black"
+          hasArrow
+          label="informasi PPDB"
+          aria-label="A tooltip"
+        >
+          <img
+            onClick={() => {
+              setHidden(true);
+            }}
+            className={`w-16 h-16 animate-bounce shadow-xl ${
+              hidden ? "hidden" : "block"
+            }`}
+            src={wa}
+            alt="whatsapp.png"
+          />
+        </Tooltip>
+        <div className={`${hidden ? "block" : "hidden"} relative  px-5 py-5 grid grid-cols-1 gap-4 shadow-lg border `}>
+          <button  onClick={() => {
+              setHidden(false);
+            }} className="absolute right-5 top-1">x</button>
+          <ReactWhatsapp number={"+6285888222457"} message={message}>
+           <div className=" p-2 mt-4 flex items-center justify-center ">
+           <img
+             
+             className={`w-4 h-4 shadow-xl `}
+             src={wa}
+             alt="whatsapp.png"
+           />
+           <p className="text-green-500  ml-2 ">
+             Hubungi Ustadz. Dedi
+           </p>
+           </div>
+          </ReactWhatsapp>
+          
+          <ReactWhatsapp number={"+6281511668021"} message={message}>
+           <div className=" p-2 flex items-center justify-center ">
+           <img
+             
+             className={`w-4 h-4 shadow-xl `}
+             src={wa}
+             alt="whatsapp.png"
+           />
+           <p className="text-green-500  ml-2 ">
+           Hubungi Ustadz. Fajri
+           </p>
+           </div>
+          </ReactWhatsapp>
+        </div>
       </div>
     </React.Fragment>
   );

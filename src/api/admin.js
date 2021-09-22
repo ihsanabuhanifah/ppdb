@@ -19,3 +19,16 @@ export async function getUser({page, per_page , keyword}) {
    
     return result.data
   }
+
+  export async function getNilai({ per_page, keyword}) {
+    let result = await axios.get(`/listNilai?perpage=${ per_page}&keywords=${keyword}`);
+   
+    return result.data
+  }
+
+  export function getUserAll({page, per_page , keyword}) {
+    console.log(per_page)
+      return axios.get(`/user?perpage=${per_page}&keywords=${keyword}&role=user&page=${page}`);
+     
+      
+    }

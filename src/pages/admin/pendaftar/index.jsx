@@ -20,6 +20,7 @@ export default function Pendaftar() {
   const [keyword, setKeyword] = React.useState("");
   let debouncedKeyword = useDebounce(keyword, 500);
   const [statusBukti, setStatusBukti] = React.useState("");
+  const [transfer, setTransfer] = React.useState(0)
   let queryClient = useQueryClient();
   const { isLoading, isError, data, isFetching } = useQuery(
     //query key
@@ -63,6 +64,7 @@ export default function Pendaftar() {
     }
   };
 
+  
   console.log(data);
   return (
     <div className="text-green-500 grid grid-cols-1 gap-5">
@@ -74,6 +76,19 @@ export default function Pendaftar() {
       {/* table */}
       <div className="p-1n ">
         <TableHeader setKeyword={setKeyword} setPer_page={setPer_page}></TableHeader>
+      </div>
+      <div className="grid grid-cols-3 gap-5">
+       <div className="p-2 border w-full" >
+       <label className="font-bold uppercase" htmlFor="">Jumlah Pendaftar</label>
+       <br />
+       <input className="bg-white w-full" type="text" disabled value={`${data?.total} Santri`} />
+       </div>
+       <div className="p-2 border w-full" >
+       <label className="font-bold uppercase" htmlFor="">Jumlah Pendaftar sudah transfer</label>
+       <br />
+       <input className="bg-white w-full" type="text" disabled value={`${data?.total} Santri`} />
+       </div>
+        
       </div>
       <div className="p-1  overflow-auto ">
      

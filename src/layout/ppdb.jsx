@@ -17,6 +17,7 @@ export default function LayoutPPDB() {
   const message = "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
   const [hiddenMenu, setHiddenMenu] = React.useState(true);
   const [logout, setLogout] = React.useState(false);
+  const [hidden, setHidden] = React.useState(false);
   let history = useHistory();
   
   return (
@@ -100,19 +101,59 @@ export default function LayoutPPDB() {
           </div>
         </div>
       </div>
+      
       <div className="fixed right-10 bottom-4 z-50">
-        <ReactWhatsapp number={"+6285888222457"} message={message}>
-          <Tooltip
-            fontSize="lg"
-            bg="gray.300"
-            color="black"
-            hasArrow
-            label="informasi PPDB"
-            aria-label="A tooltip"
-          >
-            <img className="w-16 h-16 animate-bounce shadow-xl " src={wa} alt="whatsapp.png" />
-          </Tooltip>
-        </ReactWhatsapp>
+      <Tooltip
+          fontSize="lg"
+          bg="gray.300"
+          color="black"
+          hasArrow
+          label="informasi PPDB"
+          aria-label="A tooltip"
+        >
+          <img
+            onClick={() => {
+              setHidden(true);
+            }}
+            className={`w-16 h-16 animate-bounce shadow-xl ${
+              hidden ? "hidden" : "block"
+            }`}
+            src={wa}
+            alt="whatsapp.png"
+          />
+        </Tooltip>
+        <div className={`${hidden ? "block" : "hidden"} relative  px-5 py-5 grid grid-cols-1 gap-4 shadow-lg border bg-white `}>
+          <button  onClick={() => {
+              setHidden(false);
+            }} className="absolute right-5 top-1">x</button>
+          <ReactWhatsapp number={"+6285888222457"} message={message}>
+           <div className=" p-2 mt-4 flex items-center justify-center ">
+           <img
+             
+             className={`w-4 h-4 shadow-xl `}
+             src={wa}
+             alt="whatsapp.png"
+           />
+           <p className="text-green-500  ml-2 ">
+             Hubungi Ustadz. Dedi
+           </p>
+           </div>
+          </ReactWhatsapp>
+          
+          <ReactWhatsapp number={"+6281511668021"} message={message}>
+           <div className=" p-2 flex items-center justify-center ">
+           <img
+             
+             className={`w-4 h-4 shadow-xl `}
+             src={wa}
+             alt="whatsapp.png"
+           />
+           <p className="text-green-500  ml-2 ">
+           Hubungi Ustadz. Fajri
+           </p>
+           </div>
+          </ReactWhatsapp>
+        </div>
       </div>
     </React.Fragment>
   );

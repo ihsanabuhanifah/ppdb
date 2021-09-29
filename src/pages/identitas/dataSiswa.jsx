@@ -77,8 +77,8 @@ export default function DataSiswa() {
         isClosable: true,
       });
 
-      return history.push("/ppdb/salam");
-      history.push("/identitas/data-sekolah-asal");
+      // return history.push("/ppdb/salam");
+      return history.push("/identitas/data-sekolah-asal");
     }
     if (result.response.status === 401) {
       setErrorPost(result.response.data);

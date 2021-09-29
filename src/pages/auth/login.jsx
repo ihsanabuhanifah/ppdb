@@ -50,7 +50,7 @@ export default function Register() {
         if (identitas.length === 0) {
           return history.push("/identitas");
         } else if (identitas.length === 1) {
-          return history.push("/ppdb/salam");
+         
           return history.push("/identitas/data-sekolah-asal");
         } else if (identitas.length === 2) {
          

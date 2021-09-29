@@ -10,9 +10,9 @@ const RegisterSchema = Yup.object().shape({
  
 asal_sekolah: Yup.string().required("Nama Lengkap wajib diisi"),
   npsn: Yup.string().required("NPSN wajib diisi"),
-  nisn: Yup.string()
-  .length(10, 'NISN Wajib 10 digit')
-    .typeError("NIK wajib dengan angka").required("NISN wajib diisi"),
+  // nisn: Yup.string()
+  // .length(10, 'NISN Wajib 10 digit')
+  //   .typeError("NIK wajib dengan angka").required("NISN wajib diisi"),
 
   // golongan_darah: Yup.string().required("Nama Lengkap wajib diisi"),
   alamat_sekolah: Yup.string().required("Alamat siswa wajib diisi"),
@@ -241,7 +241,7 @@ export default function PendidikanTerakhir() {
                 </p>
               )}
             </div>
-            <div className="col-start-1 lg:col-start-2">
+            <div className="col-start-1 lg:col-start-3">
               <button
                 type="submit"
                 className="w-full border flex items-center justify-center text-white bg-green-300 h-16 text-lg font-bold rounded-md hover:bg-green-600"
@@ -249,18 +249,7 @@ export default function PendidikanTerakhir() {
                 {isLoading ? <Loading></Loading> : " Simpan dan Lanjutkan"}
               </button>
             </div>
-            <div className="col-start-1 lg:col-start-3">
-              <button
-                type="button"
-                onClick={()=> {
-                    history.push("/ppdb/salam")
-                }}
-                className="w-full border flex items-center justify-center text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
-              >
-                  Lanjut Ke Dashbord
-                
-              </button>
-            </div>
+            
             
           </form>
         

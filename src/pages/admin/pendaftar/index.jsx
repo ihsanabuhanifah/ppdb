@@ -4,23 +4,22 @@ import { Collapse } from "@chakra-ui/react";
 import Pagination from "../../../components/Pagination";
 import PaginationInfo from "../../../components/paginationInfo";
 import TableHeader from "../../../components/TableHeader";
-import LoadingBar from "../../../components/loadingBar"
+import LoadingBar from "../../../components/loadingBar";
 import { Link, useHistory } from "react-router-dom";
 import { getUser } from "../../../api/admin";
 import { konfirmBukti } from "../../../api/admin";
 import { formatDate } from "../../../utils";
 import ReactWhatsapp from "react-whatsapp";
 import { useToast } from "@chakra-ui/react";
-import useDebounce from "../../../hooks/useDebounce"
+import useDebounce from "../../../hooks/useDebounce";
 export default function Pendaftar() {
   const [page, setPage] = React.useState(1);
- ;
-  const [per_page, setPer_page] = React.useState(10)
-  const [isLoadingKonfirmasi, setIsLoadingKonfirmasi] = React.useState(false)
+  const [per_page, setPer_page] = React.useState(10);
+  const [isLoadingKonfirmasi, setIsLoadingKonfirmasi] = React.useState(false);
   const [keyword, setKeyword] = React.useState("");
   let debouncedKeyword = useDebounce(keyword, 500);
   const [statusBukti, setStatusBukti] = React.useState("");
-  const [transfer, setTransfer] = React.useState(0)
+  const [transfer, setTransfer] = React.useState(0);
   let queryClient = useQueryClient();
   const { isLoading, isError, data, isFetching } = useQuery(
     //query key
@@ -49,7 +48,7 @@ export default function Pendaftar() {
   let toast = useToast();
   const updateStatus = async (id) => {
     let result = await konfirmBukti(id);
-    queryClient.invalidateQueries("provider_document")
+    queryClient.invalidateQueries("provider_document");
     queryClient.invalidateQueries("list_user");
     if (result?.status === "success") {
       toast({
@@ -60,11 +59,10 @@ export default function Pendaftar() {
         duration: 4000,
         isClosable: true,
       });
-      setIsLoadingKonfirmasi(false)
+      setIsLoadingKonfirmasi(false);
     }
   };
 
-  
   console.log(data);
   return (
     <div className="text-green-500 grid grid-cols-1 gap-5">
@@ -75,23 +73,38 @@ export default function Pendaftar() {
       </div>
       {/* table */}
       <div className="p-1n ">
-        <TableHeader setKeyword={setKeyword} setPer_page={setPer_page}></TableHeader>
+        <TableHeader
+          setKeyword={setKeyword}
+          setPer_page={setPer_page}
+        ></TableHeader>
       </div>
       <div className="grid grid-cols-3 gap-5">
-       <div className="p-2 border w-full" >
-       <label className="font-bold uppercase" htmlFor="">Jumlah Pendaftar</label>
-       <br />
-       <input className="bg-white w-full" type="text" disabled value={`${data?.total} Santri`} />
-       </div>
-       <div className="p-2 border w-full" >
-       <label className="font-bold uppercase" htmlFor="">Jumlah Pendaftar sudah transfer</label>
-       <br />
-       <input className="bg-white w-full" type="text" disabled value={`${data?.total} Santri`} />
-       </div>
-        
+        <div className="p-2 border w-full">
+          <label className="font-bold uppercase" htmlFor="">
+            Jumlah Pendaftar
+          </label>
+          <br />
+          <input
+            className="bg-white w-full"
+            type="text"
+            disabled
+            value={`${data?.total} Santri`}
+          />
+        </div>
+        <div className="p-2 border w-full">
+          <label className="font-bold uppercase" htmlFor="">
+            Jumlah Pendaftar sudah transfer
+          </label>
+          <br />
+          <input
+            className="bg-white w-full"
+            type="text"
+            disabled
+            value={`${data?.total} Santri`}
+          />
+        </div>
       </div>
       <div className="p-1  overflow-auto ">
-     
         <table className="min-w-full relative ">
           <thead>
             <tr className="uppercase">
@@ -134,10 +147,12 @@ export default function Pendaftar() {
                 </th> */}
             </tr>
           </thead>{" "}
-         
         </table>
 
-        {isFetching ? (<LoadingBar></LoadingBar>) : ( <tbody className="bg-white relative">
+        {isFetching ? (
+          <LoadingBar></LoadingBar>
+        ) : (
+          <tbody className="bg-white relative">
             {}
             {data?.data?.map((dt, index) => (
               <tr key={index} className="hover:bg-gray-200">
@@ -192,33 +207,46 @@ export default function Pendaftar() {
                     <button
                       disabled={dt.bukti?.status === 0 ? false : true}
                       onClick={() => {
-                        setIsLoadingKonfirmasi(true)
+                        setIsLoadingKonfirmasi(true);
                         updateStatus(dt.bukti?.user_id);
                       }}
                       className={`0 font-bold p-2 ${
                         dt.bukti?.status === 0
-                          ? "bg-red-500 hover:bg-red-500" 
+                          ? "bg-red-500 hover:bg-red-500"
                           : "bg-green-500 hover:bg-green-600"
                       } rounded-md text-white`}
                     >
-                      {isLoadingKonfirmasi ? "Memperbaharui" : dt.bukti?.status === 0 ? "Belum" : "Sudah"}
+                      {isLoadingKonfirmasi
+                        ? "Memperbaharui"
+                        : dt.bukti?.status === 0
+                        ? "Belum"
+                        : "Sudah"}
                     </button>
                   )}
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                {dt?.tes_diniyyah === null ? (<p className="text-red-500 italic">Belum Membuat Jadwal</p>) : formatDate(dt?.tes_diniyyah?.tanggal)}
-               
+                  {dt?.tes_diniyyah === null ? (
+                    <p className="text-red-500 italic">Belum Membuat Jadwal</p>
+                  ) : (
+                    formatDate(dt?.tes_diniyyah?.tanggal)
+                  )}
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                {dt?.tes_diniyyah === null ? (<p className="text-red-500 italic">-</p>) : dt?.tes_diniyyah?.metode === 1 ? 'Offline' : 'Online'}
-               
+                  {dt?.tes_diniyyah === null ? (
+                    <p className="text-red-500 italic">-</p>
+                  ) : dt?.tes_diniyyah?.metode === 1 ? (
+                    "Offline"
+                  ) : (
+                    "Online"
+                  )}
                 </td>
                 <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
                   poook
                 </td>
               </tr>
             ))}
-          </tbody>)}
+          </tbody>
+        )}
 
         <div className="flex items-center justify-between mt-5 text-green-500">
           <PaginationInfo

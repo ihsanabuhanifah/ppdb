@@ -107,7 +107,7 @@ export default function Payment() {
               </div>
 
               <div className="ml-5 col-span-6 lg:col-span-4">
-                PONPES MADINATULQURAN
+                YAYASAN WISATA AL ISLAM
               </div>
             </div>
           </div>

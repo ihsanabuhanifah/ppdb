@@ -4,6 +4,7 @@ import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import TesUmum from "../pages/ppdb/tes-umum";
 import Dashboard from "../pages/ppdb/dashboard";
 import Payment from "../pages/ppdb/payment";
+import Kelulusan from "../pages/ppdb/kelulusan";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import AlertLogout from "../components/AlertLogout";
 import Cookies from "js-cookie";
@@ -81,6 +82,9 @@ export default function LayoutPPDB() {
             className="lg:col-span-10 h-9/10 lg:h-full mt-5 lg:mt-0 bg-white px-5 p-10 lg:p-10 rounded-xl overflow-y-auto"
           >
             <Switch>
+            <Route path="/ppdb/status-kelulusan">
+                <Kelulusan></Kelulusan>
+              </Route>
               <Route path="/ppdb/salam">
                 <Dashboard></Dashboard>
               </Route>

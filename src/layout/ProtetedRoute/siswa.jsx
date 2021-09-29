@@ -38,7 +38,7 @@ export const SiswaPageProtected = ({ children, ...rest }) => {
       if (identitas.length === 0) {
         return history.push("/identitas");
       } else if (identitas.length === 1) {
-        return history.push(url);
+       
         return history.push("/identitas/data-sekolah-asal");
       } else if (identitas.length === 2) {
         return history.push("/identitas/data-ayah");

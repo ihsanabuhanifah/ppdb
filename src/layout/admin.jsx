@@ -2,7 +2,7 @@ import React from "react";
 import Menu from "../modules/admin/menu";
 import { Switch, Route, useHistory } from "react-router-dom";
 import TesUmum from "../pages/ppdb/tes-umum";
-import {Admin, Pendaftar, Nilai} from "../pages/admin";
+import {Admin, Pendaftar, Nilai, JadwalTes} from "../pages/admin";
 import Payment from "../pages/ppdb/payment";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import AlertLogout from "../components/AlertLogout";
@@ -88,6 +88,9 @@ export default function LayoutPPDB() {
               </Route>
               <Route path="/admin/nilai" exact>
                <Nilai></Nilai>
+              </Route>
+              <Route path="/admin/jadwal-tes" exact>
+               <JadwalTes></JadwalTes>
               </Route>
              
             </Switch>

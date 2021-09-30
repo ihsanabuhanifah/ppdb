@@ -107,7 +107,7 @@ export default function Payment() {
               </div>
 
               <div className="ml-5 col-span-6 lg:col-span-4">
-                YAYASAN WISATA AL ISLAM
+              YYS PESANTREN WISATA AL-ISLAM (PONPES MADINATULQURAN)
               </div>
             </div>
           </div>

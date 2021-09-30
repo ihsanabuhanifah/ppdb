@@ -10,14 +10,17 @@ import {
   getJadwal,
   updateStatusTes,
   updateStatusKelulusan,
+  getBuktiAll,
+  getStatusBukti
 } from "../../../api/admin";
-import { konfirmBukti } from "../../../api/admin";
+
 import { formatDate } from "../../../utils";
 import ReactWhatsapp from "react-whatsapp";
 import { useToast } from "@chakra-ui/react";
 import useDebounce from "../../../hooks/useDebounce";
 import swal from "sweetalert";
-export default function JadwalTes() {
+import { formatRupiah } from "../../../utils/formatRupiah";
+export default function RiwayatPembayaran() {
   const [page, setPage] = React.useState(1);
   const [per_page, setPer_page] = React.useState(100);
   const [isLoadingKonfirmasi, setIsLoadingKonfirmasi] = React.useState(false);
@@ -31,7 +34,7 @@ export default function JadwalTes() {
   const { isLoading, isError, data, isFetching } = useQuery(
     //query key
     [
-      "jadwal_tes",
+      "pembayaran_ppdb",
       {
         page: page,
         per_page: per_page,
@@ -40,7 +43,7 @@ export default function JadwalTes() {
     ],
 
     () =>
-      getJadwal({
+      getBuktiAll({
         page: page,
         per_page: per_page,
         keyword: debouncedKeyword,
@@ -48,21 +51,15 @@ export default function JadwalTes() {
 
     {
       keepPreviousData: true,
-      select: (response) => {
-        let result = response.data
-        return result.sort(function(a,b){
-          return new Date(b?.tes_diniyyah?.tanggal) - new Date(a?.tes_diniyyah?.tanggal)
-        })
-        
-      },
+      select: (response) => response.data,
     }
   );
 
   let toast = useToast();
   const updateStatus = async (id) => {
-    let result = await updateStatusTes(id);
+    let result = await getStatusBukti(id);
 
-    queryClient.invalidateQueries("jadwal_tes");
+    queryClient.invalidateQueries("pembayaran_ppdb");
     if (result?.status === "success") {
       toast({
         position: "top-right",
@@ -123,18 +120,23 @@ export default function JadwalTes() {
             </th>
             <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
               <div className="text-sm leading-5 text-green-500">
-                Tanggal Tes
+                Status
               </div>
             </th>
             <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
-              <div className="text-sm leading-5 text-green-500">Metode</div>
+              <div className="text-sm leading-5 text-green-500">Bukti</div>
             </th>
             <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500  border-gray-500">
-              <div className="text-sm leading-5 text-green-500">Status Tes</div>
+              <div className="text-sm leading-5 text-green-500">Nominal</div>
             </th>
             <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
               <div className="text-sm leading-5 text-green-500">
-                Status Kelulusan
+               Keterangan
+              </div>
+            </th>
+            <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
+              <div className="text-sm leading-5 text-green-500">
+              Tanggal Transfer
               </div>
             </th>
 
@@ -148,7 +150,7 @@ export default function JadwalTes() {
         ) : (
           <tbody className="bg-white relative">
             {}
-            {data?.map((dt, index) => (
+            {data?.data?.data?.map((dt, index) => (
               <tr key={index} className="hover:bg-gray-200">
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div className="flex items-center">
@@ -162,140 +164,57 @@ export default function JadwalTes() {
 
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div className="text-sm leading-5 text-blue-900">
-                    {dt.name}
+                    {dt?.user?.name}
+                  </div>
+                </td>
+                <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
+                  {dt.bukti === null ? (
+                    "-"
+                  ) : (
+                    <button
+                      disabled={dt?.status === 0 ? false : true}
+                      onClick={() => {
+                        setIsLoadingKonfirmasi(true);
+                        updateStatus(dt?.id);
+                      }}
+                      className={`0 font-bold p-2 ${
+                        dt?.status === 0
+                          ? "bg-red-500 hover:bg-red-500"
+                          : "bg-green-500 hover:bg-green-600"
+                      } rounded-md text-white`}
+                    >
+                      {isLoadingKonfirmasi
+                        ? "Memperbaharui"
+                        : dt?.status === 0
+                        ? "Belum"
+                        : "Sudah"}
+                    </button>
+                  )}
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                  <div className="text-sm leading-5 text-blue-900">
+                  <a
+                      target="_blank"
+                      className="hover:text-green-500 font-bold"
+                      href={dt.url_img}
+                    >
+                      Lihat Bukti
+                    </a>
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div className="text-sm leading-5 text-blue-900">
-                    {dt?.tes_diniyyah === undefined ? (
-                      <p className="text-red-500 font-bold italic text-xs">
-                        Belum buat jadwal
-                      </p>
-                    ) : (
-                      formatDate(dt?.tes_diniyyah?.tanggal)
-                    )}
+                    {dt?.nominal === null ? formatRupiah(350000) : formatRupiah(dt?.nominal)}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div className="text-sm leading-5 text-blue-900">
-                    {dt?.tes_diniyyah === undefined
-                      ?  <p className="text-red-500 font-bold italic text-xs">
-                      Belum buat jadwal
-                    </p> : dt?.tes_diniyyah?.metode === 1
-                        ? <span className="uppercase font-bold text-blue-500"> Offline</span>
-                        :  <span className="uppercase font-bold text-green-500"> Online</span>
-                     }
+                    {dt?.nominal === null ? 'Uang Pendaftaran' : 'Pembayaran Uang Masuk'}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div className="text-sm leading-5 text-blue-900">
-                    {dt?.tes_diniyyah === undefined ? (
-                      <p className="text-red-500 font-bold italic text-xs">
-                        Belum buat jadwal
-                      </p>
-                    ) : (
-                      <button
-                        disabled={dt?.tes_diniyyah?.status === 1}
-                        onClick={() => {
-                          swal({
-                            title: "perbaharui Status?",
-                            text: "Pilih Ok jika yakin untuk mengupdate status!",
-                            icon: "warning",
-                            buttons: true,
-                            dangerMode: true,
-                          }).then((willDelete) => {
-                            if (willDelete) {
-                              setIsLoadingKonfirmasi(true);
-                              setIndexSelect(index);
-                              updateStatus(dt?.id);
-                            }
-                          });
-                        }}
-                        className={`${
-                          dt?.tes_diniyyah?.status === 0
-                            ? "bg-red-500"
-                            : "bg-blue-500"
-                        } text-white px-2 py-1 rounded-sm font-bold`}
-                      >
-                        {dt?.tes_diniyyah?.status === 0
-                          ? isLoadingKonfirmasi
-                            ? indexSelect === index
-                              ? "Mengupdate Status"
-                              : "Belum Tes"
-                            : "Belum Tes"
-                          : "Sudah Tes"}
-                      </button>
-                    )}
-                  </div>
-                </td>
-
-                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div className="text-sm leading-5 text-blue-900">
-                    {dt?.tes_diniyyah === undefined ? (
-                      <p className="text-red-500 font-bold italic text-xs">
-                        Belum buat jadwal
-                      </p>
-                    ) : (
-                      <button
-                        disabled={dt?.tes_diniyyah?.status === 0 ? true : false}
-                        onClick={() => {
-                          swal(`Apakah ananda ${dt.name} dinyatakan Lulus ? `, {
-                            buttons: {
-                              cancel: "Cancel",
-                              lulus: {
-                                text: "Lulus",
-                                value: "lulus",
-                              },
-                              tidak: {
-                                text: "Tidak Lulus",
-                                value: "tidak",
-                                color: "red",
-                              },
-                            },
-                          }).then((value) => {
-                            switch (value) {
-                              case "lulus":
-                                setIsLoadingKelulusan(true);
-                                setIndexKelulusan(index);
-                                updateStatusLulus(dt?.id, 1);
-                                break;
-
-                              case "tidak":
-                                setIsLoadingKelulusan(true);
-                                setIndexKelulusan(index);
-                                updateStatusLulus(dt?.id, 2);
-                                break;
-
-                              default:
-                            }
-                          });
-                        }}
-                        className={`${
-                          dt?.tes_diniyyah?.kelulusan === null &&
-                          dt?.tes_diniyyah?.status === 0
-                            ? "bg-red-200"
-                            : (dt?.tes_diniyyah?.kelulusan === "1") &
-                              (dt?.tes_diniyyah?.status === 1)
-                            ? "bg-blue-500"
-                            : dt?.tes_diniyyah?.kelulusan === "2" &&
-                              dt?.tes_diniyyah?.status === 1
-                            ? "bg-red-500"
-                            : "bg-yellow-500"
-                        } text-white px-2 py-1 rounded-sm font-bold`}
-                      >
-                        {isLoadingKelulusan && index === indexKelulusan
-                          ? "Meng=update Status"
-                          : dt?.tes_diniyyah?.kelulusan === null &&
-                            dt?.tes_diniyyah?.status === 0
-                          ? "Belum Tes"
-                          : dt?.tes_diniyyah?.kelulusan === null &&
-                            dt?.tes_diniyyah?.status === 1
-                          ? "Belum diumukan "
-                          : dt?.tes_diniyyah?.kelulusan === "1"
-                          ? "Lulus"
-                          : "Tidak Lulus"}
-                      </button>
-                    )}
+                   {formatDate(dt?.created_at)}
                   </div>
                 </td>
               </tr>
@@ -312,7 +231,7 @@ export default function JadwalTes() {
           ></PaginationInfo>
           {/* <Pagination
             totalItems={20}
-            currentPage={1}
+            currentPage={1} 
             pageSize={pageSize}
           ></Pagination> */}
         </div>

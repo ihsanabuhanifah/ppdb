@@ -12,6 +12,7 @@ import wa from "../image/wa.png";
 // import { useSelector } from "react-redux";
 import { Tooltip } from "@chakra-ui/react";
 import TesDiniyah from "../pages/ppdb/tes-diniyah";
+import RiwayatPembayaran from "../pages/admin/riwayatPembayaran";
 export default function LayoutPPDB() {
   // const isPayment = useSelector((state) => state.auth.isPayment);
   const message = "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
@@ -92,6 +93,10 @@ export default function LayoutPPDB() {
               <Route path="/admin/jadwal-tes" exact>
                <JadwalTes></JadwalTes>
               </Route>
+              <Route path="/admin/riwayat-pembayaran" exact>
+             <RiwayatPembayaran></RiwayatPembayaran>
+              </Route>
+              
              
             </Switch>
           </div>

@@ -47,6 +47,7 @@ export async function uploadBuktiTransfer(values) {
 
   form.append("url_img", values["files"]);
   form.append("status", "0");
+  form.append("nominal" , parseFloat(values["nominal"]))
   try {
     let response = await axios.post("/uploadBukti/save", form, {
       headers: {
@@ -60,6 +61,12 @@ export async function uploadBuktiTransfer(values) {
   }
 }
 
+
+export async function getBuktiTransfer() {
+  let respone = await axios.get("/uploadBukti/user");
+ console.log(respone)
+  return respone.data
+}
 export async function detailBuktiTransfer() {
   let respone = await axios.get("/uploadBukti/detail");
  console.log(respone)

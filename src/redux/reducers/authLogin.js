@@ -8,7 +8,9 @@ const initialState = {
   identitas : "",
   isLoading: false,
   isAuth:false,
-  isPayment : "belum_transfer"
+  isPayment : "belum_transfer",
+  isLulus:"",
+  isSudahTes : ""
 };
 
 export default function authLogin(state = initialState, action) {
@@ -24,7 +26,9 @@ export default function authLogin(state = initialState, action) {
       identitas:action.identitas,
       isAuth:true,
       isLoading: action.isLoading,
-      isPayment : action.isPayment
+      isPayment : action.isPayment,
+      isLulus :action.isLulus,
+      isSudahTes : action.isSudahTes
     };
   }
   if (action.type === "REGISTER") {

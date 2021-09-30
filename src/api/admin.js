@@ -54,3 +54,16 @@ export async function updateStatusKelulusan(id, status) {
 
   return result.data;
 }
+
+export function getBuktiAll({ page, per_page, keyword }) {
+  console.log(per_page);
+  return axios.get(
+    `/getBuktiAll?perpage=${per_page}&keywords=${keyword}&role=user&page=${page}`
+  );
+}
+
+export async function getStatusBukti(id) {
+  let result = await axios.get(`/getStatusBukti/${id}?status=1`);
+
+  return result.data;
+}

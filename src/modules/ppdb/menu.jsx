@@ -4,19 +4,27 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
   const isPayment = useSelector((state) => state.auth.isPayment);
+  const isLulus = useSelector((state) => state.auth.isLulus);
   const menus = [
-    {
-      to: "/ppdb/status-kelulusan",
-      name: "Status Kelulusan",
-      disabled : true,
-      icon : <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
-    },
     {
       to: "/ppdb/salam",
       name: "Salam",
       disabled : true,
       icon : <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
     },
+    {
+      to: "/ppdb/pengumuman-kelulusan",
+      name: "Kelulusan",
+      disabled : isPayment,
+      icon : <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
+    },
+    {
+      to: "/ppdb/pembayaran",
+      name: "Pembayaran",
+      disabled : isPayment,
+      icon : <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
+    },
+    
     {
       to: "/ppdb/tes-umum",
       name: "Tes Umum",
@@ -38,7 +46,8 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
         <div className="grid grid-cols-1 gap-1  text-white">
           {menus.map((menu, index) => {
             return (
-              <button
+              <React.Fragment>
+                {menu.name === "Pembayaran" && isLulus !== "1" ?  "" : (<button
               key={index}
                 onClick={() => {
                   setHiddenMenu(!hiddenMenu);
@@ -56,7 +65,8 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
               >
                 {menu.icon}
                 <p>{menu.name}</p>
-              </button>
+              </button>)}
+                </React.Fragment>
             );
           })}
         </div>

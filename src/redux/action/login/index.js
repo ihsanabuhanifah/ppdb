@@ -22,11 +22,11 @@ export function authMe(payload) {
   return async (dispatch) => {
     try {
       let response = await authMeProcess(payload);
-      console.log('authMe Berjasil 1')
+      console.log("authMe Berjasil 1");
       let data = response.data;
-      console.log('data ' , data)
+      console.log("data ", data);
       dispatch(loginProcess(data));
-    
+
       Cookies.set("token-ppdb", data.token);
       syncToken();
       return data;
@@ -45,9 +45,16 @@ export const loginProcess = (data) => {
     phone: data?.user?.phone,
     token: data?.token,
     role: data?.user?.roles[0].name,
-    identitas : data?.identitas,
-    isPayment : data?.pendaftaran === 0 ? false : data?.pendaftaran === 1 ? true : 'belum_transfer'  ,
+    identitas: data?.identitas,
+    isPayment:
+      data?.pendaftaran === 0
+        ? false
+        : data?.pendaftaran === 1
+        ? true
+        : "belum_transfer",
     isLoading: false,
+    isLulus: data?.kelulusan,
+    isSudahTes:data?.statusTes
   };
 };
 
@@ -57,13 +64,13 @@ export const isLoading = () => {
   };
 };
 export const finish = () => {
-    return {
-      type: "FINISH",
-    };
+  return {
+    type: "FINISH",
   };
+};
 
-  export const payment = () => {
-    return {
-      type: "PAYMENT_UPDATE",
-    };
-  }
+export const payment = () => {
+  return {
+    type: "PAYMENT_UPDATE",
+  };
+};

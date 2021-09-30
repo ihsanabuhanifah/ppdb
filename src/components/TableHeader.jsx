@@ -7,10 +7,10 @@ export default function TableHeader({setPer_page, setKeyword}) {
       }} className="border p-2 rounded-md" name="" id="">
           <option value={1}>1</option>
         <option value={5}>5</option>
-        <option selected value={10}>10</option>
+        <option  value={10}>10</option>
         <option value={50}>50</option>
 
-        <option value={100}>100</option>
+        <option selected value={100}>100</option>
       </select>
       <div className="ml-4 w-full lg:w-1/3">
       

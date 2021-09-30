@@ -14,7 +14,7 @@ import { useToast } from "@chakra-ui/react";
 import useDebounce from "../../../hooks/useDebounce";
 export default function Nilai() {
   const [page, setPage] = React.useState(1);
-  const [per_page, setPer_page] = React.useState(10);
+  const [per_page, setPer_page] = React.useState(100);
   const [isLoadingKonfirmasi, setIsLoadingKonfirmasi] = React.useState(false);
   const [keyword, setKeyword] = React.useState("");
   let debouncedKeyword = useDebounce(keyword, 500);

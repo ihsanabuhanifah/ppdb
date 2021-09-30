@@ -1,4 +1,5 @@
 import axios from "./axios";
+import { syncToken } from "./axios";
 export async function getUser({ page, per_page, keyword }) {
   console.log(per_page);
   let result = await axios.get(
@@ -66,4 +67,16 @@ export async function getStatusBukti(id) {
   let result = await axios.get(`/getStatusBukti/${id}?status=1`);
 
   return result.data;
+}
+
+export async function deviceUpdate(id,token) {
+  console.log(token);
+  syncToken()
+  try {
+    let response = await axios.get(`/device-update/${id}?token=${token}`);
+  return response.data;
+  } catch (err) {
+    return err;
+  }
+ 
 }

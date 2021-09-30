@@ -22,6 +22,7 @@ export default function Payment() {
   let toast = useToast();
   let initialValues = {
     files: undefined,
+    nominal : 350000,
     status: 1,
   };
   const onSubmit = async (values) => {
@@ -32,13 +33,15 @@ export default function Payment() {
       toast({
         position: "top-right",
         title: "Success",
-        description: "Berhasil Menyimpan Data",
+        description: "Berhasil Mengupload Bukti",
         status: "success",
         duration: 4000,
         isClosable: true,
       });
       dispatch(payment())
-      return setStatusTransfer(true);
+      
+       setStatusTransfer(true);
+       return history.push("/ppdb/pembayaran")
       // history.push("/identitas/data-ibu");
     }
     if (result.response.status === 401) {

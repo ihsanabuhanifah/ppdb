@@ -30,6 +30,7 @@ export const registerAuth = (data) => {
     type: "REGISTER",
     message: data?.message,
     name: data?.user?.name,
+    id: data?.user?.id,
     email: data?.user?.email,
     phone: data?.user?.phone,
     token: data?.token,

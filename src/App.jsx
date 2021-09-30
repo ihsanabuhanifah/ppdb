@@ -43,7 +43,8 @@ function App() {
         <Identitas></Identitas>
       </SiswaPageProtected>
       <AdminPageProtected path="/admin">
-        <Admin></Admin>
+      {isAuth ?   <Admin></Admin> : <LoadingPage></LoadingPage>}
+      
       </AdminPageProtected>
       <Redirect from="/" to="/login" />
       <Redirect from="*" to="/login" />

@@ -10,13 +10,15 @@ const initialState = {
   isAuth:false,
   isPayment : "belum_transfer",
   isLulus:"",
-  isSudahTes : ""
+  isSudahTes : "",
+  id:0
 };
 
 export default function authLogin(state = initialState, action) {
   if (action.type === "LOGIN") {
     return {
       ...state,
+      id:action.id,
       email: action.email,
       token: action.token,
       message: action.message,
@@ -34,7 +36,7 @@ export default function authLogin(state = initialState, action) {
   if (action.type === "REGISTER") {
     return {
       ...state,
-
+      id:action.id,
       email: action.email,
       token: action.token,
       message: action.message,

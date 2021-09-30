@@ -2,24 +2,65 @@ import React from "react";
 import Menu from "../modules/admin/menu";
 import { Switch, Route, useHistory } from "react-router-dom";
 import TesUmum from "../pages/ppdb/tes-umum";
-import {Admin, Pendaftar, Nilai, JadwalTes} from "../pages/admin";
+import { Admin, Pendaftar, Nilai, JadwalTes } from "../pages/admin";
 import Payment from "../pages/ppdb/payment";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import AlertLogout from "../components/AlertLogout";
 import Cookies from "js-cookie";
 import ReactWhatsapp from "react-whatsapp";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 import wa from "../image/wa.png";
+import { deviceUpdate } from "../api/admin";
 // import { useSelector } from "react-redux";
 import { Tooltip } from "@chakra-ui/react";
+import { getMessaging, getToken } from "firebase/messaging";
 import TesDiniyah from "../pages/ppdb/tes-diniyah";
+import { useSelector } from "react-redux";
 import RiwayatPembayaran from "../pages/admin/riwayatPembayaran";
 export default function LayoutPPDB() {
-  // const isPayment = useSelector((state) => state.auth.isPayment);
-  const message = "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
+  const id = useSelector((state) => state.auth.id);
+  const message =
+    "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
   const [hiddenMenu, setHiddenMenu] = React.useState(true);
   const [logout, setLogout] = React.useState(false);
   let history = useHistory();
-  
+  React.useEffect(() => {
+    const firebaseConfig = {
+      apiKey: "AIzaSyACqkG52CtzYgbl0_EVw8qkUxvWslXB4MA",
+      authDomain: "fir-psb-notif-1dd4e.firebaseapp.com",
+      projectId: "fir-psb-notif-1dd4e",
+      storageBucket: "fir-psb-notif-1dd4e.appspot.com",
+      messagingSenderId: "139127533328",
+      appId: "1:139127533328:web:6ef745184db40701903f95",
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    const messaging = getMessaging();
+    getToken(messaging, {
+      vapidKey:
+        "BIJnu5Rq_eI-nulWKTQ-TwbADc44bfyXZ4oolgf0L-36kdAwHJQKyh-QEaHcALMv4fl5xyohUNsrir-ppoingM4",
+    })
+      .then((currentToken) => {
+        if (currentToken) {
+
+          deviceUpdate(id,currentToken)
+          console.log(currentToken);
+          // ...
+        } else {
+          // Show permission request UI
+          console.log(
+            "No registration token available. Request permission to generate one."
+          );
+          // ...
+        }
+      })
+      .catch((err) => {
+        console.log("An error occurred while retrieving token. ", err);
+        // ...
+      });
+  }, []);
   return (
     <React.Fragment>
       <AlertLogout
@@ -56,7 +97,9 @@ export default function LayoutPPDB() {
         <div className="grid grid-cols-1 relative lg:grid-cols-12 w-full h-full bg-green-500 px-2  lg:px-6 lg:pt-6  ">
           <div
             className={`lg:col-span-2 absolute z-50 lg:static w-full ${
-              hiddenMenu ? "transform -translate-x-full lg:transform " : "transform -translate-x-0 transition  duration-500"
+              hiddenMenu
+                ? "transform -translate-x-full lg:transform "
+                : "transform -translate-x-0 transition  duration-500"
             } lg:block h-full py-5 pl-1  bg-green-500`}
           >
             <header className=" hidden lg:block text-xl text-white font-bold items-center justify-between border-b lg:border-none pb-3 lg:pb-0">
@@ -82,22 +125,20 @@ export default function LayoutPPDB() {
           >
             <Switch>
               <Route path="/admin" exact>
-               <Admin></Admin>
+                <Admin></Admin>
               </Route>
               <Route path="/admin/pendaftar">
-              <Pendaftar></Pendaftar>
+                <Pendaftar></Pendaftar>
               </Route>
               <Route path="/admin/nilai" exact>
-               <Nilai></Nilai>
+                <Nilai></Nilai>
               </Route>
               <Route path="/admin/jadwal-tes" exact>
-               <JadwalTes></JadwalTes>
+                <JadwalTes></JadwalTes>
               </Route>
               <Route path="/admin/riwayat-pembayaran" exact>
-             <RiwayatPembayaran></RiwayatPembayaran>
+                <RiwayatPembayaran></RiwayatPembayaran>
               </Route>
-              
-             
             </Switch>
           </div>
         </div>
@@ -112,7 +153,11 @@ export default function LayoutPPDB() {
             label="informasi PPDB"
             aria-label="A tooltip"
           >
-            <img className="w-16 h-16 animate-bounce shadow-xl " src={wa} alt="whatsapp.png" />
+            <img
+              className="w-16 h-16 animate-bounce shadow-xl "
+              src={wa}
+              alt="whatsapp.png"
+            />
           </Tooltip>
         </ReactWhatsapp>
       </div>

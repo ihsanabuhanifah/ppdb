@@ -41,6 +41,7 @@ export const loginProcess = (data) => {
     type: "LOGIN",
     message: data?.message,
     name: data?.user?.name,
+    id: data?.user?.id,
     email: data?.user?.email,
     phone: data?.user?.phone,
     token: data?.token,

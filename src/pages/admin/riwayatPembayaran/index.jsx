@@ -120,7 +120,7 @@ export default function RiwayatPembayaran() {
             </th>
             <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
               <div className="text-sm leading-5 text-green-500">
-                Status
+                Status Validasi
               </div>
             </th>
             <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">

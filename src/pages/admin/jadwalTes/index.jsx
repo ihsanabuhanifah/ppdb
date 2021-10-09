@@ -97,11 +97,23 @@ export default function JadwalTes() {
             }
           }
         });
+        let rpl = 0;
+        let tkj = 0;
+
+        dataAwal.map((da) => {
+          if (da.jurusan === 1) {
+           tkj = tkj +1
+          }else{
+            rpl = rpl +1
+          }
+        });
         return {
           data: result,
           jumlahSantri: jumlahSantri,
           terjadwal: terjadwal,
           sudahTes: sudahTes,
+          jurusanRPL : rpl,
+          jurusanTKJ:tkj
         };
       },
     }
@@ -196,6 +208,7 @@ export default function JadwalTes() {
         body: `Bismillah, Selamat ananda ${name} telah lulus di SMK MADINATULQURAN`,
         image:
           "https://res.cloudinary.com/smk-madinatul-quran/image/upload/v1633619642/errrbiql1jigobojg5iv.png",
+        icon: "https://res.cloudinary.com/smk-madinatul-quran/image/upload/v1633820893/ce4h2qg7y3dl1kpbjlsr.png",
         click_action:
           "https://ppdb.smkmadinatulquran.sch.id/ppdb/pengumuman-kelulusan",
       },
@@ -430,6 +443,30 @@ export default function JadwalTes() {
                 value={`${data?.terjadwal - data?.sudahTes} Santri`}
               />
             </div>
+            <div className="p-2 border w-full">
+              <label className="font-bold uppercase" htmlFor="">
+                Santri <span className="text-red-500">RPL</span>
+              </label>
+              <br />
+              <input
+                className="bg-white w-full"
+                type="text"
+                disabled
+                value={`${data?.jurusanRPL} Santri`}
+              />
+            </div>
+            <div className="p-2 border w-full">
+              <label className="font-bold uppercase" htmlFor="">
+                Santri <span className="text-red-500">TKJ</span>
+              </label>
+              <br />
+              <input
+                className="bg-white w-full"
+                type="text"
+                disabled
+                value={`${data?.jurusanTKJ} Santri`}
+              />
+            </div>
           </div>
         </Collapse>
 
@@ -545,21 +582,22 @@ export default function JadwalTes() {
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                       <div className="text-sm leading-5 text-blue-900">
-                      <Tooltip
-                            hasArrow
-                            label={`Nama Akun ${dt?.name}`}
-                            bg="red.600"
-                          >
-                       <p> {dt.name_siswa}
-                        {dt?.device === null ? "" : " - R"}</p>
+                        <Tooltip
+                          hasArrow
+                          label={`Nama Akun ${dt?.name}`}
+                          bg="red.600"
+                        >
+                          <p>
+                            {" "}
+                            {dt.name_siswa}
+                            {dt?.device === null ? "" : " - R"}
+                          </p>
                         </Tooltip>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                       <div className="text-sm leading-5 text-blue-900">
-                       
-                        {dt.jurusan === 1 ? "TKJ" : "RPL"} 
-                       
+                        {dt.jurusan === 1 ? "TKJ" : "RPL"}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
@@ -592,7 +630,7 @@ export default function JadwalTes() {
                               onClick={() => {
                                 setJamTes((jamTes) => ({
                                   ...jamTes,
-                                  id: dt?.id,
+                                  id: dt?.tes_diniyyah?.user_id,
                                   jam: dt?.tes_diniyyah?.jam_tes,
                                   token: dt?.device,
                                 }));
@@ -602,6 +640,8 @@ export default function JadwalTes() {
                               {dt?.tes_diniyyah?.jam_tes === null
                                 ? "-"
                                 : dt?.tes_diniyyah?.jam_tes}
+
+                            
                             </button>
                           </Tooltip>
                         )}
@@ -713,22 +753,7 @@ export default function JadwalTes() {
                             bg="red.600"
                           >
                             <button
-                              // disabled={dt?.tes_diniyyah?.status === 1}
-                              // onClick={() => {
-                              //   swal({
-                              //     title: "perbaharui Status?",
-                              //     text: "Pilih Ok jika yakin untuk mengupdate status!",
-                              //     icon: "warning",
-                              //     buttons: true,
-                              //     dangerMode: true,
-                              //   }).then((willDelete) => {
-                              //     if (willDelete) {
-                              //       setIsLoadingKonfirmasi(true);
-                              //       setIndexSelect(index);
-                              //       updateStatus(dt?.id);
-                              //     }
-                              //   });
-                              // }}
+                             
 
                               onClick={() => {
                                 if (dt?.tes_diniyyah?.status === 1) {
@@ -736,7 +761,7 @@ export default function JadwalTes() {
                                 }
                                 setValues((values) => ({
                                   ...values,
-                                  id: dt?.id,
+                                  id:dt?.tes_diniyyah?.user_id,
                                   laporan: "",
                                 }));
                                 onOpen();
@@ -794,13 +819,13 @@ export default function JadwalTes() {
                                   case "lulus":
                                     setIsLoadingKelulusan(true);
                                     setIndexKelulusan(index);
-                                    updateStatusLulus(dt?.id, 1);
+                                    updateStatusLulus(dt?.tes_diniyyah?.user_id, 1);
                                     return sendMessage(dt?.device, dt?.name);
 
                                   case "tidak":
                                     setIsLoadingKelulusan(true);
                                     setIndexKelulusan(index);
-                                    updateStatusLulus(dt?.id, 2);
+                                    updateStatusLulus(dt?.tes_diniyyah?.user_id, 2);
                                     break;
 
                                   default:

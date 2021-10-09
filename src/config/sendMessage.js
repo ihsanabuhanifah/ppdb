@@ -8,6 +8,7 @@ export const sendMessageJam = async (token, name) => {
     notification: {
       title: "Konfirmasi Jam Tes Online PPDB SMK MADINATULQURAN",
       body: `Alhamdulilah jadwal tes online sudah dibuat `,
+      icon : "https://res.cloudinary.com/smk-madinatul-quran/image/upload/v1633820893/ce4h2qg7y3dl1kpbjlsr.png",
       image:
         "https://res.cloudinary.com/smk-madinatul-quran/image/upload/v1633619642/errrbiql1jigobojg5iv.png",
       click_action:

@@ -9,10 +9,11 @@ import LoadingBar from "../../../components/loadingBar";
 import { Link, useHistory } from "react-router-dom";
 import { getUser } from "../../../api/admin";
 import { konfirmBukti } from "../../../api/admin";
-import { formatDate } from "../../../utils";
+import { formatDate, formatTanggal, formatNomorHp } from "../../../utils";
 import ReactWhatsapp from "react-whatsapp";
 import { useToast } from "@chakra-ui/react";
 import useDebounce from "../../../hooks/useDebounce";
+import TableLoading from "../../../components/tableLoading";
 export default function Pendaftar() {
   const [page, setPage] = React.useState(1);
   const [show, setShow] = React.useState(false);
@@ -79,12 +80,11 @@ export default function Pendaftar() {
     }
   };
 
-  const [message, setMessage] = React.useState("22");
 
  
   return (
     <div className="text-green-500 grid grid-cols-1 gap-5">
-      {message}
+    
       <div className="border-b-2 pb-10">
         <h1 className="text-2xl  font-semibold">
           DAFTAR USER PORTAL PPDB SMK MADINATULQURAN
@@ -150,8 +150,7 @@ export default function Pendaftar() {
           setPer_page={setPer_page}
         ></TableHeader>
       </div>
-
-      <div className="p-1  overflow-auto ">
+{isFetching ?  <TableLoading></TableLoading> :  <div className="p-1  overflow-auto ">
         <table className="min-w-full relative ">
           <thead>
             <tr className="uppercase">
@@ -186,19 +185,12 @@ export default function Pendaftar() {
               <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                 Method ujian
               </th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                Kirim Jadwal
-              </th>
+             
               {/* <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                   Created_At
                 </th> */}
             </tr>
           </thead>{" "}
-        </table>
-
-        {isFetching ? (
-          <LoadingBar></LoadingBar>
-        ) : (
           <tbody className="bg-white relative">
             {}
             {data?.data?.data?.map((dt, index) => (
@@ -222,9 +214,9 @@ export default function Pendaftar() {
                   {dt.email}
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  <ReactWhatsapp number={dt.phone} message={"bismillah"}>
+                  <ReactWhatsapp number={formatNomorHp(dt.phone)} message={"bismillah"}>
                     <p className="hover:text-green-500 hover:font-bold hover:text-lg">
-                      {dt.phone}
+                      {formatNomorHp(dt.phone)}
                     </p>
                   </ReactWhatsapp>
                 </td>
@@ -275,7 +267,7 @@ export default function Pendaftar() {
                   {dt?.tes_diniyyah === null ? (
                     <p className="text-red-500 italic">Belum Membuat Jadwal</p>
                   ) : (
-                    formatDate(dt?.tes_diniyyah?.tanggal)
+                    formatTanggal(dt?.tes_diniyyah?.tanggal)
                   )}
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
@@ -287,13 +279,13 @@ export default function Pendaftar() {
                     "Online"
                   )}
                 </td>
-                <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  poook
-                </td>
+               
               </tr>
             ))}
           </tbody>
-        )}
+        </table>
+
+       
 
         <div className="flex items-center justify-between mt-5 text-green-500">
           <PaginationInfo
@@ -307,7 +299,8 @@ export default function Pendaftar() {
             pageSize={pageSize}
           ></Pagination> */}
         </div>
-      </div>
+      </div>}
+    
       {/* table */}
     </div>
   );

@@ -796,16 +796,16 @@ pekerja sama, maka 5 orang pekerja bisa menyelesaikan pekerjaan tersebut dalam w
                         </p>
                       </p>
                     </div>
-                    <div id={`soal8`}>
+                    <div id={`soal9`}>
                       <div
                         className="grid grid-cols-1 lg:grid-cols-3 gap-3"
                         role="group"
-                        aria-labelledby={`soal8`}
+                        aria-labelledby={`soal9`}
                       >
                         {" "}
                         <div>
                           <input
-                            name={`soal8`}
+                            name={`soal9`}
                             value={"a"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -816,7 +816,7 @@ pekerja sama, maka 5 orang pekerja bisa menyelesaikan pekerjaan tersebut dalam w
                         </div>
                         <div>
                           <input
-                            name={`soal8`}
+                            name={`soal9`}
                             value={"b"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -827,7 +827,7 @@ pekerja sama, maka 5 orang pekerja bisa menyelesaikan pekerjaan tersebut dalam w
                         </div>
                         <div>
                           <input
-                            name={`soal8`}
+                            name={`soal9`}
                             value={"c"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -838,7 +838,7 @@ pekerja sama, maka 5 orang pekerja bisa menyelesaikan pekerjaan tersebut dalam w
                         </div>
                         <div>
                           <input
-                            name={`soal8`}
+                            name={`soal9`}
                             value={"d"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -849,7 +849,7 @@ pekerja sama, maka 5 orang pekerja bisa menyelesaikan pekerjaan tersebut dalam w
                         </div>
                         <div>
                           <input
-                            name={`soal8`}
+                            name={`soal9`}
                             value={"e"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -873,7 +873,7 @@ adalah ... cm
                         </p>
                       </p>
                     </div>
-                    <div id={`soal9`}>
+                    <div id={`soal10`}>
                       <div
                         className="grid grid-cols-1 lg:grid-cols-3 gap-3"
                         role="group"
@@ -882,7 +882,7 @@ adalah ... cm
                         {" "}
                         <div>
                           <input
-                            name={`soal9`}
+                            name={`soal10`}
                             value={"a"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -893,7 +893,7 @@ adalah ... cm
                         </div>
                         <div>
                           <input
-                            name={`soal9`}
+                            name={`soal10`}
                             value={"b"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -904,7 +904,7 @@ adalah ... cm
                         </div>
                         <div>
                           <input
-                            name={`soal9`}
+                            name={`soal10`}
                             value={"c"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -915,7 +915,7 @@ adalah ... cm
                         </div>
                         <div>
                           <input
-                            name={`soal9`}
+                            name={`soal10`}
                             value={"d"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -926,7 +926,7 @@ adalah ... cm
                         </div>
                         <div>
                           <input
-                            name={`soal9`}
+                            name={`soal10`}
                             value={"e"}
                             onChange={handleChange}
                             onBlur={handleBlur}

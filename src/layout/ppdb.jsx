@@ -9,25 +9,57 @@ import Kelulusan from "../pages/ppdb/kelulusan";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import AlertLogout from "../components/AlertLogout";
 import Cookies from "js-cookie";
+import { deviceUpdate } from "../api/admin";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 import ReactWhatsapp from "react-whatsapp";
 import wa from "../image/wa.png";
 // import { useSelector } from "react-redux";
 import { Tooltip } from "@chakra-ui/react";
 import TesDiniyah from "../pages/ppdb/tes-diniyah";
+import { getMessaging, getToken } from "firebase/messaging";
+import { useSelector } from "react-redux";
 export default function LayoutPPDB() {
   // const isPayment = useSelector((state) => state.auth.isPayment);
   const message = "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
   const [hiddenMenu, setHiddenMenu] = React.useState(true);
   const [logout, setLogout] = React.useState(false);
   const [hidden, setHidden] = React.useState(false);
+  const id = useSelector((state) => state.auth.id);
   let history = useHistory();
-  
+  React.useEffect(() => {
+    const firebaseConfig = {
+      apiKey: "AIzaSyACqkG52CtzYgbl0_EVw8qkUxvWslXB4MA",
+      authDomain: "fir-psb-notif-1dd4e.firebaseapp.com",
+      projectId: "fir-psb-notif-1dd4e",
+      storageBucket: "fir-psb-notif-1dd4e.appspot.com",
+      messagingSenderId: "139127533328",
+      appId: "1:139127533328:web:6ef745184db40701903f95",
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    const messaging = getMessaging();
+    getToken(messaging, {
+      vapidKey:
+        "BIJnu5Rq_eI-nulWKTQ-TwbADc44bfyXZ4oolgf0L-36kdAwHJQKyh-QEaHcALMv4fl5xyohUNsrir-ppoingM4",
+    })
+      .then((currentToken) => {
+        deviceUpdate(id,currentToken)
+      })
+      .catch((err) => {
+        console.log("An error occurred while retrieving token. ", err);
+        // ...
+      });
+  }, []);
   return (
     <React.Fragment>
       <AlertLogout
         message="Apakah anda yakin akan Keluar ?"
         onConfirm={() => {
           Cookies.remove("token-ppdb");
+          Cookies.remove("exam");
+          Cookies.remove("url");
           return history.push("/login");
         }}
         onClose={() => {

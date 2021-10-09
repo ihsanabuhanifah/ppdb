@@ -8,7 +8,7 @@ export default function InputDate({
     error,
     placeholder,
     tabIndex,
-    type = "text",
+    type = "date",
     id,
     label,
     children,
@@ -32,7 +32,7 @@ export default function InputDate({
           <input
             id={id}
             className="w-full text-lg  border py-3 px-5 focus:bg-blue-100 "
-            type={"date"}
+            type={type}
             placeholder={placeholder}
             tabIndex={tabIndex}
             error={error}

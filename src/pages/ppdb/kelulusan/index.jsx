@@ -200,7 +200,10 @@ export default function Kelulusan() {
                 <div className="p-4 mt-5 shadow-sm text-red-500 font-bold italic">
                   <h1>Note :</h1>
                   <p>
-                    Mohon Perhatian - Biaya Tagihan Uang Masuk yan sudah
+                    - Bagi yang tes di atas bulan Oktober pembayaran tahap 1 dilakukan 2 minggu setelah pengumuman kelulusan
+                  </p>
+                  <p>
+                    - Mohon Perhatian - Biaya Tagihan Uang Masuk yan sudah
                     dibayarkan tidak dapat dikembalikan{" "}
                   </p>
                 </div>

@@ -20,6 +20,7 @@ import { useToast } from "@chakra-ui/react";
 import useDebounce from "../../../hooks/useDebounce";
 import swal from "sweetalert";
 import { formatRupiah } from "../../../utils/formatRupiah";
+import TableLoading from "../../../components/tableLoading";
 export default function RiwayatPembayaran() {
   const [page, setPage] = React.useState(1);
   const [per_page, setPer_page] = React.useState(100);
@@ -107,7 +108,7 @@ export default function RiwayatPembayaran() {
           setPer_page={setPer_page}
         ></TableHeader>
       </div>
-      <div className="overflow-auto">
+      {isFetching ? <TableLoading></TableLoading> : <div className="overflow-auto">
       <table className="p-1 w-full ">
         <thead>
           <tr className="uppercase">
@@ -145,10 +146,7 @@ export default function RiwayatPembayaran() {
                 </th> */}
           </tr>
         </thead>{" "}
-        {isFetching ? (
-          <LoadingBar></LoadingBar>
-        ) : (
-          <tbody className="bg-white relative">
+        <tbody className="bg-white relative">
             {}
             {data?.data?.data?.map((dt, index) => (
               <tr key={index} className="hover:bg-gray-200">
@@ -209,7 +207,7 @@ export default function RiwayatPembayaran() {
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div className="text-sm leading-5 text-blue-900">
-                    {dt?.nominal === null ? 'Uang Pendaftaran' : 'Pembayaran Uang Masuk'}
+                    {dt?.nominal === 350000 ? 'Uang Pendaftaran' : 'Pembayaran Uang Masuk'}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
@@ -220,7 +218,6 @@ export default function RiwayatPembayaran() {
               </tr>
             ))}
           </tbody>
-        )}
        
       </table>
       <div className="flex items-center justify-between mt-5 text-green-500">
@@ -235,7 +232,7 @@ export default function RiwayatPembayaran() {
             pageSize={pageSize}
           ></Pagination> */}
         </div>
-      </div>
+      </div>}
       {/* table */}
     </div>
   );

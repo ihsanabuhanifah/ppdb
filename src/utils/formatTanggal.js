@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-export function formatDate(timeStamps){
+export function formatTanggal(timeStamps){
     let hari =   dayjs(timeStamps).format("dddd")
     let bulan =  dayjs(timeStamps).format("MM")
     if(bulan === "01"){
@@ -60,7 +60,7 @@ export function formatDate(timeStamps){
     if(hari === "Sunday"){
         hari = "Minggu"
     }
-    return  `${hari} , ${dayjs(timeStamps).format("DD")} ${bulan} ${dayjs(timeStamps).format("YYYY hh:ss")}`
+    return  `${hari} , ${dayjs(timeStamps).format("DD")} ${bulan} ${dayjs(timeStamps).format("YYYY")}`
 }
 
 // `${hari} , ${dayjs(timeStamps).format("DD-MM-YYYY")}`

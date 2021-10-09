@@ -44,11 +44,18 @@ export async function getJadwal({ per_page, keyword }) {
   return result.data;
 }
 
-export async function updateStatusTes(id) {
-  let result = await axios.get(`/updateStatus/${id}?status=1`);
+export async function updateStatusTes(values) {
+  let result = await axios.post(`/updateStatus`, values);
 
   return result.data;
 }
+
+export async function updateJamTes(values) {
+  let result = await axios.put(`/updateJamTes`, values);
+
+  return result.data;
+}
+
 
 export async function updateStatusKelulusan(id, status) {
   let result = await axios.get(`/updateKelulusan/${id}?kelulusan=${status}`);

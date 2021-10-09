@@ -39,6 +39,6 @@ export default client;
 //http://psb-online.herokuapp.com/api
 //
 
-// baseURL: `https://psb-api.smkmadinatulquran.sch.id/api`,
+// baseURL: `https://psb-api.smkmadinatulquran.sch.id/api
 
 // baseURL: `http://localhost:8000/api`,

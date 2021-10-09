@@ -5,6 +5,7 @@ import Analogi from "../../../image/analogi.JPG";
 import BInggris from "../../../image/bahasainggris.JPG"
 import { useHistory } from "react-router-dom";
 import AlertLogout from "../../../components/AlertLogout";
+import AlertKonfirmasiTes from "../../../components/AlertKonfirmasiTes";
 import { getTesUmum, postTesUmum } from "../../../api/santri";
 import { useToast } from "@chakra-ui/react";
 import Cookies from "js-cookie";
@@ -76,8 +77,8 @@ export default function Tes() {
   };
   return (
     <React.Fragment>
-      <AlertLogout
-        message="Apakah ananda yakin akan mengerjakan tes ini ?"
+      <AlertKonfirmasiTes 
+      
         isLoading={isLoading}
         onConfirm={() => {
           onSubmit(kode);
@@ -88,7 +89,7 @@ export default function Tes() {
           setLogout(false);
         }}
         isOpen={logout}
-      ></AlertLogout>
+      ></AlertKonfirmasiTes>
       <section className="text-gray-600">
         <div className="border-b-2 pb-5">
           <h3 className="text-xl lg:text-3xl font-bold ">

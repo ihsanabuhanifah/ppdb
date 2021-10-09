@@ -1,3 +1,5 @@
 import { secondsToHms } from "./secondToMinute";
 import { formatDate } from "./formatHari";
-export {secondsToHms, formatDate}
+import { formatTanggal } from "./formatTanggal";
+import {formatNomorHp} from "./formatNomorHP"
+export {secondsToHms, formatDate, formatTanggal, formatNomorHp }

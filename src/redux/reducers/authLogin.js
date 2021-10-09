@@ -11,7 +11,8 @@ const initialState = {
   isPayment : "belum_transfer",
   isLulus:"",
   isSudahTes : "",
-  id:0
+  id:0,
+  deviceToken : "",
 };
 
 export default function authLogin(state = initialState, action) {
@@ -30,7 +31,8 @@ export default function authLogin(state = initialState, action) {
       isLoading: action.isLoading,
       isPayment : action.isPayment,
       isLulus :action.isLulus,
-      isSudahTes : action.isSudahTes
+      isSudahTes : action.isSudahTes,
+      deviceToken:action.deviceToken
     };
   }
   if (action.type === "REGISTER") {
@@ -46,6 +48,7 @@ export default function authLogin(state = initialState, action) {
       identitas:action.identitas,
       isAuth:true,
       isLoading: action.isLoading,
+      deviceToken:action.deviceToken
     };
   }
   if (action.type === "PROCESS") {

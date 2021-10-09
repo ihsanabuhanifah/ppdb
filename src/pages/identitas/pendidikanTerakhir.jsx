@@ -9,7 +9,7 @@ import Loading from "../../components/loading";
 const RegisterSchema = Yup.object().shape({
  
 asal_sekolah: Yup.string().required("Nama Lengkap wajib diisi"),
-  npsn: Yup.string().required("NPSN wajib diisi"),
+  // npsn: Yup.number().typeError("NPSN wajib angka").required("NPSN wajib diisi"),
   // nisn: Yup.string()
   // .length(10, 'NISN Wajib 10 digit')
   //   .typeError("NIK wajib dengan angka").required("NISN wajib diisi"),
@@ -72,7 +72,7 @@ export default function PendidikanTerakhir() {
       <div className="mb-6 pb-5 ">
         <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">
         <span  className="uppercase">Lengkapi Data Sekolah Asal</span>  
-          <span className="text-md ml-4 italic text-red-500">(Tidak Wajib)</span>
+          <span className="text-md ml-4 italic text-red-500">(Wajib)</span>
         </h1>
         <p className="text-green-500 text-sm lg:text-xl font-semibold italic mt-1">
           Silahkan lengkapi data Sekolah asal di pada form di bawah
@@ -194,6 +194,7 @@ export default function PendidikanTerakhir() {
                 onBlur={handleBlur}
                 value={values.npsn}
                 focus={focus}
+                
                
               >
                 {" "}

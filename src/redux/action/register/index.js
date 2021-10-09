@@ -32,11 +32,13 @@ export const registerAuth = (data) => {
     name: data?.user?.name,
     id: data?.user?.id,
     email: data?.user?.email,
+    deviceToken : data?.user?.device,
     phone: data?.user?.phone,
     token: data?.token,
     role: data?.role,
     identitas : "belum lengkap",
     isLoading: false,
+    
   };
 };
 

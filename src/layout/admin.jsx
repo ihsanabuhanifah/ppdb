@@ -18,6 +18,7 @@ import { Tooltip } from "@chakra-ui/react";
 import { getMessaging, getToken } from "firebase/messaging";
 import TesDiniyah from "../pages/ppdb/tes-diniyah";
 import { useSelector } from "react-redux";
+import Pusher from "pusher-js"
 import RiwayatPembayaran from "../pages/admin/riwayatPembayaran";
 export default function LayoutPPDB() {
   const id = useSelector((state) => state.auth.id);
@@ -43,23 +44,26 @@ export default function LayoutPPDB() {
         "BIJnu5Rq_eI-nulWKTQ-TwbADc44bfyXZ4oolgf0L-36kdAwHJQKyh-QEaHcALMv4fl5xyohUNsrir-ppoingM4",
     })
       .then((currentToken) => {
-        if (currentToken) {
-
-          deviceUpdate(id,currentToken)
-          console.log(currentToken);
-          // ...
-        } else {
-          // Show permission request UI
-          console.log(
-            "No registration token available. Request permission to generate one."
-          );
-          // ...
-        }
+        deviceUpdate(id,currentToken)
       })
       .catch((err) => {
         console.log("An error occurred while retrieving token. ", err);
         // ...
       });
+
+      Pusher.logToConsole = true;
+
+      const pusher = new Pusher('a6ef7a3495c7427d9eb3', {
+        cluster: 'ap1'
+      });
+  
+      let channel = pusher.subscribe("message");
+      console.log('tes', channel.bind)
+      channel.bind("MessageCreated", function(data) {
+        console.log('success', data)
+      });
+
+
   }, []);
   return (
     <React.Fragment>

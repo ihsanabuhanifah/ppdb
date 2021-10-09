@@ -55,7 +55,8 @@ export const loginProcess = (data) => {
         : "belum_transfer",
     isLoading: false,
     isLulus: data?.kelulusan,
-    isSudahTes:data?.statusTes
+    isSudahTes:data?.statusTes,
+    deviceToken: data?.user?.device
   };
 };
 

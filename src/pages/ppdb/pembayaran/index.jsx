@@ -245,6 +245,12 @@ export default function Pembayaran() {
         </div>
       </div>
       <div>
+      <div className="mt-5 text-md text-red-500 font-bold">
+          <p className="text-justify">
+            <span className="italic">Note :</span> bukti Transfer dikonfirmasi admin maksimal dalam 24 jam.
+          </p>
+        
+        </div>
         {/* upload bukti */}
        {isLulus === "1" ? ( <Formik
           initialValues={initialValues}

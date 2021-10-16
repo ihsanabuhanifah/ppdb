@@ -204,7 +204,7 @@ export default function JadwalTes() {
       priority: "high",
       soundName: "default",
       notification: {
-        title: "Pengumuman PPDB SMK MADINATULQURAN",
+        title: "PPDB SMK MADINATULQURAN",
         body: `Bismillah, Selamat ananda ${name} telah lulus di SMK MADINATULQURAN`,
         image:
           "https://res.cloudinary.com/smk-madinatul-quran/image/upload/v1633619642/errrbiql1jigobojg5iv.png",
@@ -505,9 +505,15 @@ export default function JadwalTes() {
                   </th>
                   <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
                     <div className="text-sm leading-5 text-green-500">
+                      Sekolah Asal
+                    </div>
+                  </th>
+                  <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
+                    <div className="text-sm leading-5 text-green-500">
                       Jurusan
                     </div>
                   </th>
+                 
                   <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
                     <div className="text-sm leading-5 text-green-500">
                       Tanggal Tes
@@ -593,6 +599,11 @@ export default function JadwalTes() {
                             {dt?.device === null ? "" : " - R"}
                           </p>
                         </Tooltip>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                      <div className="text-sm leading-5 text-blue-900">
+                      {dt.asal_sekolah}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">

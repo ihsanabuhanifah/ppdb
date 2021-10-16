@@ -70,6 +70,7 @@ export default function TestAnalogi() {
         isClosable: true,
       });
       Cookies.remove('exam')
+      localStorage.removeItem('ti')
       return history.push("/ppdb/tes-umum");
     }else{
       setIsLoading(false)
@@ -167,16 +168,16 @@ export default function TestAnalogi() {
                         </span>
                       </p>
                     </div>
-                    <div id={`soal1`}>
+                    <div id={`xy`}>
                       <div
                         className="grid grid-cols-1 lg:grid-cols-3 gap-3"
                         role="group"
-                        aria-labelledby={`soal1`}
+                        aria-labelledby={`xy`}
                       >
                         {" "}
                         <div>
                           <input
-                            name={`soal1`}
+                            name={`xy`}
                             value={"a"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -187,7 +188,7 @@ export default function TestAnalogi() {
                         </div>
                         <div>
                           <input
-                            name={`soal1`}
+                            name={`xy`}
                             value={"b"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -198,7 +199,7 @@ export default function TestAnalogi() {
                         </div>
                         <div>
                           <input
-                            name={`soal1`}
+                            name={`xy`}
                             value={"c"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -209,7 +210,7 @@ export default function TestAnalogi() {
                         </div>
                         <div>
                           <input
-                            name={`soal1`}
+                            name={`xy`}
                             value={"d"}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -220,7 +221,7 @@ export default function TestAnalogi() {
                         </div>
                         <div>
                           <input
-                            name={`soal1`}
+                            name={`xy`}
                             value={"e"}
                             checked
                             onChange={handleChange}

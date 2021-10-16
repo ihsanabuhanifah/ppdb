@@ -66,6 +66,7 @@ export default function TestMatematika() {
         isClosable: true,
       });
       Cookies.remove('exam')
+      localStorage.removeItem('tm')
       return history.push("/ppdb/tes-umum");
     }else{
       setIsLoading(false)

@@ -14,6 +14,7 @@ import ReactWhatsapp from "react-whatsapp";
 import { useToast } from "@chakra-ui/react";
 import useDebounce from "../../../hooks/useDebounce";
 import TableLoading from "../../../components/tableLoading";
+import {sendMessageBukti} from "../../../config/sendMessage"
 export default function Pendaftar() {
   const [page, setPage] = React.useState(1);
   const [show, setShow] = React.useState(false);
@@ -207,7 +208,7 @@ export default function Pendaftar() {
 
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div className="text-sm leading-5 text-blue-900">
-                    {dt.name}
+                    {dt.name} {dt?.device === null ? '' : '-R'}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
@@ -236,6 +237,7 @@ export default function Pendaftar() {
                       href={dt.bukti?.url_img}
                     >
                       Lihat Bukti
+                      
                     </a>
                   )}
                 </td>
@@ -248,9 +250,11 @@ export default function Pendaftar() {
                       onClick={() => {
                         setIsLoadingKonfirmasi(true);
                         updateStatus(dt.bukti?.user_id);
+                        return sendMessageBukti(dt?.device)
                       }}
                       className={`0 font-bold p-2 ${
                         dt.bukti?.status === 0
+                        
                           ? "bg-red-500 hover:bg-red-500"
                           : "bg-green-500 hover:bg-green-600"
                       } rounded-md text-white`}

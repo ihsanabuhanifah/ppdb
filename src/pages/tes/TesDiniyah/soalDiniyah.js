@@ -78,7 +78,7 @@ export const soalDiniyah = [
       answer: "d",
     },
     {
-      soal: "Berikut merupakan nama-nama ulul ‘azmi, kecuali …",
+      soal: "Berikut merupakan nama-nama bukan ulul ‘azmi, kecuali …",
       a: "Nuh",
       b: "Yusuf",
       c: "Daud",

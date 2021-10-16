@@ -23,12 +23,12 @@ const RegisterSchema = Yup.object().shape({
     "Nomor Handphone wajib dengan angka"
   ),
 
-  // tinggi_badan: Yup.number()
-  // .typeError("Tinggi Badan wajib dengan angka")
-  // .required("Tinggi Badan wajib diisi"),
-  // berat_badan: Yup.number()
-  // .typeError("Berat Badan wajib dengan angka")
-  // .required("Berat Badan wajib diisi"),
+  tinggi_badan: Yup.number()
+  .typeError("Tinggi Badan wajib dengan angka"),
+ 
+  berat_badan: Yup.number()
+  .typeError("Berat Badan wajib dengan angka"),
+
   pihak_yg_dihubungi: Yup.string().required("Pihak dihubungi wajib diisi"),
   //
   // ukuran_baju: Yup.number()

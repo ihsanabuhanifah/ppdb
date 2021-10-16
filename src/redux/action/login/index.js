@@ -63,6 +63,7 @@ export const loginProcess = (data) => {
 export const isLoading = () => {
   return {
     type: "PROCESS",
+    
   };
 };
 export const finish = () => {

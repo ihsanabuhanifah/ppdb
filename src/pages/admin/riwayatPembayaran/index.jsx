@@ -21,6 +21,7 @@ import useDebounce from "../../../hooks/useDebounce";
 import swal from "sweetalert";
 import { formatRupiah } from "../../../utils/formatRupiah";
 import TableLoading from "../../../components/tableLoading";
+import { sendMessageBukti } from "../../../config/sendMessage";
 export default function RiwayatPembayaran() {
   const [page, setPage] = React.useState(1);
   const [per_page, setPer_page] = React.useState(100);
@@ -174,6 +175,7 @@ export default function RiwayatPembayaran() {
                       onClick={() => {
                         setIsLoadingKonfirmasi(true);
                         updateStatus(dt?.id);
+                        sendMessageBukti(dt?.user?.device)
                       }}
                       className={`0 font-bold p-2 ${
                         dt?.status === 0

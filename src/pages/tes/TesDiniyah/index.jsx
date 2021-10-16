@@ -17,7 +17,7 @@ let documentArraySchema = Yup.object().shape({
   document: Yup.array().of(documentSchema),
 });
 export default function TestDiniyahDasar() {
-  const [waktu, setWaktu] = React.useState(localStorage.getItem("ta"));
+  const [waktu, setWaktu] = React.useState(localStorage.getItem("td"));
   const [logout, setLogout] = React.useState(false);
   const [jawaban, setJawaban] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false)
@@ -68,6 +68,7 @@ export default function TestDiniyahDasar() {
         isClosable: true,
       });
       Cookies.remove('exam')
+      localStorage.removeItem('td')
       return history.push("/ppdb/tes-umum");
     }else{
       setIsLoading(false)
@@ -82,20 +83,20 @@ export default function TestDiniyahDasar() {
     }
   }
   React.useEffect(() => {
-    let timeMatematika = localStorage.getItem("ta");
+    let timeMatematika = localStorage.getItem("td");
     if (timeMatematika === null || timeMatematika <= 0) {
-      localStorage.setItem("ta", 600);
+      localStorage.setItem("td", 600);
     }
   }, []);
 
   React.useEffect(function () {
     let intervalId = setInterval(() => {
-      let sisaWaktu = localStorage.getItem("ta");
+      let sisaWaktu = localStorage.getItem("td");
       
       setWaktu(sisaWaktu);
       let sisa = sisaWaktu - 1;
 
-      localStorage.setItem("ta", sisa);
+      localStorage.setItem("td", sisa);
     }, 1000);
 
     return function () {

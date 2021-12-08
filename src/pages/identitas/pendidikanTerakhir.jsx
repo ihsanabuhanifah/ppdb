@@ -10,16 +10,15 @@ const RegisterSchema = Yup.object().shape({
  
 asal_sekolah: Yup.string().required("Nama Lengkap wajib diisi"),
   // npsn: Yup.number().typeError("NPSN wajib angka").required("NPSN wajib diisi"),
-  // nisn: Yup.string()
-  // .length(10, 'NISN Wajib 10 digit')
-  //   .typeError("NIK wajib dengan angka").required("NISN wajib diisi"),
+  nisn: Yup.string()
+  .length(10, 'NISN Wajib 10 digit')
+    .typeError("NIK wajib dengan angka"),
 
   // golongan_darah: Yup.string().required("Nama Lengkap wajib diisi"),
   alamat_sekolah: Yup.string().required("Alamat siswa wajib diisi"),
-//   nomor_telepon_sekolah: Yup.number()
-//     .typeError("Nomor Handphone wajib dengan angka")
-//     .required("Nomor Handphone wajib diisi"),
-  
+  nomor_telepon_sekolah: Yup.number()
+    .typeError("Nomor Handphone wajib dengan angka"),
+ 
 });
 
 export default function PendidikanTerakhir() {

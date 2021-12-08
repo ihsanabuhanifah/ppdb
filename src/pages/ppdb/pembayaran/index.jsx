@@ -16,7 +16,9 @@ import { payment } from "../../../redux/action/login";
 import { useSelector, useDispatch } from "react-redux";
 let fileSchema = Yup.object().shape({
   files: Yup.string().required("Bukti Transfer wajib di Upload"),
-  nominal: Yup.string().required("Nominal wajib diisi"),
+  nominal: Yup.number()
+  .typeError("Nominal wajib dengan angka")
+  .required("Nominal wajib diisi"),
 });
 export default function Pembayaran() {
   const [isLoading, setIsLoading] = React.useState(false);

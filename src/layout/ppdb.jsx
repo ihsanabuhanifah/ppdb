@@ -60,6 +60,7 @@ export default function LayoutPPDB() {
           Cookies.remove("token-ppdb");
           Cookies.remove("exam");
           Cookies.remove("url");
+          localStorage.clear()
           return history.push("/login");
         }}
         onClose={() => {

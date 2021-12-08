@@ -6,6 +6,8 @@ import PaginationInfo from "../../../components/paginationInfo";
 import TableHeader from "../../../components/TableHeader";
 import LoadingBar from "../../../components/loadingBar";
 import { Link, useHistory } from "react-router-dom";
+import ReactWhatsapp from "react-whatsapp";
+import { formatTanggal, formatNomorHp } from "../../../utils";
 import {
   getJadwal,
   updateStatusTes,
@@ -15,7 +17,7 @@ import {
 } from "../../../api/admin";
 
 import { formatDate } from "../../../utils";
-import ReactWhatsapp from "react-whatsapp";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { useToast } from "@chakra-ui/react";
 import useDebounce from "../../../hooks/useDebounce";
 import swal from "sweetalert";
@@ -53,7 +55,15 @@ export default function RiwayatPembayaran() {
 
     {
       keepPreviousData: true,
-      select: (response) => response.data,
+      select: (response) => {
+        let result = response.data
+        
+        let total = 0
+        return {
+          data: result,
+          // bukti: bukti,
+        };
+      }
     }
   );
 
@@ -101,16 +111,26 @@ export default function RiwayatPembayaran() {
         <h1 className="text-2xl  font-semibold">
           DAFTAR JADWAL TES PPDB SMK MADINATULQURAN
         </h1>
+        
       </div>
       {/* table */}
-      <div className="p-1n ">
+      <div className="p-1 ">
         <TableHeader
           setKeyword={setKeyword}
           setPer_page={setPer_page}
         ></TableHeader>
+        <div className="flex justify-end">
+        <ReactHTMLTableToExcel
+                    id="test-table-xls-button"
+                    className="btn border py-2 px-3 font-bold  rounded-md bg-green-500 text-white"
+                    table="table-to-xls"
+                    filename={`Data-Transfer-PPDB-SMKMQ ${formatDate(new Date())}`}
+                    sheet="tablexls"
+                    buttonText="Import ke Excel"/>
+        </div>
       </div>
       {isFetching ? <TableLoading></TableLoading> : <div className="overflow-auto">
-      <table className="p-1 w-full ">
+      <table id="table-to-xls"  className="p-1 w-full ">
         <thead>
           <tr className="uppercase">
             <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
@@ -120,6 +140,15 @@ export default function RiwayatPembayaran() {
             <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
               <div className="text-sm leading-5 text-green-500">Nama Siswa</div>
             </th>
+            <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
+              <div className="text-sm leading-5 text-green-500">Sekolah Asal</div>
+            </th>
+            <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
+              <div className="text-sm leading-5 text-green-500">Nama Ayah</div>
+            </th>
+            <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
+              <div className="text-sm leading-5 text-green-500">Nomor Handphone</div>
+            </th>
             <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
               <div className="text-sm leading-5 text-green-500">
                 Status Validasi
@@ -127,6 +156,9 @@ export default function RiwayatPembayaran() {
             </th>
             <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
               <div className="text-sm leading-5 text-green-500">Bukti</div>
+            </th>
+            <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500  border-gray-500">
+              <div className="text-sm leading-5 text-green-500">Diperiksa Oleh</div>
             </th>
             <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500  border-gray-500">
               <div className="text-sm leading-5 text-green-500">Nominal</div>
@@ -149,7 +181,7 @@ export default function RiwayatPembayaran() {
         </thead>{" "}
         <tbody className="bg-white relative">
             {}
-            {data?.data?.data?.map((dt, index) => (
+            {data?.data?.data?.data?.map((dt, index) => (
               <tr key={index} className="hover:bg-gray-200">
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div className="flex items-center">
@@ -163,9 +195,30 @@ export default function RiwayatPembayaran() {
 
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div className="text-sm leading-5 text-blue-900">
-                    {dt?.user?.name}
+                    {dt?.name_siswa}
                   </div>
                 </td>
+                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                  <div className="text-sm leading-5 text-blue-900">
+                    {dt?.asal_sekolah}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                  <div className="text-sm leading-5 text-blue-900">
+                    {dt?.name_ayah}
+                  </div>
+                </td> 
+                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                <ReactWhatsapp
+                        number={formatNomorHp(dt?.phone)}
+                        message={"bismillah"}
+                      >
+                        <p className="hover:text-green-500 hover:font-bold hover:text-lg">
+                          {formatNomorHp(dt?.phone)}
+                        </p>
+                      </ReactWhatsapp>
+                </td> 
+                
                 <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
                   {dt.bukti === null ? (
                     "-"
@@ -175,7 +228,7 @@ export default function RiwayatPembayaran() {
                       onClick={() => {
                         setIsLoadingKonfirmasi(true);
                         updateStatus(dt?.id);
-                        sendMessageBukti(dt?.user?.device)
+                        sendMessageBukti(dt?.device)
                       }}
                       className={`0 font-bold p-2 ${
                         dt?.status === 0
@@ -204,6 +257,11 @@ export default function RiwayatPembayaran() {
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div className="text-sm leading-5 text-blue-900">
+                    {dt?.approved_by}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                  <div className="text-sm leading-5 text-blue-900">
                     {dt?.nominal === null ? formatRupiah(350000) : formatRupiah(dt?.nominal)}
                   </div>
                 </td>
@@ -219,6 +277,18 @@ export default function RiwayatPembayaran() {
                 </td>
               </tr>
             ))}
+             <tr className="hover:bg-gray-200 text-xl font-bold">
+                <td colSpan={7} className="px-6 py-4  whitespace-no-wrap border-b border-gray-500">
+                      <div className="text-sm text-center  leading-5 text-green-500">
+                       TOTAL PEMBAYARAN
+                      </div>
+                    </td>
+                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                    <div className="text-sm leading-5 text-green-500">
+                      {/* {formatRupiah(total)} */}
+                    </div>
+                  </td>
+                </tr>
           </tbody>
        
       </table>

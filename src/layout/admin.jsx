@@ -1,9 +1,8 @@
 import React from "react";
 import Menu from "../modules/admin/menu";
 import { Switch, Route, useHistory } from "react-router-dom";
-import TesUmum from "../pages/ppdb/tes-umum";
-import { Admin, Pendaftar, Nilai, JadwalTes } from "../pages/admin";
-import Payment from "../pages/ppdb/payment";
+
+import { Admin, Pendaftar, Nilai, JadwalTes, Dashboard } from "../pages/admin";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import AlertLogout from "../components/AlertLogout";
 import Cookies from "js-cookie";
@@ -16,14 +15,14 @@ import { deviceUpdate } from "../api/admin";
 // import { useSelector } from "react-redux";
 import { Tooltip } from "@chakra-ui/react";
 import { getMessaging, getToken } from "firebase/messaging";
-import TesDiniyah from "../pages/ppdb/tes-diniyah";
+
 import { useSelector } from "react-redux";
-import Pusher from "pusher-js"
+
 import RiwayatPembayaran from "../pages/admin/riwayatPembayaran";
 export default function LayoutPPDB() {
   const id = useSelector((state) => state.auth.id);
   const message =
-    "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
+    "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftaran , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
   const [hiddenMenu, setHiddenMenu] = React.useState(true);
   const [logout, setLogout] = React.useState(false);
   let history = useHistory();
@@ -44,26 +43,12 @@ export default function LayoutPPDB() {
         "BIJnu5Rq_eI-nulWKTQ-TwbADc44bfyXZ4oolgf0L-36kdAwHJQKyh-QEaHcALMv4fl5xyohUNsrir-ppoingM4",
     })
       .then((currentToken) => {
-        deviceUpdate(id,currentToken)
+        deviceUpdate(id, currentToken);
       })
       .catch((err) => {
         console.log("An error occurred while retrieving token. ", err);
         // ...
       });
-
-      Pusher.logToConsole = true;
-
-      const pusher = new Pusher('a6ef7a3495c7427d9eb3', {
-        cluster: 'ap1'
-      });
-  
-      let channel = pusher.subscribe("message");
-      console.log('tes', channel.bind)
-      channel.bind("MessageCreated", function(data) {
-        console.log('success', data)
-      });
-
-
   }, []);
   return (
     <React.Fragment>
@@ -78,7 +63,7 @@ export default function LayoutPPDB() {
         }}
         isOpen={logout}
       ></AlertLogout>
-      <div className="w-full h-full   overflow-hidden">
+      <div className="w-full h-full   overflow-hidden" style={{ zoom: "80%" }}>
         <header className=" lg:hidden text-xl text-white font-bold flex items-center justify-between bg-green-500 px-5 py-2 border-b lg:border-none pb-3 lg:pb-0">
           <h1>
             {" "}
@@ -128,8 +113,11 @@ export default function LayoutPPDB() {
             className="lg:col-span-10 h-9/10 lg:h-full mt-5 lg:mt-0 bg-white px-5 p-10 lg:p-10 rounded-xl overflow-y-auto"
           >
             <Switch>
-              <Route path="/admin" exact>
+              <Route path="/admin/list" exact>
                 <Admin></Admin>
+              </Route>
+              <Route path="/admin/dashboard" exact>
+                <Dashboard></Dashboard>
               </Route>
               <Route path="/admin/pendaftar">
                 <Pendaftar></Pendaftar>

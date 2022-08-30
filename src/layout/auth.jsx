@@ -21,7 +21,7 @@ export default function Layout({ children, page }) {
       <div className="grid grid-cols-12 lg:grid-cols-7 w-full h-screen  ">
         <div className="w-full h-full block lg:hidden bg-green-500"></div>
         <div
-          className={`col-span-5 hidden lg:block   h-full h-screen ${
+          className={`col-span-5 hidden lg:block   h-full ${
             page === "login" ? "order-1" : "order-2"
           }`}
         >

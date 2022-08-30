@@ -30,7 +30,7 @@ export default function Dashboard() {
         <p className="text-justify mt-4">
           {" "}
           Untuk Selanjutnya, Silahkan untuk lakukan pembayaran uang pendaftaran
-          sebesar Rp. 350.000,00 untuk mengerjakan tes.{" "}
+          sebesar Rp. 450.000,00 untuk mengerjakan tes.{" "}
         </p>
         <p className="text-justify mt-4">
           Adapun tes yang diujikan adalah sebagai berikut.

@@ -93,24 +93,7 @@ export default function Admin() {
               <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                 Nomor HP
               </th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                Jam Daftar
-              </th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                Status Transfer
-              </th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                Bukti Transfer
-              </th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                Konfirmasi
-              </th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                Jadwal Tes
-              </th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                Kirim Jadwal
-              </th>
+             
               {/* <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                   Created_At
                 </th> */}
@@ -145,24 +128,8 @@ export default function Admin() {
                     </button>
                   </ReactWhatsapp>
                 </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  {formatDate(dt.created_at)}
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  pl
-                </td>
-                <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  poook
-                </td>
-                <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  poook
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  pl
-                </td>
-                <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  poook
-                </td>
+               
+               
               </tr>
             ))}
           </tbody>

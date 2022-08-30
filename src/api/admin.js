@@ -3,7 +3,7 @@ import { syncToken } from "./axios";
 export async function getUser({ page, per_page, keyword }) {
   console.log(per_page);
   let result = await axios.get(
-    `/user?perpage=${per_page}&keywords=${keyword}&role=user&page=${page}`
+    `/user?perpage=${per_page}&keywords=${keyword}&role=user&page=${page}&tahun_ajar=2023-2024`
   );
 
   return result.data;
@@ -38,7 +38,7 @@ export function getUserAll({ page, per_page, keyword }) {
 
 export async function getJadwal({ per_page, keyword }) {
   let result = await axios.get(
-    `/getKel?perpage=${per_page}&keywords=${keyword}`
+    `/getKel?perpage=${per_page}&keywords=${keyword}&tahun_ajar=2023-2024`
   );
 
   return result.data;
@@ -66,7 +66,7 @@ export async function updateStatusKelulusan(id, status) {
 export function getBuktiAll({ page, per_page, keyword }) {
   console.log(per_page);
   return axios.get(
-    `/getBuktiAll?perpage=${per_page}&keywords=${keyword}&role=user&page=${page}`
+    `/getBuktiAll?perpage=${per_page}&keywords=${keyword}&role=user&page=${page}&tahun_ajar=2023-2024`
   );
 }
 

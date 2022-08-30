@@ -1,16 +1,15 @@
 import React from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { Collapse, useDisclosure } from "@chakra-ui/react";
-import Pusher from "pusher-js";
+
 import Dropzone from "react-dropzone";
 import { Formik } from "formik";
-import Pagination from "../../../components/Pagination";
+
 import Loading from "../../../components/loading";
 import Input from "../../../components/Input";
-import PaginationInfo from "../../../components/paginationInfo";
+
 import TableHeader from "../../../components/TableHeader";
-import LoadingBar from "../../../components/loadingBar";
-import { Link, useHistory } from "react-router-dom";
+
 import { getUser } from "../../../api/admin";
 import { konfirmBukti } from "../../../api/admin";
 import { formatDate, formatTanggal, formatNomorHp } from "../../../utils";
@@ -21,6 +20,7 @@ import TableLoading from "../../../components/tableLoading";
 import Modal from "../../../components/Modal";
 import * as Yup from "yup";
 import Select from "react-select";
+import PaginationTable from "../../../components/PaginationTable";
 import { sendMessageBukti } from "../../../config/sendMessage";
 let fileSchema = Yup.object().shape({
   files: Yup.string().required("Bukti Transfer wajib di Upload"),
@@ -40,7 +40,7 @@ export default function Pendaftar() {
   let initialValues = {
     files: undefined,
     nominal: "",
-    user_id:0,
+    user_id: 0,
     status: 1,
   };
 
@@ -80,7 +80,7 @@ export default function Pendaftar() {
     //   });
     // }
   };
-  const { isLoading, isError, data, isFetching } = useQuery(
+  const { isLoading, data, isFetching } = useQuery(
     //query key
     [
       "list_user",
@@ -104,7 +104,7 @@ export default function Pendaftar() {
         let result = response.data;
         let options = [];
         let bukti = 0;
-        result?.data?.map((rs) => {
+        result?.data?.forEach((rs) => {
           options.push({
             value: rs?.id,
             label: rs?.name,
@@ -141,7 +141,7 @@ export default function Pendaftar() {
     }
   };
 
-  console.log(data)
+  console.log(data);
   return (
     <React.Fragment>
       <div className="text-green-500 grid grid-cols-1 gap-5">
@@ -315,6 +315,7 @@ export default function Pendaftar() {
                           target="_blank"
                           className="hover:text-green-500 font-bold"
                           href={dt.bukti?.url_img}
+                          rel="noreferrer"
                         >
                           Lihat Bukti
                         </a>
@@ -370,19 +371,7 @@ export default function Pendaftar() {
                 ))}
               </tbody>
             </table>
-
-            <div className="flex items-center justify-between mt-5 text-green-500">
-              <PaginationInfo
-                totalItems={5}
-                currentPage={1}
-                pageSize={per_page}
-              ></PaginationInfo>
-              {/* <Pagination
-            totalItems={20}
-            currentPage={1}
-            pageSize={pageSize}
-          ></Pagination> */}
-            </div>
+            <PaginationTable />
           </div>
         )}
 

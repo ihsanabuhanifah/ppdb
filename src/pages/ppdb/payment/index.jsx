@@ -6,23 +6,22 @@ import Loading from "../../../components/loading";
 import { uploadBuktiTransfer, detailBuktiTransfer } from "../../../api/santri";
 import { useHistory } from "react-router-dom";
 import { useToast, useClipboard } from "@chakra-ui/react";
-import {payment} from "../../../redux/action/login"
-import { useSelector, useDispatch } from "react-redux";
+import { payment } from "../../../redux/action/login";
+import { useDispatch } from "react-redux";
 let fileSchema = Yup.object().shape({
   files: Yup.string().required("Bukti Transfer wajib di Upload"),
 });
 export default function Payment() {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [errorPost, setErrorPost] = React.useState();
   const [statusTransfer, setStatusTransfer] = React.useState(false);
-  const [value, setValue] = React.useState(3310006100)
+  const [value] = React.useState(3310006100);
   const { hasCopied, onCopy } = useClipboard(value);
   let dispatch = useDispatch();
   let history = useHistory();
   let toast = useToast();
   let initialValues = {
     files: undefined,
-    nominal : 350000,
+    nominal: 450000,
     status: 1,
   };
   const onSubmit = async (values) => {
@@ -38,14 +37,13 @@ export default function Payment() {
         duration: 4000,
         isClosable: true,
       });
-      dispatch(payment())
-      
-       setStatusTransfer(true);
-       return history.push("/ppdb/pembayaran")
+      dispatch(payment());
+
+      setStatusTransfer(true);
+      return history.push("/ppdb/pembayaran");
       // history.push("/identitas/data-ibu");
     }
     if (result.response.status === 401) {
-      setErrorPost(result.response.data);
       toast({
         position: "top-right",
         title: "Fail",
@@ -59,7 +57,7 @@ export default function Payment() {
 
   const bukti = async () => {
     let result = await detailBuktiTransfer();
-    console.log(result)
+    console.log(result);
     if (result !== "") {
       return setStatusTransfer(true);
       // history.push("/identitas/data-ibu");
@@ -67,7 +65,8 @@ export default function Payment() {
   };
   React.useEffect(() => {
     bukti();
-    console.log(statusTransfer)
+    console.log(statusTransfer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="p-2 lg:px-32 font-semibold relative">
@@ -77,7 +76,7 @@ export default function Payment() {
 
           <p className="text-justify">
             Untuk Menyelesaikan proses pendaftaran, silahkan transfer Uang
-            sejumlah Rp. 350.000,00 ke Rekening berikut.
+            sejumlah Rp. 450.000,00 ke Rekening berikut.
           </p>
           <div className="mt-5 border p-5 bg-gray-50">
             <div className="grid grid-cols-12 font-bold  ">
@@ -87,11 +86,20 @@ export default function Payment() {
               </div>
 
               <div className="ml-5 col-span-6 lg:col-span-4">
-               <button className="font-bold" onClick={onCopy}> {value}</button>
+                <button className="font-bold" onClick={onCopy}>
+                  {" "}
+                  {value}
+                </button>
               </div>
-              {hasCopied ? <p className="absolute z-50 top-0 right-0 flex  items-center text-center ">
-                <span className="text-center text-green-500 border shadow-lg px-4 rounded-md">Copy ke clipboard</span>
-              </p> : ""}
+              {hasCopied ? (
+                <p className="absolute z-50 top-0 right-0 flex  items-center text-center ">
+                  <span className="text-center text-green-500 border shadow-lg px-4 rounded-md">
+                    Copy ke clipboard
+                  </span>
+                </p>
+              ) : (
+                ""
+              )}
             </div>
             <div className="grid grid-cols-12 font-bold mt-5 lg:mt-2">
               <div className="col-span-6 lg:col-span-2 flex items-start lg:items-center justify-between">
@@ -110,7 +118,7 @@ export default function Payment() {
               </div>
 
               <div className="ml-5 col-span-6 lg:col-span-4">
-              YYS PESANTREN WISATA AL-ISLAM (PONPES MADINATULQURAN)
+                YYS PESANTREN WISATA AL-ISLAM (PONPES MADINATULQURAN)
               </div>
             </div>
           </div>
@@ -173,8 +181,6 @@ export default function Payment() {
                 <div>
                   <Dropzone
                     onDrop={(acceptedFiles) => {
-                      let reader = new FileReader();
-
                       setFieldValue(`files`, acceptedFiles[0]);
                     }}
                   >
@@ -196,8 +202,6 @@ export default function Payment() {
                           type="file"
                           error={errors?.files && touched?.files}
                           onChange={(event) => {
-                            let reader = new FileReader();
-
                             setFieldValue(
                               `files`,
                               event.currentTarget.files[0]
@@ -247,6 +251,4 @@ export default function Payment() {
       )}
     </div>
   );
-}
-{
 }

@@ -15,14 +15,14 @@ import {
   updateStatusKelulusan,
   updateJamTes,
 } from "../../../api/admin";
-import { konfirmBukti } from "../../../api/admin";
+
 import { formatTanggal, formatNomorHp } from "../../../utils";
 import { useToast } from "@chakra-ui/react";
 import useDebounce from "../../../hooks/useDebounce";
 
 import swal from "sweetalert";
 import TableLoading from "../../../components/tableLoading";
-import axios from "axios";
+
 export default function JadwalTes() {
   const [page, setPage] = React.useState(1);
   const [per_page, setPer_page] = React.useState(100);
@@ -63,14 +63,14 @@ export default function JadwalTes() {
 
         let result = [];
         if (filter === "belum") {
-          dataAwal.map((da) => {
+          dataAwal.forEach((da) => {
             if (da.tes_diniyyah === undefined) {
               result.push(da);
             }
           });
         }
         if (filter === "sudah") {
-          dataAwal.map((da) => {
+          dataAwal.forEach((da) => {
             if (da.tes_diniyyah !== undefined) {
               result.push(da);
             }
@@ -89,7 +89,7 @@ export default function JadwalTes() {
         let jumlahSantri = result.length;
         let terjadwal = 0;
         let sudahTes = 0;
-        result.map((rs) => {
+        result.forEach((rs) => {
           if (rs.tes_diniyyah !== undefined) {
             terjadwal = terjadwal + 1;
             if (rs.tes_diniyyah.status === 1) {
@@ -100,7 +100,7 @@ export default function JadwalTes() {
         let rpl = 0;
         let tkj = 0;
 
-        dataAwal.map((da) => {
+        dataAwal.forEach((da) => {
           if (da.jurusan === 1) {
            tkj = tkj +1
           }else{

@@ -6,6 +6,7 @@ import { postSantiBaru } from "../../api/santri";
 import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import Loading from "../../components/loading";
+import Identitas from "../../layout/identitas"
 const RegisterSchema = Yup.object().shape({
   // nik_siswa: Yup.string()
   // .length(16, 'NIK Wajib 16 digit')
@@ -77,7 +78,7 @@ export default function DataSiswa() {
         isClosable: true,
       });
 
-      // return history.push("/ppdb/salam");
+      window.scrollTo(0, 0);
       return history.push("/identitas/data-sekolah-asal");
     }
     if (result.response.status === 401) {
@@ -94,7 +95,7 @@ export default function DataSiswa() {
   };
   console.log(focus);
   return (
-    <React.Fragment>
+    <Identitas>
       <div className="mb-6 pb-5 ">
         <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">
           Lengkapi Data Santri
@@ -455,6 +456,6 @@ export default function DataSiswa() {
           </form>
         )}
       </Formik>
-    </React.Fragment>
+    </Identitas>
   );
 }

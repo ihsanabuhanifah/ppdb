@@ -53,7 +53,7 @@ export default function Register() {
         duration: 4000,
         isClosable: true,
       });
-      history.push("/identitas");
+      history.push("/identitas/santri");
     }
     if (result.response.status === 401) {
       console.log(result.response);

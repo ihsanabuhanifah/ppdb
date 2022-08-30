@@ -48,7 +48,7 @@ export default function Register() {
       const identitas = result.identitas;
       if (identitas !== undefined) {
         if (identitas.length === 0) {
-          return history.push("/identitas");
+          return history.push("/identitas/santri");
         } else if (identitas.length === 1) {
          
           return history.push("/identitas/data-sekolah-asal");
@@ -81,7 +81,7 @@ export default function Register() {
       <div className="w-full px-3 lg:px-12 grid grid-cols-1 gap-5">
         <div>
         <h3 className="text-xl lg:text-3xl font-bold uppercase "><span className="text-gray-500">Masuk Portal</span> <span className="text-green-500"> PPDB</span></h3>
-          <p className="text-lg lg:text-xl italic text-green-500">Silahkan Melakukan Masuk disini</p>
+          <p className="text-lg lg:text-xl italic text-green-500">Silahkan Melakukan Login</p>
         </div>
         <Formik
           initialValues={initialValues}

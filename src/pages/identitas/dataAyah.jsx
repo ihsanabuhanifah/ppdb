@@ -6,6 +6,7 @@ import { postDataAyah } from "../../api/santri";
 import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import Loading from "../../components/loading";
+import Identitas from "../../layout/identitas"
 const RegisterSchema = Yup.object().shape({
  
   //   .required("NI Wajib diisi"),
@@ -59,6 +60,7 @@ export default function DataSiswa() {
         duration: 4000,
         isClosable: true,
       });
+      window.scrollTo(0, 0);
       history.push("/identitas/data-ibu");
     }
     if (result.response.status === 401) {
@@ -75,7 +77,7 @@ export default function DataSiswa() {
   };
   console.log(focus);
   return (
-    <React.Fragment>
+    <Identitas>
       <div className="mb-6 pb-5 ">
         <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">
           Lengkapi Data Ayah Santri
@@ -321,6 +323,6 @@ export default function DataSiswa() {
           </form>
         )}
       </Formik>
-    </React.Fragment>
+    </Identitas>
   );
 }

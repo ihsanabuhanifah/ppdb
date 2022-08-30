@@ -6,6 +6,7 @@ import { postSekolahAsal } from "../../api/santri";
 import { useToast } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 import Loading from "../../components/loading";
+import Identitas from "../../layout/identitas"
 const RegisterSchema = Yup.object().shape({
  
 asal_sekolah: Yup.string().required("Nama Lengkap wajib diisi"),
@@ -47,6 +48,7 @@ export default function PendidikanTerakhir() {
       duration: 4000,
       isClosable: true,
     });
+    window.scrollTo(0, 0);
     history.push("/identitas/data-ayah")
     
   }
@@ -67,7 +69,7 @@ export default function PendidikanTerakhir() {
   let toast = useToast();
   console.log(focus);
   return (
-    <React.Fragment>
+    <Identitas>
       <div className="mb-6 pb-5 ">
         <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">
         <span  className="uppercase">Lengkapi Data Sekolah Asal</span>  
@@ -255,6 +257,6 @@ export default function PendidikanTerakhir() {
         
         )}
       </Formik>
-    </React.Fragment>
+    </Identitas>
   );
 }

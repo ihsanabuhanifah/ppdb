@@ -490,7 +490,7 @@ export default function JadwalTes() {
         {isFetching ? (
           <TableLoading></TableLoading>
         ) : (
-          <div className="overflow-auto">
+          <div style={{zoom : '80%'}} className="overflow-auto">
             <table className="p-1 w-full ">
               <thead>
                 <tr className="uppercase">
@@ -522,6 +522,11 @@ export default function JadwalTes() {
                   <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
                     <div className="text-sm leading-5 text-green-500">
                       Jam Tes
+                    </div>
+                  </th>
+                  <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
+                    <div className="text-sm leading-5 text-green-500">
+                     Catatan
                     </div>
                   </th>
                   <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
@@ -655,6 +660,17 @@ export default function JadwalTes() {
                             
                             </button>
                           </Tooltip>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                      <div className="text-sm leading-5 text-blue-900">
+                        {dt?.tes_diniyyah?.catatan === undefined ? (
+                          <p className="text-red-500 font-bold italic text-xs">
+                            Belum buat jadwal
+                          </p>
+                        ) : (
+                          dt?.tes_diniyyah?.catatan
                         )}
                       </div>
                     </td>

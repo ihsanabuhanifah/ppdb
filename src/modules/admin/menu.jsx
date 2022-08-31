@@ -49,7 +49,7 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
   return (
     <React.Fragment>
       <nav className="h-5/6 lg:h-8/10">
-        <div className="grid grid-cols-1 gap-1  text-white">
+        <div className="grid grid-cols-1 gap-1  text-white text-sm">
           {menus.map((menu, index) => {
             return (
               <button
@@ -61,7 +61,7 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
                   }
                   return history.push(menu.to)
                 }}
-                className={`flex items-center text-md  lg:text-xl font-bold p-3 lg:px-4 lg:rounded-l-full ${history.location.pathname === menu.to ? "text-green-500 font-bold bg-white" : ""}`}
+                className={`flex items-center text-md  lg:text-sm font-bold p-3 lg:px-4 lg:rounded-l-full ${history.location.pathname === menu.to ? "text-green-500 font-bold bg-white" : ""}`}
               
                
                
@@ -78,10 +78,10 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
         onClick={() => {
           setLogout(true)
         }}
-        className="flex items-center text-lg text-white  lg:text-xl font-bold p-3 lg:p-5 lg:rounded-l-full w-fullphp  "
+        className="flex items-center text-sm text-white  lg:text-xl font-bold p-3 lg:p-5 lg:rounded-l-full w-fullphp  "
       
       >
-        <LogoutIcon className="lg:h-10 lg:w-10 w-8 h-8 mr-5 " />
+        <LogoutIcon className="lg:h-10 lg:w-10 w-5 h-5 mr-5 " />
         Logout
       </button>
      </div>

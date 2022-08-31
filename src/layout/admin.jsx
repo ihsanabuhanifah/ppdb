@@ -85,13 +85,13 @@ export default function LayoutPPDB() {
         </header>
         <div className="grid grid-cols-1 relative lg:grid-cols-12 w-full h-full bg-green-500 px-2  lg:px-6 lg:pt-6  ">
           <div
-            className={`lg:col-span-2 absolute z-50 lg:static w-full ${
+            className={`lg:col-span-1 absolute z-50 lg:static w-full ${
               hiddenMenu
                 ? "transform -translate-x-full lg:transform "
                 : "transform -translate-x-0 transition  duration-500"
             } lg:block h-full py-5 pl-1  bg-green-500`}
           >
-            <header className=" hidden lg:block text-xl text-white font-bold items-center justify-between border-b lg:border-none pb-3 lg:pb-0">
+            <header className=" hidden lg:block text-sm text-white font-bold items-center justify-between border-b lg:border-none pb-3 lg:pb-0">
               <h1>
                 {" "}
                 ADMIN <br />{" "}
@@ -110,10 +110,10 @@ export default function LayoutPPDB() {
 
           <div
             id="scroll"
-            className="lg:col-span-10 h-9/10 lg:h-full mt-5 lg:mt-0 bg-white px-5 p-10 lg:p-10 rounded-xl overflow-y-auto"
+            className="lg:col-span-11 h-9/10 lg:h-full mt-5 lg:mt-0 bg-white px-5 p-10 lg:p-10 rounded-xl overflow-y-auto"
           >
             <Switch>
-              <Route path="/admin/list" exact>
+              <Route path="/admin" exact>
                 <Admin></Admin>
               </Route>
               <Route path="/admin/dashboard" exact>

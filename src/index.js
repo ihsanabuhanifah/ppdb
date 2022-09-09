@@ -5,11 +5,12 @@ import "./App.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { ChakraProvider, theme } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from "react-redux";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import store from "./redux/store";
+import 'semantic-ui-css/semantic.min.css'
 const queryClient = new QueryClient();
 ReactDOM.render(
   <React.StrictMode>

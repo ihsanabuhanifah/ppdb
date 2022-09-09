@@ -1,8 +1,7 @@
 import React from "react";
-import Matematika from "../../../image/matematika.jpg";
-import { useHistory } from "react-router-dom";
+
 import { Formik } from "formik";
-import Input from "../../../components/Input";
+
 import InputDate from "../../../components/InputDate";
 import { postTesDiniyyah, getTesDiniyah } from "../../../api/santri";
 import { useToast } from "@chakra-ui/react";
@@ -10,7 +9,9 @@ import Loading from "../../../components/loading";
 import * as Yup from "yup";
 import dayjs from "dayjs";
 const JadwalSchema = Yup.object().shape({
-  tanggal: Yup.string("tanggal wajib").required("Tanggal wajib diisi").nullable(),
+  tanggal: Yup.string("tanggal wajib")
+    .required("Tanggal wajib diisi")
+    .nullable(),
   metode: Yup.string().required("Metode wajib diisi"),
 });
 export default function TesDiniyah() {
@@ -18,12 +19,11 @@ export default function TesDiniyah() {
   const [isUploadUlang, setIsUploadUlang] = React.useState(false);
   const [jadwal, setJadwal] = React.useState({
     tanggal: null,
-    jam:null,
+    jam: null,
     metode: "",
     catatan: "",
   });
   let toast = useToast();
-  let history = useHistory();
 
   const tesSaya = async () => {
     let result = await getTesDiniyah();
@@ -40,7 +40,7 @@ export default function TesDiniyah() {
   const onSubmit = async (values) => {
     setIsLoading(true);
     let result = await postTesDiniyyah(values);
-  
+
     if (result?.message === "Berhasil Menyimpan Data") {
       toast({
         position: "top-right",
@@ -66,7 +66,7 @@ export default function TesDiniyah() {
     }
   };
 
-  console.log(jadwal)
+  console.log(jadwal);
   return (
     <section className="text-gray-600">
       <Formik
@@ -86,9 +86,12 @@ export default function TesDiniyah() {
           setFieldValue,
         }) => (
           <form className="lg:border p-1 lg:p-10 " onSubmit={handleSubmit}>
-              <h5 className="uppercase text-2xl text-center font-bold text-green-500 mb-5">
-              {jadwal.tanggal === null ? 'Buat JAdwal tes Diniyah' : "Jadwal Sudah dibuat"}</h5>
-              <div>
+            <h5 className="uppercase text-2xl text-center font-bold text-green-500 mb-5">
+              {jadwal.tanggal === null
+                ? "Buat JAdwal tes Diniyah"
+                : "Jadwal Sudah dibuat"}
+            </h5>
+            <div>
               <div className="mt-3  items-center">
                 <label className="font-bold  text-green-500 " htmlFor="metode">
                   <span className="uppercase">
@@ -131,6 +134,8 @@ export default function TesDiniyah() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={dayjs(values.tanggal).format("YYYY-MM-DD")}
+                
+  
                 required
               >
                 {errors.tanggal && touched.tanggal && (
@@ -140,27 +145,28 @@ export default function TesDiniyah() {
                 )}
               </InputDate>
             </div>
-           {jadwal.metode === "" || jadwal.metode === 1 ? "" : ( <div>
-              <InputDate
-                label="Jam Tes"
-                id="tanggal"
-                tabIndex="3"
-                type="time"
-                disabled
-                error={errors.jam_tes && touched.jam_tes}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.jam_tes}
-               
-              >
-               
+            {jadwal.metode === "" || jadwal.metode === 1 ? (
+              ""
+            ) : (
+              <div>
+                <InputDate
+                  label="Jam Tes"
+                  id="tanggal"
+                  tabIndex="3"
+                  type="time"
+                  disabled
+                  error={errors.jam_tes && touched.jam_tes}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.jam_tes}
+                >
                   <p className="text-red-500 italic font-bold  text-sm mt-1">
-                   Jam Tes Diisi oleh panitia PPDB SMK MADINATULQURAN
+                    Jam Tes Diisi oleh panitia PPDB SMK MADINATULQURAN
                   </p>
-                
-              </InputDate>
-            </div>)}
-          
+                </InputDate>
+              </div>
+            )}
+
             <div className="col-span-1 lg:col-span-3 mt-5 ">
               <label
                 className="font-bold uppercase text-green-500 "
@@ -188,48 +194,57 @@ export default function TesDiniyah() {
               )}
             </div>
             <div className="border p-5 mt-5">
-            <p className="text-justify text-red-500 font-bold italic">
+              <p className="text-justify text-red-500 font-bold italic">
                 {" "}
-               CATATAN PENTING
+                CATATAN PENTING
               </p>
               <p className="text-justify text-red-500 font-bold italic">
                 {" "}
-               - Materi tes ini adalah Baca Tulis Alquran , Hafalan dan Wawancara
+                - Materi tes ini adalah Baca Tulis Alquran , Hafalan dan
+                Wawancara
               </p>
               <p className="text-justify text-red-500 font-bold italic">
                 {" "}
-               - Untuk waktu tes secara Offline adalah hari Minggu
+                - Untuk waktu tes secara Offline adalah hari Minggu
               </p>
               <p className="text-justify text-red-500 font-bold italic">
                 {" "}
-               - Untuk waktu tes secara Online adalah hari Sabtu / Minggu
+                - Untuk waktu tes secara Online adalah hari Sabtu / Minggu
               </p>
-             
+
               <p className="text-justify text-red-500 font-bold italic">
                 {" "}
-                - Apabila memilih <span className="text-green-500">tes ONLINE</span>, panitia akan menghubungi nomor
-                telpon Abi/Umi akh calon santri untuk menentukan jam tes melalui
-                online dengan google meet.
+                - Apabila memilih{" "}
+                <span className="text-green-500">tes ONLINE</span>, panitia akan
+                menghubungi nomor telpon Abi/Umi akh calon santri untuk
+                menentukan jam tes melalui online dengan google meet.
               </p>
               <p className="text-justify text-red-500 font-bold italic">
                 {" "}
-                - Apabila memilih <span className="text-green-500">tes OFFLINE</span>, bisa langsung datang ke lokasi SMK MADINATULQURAN sesuai hari yang dipillih antara jam 08.00 - 13.00 WIB
+                - Apabila memilih{" "}
+                <span className="text-green-500">tes OFFLINE</span>, bisa
+                langsung datang ke lokasi SMK MADINATULQURAN sesuai hari yang
+                dipillih antara jam 08.00 - 13.00 WIB
               </p>
             </div>
             <div className="col-start-1 lg:col-start-3 mt-3  items-center">
-             {jadwal.tanggal === null ? ( <button
-                type="submit"
-                disabled={isUploadUlang || isLoading}
-                className="w-full border flex items-center justify-center text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
-              >
-                {isLoading ? (
-                  <Loading></Loading>
-                ) : isUploadUlang ? (
-                  "Jadwal Sudah Dibuat"
-                ) : (
-                  "Konfirmasi"
-                )}
-              </button>) : ""}
+              {jadwal.tanggal === null ? (
+                <button
+                  type="submit"
+                  disabled={isUploadUlang || isLoading}
+                  className="w-full border flex items-center justify-center text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
+                >
+                  {isLoading ? (
+                    <Loading></Loading>
+                  ) : isUploadUlang ? (
+                    "Jadwal Sudah Dibuat"
+                  ) : (
+                    "Konfirmasi"
+                  )}
+                </button>
+              ) : (
+                ""
+              )}
             </div>
           </form>
         )}

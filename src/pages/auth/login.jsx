@@ -183,6 +183,12 @@ export default function Register() {
             Mendaftar
           </Link>{" "}
         </p>
+        {/* <p className="text-center font-semibold">
+          
+          <Link className="text-green-500 text-lg font-bold" to="/lupa-password">
+            Lupa Password ?
+          </Link>{" "}
+        </p> */}
        
       </div>
     </Layout>

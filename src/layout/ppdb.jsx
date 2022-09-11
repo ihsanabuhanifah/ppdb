@@ -181,7 +181,7 @@ export default function LayoutPPDB() {
            </div>
           </ReactWhatsapp>
           
-          <ReactWhatsapp number={"+6281511668021"} message={message}>
+          <ReactWhatsapp number={"+6281311868066"} message={message}>
            <div className=" p-2 flex items-center justify-center ">
            <img
              
@@ -190,7 +190,7 @@ export default function LayoutPPDB() {
              alt="whatsapp.png"
            />
            <p className="text-green-500  ml-2 ">
-           Hubungi Ustadz. Fajri
+           Hubungi Ustadz. Patjri
            </p>
            </div>
           </ReactWhatsapp>

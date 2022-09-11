@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Register from "./pages/auth/register";
 import Login from "./pages/auth/login";
 import LupaPassword from "./pages/auth/lupa-password";
+import UbahPassword from "./pages/auth/change-password";
 import {
   TestMatematika,
   TestDiniyahDasar,
@@ -39,6 +40,9 @@ function App() {
         </Route>
         <Route path="/lupa-password">
           <LupaPassword></LupaPassword>
+        </Route>
+        <Route path="/reset/:id/:token">
+          <UbahPassword></UbahPassword>
         </Route>
         <SiswaPageProtected path="/ppdb">
           {isAuth ? <PPDB></PPDB> : <LoadingPage></LoadingPage>}

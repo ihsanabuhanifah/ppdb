@@ -5,56 +5,51 @@ import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useToast } from "@chakra-ui/react";
-import { useSelector, useDispatch } from "react-redux";
-import { authRegister } from "../../redux/action/register";
-import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
+
 import Loading from "../../components/loading";
+import { resetPassword } from "../../api/login";
 const RegisterSchema = Yup.object().shape({
-  name: Yup.string().required("Nama Lengkap wajib diisi"),
+ 
   email: Yup.string()
     .email("Format email tidak sesuai")
     .required("Email wajib diisi"),
-  phone: Yup.number()
-    .typeError("Nomor Handphone wajib dengan angka")
-    .required("Nomor Handphone wajib diisi"),
-  password: Yup.string()
-    .min(8, "Password minimal 8 karakter")
-    .required("Password Wajib diisi"),
-  password_confirmation: Yup.string()
-    .min(8, "Konfirmasi Password minimal 8 karakter")
-    .oneOf([Yup.ref("password")], "Password dan Password Konfirmasi tidak sama")
-    .required("Password Wajib diisi"),
 });
 export default function LupaPassword() {
   const [focus, setFocus] = React.useState("");
   const [errorReg, setErrorReg] = React.useState();
-  let dispatch = useDispatch();
+
   let toast = useToast();
-  let history = useHistory();
+
   const isLoading = useSelector((state) => state.auth.isLoading);
   console.log(isLoading);
   const initialValues = {
-    name: "",
+   
     email: "",
-    phone: "",
-    password: "",
-    password_confirmation: "",
-    role: 2,
+   
   };
   const onSubmit = async (values) => {
-    let result = await dispatch(authRegister(values));
+    let result = await resetPassword(values.email);
     console.log(result);
-    if (result.message === "Berhasil Membuat Akun") {
-      toast({
-        position: "top-right",
-        title: "Berhasil",
-        description: "Selamat Periksa Email Anda",
-        status: "success",
-        duration: 4000,
-        isClosable: true,
-      });
-      history.push("/identitas/santri");
-    }
+   if(result.data.status === 'Success'){
+    toast({
+      position: "top-right",
+      title: "Berhasil",
+      description: 'Email reset password berhasil dikirim, silahkan cek email ',
+      status: "success",
+      duration: 4000,
+      isClosable: true,
+    });
+   }else{
+    toast({
+      position: "top-right",
+      title: "Failed",
+      description: 'Email tidak ditemukan',
+      status: "error",
+      duration: 4000,
+      isClosable: true,
+    });
+   }
     if (result.response.status === 401) {
       console.log(result.response);
       setErrorReg(result.response.data);
@@ -70,12 +65,15 @@ export default function LupaPassword() {
   };
   return (
     <Layout page="login">
-    
       <div className="w-full px-3 lg:px-10 grid grid-cols-1 gap-5">
-    
         <div>
-          <h3 className="text-xl lg:text-3xl font-bold uppercase "><span className="text-gray-500">Lupa</span> <span className="text-green-500"> Password</span></h3>
-          <p className="text-md lg:text-xl italic text-green-500">Input email yang sudah terdaftar</p>
+          <h3 className="text-xl lg:text-3xl font-bold uppercase ">
+            <span className="text-gray-500">Lupa</span>{" "}
+            <span className="text-green-500"> Password</span>
+          </h3>
+          <p className="text-md lg:text-xl italic text-green-500">
+            Input email yang sudah terdaftar
+          </p>
         </div>
         <Formik
           initialValues={initialValues}
@@ -94,7 +92,6 @@ export default function LupaPassword() {
             isSubmitting,
           }) => (
             <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-2">
-            
               <div
                 onFocus={() => {
                   setFocus("email");
@@ -113,9 +110,8 @@ export default function LupaPassword() {
                   error={errors.email && touched.email}
                   disabled={isSubmitting}
                   onChange={(e) => {
-            
-                    setFieldValue("email",e.target.value)
-                    return setErrorReg()
+                    setFieldValue("email", e.target.value);
+                    return setErrorReg();
                   }}
                   onBlur={handleBlur}
                   value={values.email}
@@ -133,7 +129,6 @@ export default function LupaPassword() {
               )}
 
               {}
-             
 
               <div>
                 {errorReg?.message && (
@@ -145,11 +140,11 @@ export default function LupaPassword() {
                 )}
 
                 <button
-                disabled={isSubmitting}
+                  disabled={isSubmitting}
                   type="submit"
                   className="w-full border flex justify-center items-center text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
                 >
-                  {isLoading ? (<Loading/>) : "Kirim Email"}
+                  {isSubmitting ? <Loading /> : "Kirim Email"}
                 </button>
               </div>
             </form>
@@ -157,9 +152,8 @@ export default function LupaPassword() {
         </Formik>
 
         <p className="text-center font-semibold">
-          
           <Link className="text-green-500 text-lg font-bold" to="/login">
-           Kembali ke Login
+            Kembali ke Login
           </Link>{" "}
         </p>
       </div>

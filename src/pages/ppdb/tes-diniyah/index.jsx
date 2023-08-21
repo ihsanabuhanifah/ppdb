@@ -125,47 +125,64 @@ export default function TesDiniyah() {
                 </div>
               </div>
             </div>
-            <div>
-              <InputDate
-                label="Tanggal Tes Diniyah dan Wawancara"
+
+            <div className="mt-5">
+              <label
+                className="font-bold mt-5  text-green-500 "
+                htmlFor="tanggal"
+              >
+                <span className="uppercase">
+                  Tanggal Tes Diniyah dan Wawancara
+                </span>{" "}
+                <span className="italic text-md text-red-500">(wajib)</span>
+              </label>
+              <select
+                className="w-full text-lg  border py-4 px-5 focus:bg-blue-100 "
                 id="tanggal"
-                tabIndex="2"
-                error={errors.tanggal && touched.tanggal}
+                name="tanggal"
+                tabIndex="1"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={dayjs(values.tanggal).format("YYYY-MM-DD")}
-                
-  
-                required
+                value={values.tanggal}
+                error={errors.tanggal && touched.tanggal}
               >
-                {errors.tanggal && touched.tanggal && (
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.tanggal}
-                  </p>
-                )}
-              </InputDate>
+                <option>Pilih {}</option> 
+                {tanggalTes &&
+                  tanggalTes.map((item, index) => {
+                  
+                      return (
+                        <option key={index} value={item.value}>
+                          {item.label}
+                        </option>
+                      );
+                    
+                  })}
+              </select>
             </div>
-            {jadwal.metode === "" || jadwal.metode === 1 ? (
-              ""
-            ) : (
-              <div>
-                <InputDate
-                  label="Jam Tes"
-                  id="tanggal"
-                  tabIndex="3"
-                  type="time"
-                  disabled
-                  error={errors.jam_tes && touched.jam_tes}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.jam_tes}
-                >
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    Jam Tes Diisi oleh panitia PPDB SMK MADINATULQURAN
-                  </p>
-                </InputDate>
-              </div>
-            )}
+
+            <div className="mt-5">
+              <label className="font-bold  text-green-500 " htmlFor="jam_tes">
+                <span className="uppercase">Jam Tes</span>{" "}
+                <span className="italic text-md text-red-500">(wajib)</span>
+              </label>
+              <select
+                className="w-full text-lg  border py-4 px-5 focus:bg-blue-100 "
+                id="jam_tes"
+                name="jam_tes"
+                tabIndex="1"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.jam_tes}
+                error={errors.jam_tes && touched.jam_tes}
+              >
+                <option>Pilih</option>
+
+                <option value={"08:00:00"}> {"08:00"}</option>
+                <option value={"09:00:00"}> {"09:00"}</option>
+                <option value={"10:00:00"}> {"10:00"}</option>
+                <option value={"11:00:00"}> {"11:00"}</option>
+              </select>
+            </div>
 
             <div className="col-span-1 lg:col-span-3 mt-5 ">
               <label
@@ -200,16 +217,8 @@ export default function TesDiniyah() {
               </p>
               <p className="text-justify text-red-500 font-bold italic">
                 {" "}
-                - Materi tes ini adalah Baca Tulis Alquran , Hafalan dan
-                Wawancara
-              </p>
-              <p className="text-justify text-red-500 font-bold italic">
-                {" "}
-                - Untuk waktu tes secara Offline adalah hari Minggu
-              </p>
-              <p className="text-justify text-red-500 font-bold italic">
-                {" "}
-                - Untuk waktu tes secara Online adalah hari Sabtu / Minggu
+                - Materi tes ini adalah Tes Minat dan Bakat, Baca Tulis Alquran
+                , Hafalan dan Wawancara
               </p>
 
               <p className="text-justify text-red-500 font-bold italic">
@@ -218,13 +227,6 @@ export default function TesDiniyah() {
                 <span className="text-green-500">tes ONLINE</span>, panitia akan
                 menghubungi nomor telpon Abi/Umi akh calon santri untuk
                 menentukan jam tes melalui online dengan google meet.
-              </p>
-              <p className="text-justify text-red-500 font-bold italic">
-                {" "}
-                - Apabila memilih{" "}
-                <span className="text-green-500">tes OFFLINE</span>, bisa
-                langsung datang ke lokasi SMK MADINATULQURAN sesuai hari yang
-                dipillih antara jam 08.00 - 13.00 WIB
               </p>
             </div>
             <div className="col-start-1 lg:col-start-3 mt-3  items-center">
@@ -252,3 +254,74 @@ export default function TesDiniyah() {
     </section>
   );
 }
+
+const tanggalTes = [
+  {
+    value: "2023-08-20 00:00:00",
+    label: "Minggu, 20 Agustus 2023",
+  },
+  {
+    value: "2023-09-02 00:00:00",
+    label: "Sabtu, 02 September 2023",
+  },
+  {
+    value: "2023-09-03 00:00:00",
+    label: "Minggu, 03 September 2023",
+  },
+  {
+    value: "2023-09-16 00:00:00",
+    label: "Sabtu, 16 September 2023",
+  },
+  {
+    value: "2023-09-17 00:00:00",
+    label: "Minggu, 17 September 2023",
+  },
+  {
+    value: "2023-10-07 00:00:00",
+    label: "Sabtu, 07 Oktober 2023",
+  },
+  {
+    value: "2023-10-08 00:00:00",
+    label: "Minggu, 08 Oktober 2023",
+  },
+  {
+    value: "2023-10-21 00:00:00",
+    label: "Sabtu, 21 Oktober 2023",
+  },
+  {
+    value: "2023-10-07 00:00:00",
+    label: "Minggu, 22 Oktober 2023",
+  },
+  {
+    value: "2023-11-04 00:00:00",
+    label: "Sabtu, 04 November 2023",
+  },
+  {
+    value: "2023-11-05 00:00:00",
+    label: "Minggu, 05 November 2023",
+  },
+  {
+    value: "2023-11-18 00:00:00",
+    label: "Sabtu, 18 November 2023",
+  },
+  {
+    value: "2023-11-19 00:00:00",
+    label: "Minggu, 19 November 2023",
+  },
+  {
+    value: "2023-12-02 00:00:00",
+    label: "Sabtu, 02 Desember 2023",
+  },
+  {
+    value: "2023-12-02 00:00:00",
+    label: "Minggu, 03 Desember 2023",
+  },
+  {
+    value: "2023-12-02 00:00:00",
+    label: "Sabtu, 16 Desember 2023",
+  },
+  {
+    value: "2023-12-02 00:00:00",
+    label: "Minggu, 17 Desember 2023",
+  },
+];

@@ -54,7 +54,7 @@ export default function Kelulusan() {
               <div className="mt-5">
                 <h1 className="text-center font-bold text-lg ">
                   Pengumuman PPDB SMK MADINATULQURAN <br /> Tahun Pelajaran
-                  2021/2022
+                  2024/2025
                 </h1>
                 <p className="mt-5 font-semibold text-justify">
                   Berdasarkan Hasil tes dan wawancara yang telah dilaksanakan
@@ -165,7 +165,7 @@ export default function Kelulusan() {
                       Rp. 5.000.000,00
                     </div>
                     <div className="col-span-3  border  text-center py-1">
-                      31 Oktober 2021
+                      31 Oktober 2023
                     </div>
                   </div>
                   <div className="grid grid-cols-7  ">
@@ -174,7 +174,7 @@ export default function Kelulusan() {
                       Rp. 5.000.000,00
                     </div>
                     <div className="col-span-3 border  text-center py-1">
-                      31 Desember 2021
+                      31 Desember 2023
                     </div>
                   </div>
                   <div className="grid grid-cols-7  ">
@@ -183,7 +183,7 @@ export default function Kelulusan() {
                       Rp. 5.000.000,00
                     </div>
                     <div className="col-span-3 border  text-center py-1">
-                      28 Februari 2022
+                      28 Februari 2023
                     </div>
                   </div>
                   <div className="grid grid-cols-7  ">
@@ -192,7 +192,7 @@ export default function Kelulusan() {
                       Rp. 3.500.000,00
                     </div>
                     <div className="col-span-3 border  text-center py-1">
-                      31 Mei 2022
+                      31 Mei 2023
                     </div>
                   </div>
                 </div>

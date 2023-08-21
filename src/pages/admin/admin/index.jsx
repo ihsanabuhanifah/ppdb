@@ -1,26 +1,19 @@
 import React from "react";
 import { useQuery } from "react-query";
-import Pagination from "../../../components/Pagination";
 import PaginationInfo from "../../../components/paginationInfo";
 import TableHeader from "../../../components/TableHeader";
-import TableLoading from "../../../components/tableLoading";
 // import { Link, useHistory } from "react-router-dom";
 import { getAdmin } from "../../../api/admin";
-import { formatDate } from "../../../utils";
 import ReactWhatsapp from "react-whatsapp";
-import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/messaging";
-import axios from "axios";
 import postfirebase from "../../../api/axiosfirebae";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
-import { payment } from "../../../redux/action/login";
 export default function Admin() {
-  const [page, setPage] = React.useState(1);
+  const [page] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [keyword, setKeyword] = React.useState("");
-  const { isLoading, isError, data, isFetching } = useQuery(
+  const { data } = useQuery(
     //query key
     [
       "list_admin",
@@ -41,6 +34,7 @@ export default function Admin() {
     {
       keepPreviousData: true,
       select: (response) => response.data,
+      staleTime: 1000 * 60 * 10,
     }
   );
 
@@ -93,7 +87,7 @@ export default function Admin() {
               <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                 Nomor HP
               </th>
-             
+
               {/* <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                   Created_At
                 </th> */}
@@ -128,8 +122,6 @@ export default function Admin() {
                     </button>
                   </ReactWhatsapp>
                 </td>
-               
-               
               </tr>
             ))}
           </tbody>

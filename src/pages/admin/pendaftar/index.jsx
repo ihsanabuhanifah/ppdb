@@ -100,6 +100,7 @@ export default function Pendaftar() {
 
     {
       keepPreviousData: true,
+      staleTime: 1000 * 60 * 10,
       select: (response) => {
         let result = response.data;
         let options = [];

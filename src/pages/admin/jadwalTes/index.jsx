@@ -57,6 +57,7 @@ export default function JadwalTes() {
       }),
 
     {
+      staleTime: 1000 * 60 * 10,
       keepPreviousData: true,
       select: (response) => {
         let dataAwal = response.data;

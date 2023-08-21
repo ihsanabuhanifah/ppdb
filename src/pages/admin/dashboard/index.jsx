@@ -100,6 +100,7 @@ export default function Dashboard() {
 
     {
       keepPreviousData: true,
+      staleTime: 1000 * 60 * 10,
       select: (response) => {
         let result = response.data;
         let options = [];

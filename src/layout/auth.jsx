@@ -74,7 +74,7 @@ export default function Layout({ children, page }) {
            </div>
           </ReactWhatsapp>
           
-          <ReactWhatsapp number={"+6281311868066"} message={message}>
+          <ReactWhatsapp number={"+62895320050324"} message={message}>
            <div className=" p-2 flex items-center justify-center ">
            <img
              
@@ -83,7 +83,7 @@ export default function Layout({ children, page }) {
              alt="whatsapp.png"
            />
            <p className="text-green-500  ml-2 ">
-           Hubungi Ustadz. Patjri
+           Hubungi Ustadz. Ihsan
            </p>
            </div>
           </ReactWhatsapp>

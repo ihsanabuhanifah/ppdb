@@ -14,11 +14,12 @@ import { useHistory } from "react-router-dom";
 import { useToast, useClipboard } from "@chakra-ui/react";
 import { payment } from "../../../redux/action/login";
 import { useSelector, useDispatch } from "react-redux";
+import CurrencyInput from "react-currency-input-field";
 let fileSchema = Yup.object().shape({
   files: Yup.string().required("Bukti Transfer wajib di Upload"),
   nominal: Yup.number()
-  .typeError("Nominal wajib dengan angka")
-  .required("Nominal wajib diisi"),
+    .typeError("Nominal wajib dengan angka")
+    .required("Nominal wajib diisi"),
 });
 export default function Pembayaran() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -84,9 +85,7 @@ export default function Pembayaran() {
     for (let data in result.data) {
       console.log(result.data[data]);
 
-    
-        total = total + result.data[data]?.nominal;
-      
+      total = total + parseFloat(result.data[data]?.nominal);
     }
     setTotal(total);
     setIsFetching(false);
@@ -138,7 +137,6 @@ export default function Pembayaran() {
                     <div className="h-6 bg-gray-300 rounded col-span-2 " />
                   </div>
                   <div className="grid grid-cols-7 gap-x-5">
-                    
                     <div className="h-6 bg-gray-300 rounded col-span-5 " />
                     <div className="h-6 bg-gray-300 rounded col-span-2 " />
                   </div>
@@ -230,11 +228,14 @@ export default function Pembayaran() {
                   </tr>
                 ))}
                 <tr className="hover:bg-gray-200 text-xl font-bold">
-                <td colSpan={3} className="px-6 py-4  whitespace-no-wrap border-b border-gray-500">
-                      <div className="text-sm text-center  leading-5 text-green-500">
-                       TOTAL PEMBAYARAN
-                      </div>
-                    </td>
+                  <td
+                    colSpan={3}
+                    className="px-6 py-4  whitespace-no-wrap border-b border-gray-500"
+                  >
+                    <div className="text-sm text-center  leading-5 text-green-500">
+                      TOTAL PEMBAYARAN
+                    </div>
+                  </td>
                   <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                     <div className="text-sm leading-5 text-green-500">
                       {formatRupiah(total)}
@@ -247,145 +248,168 @@ export default function Pembayaran() {
         </div>
       </div>
       <div>
-      <div className="mt-5 text-md text-red-500 font-bold">
+        <div className="mt-5 text-md text-red-500 font-bold">
           <p className="text-justify">
-            <span className="italic">Note :</span> bukti Transfer dikonfirmasi admin maksimal dalam 24 jam.
+            <span className="italic">Note :</span> bukti Transfer dikonfirmasi
+            admin maksimal dalam 24 jam.
           </p>
-        
         </div>
         {/* upload bukti */}
-       {isLulus === "1" ? ( <Formik
-          initialValues={initialValues}
-          enableReinitialize
-          validationSchema={fileSchema}
-          onSubmit={onSubmit}
-        >
-          {({
-            values,
-            setValues,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-            setFieldTouched,
-            setFieldValue,
-          }) => {
-            return (
-              <form
-                className="border px-5 py-10 mt-5 shadow-lg rounded-lg"
-                onSubmit={handleSubmit}
-              >
-                <h1 className="uppercase mb-5 font-bold text-green-500 text-center">
-                  {" "}
-                  Form Upload Bukti Transfer pembayaran PSB
-                </h1>
-                <div className="mb-5">
-                  <Input
-                    label="nominal"
-                    id="nominal"
-                    placeholder="Nominal Transfer"
-                    tabIndex="2"
-                    type="text"
-                    error={errors.nominal && touched.nominal}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.nominal}
-                    required
-                  >
-                    {" "}
-                    {errors.nominal && touched.nominal && (
-                      <p className="text-red-500 italic font-bold  text-sm mt-1">
-                        {errors.nominal}
-                      </p>
-                    )}
-                  </Input>
-                </div>
-                <label
-                  className="font-bold mb-5   text-green-500 "
-                  htmlFor="penghasilan_ayah"
+        {isLulus === "1" ? (
+          <Formik
+            initialValues={initialValues}
+            enableReinitialize
+            validationSchema={fileSchema}
+            onSubmit={onSubmit}
+          >
+            {({
+              values,
+              setValues,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+              setFieldTouched,
+              setFieldValue,
+            }) => {
+              return (
+                <form
+                  className="border px-5 py-10 mt-5 shadow-lg rounded-lg"
+                  onSubmit={handleSubmit}
                 >
-                  <span className="uppercase">File Bukti</span>{" "}
-                  <span className="italic text-md text-red-500">(wajib)</span>
-                </label>
-                <div>
-                  <Dropzone
-                    onDrop={(acceptedFiles) => {
-                      let reader = new FileReader();
+                  <h1 className="uppercase mb-5 font-bold text-green-500 text-center">
+                    {" "}
+                    Form Upload Bukti Transfer pembayaran PSB
+                  </h1>
+                  <div className="mb-5">
+                    <label
+                      className="font-bold mb-5   text-green-500 "
+                      htmlFor="nominal"
+                    >
+                      <span className="uppercase">Nominal</span>{" "}
+                      <span className="italic text-md text-red-500">
+                        (wajib)
+                      </span>
+                    </label>
 
-                      setFieldValue(`files`, acceptedFiles[0]);
-                    }}
-                  >
-                    {({ getRootProps, getInputProps }) => (
-                      <div
-                        {...getRootProps({
-                          className: `text-center border-dashed border-4 mt-5 ${
-                            errors.files && touched.files
-                              ? "border-red-100"
-                              : "border-light-blue-500"
-                          } w-full p-5 col-span-4 relative`,
-                        })}
-                      >
-                        <input
-                          {...getInputProps()}
-                          className="w-full h-full"
-                          value={values.file}
-                          variant="file"
-                          type="file"
-                          error={errors?.files && touched?.files}
-                          onChange={(event) => {
-                            let reader = new FileReader();
-
-                            setFieldValue(
-                              `files`,
-                              event.currentTarget.files[0]
-                            );
-                          }}
-                        />
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setFieldValue(`files`, undefined);
-                          }}
-                          className={`${
-                            values.files !== undefined ? "block" : "hidden"
-                          } absolute top-0 right-4 z-10" text-xl`}
-                        >
-                          x
-                        </button>
-                        <p className="text-gray-400">
-                          {values.files !== undefined
-                            ? `${values.files.name}`
-                            : "Jatukan Bukti Disini atau Klik untuk mengunggah"}
-                        </p>
-                      </div>
+                    
+                    <div className="mt-5">
+                      <CurrencyInput
+                        id="nominal"
+                        name="nominal"
+                        placeholder="Rp. 0"
+                        value={values.nominal}
+                        decimalsLimit={2}
+                        prefix="Rp. "
+                        decimalSeparator=","
+                        groupSeparator="."
+                        onValueChange={(value, name) => {
+                          setFieldValue("nominal", value);
+                        }}
+                        style={{
+                          height: 40,
+                          margin: 0,
+                        }}
+                        className={`pl-3 w-full text-sm rounded border focus:outline-none focus:ring-2 ${
+                          errors.nominal && touched.nominal
+                            ? "hover:ring-red-500 focus:ring-red-500 border-red-400"
+                            : "focus:ring-blue-500 border-gray-300"
+                        } focus:border-none`}
+                      />
+                    </div>
+                    {errors.nominal && touched.nominal && (
+                      <span className="mt-1 text-sm text-red-500">
+                        {errors.nominal}
+                      </span>
                     )}
-                  </Dropzone>
-                </div>
-                <p className="text-center capitalize">
-                  {errors?.files && touched?.files && (
-                    <span className="text-red-500 text-md mt-1 italic font-bold text-center w-full">
-                      {errors?.files}
-                    </span>
-                  )}
-                </p>
-                <div className="mt-5">
-                  <button
-                    disabled={isSubmitting}
-                    className="bg-green-500 w-full flex items-center justify-center text-white py-5  font-bold"
-                    type="submit"
+                  </div>
+                  <label
+                    className="font-bold mb-5   text-green-500 "
+                    htmlFor="penghasilan_ayah"
                   >
-                    {isLoading ? <Loading></Loading> : " Upload Bukti Transfer"}
-                  </button>
-                </div>
-              </form>
-            );
-          }}
-        </Formik>) : ""}
+                    <span className="uppercase">File Bukti</span>{" "}
+                    <span className="italic text-md text-red-500">(wajib)</span>
+                  </label>
+                  <div>
+                    <Dropzone
+                      onDrop={(acceptedFiles) => {
+                        setFieldValue(`files`, acceptedFiles[0]);
+                      }}
+                    >
+                      {({ getRootProps, getInputProps }) => (
+                        <div
+                          {...getRootProps({
+                            className: `text-center border-dashed border-4 mt-5 ${
+                              errors.files && touched.files
+                                ? "border-red-100"
+                                : "border-light-blue-500"
+                            } w-full p-5 col-span-4 relative`,
+                          })}
+                        >
+                          <input
+                            {...getInputProps()}
+                            className="w-full h-full"
+                            value={values.file}
+                            variant="file"
+                            type="file"
+                            error={errors?.files && touched?.files}
+                            onChange={(event) => {
+                              setFieldValue(
+                                `files`,
+                                event.currentTarget.files[0]
+                              );
+                            }}
+                          />
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setFieldValue(`files`, undefined);
+                            }}
+                            className={`${
+                              values.files !== undefined ? "block" : "hidden"
+                            } absolute top-0 right-4 z-10" text-xl`}
+                          >
+                            x
+                          </button>
+                          <p className="text-gray-400">
+                            {values.files !== undefined
+                              ? `${values.files.name}`
+                              : "Jatukan Bukti Disini atau Klik untuk mengunggah"}
+                          </p>
+                        </div>
+                      )}
+                    </Dropzone>
+                  </div>
+                  <p className="text-center capitalize">
+                    {errors?.files && touched?.files && (
+                      <span className="text-red-500 text-md mt-1 italic font-bold text-center w-full">
+                        {errors?.files}
+                      </span>
+                    )}
+                  </p>
+                  <div className="mt-5">
+                    <button
+                      disabled={isSubmitting}
+                      className="bg-green-500 w-full flex items-center justify-center text-white py-5  font-bold"
+                      type="submit"
+                    >
+                      {isLoading ? (
+                        <Loading></Loading>
+                      ) : (
+                        " Upload Bukti Transfer"
+                      )}
+                    </button>
+                  </div>
+                </form>
+              );
+            }}
+          </Formik>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
-}
-{
 }

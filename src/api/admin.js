@@ -87,3 +87,14 @@ export async function deviceUpdate(id,token) {
   }
  
 }
+
+
+export async function sendJadwal(nomorHandpone) {
+
+  let payload = {
+    hp : nomorHandpone
+  }
+  return await  axios.post(`/sendRequestJadwal`, payload);
+
+ 
+}

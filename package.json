@@ -22,6 +22,7 @@
     "pusher-js": "^7.0.3",
     "qs": "^6.7.0",
     "react": "^17.0.2",
+    "react-currency-input-field": "^3.6.11",
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.3.4",
     "react-html-table-to-excel": "^2.0.0",

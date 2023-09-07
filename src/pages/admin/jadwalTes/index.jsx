@@ -14,6 +14,7 @@ import {
   updateStatusTes,
   updateStatusKelulusan,
   updateJamTes,
+  sendJadwal,
 } from "../../../api/admin";
 
 import { formatTanggal, formatNomorHp } from "../../../utils";
@@ -103,9 +104,9 @@ export default function JadwalTes() {
 
         dataAwal.forEach((da) => {
           if (da.jurusan === 1) {
-           tkj = tkj +1
-          }else{
-            rpl = rpl +1
+            tkj = tkj + 1;
+          } else {
+            rpl = rpl + 1;
           }
         });
         return {
@@ -113,8 +114,8 @@ export default function JadwalTes() {
           jumlahSantri: jumlahSantri,
           terjadwal: terjadwal,
           sudahTes: sudahTes,
-          jurusanRPL : rpl,
-          jurusanTKJ:tkj
+          jurusanRPL: rpl,
+          jurusanTKJ: tkj,
         };
       },
     }
@@ -491,12 +492,18 @@ export default function JadwalTes() {
         {isFetching ? (
           <TableLoading></TableLoading>
         ) : (
-          <div style={{zoom : '80%'}} className="overflow-auto">
+          <div style={{ zoom: "80%" }} className="overflow-auto">
             <table className="p-1 w-full ">
               <thead>
                 <tr className="uppercase">
                   <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
                     <div className="text-sm leading-5 text-green-500">No</div>
+                  </th>
+
+                  <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
+                    <div className="text-sm leading-5 text-green-500">
+                      Jadwal Tes
+                    </div>
                   </th>
 
                   <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
@@ -514,7 +521,7 @@ export default function JadwalTes() {
                       Jurusan
                     </div>
                   </th>
-                 
+
                   <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
                     <div className="text-sm leading-5 text-green-500">
                       Tanggal Tes
@@ -527,7 +534,7 @@ export default function JadwalTes() {
                   </th>
                   <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
                     <div className="text-sm leading-5 text-green-500">
-                     Catatan
+                      Catatan
                     </div>
                   </th>
                   <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
@@ -593,6 +600,19 @@ export default function JadwalTes() {
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                      <button
+                        onClick={async () => {
+                          const send = await sendJadwal(dt.phone);
+                          console.log("send", send);
+                          
+                        }}
+                        className={` text-white bg-blue-500 px-2 py-1 rounded-sm font-bold`}
+                      >
+                        Kirim Pesan
+                      </button>
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                       <div className="text-sm leading-5 text-blue-900">
                         <Tooltip
                           hasArrow
@@ -609,7 +629,7 @@ export default function JadwalTes() {
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                       <div className="text-sm leading-5 text-blue-900">
-                      {dt.asal_sekolah}
+                        {dt.asal_sekolah}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
@@ -657,8 +677,6 @@ export default function JadwalTes() {
                               {dt?.tes_diniyyah?.jam_tes === null
                                 ? "-"
                                 : dt?.tes_diniyyah?.jam_tes}
-
-                            
                             </button>
                           </Tooltip>
                         )}
@@ -781,15 +799,13 @@ export default function JadwalTes() {
                             bg="red.600"
                           >
                             <button
-                             
-
                               onClick={() => {
                                 if (dt?.tes_diniyyah?.status === 1) {
                                   return;
                                 }
                                 setValues((values) => ({
                                   ...values,
-                                  id:dt?.tes_diniyyah?.user_id,
+                                  id: dt?.tes_diniyyah?.user_id,
                                   laporan: "",
                                 }));
                                 onOpen();
@@ -847,13 +863,19 @@ export default function JadwalTes() {
                                   case "lulus":
                                     setIsLoadingKelulusan(true);
                                     setIndexKelulusan(index);
-                                    updateStatusLulus(dt?.tes_diniyyah?.user_id, 1);
+                                    updateStatusLulus(
+                                      dt?.tes_diniyyah?.user_id,
+                                      1
+                                    );
                                     return sendMessage(dt?.device, dt?.name);
 
                                   case "tidak":
                                     setIsLoadingKelulusan(true);
                                     setIndexKelulusan(index);
-                                    updateStatusLulus(dt?.tes_diniyyah?.user_id, 2);
+                                    updateStatusLulus(
+                                      dt?.tes_diniyyah?.user_id,
+                                      2
+                                    );
                                     break;
 
                                   default:

@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery, useQueryClient } from "react-query";
-import { Collapse, useDisclosure } from "@chakra-ui/react";
+import { Button, Collapse, useDisclosure } from "@chakra-ui/react";
+import Swal from 'sweetalert2'
 
 import Dropzone from "react-dropzone";
 import { Formik } from "formik";
@@ -10,7 +11,7 @@ import Input from "../../../components/Input";
 
 import TableHeader from "../../../components/TableHeader";
 
-import { getUser } from "../../../api/admin";
+import { getUser, updateBatal } from "../../../api/admin";
 import { konfirmBukti } from "../../../api/admin";
 import { formatDate, formatTanggal, formatNomorHp } from "../../../utils";
 import ReactWhatsapp from "react-whatsapp";
@@ -142,7 +143,36 @@ export default function Pendaftar() {
     }
   };
 
-  console.log(data);
+  const handleBatal =  (id) => {
+    Swal.fire({
+      title: 'Apakah yakin',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+
+        try{
+          const result = await updateBatal(id)
+          queryClient.invalidateQueries("list_user")
+          Swal.fire(
+            'Batal!',
+            result.message,
+            'success'
+          )
+        }catch {
+          Swal.fire(
+            'Batal!',
+            'Ada Kesalahan',
+            'error'
+          )
+        }
+      }
+    })
+  }
   return (
     <React.Fragment>
       <div className="text-green-500 grid grid-cols-1 gap-5">
@@ -264,6 +294,9 @@ export default function Pendaftar() {
                   <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                     Method ujian
                   </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
+                    Batal
+                  </th>
 
                   {/* <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                   Created_At
@@ -273,7 +306,9 @@ export default function Pendaftar() {
               <tbody className="bg-white relative">
                 {}
                 {data?.data?.data?.map((dt, index) => (
-                  <tr key={index} className="hover:bg-gray-200">
+                  <tr key={index} className={` ${
+                    Number(dt.is_batal) === 1 ? "bg-red-300" : "hover:bg-gray-200"
+                  }`}>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                       <div className="flex items-center">
                         <div>
@@ -367,6 +402,9 @@ export default function Pendaftar() {
                       ) : (
                         "Online"
                       )}
+                    </td>
+                    <td>
+                     {dt.is_batal === 1 ? <></> :  <Button onClick={()=> handleBatal(dt.id)} colorScheme="red">Batal</Button>}
                     </td>
                   </tr>
                 ))}

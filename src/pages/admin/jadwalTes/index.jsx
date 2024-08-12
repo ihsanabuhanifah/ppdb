@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery, useQueryClient } from "react-query";
-import { Collapse, Button, useDisclosure, Tooltip } from "@chakra-ui/react";
-import Pagination from "../../../components/Pagination";
+import { Collapse, useDisclosure, Tooltip, Button } from "@chakra-ui/react";
 import PaginationInfo from "../../../components/paginationInfo";
 import TableHeader from "../../../components/TableHeader";
 import Loading from "../../../components/loading";
@@ -9,12 +8,14 @@ import Modal from "../../../components/Modal";
 import ReactWhatsapp from "react-whatsapp";
 import postfirebase from "../../../api/axiosfirebae";
 import { sendMessageJam } from "../../../config/sendMessage";
+import Swal from "sweetalert2";
 import {
   getJadwal,
   updateStatusTes,
   updateStatusKelulusan,
   updateJamTes,
   sendJadwal,
+  updateBatal,
 } from "../../../api/admin";
 
 import { formatTanggal, formatNomorHp } from "../../../utils";
@@ -25,20 +26,20 @@ import swal from "sweetalert";
 import TableLoading from "../../../components/tableLoading";
 
 export default function JadwalTes() {
-  const [page, setPage] = React.useState(1);
+  const [page] = React.useState(1);
   const [per_page, setPer_page] = React.useState(100);
-  const [isLoadingKonfirmasi, setIsLoadingKonfirmasi] = React.useState(false);
+  const [isLoadingKonfirmasi] = React.useState(false);
   const [isLoadingKelulusan, setIsLoadingKelulusan] = React.useState(false);
   const [keyword, setKeyword] = React.useState("");
   const [indexSelect, setIndexSelect] = React.useState(null);
   const [indexKelulusan, setIndexKelulusan] = React.useState(null);
   let debouncedKeyword = useDebounce(keyword, 500);
   const [show, setShow] = React.useState(false);
-  const [statusBukti, setStatusBukti] = React.useState("");
+  const [] = React.useState("");
   let queryClient = useQueryClient();
   const [filter, setFilter] = React.useState("all");
   const handleToggle = () => setShow(!show);
-  const { isLoading, isError, data, isFetching } = useQuery(
+  const { data, isFetching } = useQuery(
     //query key
     [
       "jadwal_tes",
@@ -264,7 +265,27 @@ export default function JadwalTes() {
   };
 
   const [isLoadingStatus, setIsLoadingStatus] = React.useState(false);
-
+  const handleBatal = (id) => {
+    Swal.fire({
+      title: "Apakah yakin",
+      text: "",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const result = await updateBatal(id);
+          Swal.fire("Batal!", result.message, "success");
+          queryClient.invalidateQueries("jadwal_tes");
+        } catch {
+          Swal.fire("Batal!", "Ada Kesalahan", "error");
+        }
+      }
+    });
+  };
   return (
     <React.Fragment>
       <Modal onOpen={onOpen} onClose={onClose} isOpen={isOpen}>
@@ -579,6 +600,11 @@ export default function JadwalTes() {
                       Status Kelulusan
                     </div>
                   </th>
+                  <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
+                    <div className="text-sm leading-5 text-green-500">
+                      Batal
+                    </div>
+                  </th>
 
                   {/* <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
                   Created_At
@@ -586,9 +612,14 @@ export default function JadwalTes() {
                 </tr>
               </thead>{" "}
               <tbody className="bg-white relative">
-                {}
+                {console.log("data", data)}
                 {data?.data?.map((dt, index) => (
-                  <tr key={index} className="hover:bg-gray-200">
+                  <tr
+                    key={index}
+                    className={` ${
+                      Number(dt.is_batal) === 1 ? "bg-red-300" : " hover:bg-gray-200"
+                    }`}
+                  >
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                       <div className="flex items-center">
                         <div>
@@ -600,16 +631,23 @@ export default function JadwalTes() {
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                      <button
-                        onClick={async () => {
-                          const send = await sendJadwal(dt.phone);
-                          console.log("send", send);
-                          
-                        }}
-                        className={` text-white bg-blue-500 px-2 py-1 rounded-sm font-bold`}
-                      >
-                        Kirim Pesan
-                      </button>
+                      {dt.is_batal === 1 ? (
+                        <>
+                          <button className="text-white border border-white">
+                            Batal Mendaftar
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          onClick={async () => {
+                            const send = await sendJadwal(dt.phone);
+                            console.log("send", send);
+                          }}
+                          className={` text-white bg-blue-500 px-2 py-1 rounded-sm font-bold`}
+                        >
+                          Kirim Pesan
+                        </button>
+                      )}
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
@@ -909,6 +947,18 @@ export default function JadwalTes() {
                           </button>
                         )}
                       </div>
+                    </td>
+                    <td>
+                      {dt.is_batal === 1 ? (
+                        <></>
+                      ) : (
+                        <Button
+                          onClick={() => handleBatal(dt.user_id)}
+                          colorScheme="red"
+                        >
+                          Batal
+                        </Button>
+                      )}
                     </td>
                   </tr>
                 ))}

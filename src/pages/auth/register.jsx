@@ -101,7 +101,7 @@ export default function Register() {
                 className="mt-3 flex flex-col border shadow-md px-5 py-3 relative"
               >
                 <label className="font-bold text-green-500" htmlFor="name">
-                  Nama Lengkap
+                  Nama Lengkap Siswa
                 </label>
                 <input
                   id="name"

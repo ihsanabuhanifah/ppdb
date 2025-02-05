@@ -147,33 +147,7 @@ export default function DataSiswa() {
                 )}
               </Input>
             </div>
-            <div>
-              <Input
-                label="NIK Santri"
-                id="nik_siswa"
-                placeholder="NIK Siswa"
-                tabIndex="2"
-                error={errors.nik_siswa && touched.nik_siswa}
-                onFocus={() => {
-                  setFocus("nik_siswa");
-                }}
-                onChange={(e) => {
-                  setFieldValue("nik_siswa", e.target.value);
-                  return localStorage.setItem("nik_siswa", e.target.value);
-                }}
-                type="number"
-                onBlur={handleBlur}
-                value={values.nik_siswa}
-                focus={focus}
-              >
-                {" "}
-                {errors.nik_siswa && touched.nik_siswa && (
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.nik_siswa}
-                  </p>
-                )}
-              </Input>
-            </div>
+           
             <div>
               <Input
                 label="Tempat Lahir santri"
@@ -273,107 +247,10 @@ export default function DataSiswa() {
                 </div>
               </div>
             </div>
-            <div>
-              <div className="mt-3  items-center">
-                <label
-                  className="font-bold uppercase text-green-500 "
-                  htmlFor="golongan_darah"
-                >
-                  Golongan Darah santri
-                </label>
-                <div className="mt-5">
-                  <select
-                    className="w-full text-lg  border py-4 px-5 focus:bg-blue-100 "
-                    id="golongan_darah"
-                    name="golongan_darah"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.golongan_darah}
-                    error={errors.golongan_darah && touched.golongan_darah}
-                  >
-                    <option value="Pilih">Pilih</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="AB">AB</option>
-                    <option value="0">O</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div>
-              <Input
-                label="Nomor Handphone Santri"
-                id="nomor_telepon_siswa"
-                placeholder="Nomor Handphone Santri"
-                tabIndex="2"
-                type="text"
-                error={
-                  errors.nomor_telepon_siswa && touched.nomor_telepon_siswa
-                }
-                onFocus={() => {
-                  setFocus("nomor_telepon_siswa");
-                }}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.nomor_telepon_siswa}
-                focus={focus}
-              >
-                {" "}
-                {errors.nomor_telepon_siswa && touched.nomor_telepon_siswa && (
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.nomor_telepon_siswa}
-                  </p>
-                )}
-              </Input>
-            </div>
-            <div>
-              <div className="grid grid-cols-2 gap-4">
-                <Input
-                  label="Tinggi Badan "
-                  id="tinggi_badan"
-                  placeholder="Tinggi Badan"
-                  tabIndex="2"
-                  type="text"
-                  error={errors.tinggi_badan && touched.tinggi_badan}
-                  onFocus={() => {
-                    setFocus("tinggi_badan");
-                  }}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.tinggi_badan}
-                  focus={focus}
-                >
-                  {" "}
-                  {errors.tinggi_badan && touched.tinggi_badan && (
-                    <p className="text-red-500 italic font-bold  text-sm mt-1">
-                      {errors.tinggi_badan}
-                    </p>
-                  )}
-                </Input>
-                <Input
-                  label="Berat Badan"
-                  id="berat_badan"
-                  placeholder="Berat Badan"
-                  tabIndex="2"
-                  type="text"
-                  error={errors.berat_badan && touched.berat_badan}
-                  onFocus={() => {
-                    setFocus("berat_badan");
-                  }}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.berat_badan}
-                  focus={focus}
-                >
-                  {" "}
-                  {errors.berat_badan && touched.berat_badan && (
-                    <p className="text-red-500 italic font-bold  text-sm mt-1">
-                      {errors.berat_badan}
-                    </p>
-                  )}
-                </Input>
-              </div>
-            </div>
+           
+          
+           
+              
             <div>
               <div className="mt-3  items-center">
                 <label

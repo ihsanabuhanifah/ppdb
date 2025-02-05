@@ -257,71 +257,68 @@ export default function TesDiniyah() {
 
 const tanggalTes = [
   {
-    value: "2023-08-20 00:00:00",
-    label: "Minggu, 20 Agustus 2023",
+    value: "2024-09-01 00:00:00",
+    label: "Minggu, 01 September 2024",
   },
   {
-    value: "2023-09-02 00:00:00",
-    label: "Sabtu, 02 September 2023",
+    value: "2024-09-08 00:00:00",
+    label: "Minggu, 08 September 2024",
   },
   {
-    value: "2023-09-03 00:00:00",
-    label: "Minggu, 03 September 2023",
+    value: "2024-09-15 00:00:00",
+    label: "Minggu, 15 September 2024",
   },
   {
-    value: "2023-09-16 00:00:00",
-    label: "Sabtu, 16 September 2023",
+    value: "2024-09-22 00:00:00",
+    label: "Minggu, 22 September 2024",
   },
   {
-    value: "2023-09-17 00:00:00",
-    label: "Minggu, 17 September 2023",
+    value: "2024-10-06 00:00:00",
+    label: "Minggu, 06 Oktober 2024",
   },
   {
-    value: "2023-10-07 00:00:00",
-    label: "Sabtu, 07 Oktober 2023",
+    value: "2024-10-13 00:00:00",
+    label: "Minggu, 13 Oktober 2024",
   },
   {
-    value: "2023-10-08 00:00:00",
-    label: "Minggu, 08 Oktober 2023",
+    value: "2024-10-20 00:00:00",
+    label: "Minggu, 20 Oktober 2024",
   },
   {
-    value: "2023-10-21 00:00:00",
-    label: "Sabtu, 21 Oktober 2023",
+    value: "2024-10-27 00:00:00",
+    label: "Minggu, 27 Oktober 2024",
   },
   {
-    value: "2023-10-07 00:00:00",
-    label: "Minggu, 22 Oktober 2023",
+    value: "2024-10-07 00:00:00",
+    label: "Minggu, 22 Oktober 2024",
   },
   {
-    value: "2023-11-04 00:00:00",
-    label: "Sabtu, 04 November 2023",
+    value: "2024-11-03 00:00:00",
+    label: "Minggu, 03 November 2024",
   },
   {
-    value: "2023-11-05 00:00:00",
-    label: "Minggu, 05 November 2023",
+    value: "2024-11-10 00:00:00",
+    label: "Minggu, 10 November 2024",
   },
   {
-    value: "2023-11-18 00:00:00",
-    label: "Sabtu, 18 November 2023",
+    value: "2024-11-17 00:00:00",
+    label: "Minggu, 17 November 2024",
   },
   {
-    value: "2023-11-19 00:00:00",
-    label: "Minggu, 19 November 2023",
+    value: "2024-11-24 00:00:00",
+    label: "Minggu, 24 November 2024",
   },
   {
-    value: "2023-12-02 00:00:00",
-    label: "Sabtu, 02 Desember 2023",
+    value: "2024-12-01 00:00:00",
+    label: "Minggu, 01 Desember 2024",
   },
   {
-    value: "2023-12-02 00:00:00",
-    label: "Minggu, 03 Desember 2023",
+    value: "2024-12-08 00:00:00",
+    label: "Minggu, 08 Desember 2024",
   },
   {
-    value: "2023-12-02 00:00:00",
-    label: "Sabtu, 16 Desember 2023",
+    value: "2024-12-15 00:00:00",
+    label: "Minggu, 15 Desember 2024",
   },
-  {
-    value: "2023-12-02 00:00:00",
-    label: "Minggu, 17 Desember 2023",
-  },
+ 
 ];

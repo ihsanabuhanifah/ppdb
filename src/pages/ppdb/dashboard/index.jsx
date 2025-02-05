@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Payment from "../payment";
+import Payment2 from "../payment/index2";
 export default function Dashboard() {
   const name = useSelector((state) => state.auth.name);
   const isPayment = useSelector((state) => state.auth.isPayment);
@@ -43,6 +45,11 @@ export default function Dashboard() {
           </ol>
         </p>
 
+        {isPayment !== 'belum_transfer' ? (
+          ""
+        ) : (
+          <Payment2/>
+        )}
         <div className="mt-5 border w-full p-10 text-center">
           <p className="font-bold">Status Pembayaran Pendaftran PSB </p>
           <br />
@@ -63,20 +70,7 @@ export default function Dashboard() {
             )}
           </p>
         </div>
-        {isPayment !== 'belum_transfer' ? (
-          ""
-        ) : (
-          <div className="w-full flex justify-center items-center mt-5">
-            <button
-              onClick={() => {
-                history.push("/ppdb/konfirmasi-pembayaran-ppdb");
-              }}
-              className="inline-flex bg-green-500 hover:bg-green-600 text-white font-bold px-5 py-5 rounded"
-            >
-              Selesaikan pembayaran
-            </button>
-          </div>
-        )}
+       
         <div className="flex items-center justify-end mt-5">
           Hormat Kami,
           <br />
@@ -85,6 +79,8 @@ export default function Dashboard() {
           Panitia PPDB
         </div>
       </div>
+
+    
     </div>
   );
 }

@@ -122,80 +122,9 @@ export default function DataSiswa() {
                 )}
               </Input>
             </div>
-            <div>
-              <Input
-                label="NIK ibu"
-                id="nik_ibu"
-                placeholder="NIK Ibu"
-                tabIndex="2"
-                error={errors.nik_ibu && touched.nik_ibu}
-                onFocus={() => {
-                  setFocus("nik_ibu");
-                }}
-                onChange={(e) => {
-                  setFieldValue("nik_ibu", e.target.value);
-                  return localStorage.setItem("nik_ibu", e.target.value);
-                }}
-                onBlur={handleBlur}
-                value={values.nik_ibu}
-                focus={focus}
-                type="number"
-              >
-                {" "}
-                {errors.nik_ibu && touched.nik_ibu && (
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.nik_ibu}
-                  </p>
-                )}
-              </Input>
-            </div>
-            <div>
-              <Input
-                label="Tempat Lahir ibu"
-                id="tempat_lahir_ibu"
-                placeholder="Tempat lahir"
-                tabIndex="2"
-                error={errors.tempat_lahir_ibu && touched.tempat_lahir_ibu}
-                onFocus={() => {
-                  setFocus("tempat_lahir_ibu");
-                }}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.tempat_lahir_ibu}
-                focus={focus}
-              >
-                {" "}
-                {errors.tempat_lahir_ibu && touched.tempat_lahir_ibu && (
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.tempat_lahir_ibu}
-                  </p>
-                )}
-              </Input>
-            </div>
-            <div>
-              <Input
-                label="Tanggal lahir ibu"
-                id="tanggal_lahir_ibu"
-                placeholder="Tanggal lahir"
-                tabIndex="2"
-                type="date"
-                error={errors.tanggal_lahir_ibu && touched.tanggal_lahir_ibu}
-                onFocus={() => {
-                  setFocus("tanggal_lahir_ibu");
-                }}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.tanggal_lahir_ibu}
-                focus={focus}
-              >
-                {" "}
-                {errors.tanggal_lahir_ibu && touched.tanggal_lahir_ibu && (
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.tanggal_lahir_ibu}
-                  </p>
-                )}
-              </Input>
-            </div>
+           
+           
+           
             <div>
               <Input
                 label="Nomor Handphone ibu"
@@ -221,95 +150,10 @@ export default function DataSiswa() {
                 )}
               </Input>
             </div>
-            <div>
-              <Input
-                label="pekerjaan_ibu"
-                id="pekerjaan_ibu"
-                placeholder="Pekerjaan ibu"
-                tabIndex="2"
-                type="text"
-                error={errors.pekerjaan_ibu && touched.pekerjaan_ibu}
-                onFocus={() => {
-                  setFocus("pekerjaan_ibu");
-                }}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.pekerjaan_ibu}
-                focus={focus}
-              >
-                {" "}
-                {errors.pekerjaan_ibu && touched.pekerjaan_ibu && (
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.pekerjaan_ibu}
-                  </p>
-                )}
-              </Input>
-            </div>
-            <div>
-              <div className="mt-3  items-center">
-                <label
-                  className="font-bold  text-green-500 "
-                  htmlFor="penghasilan_ibu"
-                >
-                  <span className="uppercase">Penghasilan ibu</span>{" "}
-                  {/* <span className="italic text-md text-red-500">(wajib)</span> */}
-                </label>
-                <div className="mt-5">
-                  <select
-                    className="w-full text-lg  border py-4 px-5 focus:bg-blue-100 "
-                    id="penghasilan_ibu"
-                    name="penghasilan_ibu"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.penghasilan_ibu}
-                    error={errors.penghasilan_ibu && touched.penghasilan_ibu}
-                  >
-                    <option>Pilih</option>
-                    <option value={"kurang dari 5000000"}>
-                      {" "}
-                      {" Kurang dari Rp. 5.000.000"}
-                    </option>
-                    <option
-                      value={"lebih dari 5000000 dan kurang dari 10000000"}
-                    >
-                      {" "}
-                      {
-                        " Lebih dari Rp. 5.000.000 dan Kurang dari Rp. 10.000.000"
-                      }
-                    </option>
-                    <option
-                      value={"lebih dari 10000000 dan kurang dari 20000000"}
-                    >
-                      {" "}
-                      {
-                        " Lebih dari Rp. 10.000.000 dan Kurang dari Rp. 20.000.000"
-                      }
-                    </option>
-                    <option value={"lebih dari 20000000"}>
-                      {" "}
-                      {" Lebih dari Rp. 20.000.000"}
-                    </option>
-                    <option value={"lebih dari 30000000"}>
-                      {" "}
-                      {" Lebih dari Rp. 30.000.000"}
-                    </option>
-                    <option value={"lebih dari 40000000"}>
-                      {" "}
-                      {" Lebih dari Rp. 40.000.000"}
-                    </option>
-                  </select>
-                  {errors.penghasilan_ibu && touched.penghasilan_ibu && (
-                    <p className="text-red-500 italic font-bold  text-sm mt-1">
-                      {errors.penghasilan_ibu}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div></div>
-            <div></div>
-
+           
+            
+            
+          
             <div className="col-span-1 lg:col-span-3">
               {errorPost?.message && (
                 <p className="text-red-500 italic font-bold  text-md mb-5 mt-1">

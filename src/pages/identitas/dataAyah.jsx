@@ -129,84 +129,9 @@ export default function DataSiswa() {
                 )}
               </Input>
             </div>
-            <div>
-              <Input
-                label="NIK Ayah"
-                id="nik_ayah"
-                placeholder="NIK ayah"
-                tabIndex="2"
-                error={errors.nik_ayah && touched.nik_ayah}
-                onFocus={() => {
-                  setFocus("nik_ayah");
-                }}
-                onChange={(e) => {
-                  setFieldValue("nik_ayah", e.target.value);
-                  return localStorage.setItem("nik_ayah", e.target.value);
-                }}
-                type="number"
-                onBlur={handleBlur}
-                value={values.nik_ayah}
-                focus={focus}
-              >
-                {" "}
-                {errors.nik_ayah && touched.nik_ayah && (
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.nik_ayah}
-                  </p>
-                )}
-              </Input>
-            </div>
-            <div>
-              <Input
-                label="Tempat Lahir Ayah"
-                id="tempat_lahir_ayah"
-                placeholder="Tempat lahir"
-                tabIndex="2"
-                error={errors.tempat_lahir_ayah && touched.tempat_lahir_ayah}
-                onFocus={() => {
-                  setFocus("tempat_lahir_ayah");
-                }}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.tempat_lahir_ayah}
-                focus={focus}
-                
-              >
-                {" "}
-                {errors.tempat_lahir_ayah && touched.tempat_lahir_ayah && (
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.tempat_lahir_ayah}
-                  </p>
-                )}
-              </Input>
-            </div>
-            <div>
-              <Input
-                label="Tanggal lahir ayah"
-                id="tanggal_lahir_ayah"
-                placeholder="Tanggal lahir"
-                tabIndex="2"
-                type="date"
-                error={
-                  errors.tanggal_lahir_ayah && touched.tanggal_lahir_ayah
-                }
-                onFocus={() => {
-                  setFocus("tanggal_lahir_ayah");
-                }}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.tanggal_lahir_ayah}
-                focus={focus}
-               
-              >
-                {" "}
-                {errors.tanggal_lahir_ayah && touched.tanggal_lahir_ayah && (
-                  <p className="text-red-500 italic font-bold  text-sm mt-1">
-                    {errors.tanggal_lahir_ayah}
-                  </p>
-                )}
-              </Input>
-            </div>
+           
+           
+            
             <div>
               <Input
                 label="Nomor Handphone Ayah"

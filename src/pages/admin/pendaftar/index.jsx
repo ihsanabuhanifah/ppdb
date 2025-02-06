@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { Button, Collapse, useDisclosure } from "@chakra-ui/react";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 import Dropzone from "react-dropzone";
 import { Formik } from "formik";
@@ -143,115 +143,43 @@ export default function Pendaftar() {
     }
   };
 
-  const handleBatal =  (id) => {
+  const handleBatal = (id) => {
     Swal.fire({
-      title: 'Apakah yakin',
+      title: "Apakah yakin",
       text: "",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes'
-    }).then(async(result) => {
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then(async (result) => {
       if (result.isConfirmed) {
-
-        try{
-          const result = await updateBatal(id)
-          queryClient.invalidateQueries("list_user")
-          Swal.fire(
-            'Batal!',
-            result.message,
-            'success'
-          )
-        }catch {
-          Swal.fire(
-            'Batal!',
-            'Ada Kesalahan',
-            'error'
-          )
+        try {
+          const result = await updateBatal(id);
+          queryClient.invalidateQueries("list_user");
+          Swal.fire("Batal!", result.message, "success");
+        } catch {
+          Swal.fire("Batal!", "Ada Kesalahan", "error");
         }
       }
-    })
-  }
+    });
+  };
   return (
     <React.Fragment>
-      <div className="text-green-500 grid grid-cols-1 gap-5">
+      <div className="text-blue-400 grid grid-cols-1 gap-5">
         <div className="border-b-2 pb-10">
           <h1 className="text-2xl  font-semibold">
-            DAFTAR USER PORTAL PPDB SMK MADINATULQURAN
+            DAFTAR CALON SISWA PORTAL PPDB MAN 2 KOTA SUKABUMI
           </h1>
         </div>
         {/* table */}
-        <button
-          className="font-bold uppercase"
-          type="button"
-          variantColor="blue"
-          onClick={() => {
-            handleToggle();
-            return console.log(show);
-          }}
-        >
-          {show
-            ? " Sembunyikan Detail Informasi"
-            : " Tampilkan Detail Informasi"}
-        </button>
-        <Collapse in={show} animateOpacity>
-          <div className="grid grid-cols-3 gap-5">
-            <div className="p-2 border w-full">
-              <label className="font-bold uppercase" htmlFor="">
-                Jumlah <span className="text-red-500">Pendaftar</span>
-              </label>
-              <br />
-              <input
-                className="bg-white w-full"
-                type="text"
-                disabled
-                value={`${data?.data?.total} Santri`}
-              />
-            </div>
-            <div className="p-2 border w-full">
-              <label className="font-bold uppercase" htmlFor="">
-                Jumlah{" "}
-                <span className="text-red-500">Pendaftar sudah transfer</span>
-              </label>
-              <br />
-              <input
-                className="bg-white w-full"
-                type="text"
-                disabled
-                value={`${data?.bukti} Santri`}
-              />
-            </div>
-            <div className="p-2 border w-full">
-              <label className="font-bold uppercase" htmlFor="">
-                Jumlah{" "}
-                <span className="text-red-500">Pendaftar belum transfer</span>
-              </label>
-              <br />
-              <input
-                className="bg-white w-full"
-                type="text"
-                disabled
-                value={`${data?.data?.total - data?.bukti} Santri`}
-              />
-            </div>
-          </div>
-        </Collapse>
+
         <div className="p-1n ">
           <TableHeader
             setKeyword={setKeyword}
             setPer_page={setPer_page}
           ></TableHeader>
-          <div className="flex justify-end">
-            <button
-              onClick={() => {
-                return onOpen();
-              }}
-              className="btn border py-2 px-3 font-bold  rounded-md bg-green-500 text-white"
-            >
-              Upload Bukti
-            </button>
-          </div>
+         
         </div>
         {isFetching ? (
           <TableLoading></TableLoading>
@@ -260,55 +188,67 @@ export default function Pendaftar() {
             <table className="min-w-full relative ">
               <thead>
                 <tr className="uppercase">
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-green-500 tracking-wider">
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-400 tracking-wider">
                     No
                   </th>
-
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
                     Nama
                   </th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
                     Email
                   </th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                    Nomor HP
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Nomor Utama
                   </th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                    Jam Daftar
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Nomor Darurat
                   </th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                    Status Transfer
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                  Agama
                   </th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                    Bukti Transfer
-                  </th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                    Terkonfirmasi
-                  </th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                    Dikonfirmasi oleh
-                  </th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                    Jadwal Tes
-                  </th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                    Method ujian
-                  </th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
-                    Batal
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Asal Sekolah
                   </th>
 
-                  {/* <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                   Transportasi
+                  </th>
+
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Nama Ayah
+                  </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Nama Ayah
+                  </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Detail
+                  </th>
+                  {/* <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
                   Created_At
                 </th> */}
                 </tr>
               </thead>{" "}
               <tbody className="bg-white relative">
-                {}
+                {data?.data?.data?.length === 0 && (
+                  <tr>
+                    <td
+                      className="text-red-500 text-2xl flex items-center justify-center "
+                      colSpan={"20"}
+                      rowSpan={"20"}
+                    >
+                      Data Tidak Ditemukan
+                    </td>
+                  </tr>
+                )}
                 {data?.data?.data?.map((dt, index) => (
-                  <tr key={index} className={` ${
-                    Number(dt.is_batal) === 1 ? "bg-red-300" : "hover:bg-gray-200"
-                  }`}>
+                  <tr
+                    key={index}
+                    className={` ${
+                      Number(dt.is_batal) === 1
+                        ? "bg-red-300"
+                        : "hover:bg-gray-200"
+                    }`}
+                  >
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                       <div className="flex items-center">
                         <div>
@@ -321,7 +261,7 @@ export default function Pendaftar() {
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                       <div className="text-sm leading-5 text-blue-900">
-                        {dt.name} {dt?.device === null ? "" : "-R"}
+                        {dt.name}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
@@ -332,79 +272,39 @@ export default function Pendaftar() {
                         number={formatNomorHp(dt.phone)}
                         message={"bismillah"}
                       >
-                        <p className="hover:text-green-500 hover:font-bold hover:text-lg">
+                        <p className="hover:text-blue-400 hover:font-bold hover:text-lg">
                           {formatNomorHp(dt.phone)}
                         </p>
                       </ReactWhatsapp>
                     </td>
+
                     <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                      {formatDate(dt.created_at)}
-                    </td>
-                    <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                      {dt.bukti === null ? "-" : <p>Sudah Upload</p>}
-                    </td>
-                    <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
-                      {dt.bukti === null ? (
-                        "-"
-                      ) : (
-                        <a
-                          target="_blank"
-                          className="hover:text-green-500 font-bold"
-                          href={dt.bukti?.url_img}
-                          rel="noreferrer"
-                        >
-                          Lihat Bukti
-                        </a>
-                      )}
-                    </td>
-                    <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
-                      {dt.bukti === null ? (
-                        "-"
-                      ) : (
-                        <button
-                          disabled={dt.bukti?.status === 0 ? false : true}
-                          onClick={() => {
-                            setIsLoadingKonfirmasi(true);
-                            updateStatus(dt.bukti?.user_id);
-                            return sendMessageBukti(dt?.device);
-                          }}
-                          className={`0 font-bold p-2 ${
-                            dt.bukti?.status === 0
-                              ? "bg-red-500 hover:bg-red-500"
-                              : "bg-green-500 hover:bg-green-600"
-                          } rounded-md text-white`}
-                        >
-                          {isLoadingKonfirmasi
-                            ? "Memperbaharui"
-                            : dt.bukti?.status === 0
-                            ? "Belum"
-                            : "Sudah"}
-                        </button>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                      {dt?.bukti?.approved_by}
-                    </td>
-                    <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                      {dt?.tes_diniyyah === null ? (
-                        <p className="text-red-500 italic">
-                          Belum Membuat Jadwal
+                     {!!dt.nomor_ayah  === false? "-":  <ReactWhatsapp
+                        number={formatNomorHp(dt.phone_ayah)}
+                        message={"bismillah"}
+                      >
+                        <p className="hover:text-blue-400 hover:font-bold hover:text-lg">
+                          {formatNomorHp(dt.phone_ayah)}
                         </p>
-                      ) : (
-                        formatTanggal(dt?.tes_diniyyah?.tanggal)
-                      )}
+                      </ReactWhatsapp>}
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                      {dt?.tes_diniyyah === null ? (
-                        <p className="text-red-500 italic">-</p>
-                      ) : dt?.tes_diniyyah?.metode === 1 ? (
-                        "Offline"
-                      ) : (
-                        "Online"
-                      )}
+                      {dt.agama}
                     </td>
-                    <td>
-                     {dt.is_batal === 1 ? <></> :  <Button onClick={()=> handleBatal(dt.id)} colorScheme="red">Batal</Button>}
+                    <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                      {dt.asal_sekolah}
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                      {dt.transportasi}
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                      {dt.nama_ayah}
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                      {dt.nama_ibu}
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                      <Button>Detail</Button>
                     </td>
                   </tr>
                 ))}
@@ -440,13 +340,13 @@ export default function Pendaftar() {
                 className="border px-5 p-10 mt-5 mb-5 shadow-lg rounded-lg"
                 onSubmit={handleSubmit}
               >
-                <h1 className="uppercase mb-5 font-bold text-green-500 text-center">
+                <h1 className="uppercase mb-5 font-bold text-blue-400 text-center">
                   {" "}
                   Form Upload Bukti Transfer pembayaran PSB
                 </h1>
                 <div className="mb-5">
                   <label
-                    className="font-bold mb-5   text-green-500 "
+                    className="font-bold mb-5   text-blue-400 "
                     htmlFor="penghasilan_ayah"
                   >
                     <span className="uppercase">Nama Akun</span>{" "}
@@ -488,7 +388,7 @@ export default function Pendaftar() {
                   </Input>
                 </div>
                 <label
-                  className="font-bold mb-5   text-green-500 "
+                  className="font-bold mb-5   text-blue-400 "
                   htmlFor="penghasilan_ayah"
                 >
                   <span className="uppercase">File Bukti</span>{" "}
@@ -558,7 +458,7 @@ export default function Pendaftar() {
                 <div className="mt-5">
                   <button
                     disabled={isSubmitting}
-                    className="bg-green-500 w-full flex items-center justify-center text-white py-5  font-bold"
+                    className="bg-blue-400 w-full flex items-center justify-center text-white py-5  font-bold"
                     type="submit"
                   >
                     {isLoading ? <Loading></Loading> : " Upload Bukti Transfer"}

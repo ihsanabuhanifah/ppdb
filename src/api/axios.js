@@ -9,7 +9,7 @@ import qs from "qs";
   }
 
 let client = axios.create({
-  baseURL: `https://psb-api.smkmadinatulquran.sch.id/api`,
+  baseURL: `https://ppdb-api.man1kotasukabumi.web.id/api`,
   headers,
   paramsSerializer: function (params) {
     return qs.stringify(params, { encode: false, skipNulls: true });

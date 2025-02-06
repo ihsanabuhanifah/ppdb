@@ -207,8 +207,8 @@ export default function JadwalTes() {
       priority: "high",
       soundName: "default",
       notification: {
-        title: "PPDB SMK MADINATULQURAN",
-        body: `Bismillah, Selamat ananda ${name} telah lulus di SMK MADINATULQURAN`,
+        title: "PPDB MAN 2 KOTA SUKABUMI<",
+        body: `Bismillah, Selamat ananda ${name} telah lulus di MAN 2 KOTA SUKABUMI<`,
         image:
           "https://res.cloudinary.com/smk-madinatul-quran/image/upload/v1633619642/errrbiql1jigobojg5iv.png",
         icon: "https://res.cloudinary.com/smk-madinatul-quran/image/upload/v1633820893/ce4h2qg7y3dl1kpbjlsr.png",

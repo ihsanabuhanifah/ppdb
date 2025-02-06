@@ -145,11 +145,11 @@ export default function Dashboard() {
   console.log(data);
   return (
     <React.Fragment>
-      <div className="text-green-500 grid grid-cols-1 gap-5">
+      <div className="text-blue-400 grid grid-cols-1 gap-5">
         <div className="border-b-2 pb-10">
           <h1 className="text-2xl  font-semibold">
-            DAFTAR USER PORTAL PPDB SMK MADINATULQURAN
-          </h1>
+            DAFTAR USER PORTAL PPDB MAN 2 KOTA SUKABUMI
+            </h1>
         </div>
         {/* table */}
         <button

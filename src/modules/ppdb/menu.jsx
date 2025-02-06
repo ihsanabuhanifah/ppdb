@@ -7,8 +7,8 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
   const isLulus = useSelector((state) => state.auth.isLulus);
   const menus = [
     {
-      to: "/ppdb/salam",
-      name: "Salam",
+      to: "/ppdb/dashboard",
+      name: "Dashboard",
       disabled : true,
       icon : <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
     },
@@ -18,25 +18,25 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
       disabled : isPayment,
       icon : <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
     },
-    {
-      to: "/ppdb/pembayaran",
-      name: "Pembayaran",
-      disabled : true,
-      icon : <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
-    },
+    // {
+    //   to: "/ppdb/pembayaran",
+    //   name: "Pembayaran",
+    //   disabled : true,
+    //   icon : <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
+    // },
     
-    {
-      to: "/ppdb/tes-umum",
-      name: "Tes Umum",
-      disabled : isPayment,
-      icon : <BookOpenIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
-    },
-    {
-      to: "/ppdb/tes-diniyah-dan-interview",
-      name: "Tes Diniyah",
-      disabled : isPayment,
-      icon : <BookOpenIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
-    },
+    // {
+    //   to: "/ppdb/tes-umum",
+    //   name: "Tes Umum",
+    //   disabled : isPayment,
+    //   icon : <BookOpenIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
+    // },
+    // {
+    //   to: "/ppdb/tes-diniyah-dan-interview",
+    //   name: "Tes Diniyah",
+    //   disabled : isPayment,
+    //   icon : <BookOpenIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
+    // },
   ];
   
  let history = useHistory()
@@ -58,7 +58,7 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
                   }
                   return history.push(menu.to)
                 }}
-                className={`flex items-center text-md  lg:text-xl font-bold p-3 lg:px-4 lg:rounded-l-full ${history.location.pathname === menu.to ? "text-green-500 font-bold bg-white" : ""}`}
+                className={`flex items-center text-md  lg:text-xl font-bold p-3 lg:px-4 lg:rounded-l-full ${history.location.pathname === menu.to ? "text-blue-400 font-bold bg-white" : ""}`}
               
                
                

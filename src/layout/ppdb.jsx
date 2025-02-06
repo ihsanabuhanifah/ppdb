@@ -69,11 +69,11 @@ export default function LayoutPPDB() {
         isOpen={logout}
       ></AlertLogout>
       <div className="w-full h-full   overflow-hidden">
-        <header className=" lg:hidden text-xl text-white font-bold flex items-center justify-between bg-green-500 px-5 py-2 border-b lg:border-none pb-3 lg:pb-0">
+        <header className=" lg:hidden text-xl text-white font-bold flex items-center justify-between bg-blue-400 px-5 py-2 border-b lg:border-none pb-3 lg:pb-0">
           <h1>
             {" "}
             PPDB <br />{" "}
-            <span className="hidden lg:block">SMK MADINATULQURAN</span>
+            <span className="hidden lg:block">MAN 1 KOTA SUKABUMI</span>
           </h1>
           <button
             onClick={() => {
@@ -88,17 +88,17 @@ export default function LayoutPPDB() {
             )}
           </button>
         </header>
-        <div className="grid grid-cols-1 relative lg:grid-cols-12 w-full h-full bg-green-500 px-2  lg:px-6 lg:pt-6  ">
+        <div className="grid grid-cols-1 relative lg:grid-cols-12 w-full h-full bg-blue-400 px-2  lg:px-6 lg:pt-6  ">
           <div
             className={`lg:col-span-2 absolute z-50 lg:static w-full ${
               hiddenMenu ? "transform -translate-x-full lg:transform " : "transform -translate-x-0 transition  duration-500"
-            } lg:block h-full py-5 pl-1  bg-green-500`}
+            } lg:block h-full py-5 pl-1  bg-blue-400`}
           >
             <header className=" hidden lg:block text-lg text-white font-bold  items-center justify-between border-b lg:border-none pb-3 lg:pb-0">
               <h1>
                 {" "}
                 PPDB <br />{" "}
-                <span className="hidden lg:block">SMK MADINATULQURAN</span>
+                <span className="hidden lg:block">MAN 1 KOTA SUKABUMI</span>
               </h1>
             </header>
 
@@ -119,25 +119,13 @@ export default function LayoutPPDB() {
             <Route path="/ppdb/pengumuman-kelulusan">
                 <Kelulusan></Kelulusan>
               </Route>
-              <Route path="/ppdb/salam">
+              <Route path="/ppdb/dashboard">
                 <Dashboard></Dashboard>
               </Route>
-              <Route path="/ppdb/pembayaran">
-                <Pembayaran></Pembayaran>
-              </Route>
-              <Route path="/ppdb/tes-umum">
-                {/* Mohon maaf halaman masih dalam tahap pengerjaan */}
-                <TesUmum></TesUmum>
-              </Route>
-              <Route path="/ppdb/tes-diniyah-dan-interview">
-            <TesDiniyah></TesDiniyah>
-              </Route>
-              <Route path="/ppdb/konfirmasi-pembayaran-ppdb">
-              <Payment></Payment>
-                
-                
-              </Route>
-              <Redirect from="/ppdb" to="/ppdb/salam" />
+            
+             
+              
+              <Redirect from="/ppdb" to="/ppdb/dashboard" />
             </Switch>
           </div>
         </div>
@@ -175,7 +163,7 @@ export default function LayoutPPDB() {
              src={wa}
              alt="whatsapp.png"
            />
-           <p className="text-green-500  ml-2 ">
+           <p className="text-blue-400  ml-2 ">
              Hubungi Ustadz. Dedi
            </p>
            </div>
@@ -189,7 +177,7 @@ export default function LayoutPPDB() {
              src={wa}
              alt="whatsapp.png"
            />
-           <p className="text-green-500  ml-2 ">
+           <p className="text-blue-400  ml-2 ">
            Hubungi Ustadz. Ihsan
            </p>
            </div>

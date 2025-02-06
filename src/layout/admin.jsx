@@ -64,11 +64,11 @@ export default function LayoutPPDB() {
         isOpen={logout}
       ></AlertLogout>
       <div className="w-full h-full   overflow-hidden" style={{ zoom: "80%" }}>
-        <header className=" lg:hidden text-xl text-white font-bold flex items-center justify-between bg-green-500 px-5 py-2 border-b lg:border-none pb-3 lg:pb-0">
+        <header className=" lg:hidden text-xl text-white font-bold flex items-center justify-between bg-blue-400 px-5 py-2 border-b lg:border-none pb-3 lg:pb-0">
           <h1>
             {" "}
             ADMIN <br />{" "}
-            <span className="hidden lg:block">SMK MADINATULQURAN</span>
+            <span className="hidden lg:block">MAN 1 KOTA SUKABUMI</span>
           </h1>
           <button
             onClick={() => {
@@ -83,19 +83,19 @@ export default function LayoutPPDB() {
             )}
           </button>
         </header>
-        <div className="grid grid-cols-1 relative lg:grid-cols-12 w-full h-full bg-green-500 px-2  lg:px-6 lg:pt-6  ">
+        <div className="grid grid-cols-1 relative lg:grid-cols-12 w-full h-full bg-blue-400 px-2  lg:px-6 lg:pt-6  ">
           <div
             className={`lg:col-span-1 absolute z-50 lg:static w-full ${
               hiddenMenu
                 ? "transform -translate-x-full lg:transform "
                 : "transform -translate-x-0 transition  duration-500"
-            } lg:block h-full py-5 pl-1  bg-green-500`}
+            } lg:block h-full py-5 pl-1  bg-blue-400`}
           >
             <header className=" hidden lg:block text-sm text-white font-bold items-center justify-between border-b lg:border-none pb-3 lg:pb-0">
               <h1>
                 {" "}
                 ADMIN <br />{" "}
-                <span className="hidden lg:block">SMK MADINATULQURAN</span>
+                <span className="hidden lg:block">MAN 1 KOTA SUKABUMI</span>
               </h1>
             </header>
 

@@ -12,7 +12,7 @@ export const AuthProtected = ({ children, ...rest }) => {
     let result = await dispatch(authMe(values));
   
     if(result.response?.status === 401){
-      history.push("/login")
+      history.push("/home")
     }else{
         history.goBack()
     }
@@ -30,7 +30,7 @@ export const AuthProtected = ({ children, ...rest }) => {
   if (Cookies.get("token-ppdb")) {
     return <Route {...rest}>{children}</Route>;
   } else {
-    return <Redirect to="/login" />;
+    return <Redirect to="/home" />;
   }
 };
 

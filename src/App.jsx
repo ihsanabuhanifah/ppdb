@@ -25,12 +25,16 @@ import {
 } from "./layout/ProtetedRoute";
 import { useSelector } from "react-redux";
 import LoadingPage from "./pages/auth/loadingPage,";
+import Home from "./pages/auth/home";
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   return (
     <main className="text-md h-screen">
       <Switch>
+      <Route  exact path="/home">
+          <Home></Home>
+        </Route>
         <Route path="/login">
           <Login></Login>
         </Route>

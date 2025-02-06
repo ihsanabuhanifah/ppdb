@@ -32,21 +32,8 @@ export const SiswaPageProtected = ({ children, ...rest }) => {
     if (result?.user?.roles[0].name === "admin") {
       return history.push("/admin/dashboard");
     }
-    const identitas = result.identitas;
-
-    if (identitas !== undefined) {
-      if (identitas.length === 0) {
-        return history.push("/identitas");
-      } else if (identitas.length === 1) {
-       
-        return history.push("/identitas/data-sekolah-asal");
-      } else if (identitas.length === 2) {
-        return history.push("/identitas/data-ayah");
-      } else if (identitas.length === 3) {
-        return history.push("/identitas/data-ibu");
-      } else {
-        return history.push(url);
-      }
+    if (result?.user?.roles[0].name === "user") {
+      return history.push("/ppdb/dashboard");
     }
   };
 

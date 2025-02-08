@@ -2,9 +2,11 @@ module.exports = {
   
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
+  mode : "jit",
   
   theme: {
     extend: {
+     
       height: {
         "1/7": "30%",
         "6/7": "70%",

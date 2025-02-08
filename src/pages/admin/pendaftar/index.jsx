@@ -169,7 +169,7 @@ export default function Pendaftar() {
       <div className="text-blue-400 grid grid-cols-1 gap-5">
         <div className="border-b-2 pb-10">
           <h1 className="text-2xl  font-semibold">
-            DAFTAR CALON SISWA PORTAL PPDB MAN 2 KOTA SUKABUMI
+            DAFTAR CALON SISWA PORTAL PPDB MAN 1 KOTA SUKABUMI
           </h1>
         </div>
         {/* table */}

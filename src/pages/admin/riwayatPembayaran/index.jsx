@@ -109,7 +109,7 @@ export default function RiwayatPembayaran() {
     <div className="text-green-500 grid grid-cols-1 gap-5 ">
       <div className="border-b-2 pb-10">
         <h1 className="text-2xl  font-semibold">
-          DAFTAR JADWAL TES PPDB MAN 2 KOTA SUKABUMI
+          DAFTAR JADWAL TES PPDB MAN 1 KOTA SUKABUMI
         </h1>
         
       </div>

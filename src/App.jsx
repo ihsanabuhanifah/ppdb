@@ -32,7 +32,10 @@ function App() {
   return (
     <main className="text-md h-screen">
       <Switch>
-      <Route  exact path="/home">
+      <Route exact path="/">
+          <Home></Home>
+        </Route>
+        <Route exact path="/home">
           <Home></Home>
         </Route>
         <Route path="/login">

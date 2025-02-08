@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactWhatsapp from "react-whatsapp";
 import wa from "../image/wa.png";
 import image1 from "../image/image.png";
+
 import { Tooltip } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -13,11 +14,21 @@ export default function Layout({ children }) {
 
   return (
     <React.Fragment>
-      <div className="w-screen h-screen bg-gray-200 overflow-auto">
+      <div className="w-screen h-screen  overflow-hidden">
+        {/* <div
+          className="absolute inset-0 bg-cover bg-center"
+         
+        >
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+        </div> */}
         {/* Header */}
-        <header className="h-[15%] flex items-center justify-between fixed w-full z-10 px-5 bg-white py-2">
+        <header className="h-[10%] flex items-center justify-between  w-full z-10 px-5 bg-white py-2">
           <section className="flex items-center space-x-5">
-            <img className="rounded-lg h-16 w-16" src={image1} alt="Logo" />
+            <img
+              className="rounded-lg h-16 w-16 p-4 "
+              src={image1}
+              alt="Logo"
+            />
             <h2 className="text-2xl font-bold text-blue-400">
               PPDB MAN 1 KOTA SUKABUMI
             </h2>
@@ -25,19 +36,59 @@ export default function Layout({ children }) {
 
           {/* Menu untuk Desktop */}
           <section className="hidden md:flex space-x-5">
-            <button onClick={() => history.push("home")} className="text-blue-400 text-xl rounded-xl">
-              Home
+            <button
+              onClick={() => history.push("home")}
+              className="btn text-blue-400 text-md hover:text-blue-500 "
+            >
+              Jalur Seleksi
             </button>
-            <button onClick={() => history.push("login")} className="text-blue-400 text-xl rounded-xl">
+
+            <button
+              onClick={() => history.push("home")}
+              className="btn text-blue-400 text-md hover:text-blue-500 "
+            >
+              Kuota Daya Tampung
+            </button>
+            <button
+              onClick={() => history.push("home")}
+              className="btn text-blue-400 text-md hover:text-blue-500 "
+            >
+              Persyaratan
+            </button>
+            <button
+              onClick={() => history.push("home")}
+              className="btn text-blue-400 text-md hover:text-blue-500 "
+            >
+              Time Line
+            </button>
+            <button
+              onClick={() => history.push("home")}
+              className="btn text-blue-400 text-md hover:text-blue-500 "
+            >
+              Alur Pendaftaran
+            </button>
+            <button
+              onClick={() => history.push("home")}
+              className="btn text-blue-400 text-md hover:text-blue-500 "
+            >
+              Materi Tes
+            </button>
+            <button
+              onClick={() => history.push("login")}
+              className="btn text-blue-400 text-md hover:text-blue-500 "
+            >
               Login
             </button>
-            <button onClick={() => history.push("register")} className="text-blue-400 text-xl rounded-xl">
+            <button
+              onClick={() => history.push("register")}
+              className="btn text-blue-400 text-md hover:text-blue-500 "
+            >
               Register
             </button>
           </section>
 
           {/* Hamburger Menu untuk Mobile */}
-          <div className="md:hidden">
+          <div className="md:hidden ">
             <button onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? (
                 <FaTimes className="text-blue-400 text-3xl" />
@@ -56,7 +107,7 @@ export default function Layout({ children }) {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden absolute top-[60%] left-0 w-full z-30 bg-white shadow-lg py-5"
+              className="md:hidden absolute top-[60%] w-full bg-white shadow-lg py-5"
             >
               <div className="flex flex-col items-center space-y-5">
                 <button
@@ -92,7 +143,7 @@ export default function Layout({ children }) {
         </AnimatePresence>
 
         {/* Konten Utama */}
-        <section className="flex justify-center items-center pt-48 h-[80%] w-full overflow-auto">
+        <section className=" bg-blue-500  pt-20 items-center h-[90%] w-full overflow-auto">
           {children}
         </section>
       </div>

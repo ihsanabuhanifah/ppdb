@@ -16,7 +16,7 @@ export default function Section2() {
         <div className="flex justify-center">
           <img
             className="rounded-full shadow-lg transition duration-300 transform hover:scale-105"
-            style={{ height: 350, width: 350 }}
+            style={{ height: 200, width: 200 }}
             src={Kepsek}
             alt="Kepala Madrasah"
           />

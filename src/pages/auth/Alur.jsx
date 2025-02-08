@@ -14,12 +14,12 @@ export default function AlurPendaftaran() {
   return (
     <div className="max-w-3xl mx-auto p-6">
       <div className="  text-center mb-10 rounded-3xl">
-        <h4 className="text-white text-4xl font-bold mb-">
+      <h4 className="text-gray-700 text-4xl font-bold mb-2">
           Alur Pendaftaran
         </h4>
         <div className="w-20 h-1 bg-yellow-500 mx-auto"></div>
       </div>
-      <div className="relative border-l-4 border-blue-500 pl-6 bg-white px-5 py-10 rounded-2xl">
+      <div className="relative border shadow-2xl pl-6 bg-white px-5 py-10 rounded-2xl">
         {steps.map((step, index) => (
           <motion.div 
             key={step.id} 

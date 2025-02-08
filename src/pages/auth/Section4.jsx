@@ -71,28 +71,8 @@ export default function Section4() {
               </ul>
             </motion.div>
           </section>
-          <section className="space-y-5">
-            <motion.div
-              className=" p-8   rounded-3xl bg-white  backdrop-blur-lg shadow-xl border border-white/20"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0px 10px 30px rgba(255, 255, 255, 0.2)",
-              }}
-            >
-              <div className=" left-6 flex items-center bg-green-500 text-white px-4 py-1 rounded-full shadow-lg">
-                <HiDocumentText className="mr-2" />{" "}
-                <span className="font-semibold ml-5">Jalur Bina Mandiri</span>
-              </div>
-              <ul className="mt-6 space-y-4 text-md text-gray-500">
-                {["surat rekomendasi dari MAN 1 Kota Sukabumi"].map(
-                  (item, index) => (
-                    <li key={index} className="flex items-center">
-                      <FaCheckCircle className="text-green-400 mr-3" /> {item}
-                    </li>
-                  )
-                )}
-              </ul>
-            </motion.div>
+          <section className="space-y-5 h-full">
+            
 
             {/* Persyaratan Khusus */}
             <motion.div

@@ -15,7 +15,7 @@ export default function Materi() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <thead className="bg-blue-700 text-white">
+        <thead className="bg-blue-500 text-white">
           <tr>
             <th className="py-3 px-6 text-lg">Jenis Tes</th>
             <th className="py-3 px-6 text-lg">Deskripsi</th>

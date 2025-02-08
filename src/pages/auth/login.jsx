@@ -10,7 +10,7 @@ import { useHistory } from "react-router";
 import Loading from "../../components/loading";
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Format email tidak sesuai")
+   
     .required("Email wajib diisi"),
 
   password: Yup.string()
@@ -103,12 +103,12 @@ export default function Register() {
                   className="mt-3 flex flex-col border shadow-md px-5 py-3 relative"
                 >
                   <label className="font-bold text-blue-400" htmlFor="email">
-                    Alamat Email
+                    Alamat Email / No WA
                   </label>
                   <input
                     className="inline-flex w-full rounded-lg text-lg focus:outline-none"
                     type="text"
-                    placeholder="santri_psb@gmail.com"
+                    placeholder="santri_psb@gmail.com atau 085659552000"
                     id="email"
                     tabIndex="2"
                     error={errors.email && touched.email}

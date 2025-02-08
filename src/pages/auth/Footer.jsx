@@ -10,7 +10,7 @@ export default function Footer() {
           </div>
 
           {/* Kontak */}
-          <section className="grid grid-cols-4">
+          <section className="grid grid-cols-2">
           <div>
               <h3 className="text-xl font-bold mb-2">HUBUNGI KAMI</h3>
               <p>Jalan Bandung No.7 Penanggungan, Klojen Kota Malang 65113</p>
@@ -26,14 +26,7 @@ export default function Footer() {
             </div>
             {/* Profil */}
             <div>
-              <h3 className="text-xl font-bold mb-2">MAN 2 KOTA MALANG</h3>
-              <p>
-                Madrasah Aliyah Negeri (MAN) 2 Kota Malang, sebagai lembaga
-                pendidikan Islam formal di bawah Kementerian Agama Republik
-                Indonesia berkomitmen memberikan kontribusi yang besar bagi
-                masyarakat sebagai penerus perjuangan dalam rangka syiar agama
-                Islam.
-              </p>
+            
 
               {/* Social Media */}
               <div className="flex space-x-4 mt-4">

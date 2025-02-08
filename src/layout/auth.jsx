@@ -7,14 +7,22 @@ import { Tooltip } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion"; // Import animasi
-
+import bg from "../image/bg.png";
 export default function Layout({ children }) {
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <React.Fragment>
-      <div className="w-screen h-screen  overflow-hidden">
+      <div
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundAttachment: "fixed",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        className="w-screen h-screen  overflow-hidden"
+      >
         {/* <div
           className="absolute inset-0 bg-cover bg-center"
          
@@ -24,8 +32,8 @@ export default function Layout({ children }) {
         {/* Header */}
         <header className="h-[10%] flex items-center justify-between  w-full z-10 px-5 bg-white py-2">
           <section className="flex items-center space-x-5">
-            <img
-              className="rounded-lg h-16 w-16 p-4 "
+          <img
+              className="rounded-lg h-20 w-20 p-4 "
               src={image1}
               alt="Logo"
             />
@@ -37,42 +45,12 @@ export default function Layout({ children }) {
           {/* Menu untuk Desktop */}
           <section className="hidden md:flex space-x-5">
             <button
-              onClick={() => history.push("home")}
+              onClick={() => history.push("/")}
               className="btn text-blue-400 text-md hover:text-blue-500 "
             >
-              Jalur Seleksi
+              Beranda
             </button>
 
-            <button
-              onClick={() => history.push("home")}
-              className="btn text-blue-400 text-md hover:text-blue-500 "
-            >
-              Kuota Daya Tampung
-            </button>
-            <button
-              onClick={() => history.push("home")}
-              className="btn text-blue-400 text-md hover:text-blue-500 "
-            >
-              Persyaratan
-            </button>
-            <button
-              onClick={() => history.push("home")}
-              className="btn text-blue-400 text-md hover:text-blue-500 "
-            >
-              Time Line
-            </button>
-            <button
-              onClick={() => history.push("home")}
-              className="btn text-blue-400 text-md hover:text-blue-500 "
-            >
-              Alur Pendaftaran
-            </button>
-            <button
-              onClick={() => history.push("home")}
-              className="btn text-blue-400 text-md hover:text-blue-500 "
-            >
-              Materi Tes
-            </button>
             <button
               onClick={() => history.push("login")}
               className="btn text-blue-400 text-md hover:text-blue-500 "
@@ -143,7 +121,7 @@ export default function Layout({ children }) {
         </AnimatePresence>
 
         {/* Konten Utama */}
-        <section className=" bg-blue-500  pt-20 items-center h-[90%] w-full overflow-auto">
+        <section style={{ backgroundColor: "rgba(43,105,236, 0.9)" }} className="   pt-20 items-center h-[90%] w-full overflow-auto">
           {children}
         </section>
       </div>

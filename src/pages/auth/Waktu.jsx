@@ -55,20 +55,29 @@ const Timeline = () => {
     { uraian: "Rapat Orang Tua Peserta Didik dengan Komite", pelaksanaan: "3 Juni 2025" },
     { uraian: "Daftar Ulang", pelaksanaan: "9 April 2025 – 5 Juni 2025" }
   ];
+  const dataGelombang3 = [
+    { uraian: "Pendaftaran Online/Offline PPDBM", pelaksanaan: "1 - 2 Juli 2025" },
+    { uraian: "Verifikasi Berkas", pelaksanaan: "1 - 2 Juli 2025" },
+    { uraian: "Seleksi CBT", pelaksanaan: "3 - 4 Juli 2025" },
+    { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "5 Juli 2025" },
+    { uraian: "Rapat Orang Tua Peserta Didik dengan Komite", pelaksanaan: "7 Juli 2025" },
+    { uraian: "Daftar Ulang", pelaksanaan: "9 Juli 2025" }
+  ];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5  ">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5  ">
       <motion.div 
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
         transition={{ duration: 1 }}
-        className="text-center mb-6 col-span-1 lg:col-span-2 "
+        className="text-center mb-6 col-span-1 lg:col-span-3 "
       >
         <h1 className="text-white text-4xl font-bold ">Waktu Pelaksanaan</h1>
         <div className="w-20 h-1 bg-yellow-500 mx-auto mt-2"></div>
       </motion.div>
       <TimelineTable title="Pendaftaran Gelombang 1" data={dataGelombang1} color="bg-blue-500" />
       <TimelineTable title="Pendaftaran Gelombang 2" data={dataGelombang2} color="bg-green-500" />
+      <TimelineTable title="Pendaftaran Tahap Akhir" data={dataGelombang3} color="bg-green-500" />
     </div>
   );
 };

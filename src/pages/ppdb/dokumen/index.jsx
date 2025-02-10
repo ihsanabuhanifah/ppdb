@@ -159,7 +159,7 @@ export default function UploadDokumen() {
                 )}
               </td>
               <td className="border border-gray-300 p-3">
-                { file?.includes("pdf") ? (
+                { !!file === false ? <span className="text-red-500 font-bold">Belum Upload</span> :  file?.includes("pdf") ? (
                     <a
                       href={file.url}
                       target="_blank"

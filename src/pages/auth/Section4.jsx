@@ -4,7 +4,7 @@ import { HiDocumentText } from "react-icons/hi";
 
 export default function Section4() {
   return (
-    <div className="max-h-screen">
+    <div className="">
       <div className="  text-center mb-10 rounded-3xl">
         <h4 className="text-white text-4xl font-bold mb-">
           Persyaratan Pendaftaran
@@ -12,9 +12,9 @@ export default function Section4() {
         <div className="w-20 h-1 bg-yellow-500 mx-auto"></div>
       </div>
       
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1  md:grid-cols-2 gap-10">
           {/* Persyaratan Umum */}
-          <section className="space-y-5">
+          <section className="space-y-5 h-full">
             <motion.div
               className=" p-8  rounded-3xl bg-white shadow-xl border border-white/20"
               whileHover={{
@@ -71,7 +71,7 @@ export default function Section4() {
               </ul>
             </motion.div>
           </section>
-          <section className="space-y-5 h-full">
+          <section className="space-y-5 h-full ">
             
 
             {/* Persyaratan Khusus */}

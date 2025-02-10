@@ -188,6 +188,9 @@ export default function Register() {
                   <option>Pilih</option>
                   <option value={"SMP"}> SMP</option>
                   <option value={"MTs"}> MTs</option>
+                  <option value={"PKBM"}>PKBM</option>
+                  <option value={"PDF Wustha"}> PDF Wustha</option>
+                  <option value={"PPS SPQ"}> PPS SPQ</option>
                   
                 </SelectReg>
 

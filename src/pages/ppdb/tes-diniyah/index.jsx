@@ -25,6 +25,9 @@ export default function TesDiniyah() {
   });
   let toast = useToast();
 
+
+  
+
   const tesSaya = async () => {
     let result = await getTesDiniyah();
     console.log(result);

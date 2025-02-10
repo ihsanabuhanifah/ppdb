@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Section1() {
   const [welcomeText, setWelcomeText] = useState("");
   const fullText = "PPDB MAN 1 Kota Sukabumi";
   const [counters, setCounters] = useState({ total: 0, mts: 0, smp: 0 });
+  const history = useHistory()
 
   useEffect(() => {
     let index = 0;
@@ -33,7 +35,7 @@ export default function Section1() {
 
   return (
     <>
-      <h4 className="text-white text-center font-bold text-2xl lg:ext-6xl h-20">
+      <h4 className="text-white text-center font-bold text-2xl lg:text-4xl lg:ext-6xl h-20">
         Selamat Datang di {welcomeText}
       </h4>
       <div className="mt-5 ">
@@ -58,7 +60,9 @@ export default function Section1() {
         </h4> */}
       </div>
       <div className="flex items-center justify-center mt-5 space-x-4">
-        <button className="border px-16 py-3 font-bold text-white border-[#F6B023] rounded-full hover:bg-[#F6B023] transition duration-300">
+        <button  onClick={() => {
+                history.push("/register");
+              }} className="border px-16 py-3 font-bold text-white border-[#F6B023] rounded-full hover:bg-[#F6B023] transition duration-300">
           Daftar PPDB
         </button>
       </div>

@@ -13,7 +13,7 @@ export default function InputReg({
   focus,
   setFocus,
   type,
-  isRequired = false
+  isRequired = false, disabled
 }) {
   return (
     <>
@@ -26,6 +26,7 @@ export default function InputReg({
           `mt-3 flex flex-col border shadow-md px-5 py-3 relative   rounded-lg`,
           {
             "border-red-500": errors && touched,
+            "opacity-100" : isSubmitting || disabled === true
           }
         )}
       >
@@ -34,14 +35,16 @@ export default function InputReg({
         </label>
         <input
           id={id}
-          className={"inline-flex w-full rounded-lg text-lg focus:outline-none"}
+          className={clsx(`inline-flex w-full rounded-lg text-lg focus:outline-none`, {
+            "opacity-10" : isSubmitting || disabled
+          })}
           type={type}
           placeholder={placeholder}
           tabIndex="1"
           onChange={handleChange}
           onBlur={handleBlur}
           value={value}
-          disabled={isSubmitting}
+          disabled={isSubmitting || disabled}
         />
         {focus === id ? (
           <div className="bg-blue-400 w-2 h-full absolute bottom-0  left-0"></div>

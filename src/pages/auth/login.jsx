@@ -11,11 +11,11 @@ import Loading from "../../components/loading";
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
    
-    .required("Email wajib diisi"),
+    .required("Wajib diisi"),
 
   password: Yup.string()
     .min(8, "Password minimal 8 karakter")
-    .required("Password Wajib diisi"),
+    .required(" Wajib diisi"),
 });
 export default function Register() {
   const [focus, setFocus] = React.useState("");
@@ -45,10 +45,9 @@ export default function Register() {
         return history.push("/admin/pendaftar");
       }
 
-      const identitas = result.identitas;
-      if (identitas !== undefined) {
-        return history.push("/ppdb/salam");
-      }
+     
+        return history.push("/ppdb/dashboard");
+    
     }
     if (result.response.status === 401) {
       console.log(result.response);
@@ -65,7 +64,7 @@ export default function Register() {
   };
   return (
     <Layout page="login">
-      <section className=" p-5 w-full grid grid-cols-1 3 lg:grid-cols-3 h-full   ">
+      <section className=" p-5 w-full grid grid-cols-1 3 lg:grid-cols-3    ">
         <div className="w-full  lg:col-start-2 bg-white rounded-2xl py-10 px-5">
           <div>
             <h3 className="text-xl lg:text-3xl font-bold uppercase mb-2 ">

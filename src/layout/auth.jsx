@@ -30,14 +30,14 @@ export default function Layout({ children }) {
           <div className="absolute inset-0 bg-black opacity-50"></div>
         </div> */}
         {/* Header */}
-        <header className="h-[10%] flex items-center justify-between  w-full z-10 px-5 bg-white py-2">
+        <header className="h-[10%] lg:h-[8%] flex items-center justify-between  w-full z-10 px-5 bg-white py-2">
           <section className="flex items-center space-x-5">
           <img
               className="rounded-lg h-20 w-20 p-4 "
               src={image1}
               alt="Logo"
             />
-            <h2 className="text-2xl font-bold text-blue-400">
+           <h2 className="text-2xl font-bold hidden lg:block text-blue-400">
               PPDB MAN 1 KOTA SUKABUMI
             </h2>
           </section>
@@ -46,20 +46,20 @@ export default function Layout({ children }) {
           <section className="hidden md:flex space-x-5">
             <button
               onClick={() => history.push("/")}
-              className="btn text-blue-400 text-md hover:text-blue-500 "
+              className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
             >
               Beranda
             </button>
 
             <button
               onClick={() => history.push("login")}
-              className="btn text-blue-400 text-md hover:text-blue-500 "
+              className="btn text-blue-400 text-md hover:text-blue-500 font-semibold "
             >
               Login
             </button>
             <button
               onClick={() => history.push("register")}
-              className="btn text-blue-400 text-md hover:text-blue-500 "
+              className="btn text-blue-400 text-md hover:text-blue-500 font-semibold "
             >
               Register
             </button>
@@ -85,35 +85,35 @@ export default function Layout({ children }) {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden absolute top-[60%] w-full bg-white shadow-lg py-5"
+              className="md:hidden absolute top-[0%] z-50 h-screen w-full bg-white shadow-lg py-5"
             >
               <div className="flex flex-col items-center space-y-5">
-                <button
+              <button
                   onClick={() => {
                     history.push("home");
                     setMenuOpen(false);
                   }}
-                  className="text-blue-400 text-3xl rounded-xl"
+                  className="text-blue-400 text-xl rounded-xl"
                 >
-                  Home
+                  Beranda
                 </button>
                 <button
                   onClick={() => {
                     history.push("login");
                     setMenuOpen(false);
                   }}
-                  className="text-blue-400 text-3xl rounded-xl"
+                   className="text-blue-400 text-xl rounded-xl"
                 >
-                  Login
+                  Masuk
                 </button>
                 <button
                   onClick={() => {
                     history.push("register");
                     setMenuOpen(false);
                   }}
-                  className="text-blue-400 text-3xl rounded-xl"
+                  className="text-blue-400 text-xl rounded-xl"
                 >
-                  Register
+                  Daftar
                 </button>
               </div>
             </motion.div>

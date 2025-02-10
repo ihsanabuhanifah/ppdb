@@ -8,7 +8,7 @@ const TimelineTable = ({ title, data, color }) => {
     // whileView={{ opacity: 1, y: 0 }} 
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
-      className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6 my-6"
+      className="  bg-white shadow-lg rounded-lg p-6 my-6"
     >
       <h2 className={`text-2xl font-bold text-gray-800 mb-4`}>{title}</h2>
       <table className="w-full border-collapse border border-gray-300 rounded-lg overflow-hidden">
@@ -57,7 +57,7 @@ const Timeline = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 ">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5  ">
       <motion.div 
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
@@ -67,8 +67,8 @@ const Timeline = () => {
         <h1 className="text-white text-4xl font-bold ">Waktu Pelaksanaan</h1>
         <div className="w-20 h-1 bg-yellow-500 mx-auto mt-2"></div>
       </motion.div>
-      <TimelineTable title="Time Line Pendaftaran Gelombang 1" data={dataGelombang1} color="bg-blue-500" />
-      <TimelineTable title="Time Line Pendaftaran Gelombang 2" data={dataGelombang2} color="bg-green-500" />
+      <TimelineTable title="Pendaftaran Gelombang 1" data={dataGelombang1} color="bg-blue-500" />
+      <TimelineTable title="Pendaftaran Gelombang 2" data={dataGelombang2} color="bg-green-500" />
     </div>
   );
 };

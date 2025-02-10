@@ -61,7 +61,7 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
                   }
                   return history.push(menu.to)
                 }}
-                className={`flex items-center text-md  lg:text-sm font-bold p-3 lg:px-4 lg:rounded-l-full ${history.location.pathname === menu.to ? "text-green-500 font-bold bg-white" : ""}`}
+                className={`flex items-center text-md  lg:text-sm font-bold p-3 lg:px-4 lg:rounded-l-full ${history.location.pathname === menu.to ? "text-blue-400 font-bold bg-white" : ""}`}
               
                
                

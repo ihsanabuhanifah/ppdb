@@ -17,17 +17,11 @@ import Footer from "./Footer";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import ReactWhatsapp from "react-whatsapp";
-import clsx from "clsx";
 export default function Layout() {
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
   const [showContact, setShowContact] = useState(true);
-  const [hidden, setHidden] = React.useState();
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [showSection, setShowSection] = useState(true);
-
-  const sectionRef = useRef(null);
-  const [scrollY, setScrollY] = useState(0);
+  const [hidden, setHidden] = React.useState(true);
 
   // Refs untuk setiap section
   const berandaRef = useRef(null);
@@ -46,28 +40,16 @@ export default function Layout() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (sectionRef.current) {
-        setScrollY(sectionRef.current.scrollTop);
+      if (window.scrollY > 10) {
+        setShowContact(false); // Sembunyikan kontak saat scroll ke bawah
+      } else {
+        setShowContact(true); // Tampilkan kontak saat di atas
       }
     };
 
-    const section = sectionRef.current;
-    if (section) {
-      section.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      if (section) {
-        section.removeEventListener("scroll", handleScroll);
-      }
-    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    Aos.init({ duration: 1000 });
-  }, []);
-
-  console.log("sc", scrollY);
 
   return (
     <React.Fragment>
@@ -82,10 +64,8 @@ export default function Layout() {
       >
         <section
           style={{ backgroundColor: "rgba(43,105,236, 0.9)" }}
-          className={`items-center justify-between py-2 px-5  hidden lg:flex transition-all duration-500 ${
-            scrollY < 100
-              ? "opacity-100 h-auto translate-y-0"
-              : "opacity-0 h-0 overflow-hidden -translate-y-100 absolute -z-100"
+          className={`items-center justify-between py-2 px-5 hidden lg:flex transition-all duration-500 ${
+            showContact ? "opacity-100 h-auto" : "opacity-0 h-0 overflow-hidden"
           }`}
         >
           <div className="text-white font-semibold">
@@ -127,43 +107,43 @@ export default function Layout() {
           <section className="hidden md:flex space-x-5">
             <button
               onClick={() => scrollToSection(berandaRef)}
-              className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
+              className="btn text-blue-400 text-md hover:text-blue-500"
             >
               Beranda
             </button>
             <button
               onClick={() => scrollToSection(dayaTampungRef)}
-              className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
+              className="btn text-blue-400 text-md hover:text-blue-500"
             >
               Jalur Seleksi dan Kuota
             </button>
             {/* <button
               onClick={() => scrollToSection(dayaTampungRef)}
-              className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
+              className="btn text-blue-400 text-md hover:text-blue-500"
             >
               Kuota Daya Tampung
             </button> */}
             <button
               onClick={() => scrollToSection(persyaratanRef)}
-              className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
+              className="btn text-blue-400 text-md hover:text-blue-500"
             >
               Persyaratan
             </button>
             <button
               onClick={() => scrollToSection(timelineRef)}
-              className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
+              className="btn text-blue-400 text-md hover:text-blue-500"
             >
-              Timeline
+              Time Line
             </button>
             <button
               onClick={() => scrollToSection(alurRef)}
-              className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
+              className="btn text-blue-400 text-md hover:text-blue-500"
             >
               Alur Pendaftaran
             </button>
             <button
               onClick={() => scrollToSection(materiRef)}
-              className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
+              className="btn text-blue-400 text-md hover:text-blue-500"
             >
               Materi Tes
             </button>
@@ -189,7 +169,7 @@ export default function Layout() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden absolute top-[0%] z-50 h-screen w-full bg-white shadow-lg py-5"
+              className="md:hidden absolute top-[60%] w-full bg-white shadow-lg py-5"
             >
               <div className="flex flex-col items-center space-y-5">
                 <button
@@ -197,71 +177,27 @@ export default function Layout() {
                     scrollToSection(berandaRef);
                     setMenuOpen(false);
                   }}
-                  className="text-blue-400 text-xl rounded-xl"
+                  className="text-blue-400 text-3xl rounded-xl"
                 >
-                  Beranda
+                  Home
+                </button>
+                <button
+                  onClick={() => {
+                    scrollToSection(seleksiRef);
+                    setMenuOpen(false);
+                  }}
+                  className="text-blue-400 text-3xl rounded-xl"
+                >
+                  Jalur Seleksi
                 </button>
                 <button
                   onClick={() => {
                     scrollToSection(dayaTampungRef);
                     setMenuOpen(false);
                   }}
-                  className="text-blue-400 text-xl rounded-xl"
+                  className="text-blue-400 text-3xl rounded-xl"
                 >
-                  Jalur Seleksi dan Kuota
-                </button>
-                <button
-                  onClick={() => {
-                    scrollToSection(persyaratanRef);
-                    setMenuOpen(false);
-                  }}
-                  className="text-blue-400 text-xl rounded-xl"
-                >
-                  Persyaratan
-                </button>
-                <button
-                  onClick={() => {
-                    scrollToSection(timelineRef);
-                    setMenuOpen(false);
-                  }}
-                  className="text-blue-400 text-xl rounded-xl"
-                >
-                  Timeline
-                </button>
-                <button
-                  onClick={() => {
-                    scrollToSection(alurRef);
-                    setMenuOpen(false);
-                  }}
-                  className="text-blue-400 text-xl rounded-xl"
-                >
-                  Alur Pendaftaran
-                </button>
-                <button
-                  onClick={() => {
-                    scrollToSection(materiRef);
-                    setMenuOpen(false);
-                  }}
-                  className="text-blue-400 text-xl rounded-xl"
-                >
-                  Materi Tes
-                </button>
-
-                <button
-                  onClick={() => {
-                    history.push("/login");
-                  }}
-                  className="text-blue-400 text-xl rounded-xl"
-                >
-                  Masuk
-                </button>
-                <button
-                  onClick={() => {
-                    history.push("/register");
-                  }}
-                  className="text-blue-400 text-xl rounded-xl"
-                >
-                  Daftar
+                  Kuota Daya Tampung
                 </button>
               </div>
             </motion.div>
@@ -269,12 +205,8 @@ export default function Layout() {
         </AnimatePresence>
 
         {/* Konten dengan efek Parallax */}
-        <section
-          ref={sectionRef}
-          className={clsx(`h-[90%] w-full overflow-auto `, {})}
-        >
+        <section className="h-[90%] w-full overflow-auto pb-10  ">
           <section
-            ref={berandaRef}
             className="p-10"
             style={{ backgroundColor: "rgba(43,105,236, 0.9)" }}
           >
@@ -312,6 +244,23 @@ export default function Layout() {
             <Footer />
           </section>
         </section>
+
+        <div
+          className={`${
+            hidden ? "block" : "hidden"
+          } relative  px-5 py-5 grid grid-cols-1 gap-4 shadow-lg border bg-white `}
+        >
+          <ReactWhatsapp number={"+62895320050324"} message={""}>
+            <div className=" p-2 flex items-center justify-center ">
+              <img
+                className={`w-4 h-4 shadow-xl `}
+                src={wa}
+                alt="whatsapp.png"
+              />
+              <p className="text-blue-400  ml-2 ">Hubungi Ustadz. Ihsan</p>
+            </div>
+          </ReactWhatsapp>
+        </div>
       </div>
     </React.Fragment>
   );

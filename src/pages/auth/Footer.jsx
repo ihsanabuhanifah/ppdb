@@ -1,28 +1,25 @@
 export default function Footer() {
   return (
-    <footer className=" text-white p-6 ">
-      <div className="container mx-auto p-6 bg-[#06579E]">
+    <footer className=" text-white ">
+      <div className="p-10 ">
         <div className="grid grid-cols-1  gap-8">
           {/* Slogan */}
           <div>
-            <h2 className="text-2xl font-bold">JABAR JUARA</h2>
+            <h2 className="text-2xl font-bold">MAN 1 Kota Sukabumi</h2>
             <p>Disiplin, Sukses, Berwawasan Islami</p>
           </div>
 
           {/* Kontak */}
-          <section className="grid grid-cols-2">
+          <section className="grid">
           <div>
               <h3 className="text-xl font-bold mb-2">HUBUNGI KAMI</h3>
-              <p>Jalan Bandung No.7 Penanggungan, Klojen Kota Malang 65113</p>
-              <p>
-                <strong>Telepon:</strong> 0341-551357 / 0341-558333
+              <p>Jl. Pramuka No.4, Gedongpanjang, Kec. Citamiang, Kota Sukabumi, Jawa Barat 43144
               </p>
               <p>
-                <strong>Fax:</strong> 0341-559779
+                <strong>Kontak Panitia: </strong> :<span className="ml-2">085795922861 (Pak Adi)</span>
               </p>
-              <p>
-                <strong>Email:</strong> admin@man2kotamalang.sch.id
-              </p>
+              <p><strong>Jam Pelayanan</strong> :  <span className="ml-2"> senin sd jum’at jam 07.30 sd 15.00 (Jam Kerja)</span></p>
+             
             </div>
             {/* Profil */}
             <div>
@@ -54,9 +51,9 @@ export default function Footer() {
             © Copyright <strong> MAN 1 KOTA SUKABUMI.</strong> All Rights
             Reserved
           </p>
-          <a href="#" className="text-yellow-400 hover:text-yellow-300">
+          {/* <a href="#" className="text-yellow-400 hover:text-yellow-300">
             Developer By ihsan{" "}
-          </a>
+          </a> */}
         </div>
       </div>
     </footer>

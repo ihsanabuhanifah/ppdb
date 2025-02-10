@@ -1,5 +1,49 @@
 import axios from "./axios";
 import {syncToken} from "./axios"
+
+
+
+
+export const uploadFileFoto = async (file, key) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("key", key);
+
+
+  try {
+    const response = await axios.post("/upload/profile", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    return response.data;
+  } catch (error) {
+   return error
+  }
+};
+
+
+export async function getDetail() {
+  try {
+    let response = await axios.get("/detail");
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
+
+
+export async function updateProfile(payload) {
+  try {
+    let response = await axios.put("/update-profile", payload);
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
+
+
+
+
 export async function postSantiBaru(values) {
   try {
     let response = await axios.post("/dataSiswa/save", values);

@@ -14,12 +14,12 @@ export default function Section2() {
       <div className="grid md:grid-cols-2 gap-8 items-center">
         {/* Image */}
         <div className="flex justify-center">
-          <img
-            className="rounded-full shadow-lg transition duration-300 transform hover:scale-105"
-            style={{ height: 200, width: 200 }}
-            src={Kepsek}
-            alt="Kepala Madrasah"
-          />
+        <img
+  className="rounded-full shadow-lg transition duration-300 transform hover:scale-105 w-[200px] h-[200px] md:w-[350px] md:h-[350px]"
+  src={Kepsek}
+  alt="Kepala Madrasah"
+/>
+
         </div>
 
         {/* Sambutan dengan efek hover getar */}
@@ -35,10 +35,17 @@ export default function Section2() {
             membangun karakter!
           </p>
           <p className="text-justify text-lg leading-relaxed mt-4">
-            Kami memadukan pendidikan agama dan umum dalam suasana yang
-            menyenangkan. Saya sering melihat sendiri bagaimana siswa-siswi kami
-            tumbuh menjadi pribadi yang cerdas, berakhlak mulia, dan siap
-            menghadapi tantangan masa depan.
+          Bayangkan sebuah madrasah/sekolah di mana anak-anak tidak hanya belajar mata pelajaran biasa, tapi juga mengembangkan kepribadian islami yang kuat. Di madrasah kami, setiap siswa adalah bintang yang sedang menemukan potensinya. Kami memadukan pendidikan agama dan umum dalam suasana yang menyenangkan.
+Saya sering melihat sendiri bagaimana siswa-siswi kami tumbuh menjadi pribadi yang cerdas, berakhlak mulia, dan siap menghadapi tantangan masa depan. Bukankah itu yang kita inginkan untuk anak-anak kita?
+Mari bergabung dengan keluarga besar MAN 1 Kota Sukabumi! Pendaftaran telah dibuka dan tim kami siap membantu Anda dengan senang hati. 
+          </p>
+
+          <p className="text-justify text-lg leading-relaxed mt-4">
+          Ingat, di madrasah kami, setiap anak adalah amanah yang kami jaga dan bimbing dengan sepenuh hati. Kami menantikan kehadiran Anda!
+          </p>
+
+          <p className="text-justify text-lg leading-relaxed mt-4">
+          MAN 1 Kota Sukabumi! Disiplin! Sukses! Berwawasan Islami!
           </p>
 
           <h2 className="text-xl italic mt-6">

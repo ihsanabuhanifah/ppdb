@@ -20,10 +20,11 @@ import { Tooltip } from "@chakra-ui/react";
 import TesDiniyah from "../pages/ppdb/tes-diniyah";
 import { getMessaging, getToken } from "firebase/messaging";
 import { useSelector } from "react-redux";
+import Dokumen from "../pages/ppdb/dokumen";
 export default function LayoutPPDB() {
   // const isPayment = useSelector((state) => state.auth.isPayment);
   const message = "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
-  const [hiddenMenu, setHiddenMenu] = React.useState(true);
+  const [hiddenMenu, setHiddenMenu] = React.useState(false);
   const [logout, setLogout] = React.useState(false);
   const [hidden, setHidden] = React.useState(false);
   const id = useSelector((state) => state.auth.id);
@@ -116,11 +117,14 @@ export default function LayoutPPDB() {
             className="lg:col-span-10 h-9/10 lg:h-full mt-5 lg:mt-0 bg-white px-5 p-10 lg:p-10 rounded-xl overflow-y-auto"
           >
             <Switch>
-            <Route path="/ppdb/pengumuman-kelulusan">
+            <Route path="/ppdb/biodata">
                 <Kelulusan></Kelulusan>
               </Route>
               <Route path="/ppdb/dashboard">
                 <Dashboard></Dashboard>
+              </Route>
+              <Route path="/ppdb/dokumen">
+                <Dokumen></Dokumen>
               </Route>
             
              
@@ -155,7 +159,7 @@ export default function LayoutPPDB() {
           <button  onClick={() => {
               setHidden(false);
             }} className="absolute right-5 top-1">x</button>
-          <ReactWhatsapp number={"+6285888222457"} message={message}>
+          <ReactWhatsapp number={"+62857959228617"} message={""}>
            <div className=" p-2 mt-4 flex items-center justify-center ">
            <img
              
@@ -164,24 +168,12 @@ export default function LayoutPPDB() {
              alt="whatsapp.png"
            />
            <p className="text-blue-400  ml-2 ">
-             Hubungi Ustadz. Dedi
+             Pak Adi (Panitia PPDB)
            </p>
            </div>
           </ReactWhatsapp>
           
-          <ReactWhatsapp number={"+62895320050324"} message={message}>
-           <div className=" p-2 flex items-center justify-center ">
-           <img
-             
-             className={`w-4 h-4 shadow-xl `}
-             src={wa}
-             alt="whatsapp.png"
-           />
-           <p className="text-blue-400  ml-2 ">
-           Hubungi Ustadz. Ihsan
-           </p>
-           </div>
-          </ReactWhatsapp>
+          
         </div>
       </div>
     </React.Fragment>

@@ -30,6 +30,12 @@ export default function Menu({ setHiddenMenu, hiddenMenu, setLogout }) {
       disabled: true,
       icon: <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />,
     },
+    {
+      to: "/ppdb/pengumuman",
+      name: "Pengumuman",
+      disabled: true,
+      icon: <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />,
+    },
     // {
     //   to: "/ppdb/pembayaran",
     //   name: "Pembayaran",
@@ -71,12 +77,12 @@ export default function Menu({ setHiddenMenu, hiddenMenu, setLogout }) {
                     }}
                     className={`flex items-center text-md  lg:text-xl font-bold p-3 lg:px-4 lg:rounded-l-full ${
                       menu.to === men
-                        ? "text-blue-400 font-bold bg-white"
+                        ? "text-blue-400 font-bold bg-white whitespace-nowrap" 
                         : ""
                     }`}
                   >
                     {menu.icon}
-                    <p>{menu.name}</p>
+                    <p className="whitespace-nowrap">{menu.name}</p>
                   </button>
               </React.Fragment>
             );

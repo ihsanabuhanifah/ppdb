@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import { Formik, useFormik, FormikProvider } from "formik";
@@ -13,8 +13,11 @@ import Batas from "../../auth/Batas";
 import InputReg from "../../auth/Input";
 import SelectReg from "../../auth/Select";
 import TextAreaReg from "../../auth/TextArea";
-import { getDetail, updateProfile } from "../../../api/santri";
-import { useQuery } from "react-query";
+import { fetchImageAsBase64, getDetail, updateProfile } from "../../../api/santri";
+import { useQuery, useQueryClient } from "react-query";
+import { pdf } from "@react-pdf/renderer";
+import { Resume } from "../pdf/resume.pdf";
+import { Button } from "semantic-ui-react";
 const RegisterSchema = Yup.object().shape({
   name: Yup.string(),
   email: Yup.string().email("Format email tidak sesuai"),
@@ -25,6 +28,9 @@ const RegisterSchema = Yup.object().shape({
   jenis_kelamin: Yup.string(),
   nisn: Yup.string().matches(/^\d{10}$/, "NISN harus 10 digit angka"),
   nik: Yup.string().matches(/^\d{16}$/, "NIK harus 16 digit angka"),
+  nomor_kk: Yup.string()
+    .nullable()
+    .matches(/^\d{16}$/, "Nomor KK harus 16 digit angka"),
   tempat_lahir: Yup.string(),
   tanggal_lahir: Yup.string(),
   agama: Yup.string(),
@@ -85,6 +91,8 @@ export default function Register() {
   let toast = useToast();
   let history = useHistory();
   const isLoading = useSelector((state) => state.auth.isLoading);
+  const queryClient = useQueryClient();
+  let [loading, setLoading] = useState(false)
 
   const { isError, data, isFetching } = useQuery(
     //query key
@@ -103,6 +111,7 @@ export default function Register() {
     let result = await updateProfile(values);
     console.log("result", result);
     if (result.message === "Berhasil Menyimpan Data") {
+      queryClient.invalidateQueries("detail");
       toast({
         position: "top-right",
         title: "Berhasil",
@@ -141,7 +150,7 @@ export default function Register() {
       agama: data?.agama || "",
       anak_ke: data?.anak_ke || "",
       jumlah_saudara_kandung: data?.jumlah_saudara_kandung || "",
-      jenis_sekolah: data?.asal_sekolah || "",
+      jenis_sekolah: data?.jenis_sekolah || "",
       asal_sekolah: data?.asal_sekolah || "",
       alamat: data?.alamat || "",
       desa: data?.desa || "",
@@ -182,16 +191,15 @@ export default function Register() {
       nomor_kip: data?.nomor_kip,
       nomor_pendaftaran: data?.nomor_pendaftaran,
       jalur_seleksi: data?.jalur_seleksi,
-      tingkat1 : data?.tingkat1,
-      tingkat2 : data?.tingkat2,
-      tingkat3 : data?.tingkat3,
-      juara_ke_1 : data?.juara_ke_1,
-      juara_ke_2 : data?.juara_ke_2,
-      juara_ke_3 : data?.juara_ke_3,
-      nama_prestasi1 : data?.nama_prestasi1,
-      nama_prestasi2 : data?.nama_prestasi2,
-      nama_prestasi3 : data?.nama_prestasi3,
-
+      tingkat1: data?.tingkat1,
+      tingkat2: data?.tingkat2,
+      tingkat3: data?.tingkat3,
+      juara_ke_1: data?.juara_ke_1,
+      juara_ke_2: data?.juara_ke_2,
+      juara_ke_3: data?.juara_ke_3,
+      nama_prestasi1: data?.nama_prestasi1,
+      nama_prestasi2: data?.nama_prestasi2,
+      nama_prestasi3: data?.nama_prestasi3,
 
       role: 2,
       is_batal: 0,
@@ -219,6 +227,29 @@ export default function Register() {
   useEffect(() => {
     localStorage.setItem("update", JSON.stringify(values));
   }, [values]);
+
+  const handleDownload = async () => {
+
+    let res
+
+    
+
+  
+
+    console.log("res", res)
+   setLoading(true)
+    const blob = await pdf(<Resume data={data} foto={res} />).toBlob();
+
+    const file = new Blob([blob], {
+      type: "application/pdf",
+    });
+
+    const fileURL = URL.createObjectURL(file);
+ setLoading(false)
+    window.open(fileURL, "_blank"); // Buka di tab baru
+
+    // return onOpen();
+  };
   return (
     <>
       <>
@@ -229,6 +260,13 @@ export default function Register() {
               LENGKAPI DATA DIRI
             </h2>
           </div>
+
+          <div className="flex items-center justify-end">
+            <Button loading={loading} color="facebook" onClick={handleDownload}>
+              Download Rekap Pendaftaran
+            </Button>
+          </div>
+         
           <FormikProvider value={Formik}>
             <form
               onSubmit={handleSubmit}
@@ -341,8 +379,10 @@ export default function Register() {
                         <option>Pilih</option>
                         <option value={"Raport"}> Raport</option>
                         <option value={"Akademik"}> Akademik</option>
-                        <option value={"Ekstrakulikuler"}> Ekstrakulikuler</option>
-                        
+                        <option value={"Ekstrakulikuler"}>
+                          {" "}
+                          Ekstrakulikuler
+                        </option>
                       </SelectReg>{" "}
                       <SelectReg
                         isRequired
@@ -361,24 +401,25 @@ export default function Register() {
                         <option>Pilih</option>
                         <option value={"Nasional"}> Nasional</option>
                         <option value={"Provinsi"}> Provinsi</option>
-                        <option value={"Kabupaten/Kota"}> Kabupaten/Kota</option>
-                        
+                        <option value={"Kabupaten/Kota"}>
+                          {" "}
+                          Kabupaten/Kota
+                        </option>
                       </SelectReg>{" "}
-
                       <InputReg
-                    isRequired
-                    focus={focus}
-                    setFocus={setFocus}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    isSubmitting={isSubmitting}
-                    value={values.juara_ke_1}
-                    title={"Juara"}
-                    placeholder={"1"}
-                    errors={errors.juara_ke_1}
-                    id={"juara_ke_1"}
-                    touched={touched.juara_ke_1}
-                  />
+                        isRequired
+                        focus={focus}
+                        setFocus={setFocus}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                        isSubmitting={isSubmitting}
+                        value={values.juara_ke_1}
+                        title={"Juara"}
+                        placeholder={"1"}
+                        errors={errors.juara_ke_1}
+                        id={"juara_ke_1"}
+                        touched={touched.juara_ke_1}
+                      />
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-5 mt-2 px-0 lg:px-5">
                       <h2 className="text-blue-400 font-bold text-lg   col-span-1 lg:col-span-3">
@@ -401,8 +442,10 @@ export default function Register() {
                         <option>Pilih</option>
                         <option value={"Raport"}> Raport</option>
                         <option value={"Akademik"}> Akademik</option>
-                        <option value={"Ekstrakulikuler"}> Ekstrakulikuler</option>
-                        
+                        <option value={"Ekstrakulikuler"}>
+                          {" "}
+                          Ekstrakulikuler
+                        </option>
                       </SelectReg>{" "}
                       <SelectReg
                         isRequired
@@ -421,24 +464,25 @@ export default function Register() {
                         <option>Pilih</option>
                         <option value={"Nasional"}> Nasional</option>
                         <option value={"Provinsi"}> Provinsi</option>
-                        <option value={"Kabupaten/Kota"}> Kabupaten/Kota</option>
-                        
+                        <option value={"Kabupaten/Kota"}>
+                          {" "}
+                          Kabupaten/Kota
+                        </option>
                       </SelectReg>{" "}
-
                       <InputReg
-                    isRequired
-                    focus={focus}
-                    setFocus={setFocus}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    isSubmitting={isSubmitting}
-                    value={values.juara_ke_2}
-                    title={"Juara"}
-                    placeholder={"1"}
-                    errors={errors.juara_ke_2}
-                    id={"juara_ke_2"}
-                    touched={touched.juara_ke_2}
-                  />
+                        isRequired
+                        focus={focus}
+                        setFocus={setFocus}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                        isSubmitting={isSubmitting}
+                        value={values.juara_ke_2}
+                        title={"Juara"}
+                        placeholder={"1"}
+                        errors={errors.juara_ke_2}
+                        id={"juara_ke_2"}
+                        touched={touched.juara_ke_2}
+                      />
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-5 mt-2 px-0 lg:px-5">
                       <h2 className="text-blue-400 font-bold text-lg   col-span-1 lg:col-span-3">
@@ -461,8 +505,10 @@ export default function Register() {
                         <option>Pilih</option>
                         <option value={"Raport"}> Raport</option>
                         <option value={"Akademik"}> Akademik</option>
-                        <option value={"Ekstrakulikuler"}> Ekstrakulikuler</option>
-                        
+                        <option value={"Ekstrakulikuler"}>
+                          {" "}
+                          Ekstrakulikuler
+                        </option>
                       </SelectReg>{" "}
                       <SelectReg
                         isRequired
@@ -481,24 +527,25 @@ export default function Register() {
                         <option>Pilih</option>
                         <option value={"Nasional"}> Nasional</option>
                         <option value={"Provinsi"}> Provinsi</option>
-                        <option value={"Kabupaten/Kota"}> Kabupaten/Kota</option>
-                        
+                        <option value={"Kabupaten/Kota"}>
+                          {" "}
+                          Kabupaten/Kota
+                        </option>
                       </SelectReg>{" "}
-
                       <InputReg
-                    isRequired
-                    focus={focus}
-                    setFocus={setFocus}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    isSubmitting={isSubmitting}
-                    value={values.juara_ke_3}
-                    title={"Juara"}
-                    placeholder={"1"}
-                    errors={errors.juara_ke_3}
-                    id={"juara_ke_3"}
-                    touched={touched.juara_ke_3}
-                  />
+                        isRequired
+                        focus={focus}
+                        setFocus={setFocus}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                        isSubmitting={isSubmitting}
+                        value={values.juara_ke_3}
+                        title={"Juara"}
+                        placeholder={"1"}
+                        errors={errors.juara_ke_3}
+                        id={"juara_ke_3"}
+                        touched={touched.juara_ke_3}
+                      />
                     </div>
                   </>
                 )}
@@ -713,7 +760,7 @@ export default function Register() {
                     handleChange={handleChange}
                     isSubmitting={isSubmitting}
                     value={values.tempat_tinggal}
-                    title={"Jarak Rumah ke Sekolah"}
+                    title={"Jarak Rumah ke MAN 1 Kota Sukabumi"}
                     placeholder={"cth. Sukabumi"}
                     errors={errors.tempat_tinggal}
                     id="tempat_tinggal"

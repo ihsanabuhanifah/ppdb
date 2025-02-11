@@ -21,6 +21,7 @@ import TesDiniyah from "../pages/ppdb/tes-diniyah";
 import { getMessaging, getToken } from "firebase/messaging";
 import { useSelector } from "react-redux";
 import Dokumen from "../pages/ppdb/dokumen";
+import Pengumuman from "../pages/ppdb/Pengumuman";
 export default function LayoutPPDB() {
   // const isPayment = useSelector((state) => state.auth.isPayment);
   const message = "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
@@ -125,6 +126,9 @@ export default function LayoutPPDB() {
               </Route>
               <Route path="/ppdb/dokumen">
                 <Dokumen></Dokumen>
+              </Route>
+              <Route path="/ppdb/pengumuman">
+                <Pengumuman></Pengumuman>
               </Route>
             
              

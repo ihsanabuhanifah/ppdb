@@ -9,11 +9,11 @@ export default function UploadDokumen() {
   let toast = useToast();
   let history = useHistory();
   const [files, setFiles] = useState({
-    foto_profile: null,
-    foto_kks: null,
-    foto_pkh: null,
-    foto_kip: null,
-    dokumen_prestasi : null
+    foto_profile:"",
+    foto_kks:"",
+    foto_pkh:"",
+    foto_kip:"",
+    dokumen_prestasi :""
   });
   const [errors, setErrors] = useState({});
 

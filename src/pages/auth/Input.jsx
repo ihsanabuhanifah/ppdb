@@ -51,12 +51,13 @@ export default function InputReg({
         ) : (
           ""
         )}
-      </div>
-      {errors && touched && (
+        {errors && touched && (
         <p className="text-red-500 italic font-bold  text-sm mt-1">
           {errors}
         </p>
       )}
+      </div>
+      
     </>
   );
 }

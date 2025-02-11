@@ -18,6 +18,8 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import ReactWhatsapp from "react-whatsapp";
 import clsx from "clsx";
+import { useQuery } from "react-query";
+import { getJumlahPendaftaran } from "../../api/santri";
 export default function Layout() {
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,6 +45,22 @@ export default function Layout() {
       ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
+
+  const { isError, data, isFetching } = useQuery(
+    //query key
+    ["pendaftaran", []],
+
+    () => getJumlahPendaftaran(),
+
+    {
+      keepPreviousData: true,
+      select: (response) => response.data,
+    }
+  );
+
+  console.log("data", data)
+
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -278,8 +296,8 @@ export default function Layout() {
             className="p-10"
             style={{ backgroundColor: "rgba(43,105,236, 0.9)" }}
           >
-            <Beranda />
-          </section>
+            <Beranda data={data} />
+          </section> 
           <section
             style={{ backgroundColor: "rgba(43,105,236, 0.9)" }}
             className="px-3 md:px-6 py-12"

@@ -31,6 +31,15 @@ export async function getDetail() {
   }
 }
 
+export async function getJumlahPendaftaran() {
+  try {
+    let response = await axios.get("/jumlah-pendaftaran");
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
+
 
 export async function updateProfile(payload) {
   try {
@@ -161,3 +170,26 @@ export async function getTesUmum(kode) {
  console.log(respone)
   return respone.data
 }
+
+
+
+
+
+export const fetchImageAsBase64 = async (url) => {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    // Konversi Blob ke File
+    const file = new File([blob], "image.jpg", { type: blob.type });
+
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.readAsDataURL(file); // Konversi ke Base64
+    });
+  } catch (error) {
+    console.error("Error fetching image:", error);
+    return null;
+  }
+};

@@ -11,7 +11,23 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import store from "./redux/store";
 import 'semantic-ui-css/semantic.min.css'
+import { Font } from "@react-pdf/renderer";
+
 const queryClient = new QueryClient();
+Font.register({
+  family: "Open Sans",
+  fonts: [
+    {
+      src: "https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFUK0Zdc1UAw.ttf", // Regular
+      fontWeight: 400,
+    },
+    {
+      src: "https://fonts.gstatic.com/s/opensans/v18/mem6YaGs126MiZpBA-UFUK0Xdc0.ttf", // Bold
+      fontWeight: 200,
+    },
+  ],
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

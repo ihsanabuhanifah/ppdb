@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Section1({data}) {
   const [welcomeText, setWelcomeText] = useState("");
-  const fullText = "PPDB MAN 1 Kota Sukabumi";
+  const fullText = "PPDB MAN 1 Kota Sukabumi 2025/2026";
   const [counters, setCounters] = useState({ total: 0, mts: 0, smp: 0, pkbm : 0, pps :0, wustha : 0 });
   const history = useHistory()
 

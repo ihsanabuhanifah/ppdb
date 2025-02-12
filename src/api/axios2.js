@@ -5,9 +5,9 @@ import qs from "qs";
 
 
 let client = axios.create({
-  baseURL: `https://ppdb-api.man1kotasukabumi.web.id/api`,
+  //baseURL: `https://ppdb-api.man1kotasukabumi.web.id/api`,
  
-  // baseURL : 'http://localhost:8000/api'
+   baseURL : 'http://localhost:8000/api'
 });
 
 // export const syncToken = () => {

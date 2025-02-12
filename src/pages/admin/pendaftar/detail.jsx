@@ -13,11 +13,12 @@ import Batas from "../../auth/Batas";
 import InputReg from "../../auth/Input";
 import SelectReg from "../../auth/Select";
 import TextAreaReg from "../../auth/TextArea";
-import { fetchImageAsBase64, getDetail, updateProfile } from "../../../api/santri";
+import { fetchImageAsBase64, getDetail, getDetailByAdmin, updateProfile } from "../../../api/santri";
 import { useQuery, useQueryClient } from "react-query";
 import { pdf } from "@react-pdf/renderer";
-import { Resume } from "../pdf/resume.pdf";
+import { Resume } from "../../ppdb/pdf/resume.pdf";
 import { Button } from "semantic-ui-react";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 const RegisterSchema = Yup.object().shape({
   name: Yup.string(),
   email: Yup.string().email("Format email tidak sesuai"),
@@ -84,7 +85,11 @@ const RegisterSchema = Yup.object().shape({
     ),
 });
 
-export default function Register() {
+export default function DetailPendaftar() {
+    const params = useParams()
+    const id = params.id
+
+    console.log("params", params)
   const [focus, setFocus] = React.useState("");
   const [errorReg, setErrorReg] = React.useState();
   let dispatch = useDispatch();
@@ -96,11 +101,12 @@ export default function Register() {
 
   const { isError, data, isFetching } = useQuery(
     //query key
-    ["detail", []],
+    ["users/detail/id", [id]],
 
-    () => getDetail(),
+    () => getDetailByAdmin(id),
 
     {
+    enabled : id !== undefined,
       keepPreviousData: true,
       select: (response) => response.data,
     }
@@ -200,6 +206,7 @@ export default function Register() {
       nama_prestasi1: data?.nama_prestasi1,
       nama_prestasi2: data?.nama_prestasi2,
       nama_prestasi3: data?.nama_prestasi3,
+      is_lulus : data?.is_lulus,
 
       role: 2,
       is_batal: 0,
@@ -224,9 +231,7 @@ export default function Register() {
 
   console.log("Data", data);
 
-  useEffect(() => {
-    localStorage.setItem("update", JSON.stringify(values));
-  }, [values]);
+  
 
   const handleDownload = async () => {
 
@@ -257,15 +262,15 @@ export default function Register() {
         <div className="w-full   bg-white rounded-2xl py-1 lg:py-10 px-1 lg:px-5">
           <div className="text-center">
             <h2 className="text-3xl text-blue-400 font-bold uppercase">
-              LENGKAPI DATA DIRI
+              DATA SISWA
             </h2>
           </div>
 
-          {/* <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end">
             <Button loading={loading} color="facebook" onClick={handleDownload}>
               Download Rekap Pendaftaran
             </Button>
-          </div> */}
+          </div>
          
           <FormikProvider value={Formik}>
             <form

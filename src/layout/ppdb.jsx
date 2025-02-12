@@ -163,7 +163,7 @@ export default function LayoutPPDB() {
           <button  onClick={() => {
               setHidden(false);
             }} className="absolute right-5 top-1">x</button>
-          <ReactWhatsapp number={"+62857959228617"} message={""}>
+          <ReactWhatsapp number={"+6285795922861"} message={""}>
            <div className=" p-2 mt-4 flex items-center justify-center ">
            <img
              

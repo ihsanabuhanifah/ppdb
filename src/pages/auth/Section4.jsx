@@ -31,13 +31,14 @@ export default function Section4() {
                   "Beragama Islam",
                   "Peserta didik kelas IX MTs/SMP",
                   "Usia maksimal 17 tahun pada 1 Juli 2025",
-                  "Upload foto 3x4 berseragam (JPG/JPEG, max 1MB)",
-                  "Upload NISN",
-                  "Scan rapor semester 3, 4, 5",
-                  "Scan Akte Kelahiran",
-                  "Scan Ijazah (jika sudah ada)",
-                  "Scan SKHUN",
-                  "Scan SKKB dari Sekolah",
+                  "Mengunggah (upload) foto berwarna  ukuran 3x4 dengan latar belakang merah dan berseragam Madrasah/Sekolah Asal (format foto JPG/JPEG kurang dari 1 Mb)",
+                  "Print Screenshoot NISN yang diambil dari website: nisn.data.kemendikbud.go.id (Diserahkan saat Daftar Ulang)",
+                  "Fc/Scan Rapot Semester 3, 4, dan 5 (Diserahkan saat Daftar Ulang)",
+                  "Fc/Scan Rapot Semester 3, 4, dan 5 (Diserahkan saat Daftar Ulang)",
+                  "Fc/Scan Kartu Keluarga (KK) (Diserahkan saat Daftar Ulang)",
+                  "Fc/Scan Ijazah apabila sudah ada (Diserahkan saat Daftar Ulang)",
+                  "Fc/Scan Surat Keterangan Hasil Ujian (KHUn atau SKHUN) (Diserahkan saat Daftar Ulang)",
+                  "Fc/Scan Surat keterangan kelakuan baik (SKKB) dari Sekolah (Diserahkan saat Daftar Ulang)",
                 ].map((item, index) => (
                   <li key={index} className="flex items-center">
                     <FaCheckCircle className="text-green-400 mr-3" /> {item}
@@ -100,8 +101,8 @@ export default function Section4() {
                 </div>
                 <ol className="mt-3 ml-4 list-decimal space-y-2 text-sm text-gray-500">
                   {[
-                    "Juara 1,2 & 3 Olimpiade/KSM/MYRES/OSN/OSP/OPSI/LKTI/atau lomba yang diselenggarakan oleh kemenag, kemendikdasmen, Kemendikti, instansi resmi pemerintah minimal tingkat kabupaten",
-                    "atau",
+                    "Juara 1,2 & 3 Olimpiade/KSM/MYRES/OSN/OSP/OPSI/LKTI/atau lomba yang diselenggarakan oleh kemenag, kemendikdasmen, Kemendikti, instansi resmi pemerintah minimal tingkat kabupaten atau",
+                    ,
                     "Mendapat rekomendasi dari kepala sekolah bahwa siswa tersebut terbaik 1-5 dalam satu kelas dan layak mendaftar di jalur prestasi akademik",
                   ].map((item, index) => (
                     <li className="ml-6" key={index}>

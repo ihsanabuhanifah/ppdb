@@ -31,6 +31,15 @@ export async function getDetail() {
   }
 }
 
+export async function getDetailByAdmin(id) {
+  try {
+    let response = await axios.get(`users/detail/${id}`);
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
+
 export async function getJumlahPendaftaran() {
   try {
     let response = await axios.get("/jumlah-pendaftaran");

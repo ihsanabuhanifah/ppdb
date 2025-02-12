@@ -1,67 +1,83 @@
 import { useEffect, useState } from "react";
-import { Upload, Eye, AlertCircle  } from "lucide-react";
+import { Upload, Eye, AlertCircle } from "lucide-react";
 import { getDetail, uploadFileFoto } from "../../../api/santri";
-import { useToast } from "@chakra-ui/react";
+import { Spinner, useToast } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
+import { pdf } from "@react-pdf/renderer";
+import { Resume } from "../pdf/resume.pdf";
+import { Button } from "semantic-ui-react";
 
 export default function UploadDokumen() {
+  const queryClient = useQueryClient();
   let toast = useToast();
   let history = useHistory();
+  let [loading, setLoading] = useState(false);
   const [files, setFiles] = useState({
-    foto_profile:"",
-    foto_kks:"",
-    foto_pkh:"",
-    foto_kip:"",
-    dokumen_prestasi :""
+    foto_profile: "",
+    foto_kks: "",
+    foto_pkh: "",
+    foto_kip: "",
+    dokumen_prestasi: "",
   });
   const [errors, setErrors] = useState({});
 
   const { isError, data, isFetching } = useQuery(
-      //query key
-      ["detail", []],
-  
-      () => getDetail(),
-  
-      {
-        keepPreviousData: true,
-        select: (response) => response.data,
-      }
-    );
+    //query key
+    ["detail", []],
 
-    console.log("Data", data)
+    () => getDetail(),
 
+    {
+      keepPreviousData: true,
+      select: (response) => response.data,
+    }
+  );
 
-    useEffect(()=> {
+  console.log("Data", data);
 
-      setFiles((prev) => ({
-        ...prev,
-        foto_profile: data?.foto_profile,
-        foto_kks: data?.foto_kks,
-        foto_pkh: data?.foto_pkh,
-        foto_kip: data?.foto_kip,
-        dokumen_prestasi : data?.dokumen_prestasi
-      }));
+  useEffect(() => {
+    setFiles((prev) => ({
+      ...prev,
+      foto_profile: data?.foto_profile,
+      foto_kks: data?.foto_kks,
+      foto_pkh: data?.foto_pkh,
+      foto_kip: data?.foto_kip,
+      dokumen_prestasi: data?.dokumen_prestasi,
+    }));
+  }, [data]);
 
-
-    }, [data])
-
-
-    console.log("files", files)
+  console.log("files", files);
 
   const handleFileChange = async (e, key) => {
+    setLoading(true);
     const file = e.target.files[0];
+
+    if (key !== "dokumen_prestasi") {
+      if (file.type?.includes("pdf")) {
+        setLoading(false);
+        return toast({
+          position: "top-right",
+          title: "Warning",
+          description: "Foto Wajib menggunakan gambar (.jpg/.jpeg/.png)",
+          status: "warning",
+          duration: 4000,
+          isClosable: true,
+        });
+      }
+    }
     if (file) {
       if (file.size > 1024 * 1024) {
         setErrors((prev) => ({
           ...prev,
           [key]: "Ukuran file terlalu besar (maks 1MB)",
         }));
-      return   toast({
+        setLoading(false);
+        return toast({
           position: "top-right",
           title: "Warning",
           description: "Ukuran file terlalu besar (maks 1MB",
-          status: "error",
+          status: "warning",
           duration: 4000,
           isClosable: true,
         });
@@ -70,13 +86,14 @@ export default function UploadDokumen() {
       console.log("key", key);
       try {
         const response = await uploadFileFoto(file, key);
-        console.log("res", response)
+        console.log("res", response);
 
         setFiles((prev) => ({
           ...prev,
           [key]: { file, url: response.file_url, type: file.type },
         }));
 
+        queryClient.invalidateQueries("detail");
         toast({
           position: "top-right",
           title: "Berhasil",
@@ -95,73 +112,165 @@ export default function UploadDokumen() {
           duration: 4000,
           isClosable: true,
         });
+      } finally {
+        setLoading(false);
       }
     }
+  };
+
+  const handleDownload = async () => {
+    let res;
+
+    console.log("res", res);
+    setLoading(true);
+    const blob = await pdf(<Resume data={data} foto={res} />).toBlob();
+
+    const file = new Blob([blob], {
+      type: "application/pdf",
+    });
+
+    const fileURL = URL.createObjectURL(file);
+    setLoading(false);
+    window.open(fileURL, "_blank"); // Buka di tab baru
+
+    // return onOpen();
   };
 
   return (
     <div className=" mx-auto bg-white rounded-2xl shadow-lg p-6">
       <div className="text-center mb-5">
         <h2 className="text-3xl text-blue-500 font-bold uppercase">
-          Upload Dokumen
+          KELENGKAPANDOKUMEN
         </h2>
       </div>
-      <table className="w-full border-collapse border border-gray-300">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="border border-gray-300 p-3">Dokumen</th>
-            <th className="border border-gray-300 p-3">Deskripsi</th>
-            <th className="border border-gray-300 p-3">Upload</th>
-            <th className="border border-gray-300 p-3">Preview</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(files).map(([key, file]) => (
-            <tr key={key} className="text-center">
+
+     
+      <div>
+        <div className="mb-2">
+          <h2 className="text-2xl font-bold mb-2 text-gray-500">
+            A. Download Dokumen
+          </h2>
+        </div>
+        <table className="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border border-gray-300 p-3">Dokumen</th>
+              <th className="border border-gray-300 p-3">Deskripsi</th>
+              <th className="border border-gray-300 p-3">Download</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="text-center">
               <td className="border border-gray-300 p-3 capitalize">
-              {key === "foto_profile"
-                  ? "Foto Profie"
-                  : key === "foto_kks"
-                  ? "Kartu KKS"
-                  : key === "foto_pkh"
-                  ? "Kartu PKH"
-                  : key === "foto_kip"
-                  ? "Kartu KIP "
-                  : "Dokumen Prestasi"}
+                Rekap Pendaftaran
               </td>
               <td className="border border-gray-300 p-3 text-sm text-gray-600">
-                {key === "foto_profile"
-                  ? "Upload Foto Data Diri dengan latar merah dan seragam sekolah/madrasah"
-                  : key === "foto_kks"
-                  ? "Upload Foto Kartu Keluarga Sejahtera/Kartu Perlindungan (jika ada bagi Jalur Afirmasi)"
-                  : key === "foto_pkh"
-                  ? "Upload Foto Kartu Program Keluarga Harapan (jika ada bagi Jalur Afirmasi)"
-                  : key === "foto_kip"
-                  ? "Upload Foto Kartu Kartu Indonesia Pintar (jika ada bagi Jalur Afirmasi)"
-                  : "Upload Foto Dokumen Prestasi/Raport/Sertifikat/Lainnya (Digabungkan dalam 1 file PDF)(Bagi Jalur Prestasi)"}
+                {" "}
+                Dokumen ini dicetak/diprint oleh masing-masing pendaftar dan dibawa saat Daftar Ulang
               </td>
               <td className="border border-gray-300 p-3">
-                <input
-                  type="file"
-                  accept="image/*,.pdf"
-                  onChange={(e) => handleFileChange(e, key)}
-                  className="hidden"
-                  id={key}
-                />
-                <label
-                  htmlFor={key}
-                  className="cursor-pointer bg-blue-100 text-blue-700 p-2 rounded-lg flex items-center gap-2 hover:bg-blue-200 transition"
+                <Button
+                  loading={loading}
+                  color="facebook"
+                  onClick={handleDownload}
                 >
-                  <Upload size={20} /> Pilih File
-                </label>
-                {errors[key] && (
-                  <p className="text-red-500 text-sm mt-1">{errors[key]}</p>
-                )}
+                  Download 
+                </Button>
+              </td>
+            </tr>
+            <tr className="text-center">
+              <td className="border border-gray-300 p-3 capitalize">
+              Surat Pernyataan
+              </td>
+              <td className="border border-gray-300 p-3 text-sm text-gray-600">
+                {" "}
+                Dokumen ini dicetak/diprint oleh masing-masing pendaftar dan dibawa saat Daftar Ulang
               </td>
               <td className="border border-gray-300 p-3">
-                { !!file === false ? <span className="text-red-500 font-bold">Belum Upload</span> :  file?.includes("pdf") ? (
+                <Button
+                  loading={loading}
+                  color="facebook"
+                  onClick={()=> {
+                    window.open(`http://localhost:8000/storage/uploads/Surat-Pernyataan.docx`)
+                  }}
+                >
+                  Download 
+                </Button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="mb-2 mt-5">
+          <h2 className="text-2xl font-bold mb-2 text-gray-500">
+            B. Upload Dokumen
+          </h2>
+        </div>
+        <table className="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border border-gray-300 p-3">Dokumen</th>
+              <th className="border border-gray-300 p-3">Deskripsi</th>
+              <th className="border border-gray-300 p-3">Upload</th>
+              <th className="border border-gray-300 p-3">Preview</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(files).map(([key, file]) => (
+              <tr key={key} className="text-center">
+                <td className="border border-gray-300 p-3 capitalize">
+                  {key === "foto_profile"
+                    ? "Foto Profil"
+                    : key === "foto_kks"
+                    ? "Kartu KKS"
+                    : key === "foto_pkh"
+                    ? "Kartu PKH"
+                    : key === "foto_kip"
+                    ? "Kartu KIP "
+                    : "Dokumen Prestasi"}
+                </td>
+                <td className="border border-gray-300 p-3 text-sm text-gray-600">
+                  {key === "foto_profile"
+                    ? "Upload Foto Data Diri dengan latar merah dan seragam sekolah/madrasah asal"
+                    : key === "foto_kks"
+                    ? "Upload Foto Kartu Keluarga Sejahtera/Kartu Perlindungan (Jika Ada dan Bagi Jalur Afirmasi)"
+                    : key === "foto_pkh"
+                    ? "Upload Foto Kartu Program Keluarga Harapan (Jika Ada dan Bagi Jalur Afirmasi)"
+                    : key === "foto_kip"
+                    ? "Upload Foto Kartu Kartu Indonesia Pintar (Jika Ada dan Bagi Jalur Afirmasi)"
+                    : "Upload Foto Dokumen Prestasi/Raport/Sertifikat/Lainnya (Digabungkan dalam 1 file PDF)(Bagi Jalur Prestasi)"}
+                </td>
+                <td className="border border-gray-300 p-3">
+                  <input
+                    type="file"
+                    accept="image/*,.pdf"
+                    onChange={(e) => handleFileChange(e, key)}
+                    className="hidden"
+                    id={key}
+                  />
+                  {loading ? (
+                    <Spinner />
+                  ) : !!file === false ? (
+                    <label
+                      htmlFor={key}
+                      className="cursor-pointer bg-blue-100 text-blue-700 p-2 rounded-lg flex items-center gap-2 hover:bg-blue-200 transition"
+                    >
+                      <Upload size={20} /> Pilih File
+                    </label>
+                  ) : (
+                    <span className="text-green-500 font-bold">
+                      Sudah Upload
+                    </span>
+                  )}
+                  {errors[key] && (
+                    <p className="text-red-500 text-sm mt-1">{errors[key]}</p>
+                  )}
+                </td>
+                <td className="border border-gray-300 p-3">
+                  {!!file === false ? (
+                    <span className="text-red-500 font-bold">Belum Upload</span>
+                  ) : file?.url?.includes("pdf") ? (
                     <a
-                      href={file.url}
+                      href={file}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-500 flex items-center gap-2"
@@ -177,20 +286,32 @@ export default function UploadDokumen() {
                       />
                     </div>
                   )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg mb-5  w-full flex items-start gap-3">
+      <div className="bg-yellow-100 mt-5 text-yellow-800 p-4 rounded-lg mb-5  w-full flex items-start gap-3">
         <AlertCircle className="text-red-500" size={24} />
         <div>
           <h3 className="font-bold text-lg text-red-500">Keterangan:</h3>
           <ul className="list-disc list-inside text-sm text-red-500">
-            <li><strong>Upload Foto Diri</strong> - Wajib untuk Jalur Reguler, Afirmasi, dan Prestasi.</li>
-            <li><strong>Upload Foto Kartu KKS/KPS/PKH/KIP</strong> - Diperlukan bagi Jalur Afirmasi.</li>
-            <li><strong>Upload Foto Dokumen Prestasi/Raport/Sertifikat/Lainnya</strong> - Harus digabungkan dalam satu file PDF bagi Jalur Prestasi.</li>
+            <li>
+              <strong>Upload Foto Diri</strong> - Wajib untuk Jalur Reguler,
+              Afirmasi, dan Prestasi.
+            </li>
+            <li>
+              <strong>Upload Foto Kartu KKS/KPS/PKH/KIP</strong> - Diperlukan
+              bagi Jalur Afirmasi.
+            </li>
+            <li>
+              <strong>
+                Upload Foto Dokumen Prestasi/Raport/Sertifikat/Lainnya
+              </strong>{" "}
+              - Harus digabungkan dalam satu file PDF bagi Jalur Prestasi.
+            </li>
           </ul>
         </div>
       </div>

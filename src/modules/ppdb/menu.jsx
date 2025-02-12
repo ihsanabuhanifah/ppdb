@@ -26,7 +26,7 @@ export default function Menu({ setHiddenMenu, hiddenMenu, setLogout }) {
     },
     {
       to: "/ppdb/dokumen",
-      name: "Upload Dokumen",
+      name: "Dokumen",
       disabled: true,
       icon: <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />,
     },

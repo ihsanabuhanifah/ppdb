@@ -183,12 +183,12 @@ export default function Register() {
             </Link>{" "}
           </p>
           <p className="text-center font-semibold">
-            <Link
+            {/* <Link
               className="text-blue-400 text-lg font-bold"
               to="/lupa-password"
             >
               Lupa Password ?
-            </Link>{" "}
+            </Link>{" "} */}
           </p>
         </div>
       </section>

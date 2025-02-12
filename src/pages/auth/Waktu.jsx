@@ -43,8 +43,8 @@ const Timeline = () => {
     { uraian: "Verifikasi Berkas", pelaksanaan: "17 Februari 2025 – 21 Maret 2025" },
     { uraian: "Seleksi CBT", pelaksanaan: "17 Februari 2025 – 21 Maret 2025" },
     { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "17 Februari 2025 – 21 Maret 2025" },
-    { uraian: "Rapat Orang Tua Peserta Didik dengan Komite", pelaksanaan: "24 Februari 2025" },
-    { uraian: "Daftar Ulang", pelaksanaan: "17 Februari 2025 – 25 Februari 2025" }
+   
+    { uraian: "Daftar Ulang", pelaksanaan: "17 Februari 2025 – 24 Maret 2025" }
   ];
 
   const dataGelombang2 = [
@@ -52,7 +52,7 @@ const Timeline = () => {
     { uraian: "Verifikasi Berkas", pelaksanaan: "9 April 2025 – 2 Juni 2025" },
     { uraian: "Seleksi CBT", pelaksanaan: "9 April 2025 – 2 Juni 2025" },
     { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "9 April 2025 – 2 Juni 2025" },
-    { uraian: "Rapat Orang Tua Peserta Didik dengan Komite", pelaksanaan: "3 Juni 2025" },
+   
     { uraian: "Daftar Ulang", pelaksanaan: "9 April 2025 – 5 Juni 2025" }
   ];
   const dataGelombang3 = [
@@ -60,7 +60,7 @@ const Timeline = () => {
     { uraian: "Verifikasi Berkas", pelaksanaan: "1 - 2 Juli 2025" },
     { uraian: "Seleksi CBT", pelaksanaan: "3 - 4 Juli 2025" },
     { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "5 Juli 2025" },
-    { uraian: "Rapat Orang Tua Peserta Didik dengan Komite", pelaksanaan: "7 Juli 2025" },
+    
     { uraian: "Daftar Ulang", pelaksanaan: "9 Juli 2025" }
   ];
 
@@ -77,7 +77,7 @@ const Timeline = () => {
       </motion.div>
       <TimelineTable title="Pendaftaran Gelombang 1" data={dataGelombang1} color="bg-blue-500" />
       <TimelineTable title="Pendaftaran Gelombang 2" data={dataGelombang2} color="bg-green-500" />
-      <TimelineTable title="Pendaftaran Tahap Akhir" data={dataGelombang3} color="bg-green-500" />
+      <TimelineTable title="Pendaftaran Tahap Akhir" data={dataGelombang3} color="bg-red-500" />
     </div>
   );
 };

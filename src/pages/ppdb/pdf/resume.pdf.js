@@ -366,10 +366,59 @@ export const Resume = ({ data }) => {
             )}
           </View>
 
-          <View></View>
+          <View style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+           
+            marginTop: space,
+          }}>
+          <View style={ { flex: 1, marginRight: 10 , marginTop : 100}}>
+            <Text style={{
+              fontSize : 6,
+              color : 'red',
+              marginBottom : 2,
+            }}>
+              * Foto pribadi dicetak berwarna dengan ukuran 2 x 3 dan ditempel
+              pada Dokumen Rekapan Isian Data ini
+            </Text>
+            <Text style={{
+              fontSize : 6,
+              color : 'red',
+              marginBottom : 2,
+            }}>
+            * Dokumen Rekapan Isian Data ini dicetak oleh masing-masing
+            Pendaftar dan diserahkan kepada Panitia saat Daftar Ulang
+            </Text>
+            <Text style={{
+              fontSize : 6,
+              color : 'red',
+              marginBottom : 2,
+            }}>
+            * Dokumen
+            Surat Pernyataan dicetak oleh masing-masing Pendaftar dan diserahkan
+            kepada Panitia saat Daftar Ulang 
+            </Text>
+            <Text style={{
+              fontSize : 6,
+              color : 'red',
+              marginBottom : 2,
+            }}>
+            * Dokumen pendukung bagi pendaftar
+            jalur Afirmasi atau Prestasi wajib diserahkan saat Daftar Ulang
+            </Text>
+            <Text style={{
+              fontSize : 6,
+              color : 'red'
+            }}>*Jika Pendaftar tidak melakukan Daftar Ulang sampai batas akhir
+            gelombang, maka akun Pendaftar akan dihapus oleh Panitia. Serta
+            wajib membuat akun ulang jika Pendaftar ingin mengikuti seleksi di
+            gelombang berikutnya.</Text>
+            
+          
+          </View>
 
           {/* Pernyataan */}
-          <View style={styles.signatureContainer}>
+          <View style={[styles.signatureContainer, { flex: 1, marginLeft: 10 }]}>
             {/* Kotak Foto */}
             <View style={styles.photoBox}>
               <Text>Pas Foto</Text>
@@ -379,9 +428,10 @@ export const Resume = ({ data }) => {
             <View style={styles.signatureSection}>
               <Text>Sukabumi, {formatMonth(new Date())}</Text>
               <Text>Tanda Tangan:</Text>
-             
+
               <Text style={{ marginTop: 50 }}>({data.name})</Text>
             </View>
+          </View>
           </View>
         </View>
       </Page>

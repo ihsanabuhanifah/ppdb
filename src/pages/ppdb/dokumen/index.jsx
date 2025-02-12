@@ -34,7 +34,7 @@ export default function UploadDokumen() {
     }
   );
 
-  console.log("Data", data);
+
 
   useEffect(() => {
     setFiles((prev) => ({
@@ -90,7 +90,7 @@ export default function UploadDokumen() {
 
         setFiles((prev) => ({
           ...prev,
-          [key]: { file, url: response.file_url, type: file.type },
+          [key]:  response.file_url,
         }));
 
         queryClient.invalidateQueries("detail");
@@ -266,15 +266,17 @@ export default function UploadDokumen() {
                   )}
                 </td>
                 <td className="border border-gray-300 p-3">
+
                   {!!file === false ? (
                     <span className="text-red-500 font-bold">Belum Upload</span>
-                  ) : file?.url?.includes("pdf") ? (
+                  ) : file?.includes("pdf") ? (
                     <a
                       href={file}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-500 flex items-center gap-2"
                     >
+                     
                       <Eye size={20} /> Lihat PDF
                     </a>
                   ) : (

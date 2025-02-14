@@ -35,6 +35,8 @@ export const SiswaPageProtected = ({ children, ...rest }) => {
     if (result?.user?.roles[0].name === "user") {
       return history.push("/ppdb/dashboard");
     }
+
+    return history.push(url)
   };
 
   React.useEffect(() => {

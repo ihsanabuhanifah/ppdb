@@ -148,8 +148,12 @@ export default function Pendaftar() {
                     Nama Lengkap
                   </th>
                   <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
-                    Email
+                    NISN
                   </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Gelombang
+                  </th>
+                 
                   <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
                     Nomor Utama
                   </th>
@@ -160,7 +164,9 @@ export default function Pendaftar() {
                   <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
                     Asal Sekolah
                   </th>
-
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Diperbaharui
+                  </th>
                   <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
                     Detail
                   </th>
@@ -223,8 +229,12 @@ export default function Pendaftar() {
                       {dt.name}
                     </td>
                     <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
-                      {dt.email}
+                      {dt.nisn}
                     </td>
+                    <td className="px-6 py-4 text-center text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
+                     {dt.gelombang}
+                    </td>
+                    
                     <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
                       <ReactWhatsapp
                         number={formatNomorHp(dt.phone)}
@@ -242,11 +252,14 @@ export default function Pendaftar() {
                     <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
                       {dt.asal_sekolah}
                     </td>
+                    <td className="px-6 py-4 text-center text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
+                     {formatDateInd(dt.updated_at)}
+                    </td>
 
                     <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500  leading-5">
-                      <Button onClick={()=> {
+                      <Button colorPalette="teal" variant="solid"  onClick={()=> {
                         history.push(`pendaftar/${dt.id}/detail`)
-                      }}> Perbaharui</Button>
+                      }}> Detail</Button>
                     </td>
                   </tr>
                 ))}
@@ -264,3 +277,21 @@ export default function Pendaftar() {
     </React.Fragment>
   );
 }
+
+
+export const formatDateInd = (isoString) => {
+  if (!isoString) return '-';
+
+  const date = new Date(isoString);
+
+  const options= {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false, // Format 24 jam
+  };
+
+  return new Date(date).toLocaleDateString('id-ID', options);
+};

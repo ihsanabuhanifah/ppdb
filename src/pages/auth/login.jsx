@@ -8,6 +8,7 @@ import { useToast } from "@chakra-ui/react";
 import { authLogin } from "../../redux/action/login";
 import { useHistory } from "react-router";
 import Loading from "../../components/loading";
+import Swal from "sweetalert2";
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
    
@@ -32,14 +33,12 @@ export default function Register() {
     let result = await dispatch(authLogin(values));
     console.log(result);
     if (result.message === "Berhasil Login") {
-      toast({
-        position: "top-right",
-        title: "Berhasil",
-        description: "Berhasil login",
-        status: "success",
-        duration: 4000,
-        isClosable: true,
+      Swal.fire({
+        title: "Berhasil!",
+        text: "Login Berhasil",
+        icon: "success"
       });
+      
 
       if (result.user.roles[0].name === "admin") {
         return history.push("/admin/pendaftar");
@@ -52,13 +51,12 @@ export default function Register() {
     if (result.response.status === 401) {
       console.log(result.response);
 
-      toast({
-        position: "top-right",
+    
+
+      Swal.fire({
         title: "Gagal",
-        description: "Email dan Password tidak cocok",
-        status: "error",
-        duration: 10000,
-        isClosable: true,
+        text: "Email dan Password tidak cocok",
+        icon: "error"
       });
     }
   };

@@ -7,6 +7,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { pdf } from "@react-pdf/renderer";
 import { Resume } from "../pdf/resume.pdf";
 import { Button } from "semantic-ui-react";
+import Swal from "sweetalert2";
 
 export default function UploadDokumen() {
   const queryClient = useQueryClient();
@@ -34,8 +35,6 @@ export default function UploadDokumen() {
     }
   );
 
-
-
   useEffect(() => {
     setFiles((prev) => ({
       ...prev,
@@ -56,13 +55,11 @@ export default function UploadDokumen() {
     if (key !== "dokumen_prestasi") {
       if (file.type?.includes("pdf")) {
         setLoading(false);
-        return toast({
-          position: "top-right",
-          title: "Warning",
-          description: "Foto Wajib menggunakan gambar (.jpg/.jpeg/.png)",
-          status: "warning",
-          duration: 4000,
-          isClosable: true,
+
+        return Swal.fire({
+          title: "Peringatan",
+          text: "Foto Wajib menggunakan gambar (.jpg/.jpeg/.png)",
+          icon: "warning",
         });
       }
     }
@@ -73,13 +70,11 @@ export default function UploadDokumen() {
           [key]: "Ukuran file terlalu besar (maks 1MB)",
         }));
         setLoading(false);
-        return toast({
-          position: "top-right",
-          title: "Warning",
-          description: "Ukuran file terlalu besar (maks 1MB",
-          status: "warning",
-          duration: 4000,
-          isClosable: true,
+
+        return Swal.fire({
+          title: "Peringatan",
+          text: "Ukuran file terlalu besar (maks 1MB)",
+          icon: "warning",
         });
       }
 
@@ -90,27 +85,21 @@ export default function UploadDokumen() {
 
         setFiles((prev) => ({
           ...prev,
-          [key]:  response.file_url,
+          [key]: response.file_url,
         }));
 
         queryClient.invalidateQueries("detail");
-        toast({
-          position: "top-right",
-          title: "Berhasil",
-          description: "Upload File Berhasil",
-          status: "success",
-          duration: 4000,
-          isClosable: true,
+
+        Swal.fire({
+          title: "Berhasil!",
+          text: "Upload File Berhasil",
+          icon: "success",
         });
       } catch (err) {
-        console.log("err", err);
-        toast({
-          position: "top-right",
+        Swal.fire({
           title: "Gagal",
-          description: "Upload file Gagal",
-          status: "error",
-          duration: 4000,
-          isClosable: true,
+          text: "Upload file Gagal",
+          icon: "error",
         });
       } finally {
         setLoading(false);
@@ -140,11 +129,10 @@ export default function UploadDokumen() {
     <div className=" mx-auto bg-white rounded-2xl shadow-lg p-6">
       <div className="text-center mb-5">
         <h2 className="text-3xl text-blue-500 font-bold uppercase">
-          KELENGKAPANDOKUMEN
+          KELENGKAPAN DOKUMEN
         </h2>
       </div>
 
-     
       <div>
         <div className="mb-2">
           <h2 className="text-2xl font-bold mb-2 text-gray-500">
@@ -166,7 +154,8 @@ export default function UploadDokumen() {
               </td>
               <td className="border border-gray-300 p-3 text-sm text-gray-600">
                 {" "}
-                Dokumen ini dicetak/diprint oleh masing-masing pendaftar dan dibawa saat Daftar Ulang
+                Dokumen ini dicetak/diprint oleh masing-masing pendaftar dan
+                dibawa saat Daftar Ulang
               </td>
               <td className="border border-gray-300 p-3">
                 <Button
@@ -174,27 +163,30 @@ export default function UploadDokumen() {
                   color="facebook"
                   onClick={handleDownload}
                 >
-                  Download 
+                  Download
                 </Button>
               </td>
             </tr>
             <tr className="text-center">
               <td className="border border-gray-300 p-3 capitalize">
-              Surat Pernyataan
+                Surat Pernyataan
               </td>
               <td className="border border-gray-300 p-3 text-sm text-gray-600">
                 {" "}
-                Dokumen ini dicetak/diprint oleh masing-masing pendaftar dan dibawa saat Daftar Ulang
+                Dokumen ini dicetak/diprint oleh masing-masing pendaftar dan
+                dibawa saat Daftar Ulang
               </td>
               <td className="border border-gray-300 p-3">
                 <Button
                   loading={loading}
                   color="facebook"
-                  onClick={()=> {
-                    window.open(`http://localhost:8000/storage/uploads/Surat-Pernyataan.docx`)
+                  onClick={() => {
+                    window.open(
+                      `https://ppdb-api.man1kotasukabumi.web.id/storage/uploads/Surat-Pernyataan.docx`
+                    );
                   }}
                 >
-                  Download 
+                  Download
                 </Button>
               </td>
             </tr>
@@ -266,7 +258,6 @@ export default function UploadDokumen() {
                   )}
                 </td>
                 <td className="border border-gray-300 p-3">
-
                   {!!file === false ? (
                     <span className="text-red-500 font-bold">Belum Upload</span>
                   ) : file?.includes("pdf") ? (
@@ -276,7 +267,6 @@ export default function UploadDokumen() {
                       rel="noopener noreferrer"
                       className="text-blue-500 flex items-center gap-2"
                     >
-                     
                       <Eye size={20} /> Lihat PDF
                     </a>
                   ) : (

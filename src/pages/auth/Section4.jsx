@@ -39,6 +39,7 @@ export default function Section4() {
                   "Fc/Scan Ijazah apabila sudah ada (Diserahkan saat Daftar Ulang)",
                   "Fc/Scan Surat Keterangan Hasil Ujian (KHUn atau SKHUN) (Diserahkan saat Daftar Ulang)",
                   "Fc/Scan Surat keterangan kelakuan baik (SKKB) dari Sekolah (Diserahkan saat Daftar Ulang)",
+                  "Fc/Scan Akta Lahir (Dibawa saat Daftar Ulang)"
                 ].map((item, index) => (
                   <li key={index} className="flex items-center">
                     <FaCheckCircle className="text-green-400 mr-3" /> {item}

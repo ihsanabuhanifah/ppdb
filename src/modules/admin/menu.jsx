@@ -55,10 +55,10 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
               <button
               key={index}
                 onClick={() => {
-                  setHiddenMenu(!hiddenMenu);
-                  if(menu.disabled === false){
-                    return history.push("/ppdb/konfirmasi-pembayaran-ppdb")
-                  }
+                  // setHiddenMenu(!hiddenMenu);
+                  // if(menu.disabled === false){
+                  //   return history.push("/ppdb/konfirmasi-pembayaran-ppdb")
+                  // }
                   return history.push(menu.to)
                 }}
                 className={`flex items-center text-md  lg:text-sm font-bold p-3 lg:px-4 lg:rounded-l-full ${history.location.pathname === menu.to ? "text-blue-400 font-bold bg-white" : ""}`}

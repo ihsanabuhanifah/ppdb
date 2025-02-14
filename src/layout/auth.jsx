@@ -7,7 +7,7 @@ import { Tooltip } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion"; // Import animasi
-import bg from "../image/bg.png";
+import bg from "../image/bg.jpg";
 export default function Layout({ children }) {
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);

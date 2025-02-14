@@ -1,5 +1,5 @@
 import Kepsek from "../../image/kepsek.png";
-import bg from "../../image/bg.png";
+
 
 export default function Section2() {
   return (

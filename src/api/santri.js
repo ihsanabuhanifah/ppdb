@@ -1,5 +1,7 @@
+import { useMutation, useQueryClient } from "react-query";
 import axios from "./axios";
 import {syncToken} from "./axios"
+import Swal from "sweetalert2";
 
 
 
@@ -202,3 +204,52 @@ export const fetchImageAsBase64 = async (url) => {
     return null;
   }
 };
+
+
+
+
+
+
+export async function postNilaiBerkas(values) {
+  try {
+    let response = await axios.post(`/berkas/${values.id}`, values);
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
+
+export const useNilaiBerkas = () => {
+
+  const queryClient = useQueryClient()
+
+
+  const mutate = useMutation({
+    mutationFn : (values)=> postNilaiBerkas(values) ,
+    onSuccess : ()=> {
+
+      queryClient.invalidateQueries("users/detail/id")
+      Swal.fire({
+        title: "Penilaian Berkas Berhasil",
+        icon: "success",
+        draggable: true
+      });
+      
+    },
+
+    onError : ()=> {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
+      
+    }
+  })
+
+  return mutate
+}
+
+
+ 

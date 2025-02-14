@@ -39,29 +39,29 @@ const TimelineTable = ({ title, data, color }) => {
 
 const Timeline = () => {
   const dataGelombang1 = [
-    { uraian: "Pendaftaran Online/Offline PPDBM", pelaksanaan: "17 Februari 2025 – 21 Maret 2025" },
-    { uraian: "Verifikasi Berkas", pelaksanaan: "17 Februari 2025 – 21 Maret 2025" },
-    { uraian: "Seleksi CBT", pelaksanaan: "17 Februari 2025 – 21 Maret 2025" },
-    { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "17 Februari 2025 – 21 Maret 2025" },
+    { uraian: "Pendaftaran Online/Offline PPDBM", pelaksanaan: "14 Februari 2025 – 21 Maret 2025" },
+    { uraian: "Verifikasi Berkas", pelaksanaan: "14 Februari 2025 – 21 Maret 2025" },
+    { uraian: "Seleksi CBT", pelaksanaan: "6 Maret 2025 – 21 Maret 2025" },
+    { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "6 Maret 2025 – 21 Maret 2025" },
    
-    { uraian: "Daftar Ulang", pelaksanaan: "17 Februari 2025 – 24 Maret 2025" }
+    { uraian: "Daftar Ulang", pelaksanaan: "6 Maret 2025 – 25 Maret 2025" }
   ];
 
   const dataGelombang2 = [
-    { uraian: "Pendaftaran Online/Offline PPDBM", pelaksanaan: "9 April 2025 – 2 Juni 2025" },
-    { uraian: "Verifikasi Berkas", pelaksanaan: "9 April 2025 – 2 Juni 2025" },
-    { uraian: "Seleksi CBT", pelaksanaan: "9 April 2025 – 2 Juni 2025" },
-    { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "9 April 2025 – 2 Juni 2025" },
+    { uraian: "Pendaftaran Online/Offline PPDBM", pelaksanaan: "9 April 2025 – 26 Juni 2025" },
+    { uraian: "Verifikasi Berkas", pelaksanaan: "9 April 2025 – 26 Juni 2025" },
+    { uraian: "Seleksi CBT", pelaksanaan: "9 April 2025 – 26 Juni 2025" },
+    { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "9 April 2025 – 26 Juni 2025" },
    
-    { uraian: "Daftar Ulang", pelaksanaan: "9 April 2025 – 5 Juni 2025" }
+    { uraian: "Daftar Ulang", pelaksanaan: "9 April 2025 – 30 Juni 2025" }
   ];
   const dataGelombang3 = [
-    { uraian: "Pendaftaran Online/Offline PPDBM", pelaksanaan: "1 - 2 Juli 2025" },
-    { uraian: "Verifikasi Berkas", pelaksanaan: "1 - 2 Juli 2025" },
-    { uraian: "Seleksi CBT", pelaksanaan: "3 - 4 Juli 2025" },
-    { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "5 Juli 2025" },
+    { uraian: "Pendaftaran Online/Offline PPDBM", pelaksanaan: "10 Juni - 9 Juli 2025" },
+    { uraian: "Verifikasi Berkas", pelaksanaan: "10 Juni - 9 Juli 2025" },
+    { uraian: "Seleksi CBT", pelaksanaan: "10 Juni - 9 Juli 2025" },
+    { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "10 Juni - 9 Juli 2025" },
     
-    { uraian: "Daftar Ulang", pelaksanaan: "9 Juli 2025" }
+    { uraian: "Daftar Ulang", pelaksanaan: "10 Juni - 11 Juli 2025" }
   ];
 
   return (

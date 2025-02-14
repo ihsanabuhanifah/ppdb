@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Formik, useFormik, FormikProvider } from "formik";
 import * as Yup from "yup";
-import { useToast } from "@chakra-ui/react";
+import { useDisclosure, useToast } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useHistory } from "react-router";
@@ -13,12 +13,28 @@ import Batas from "../../auth/Batas";
 import InputReg from "../../auth/Input";
 import SelectReg from "../../auth/Select";
 import TextAreaReg from "../../auth/TextArea";
-import { fetchImageAsBase64, getDetail, getDetailByAdmin, updateProfile } from "../../../api/santri";
+import {
+  fetchImageAsBase64,
+  getDetail,
+  getDetailByAdmin,
+  updateProfile,
+  useNilaiBerkas,
+} from "../../../api/santri";
 import { useQuery, useQueryClient } from "react-query";
 import { pdf } from "@react-pdf/renderer";
 import { Resume } from "../../ppdb/pdf/resume.pdf";
 import { Button } from "semantic-ui-react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { ArrowBigLeft, ArrowLeft, Eye } from "lucide-react";
+import Modal from "./Modal";
+import { formatDateInd } from ".";
+import Swal from "sweetalert2";
+import {
+  DocumentAddIcon,
+  DocumentIcon,
+  DocumentReportIcon,
+} from "@heroicons/react/outline";
+import Nilai from "./Nilai";
 const RegisterSchema = Yup.object().shape({
   name: Yup.string(),
   email: Yup.string().email("Format email tidak sesuai"),
@@ -86,10 +102,20 @@ const RegisterSchema = Yup.object().shape({
 });
 
 export default function DetailPendaftar() {
-    const params = useParams()
-    const id = params.id
+  const params = useParams();
+  const id = params.id;
 
-    console.log("params", params)
+  let [image, setImage] = useState("");
+
+  const { onOpen, isOpen, onClose } = useDisclosure();
+
+  const [files, setFiles] = useState({
+    foto_profile: "",
+    foto_kks: "",
+    foto_pkh: "",
+    foto_kip: "",
+    dokumen_prestasi: "",
+  });
   const [focus, setFocus] = React.useState("");
   const [errorReg, setErrorReg] = React.useState();
   let dispatch = useDispatch();
@@ -97,7 +123,8 @@ export default function DetailPendaftar() {
   let history = useHistory();
   const isLoading = useSelector((state) => state.auth.isLoading);
   const queryClient = useQueryClient();
-  let [loading, setLoading] = useState(false)
+  let [loading, setLoading] = useState(false);
+  const name = useSelector((state) => state.auth.name);
 
   const { isError, data, isFetching } = useQuery(
     //query key
@@ -106,37 +133,33 @@ export default function DetailPendaftar() {
     () => getDetailByAdmin(id),
 
     {
-    enabled : id !== undefined,
+      enabled: id !== undefined,
       keepPreviousData: true,
       select: (response) => response.data,
     }
   );
 
+  const mutate = useNilaiBerkas();
+
   const initialValues = {};
   const onSubmit = async (values) => {
-    let result = await updateProfile(values);
+    let result = await updateProfile({ id: id, ...values, nama_admin: name });
     console.log("result", result);
     if (result.message === "Berhasil Menyimpan Data") {
       queryClient.invalidateQueries("detail");
-      toast({
-        position: "top-right",
-        title: "Berhasil",
-        description: "Berhasil Memperbaharui Data",
-        status: "success",
-        duration: 4000,
-        isClosable: true,
+      Swal.fire({
+        title: "Berhasil!",
+        text: "Berhasil Memperbaharui Data",
+        icon: "success",
       });
     }
     if (result.response.status === 401) {
       console.log(result.response);
       setErrorReg(result.response.data);
-      toast({
-        position: "top-right",
+      Swal.fire({
         title: "Gagal",
-        description: result.response?.data?.message,
-        status: "error",
-        duration: 4000,
-        isClosable: true,
+        text: result.response?.data?.message,
+        icon: "error",
       });
     }
   };
@@ -206,7 +229,17 @@ export default function DetailPendaftar() {
       nama_prestasi1: data?.nama_prestasi1,
       nama_prestasi2: data?.nama_prestasi2,
       nama_prestasi3: data?.nama_prestasi3,
-      is_lulus : data?.is_lulus,
+      is_lulus: data?.is_lulus,
+      gelombang: data?.gelombang,
+      created_at: data?.created_at,
+      updated_at: data?.updated_at,
+      cbt_bacaan: data?.nilai?.cbt_bacaan,
+      cbt_tajwid: data?.nilai?.cbt_tajwid,
+      cbt_hafalan: data?.nilai?.cbt_hafalan,
+      cbt_tulisan: data?.nilai?.cbt_tulisan,
+      cbt_nilai: data?.nilai?.cbt_nilai,
+      cbt_keterangan: data?.nilai?.cbt_keterangan,
+      cbt_penilaian: data?.nilai?.cbt_penilaian,
 
       role: 2,
       is_batal: 0,
@@ -231,18 +264,11 @@ export default function DetailPendaftar() {
 
   console.log("Data", data);
 
-  
-
   const handleDownload = async () => {
+    let res;
 
-    let res
-
-    
-
-  
-
-    console.log("res", res)
-   setLoading(true)
+    console.log("res", res);
+    setLoading(true);
     const blob = await pdf(<Resume data={data} foto={res} />).toBlob();
 
     const file = new Blob([blob], {
@@ -250,28 +276,61 @@ export default function DetailPendaftar() {
     });
 
     const fileURL = URL.createObjectURL(file);
- setLoading(false)
+    setLoading(false);
     window.open(fileURL, "_blank"); // Buka di tab baru
 
     // return onOpen();
   };
+
+  useEffect(() => {
+    setFiles((prev) => ({
+      ...prev,
+      foto_profile: data?.foto_profile,
+      foto_kks: data?.foto_kks,
+      foto_pkh: data?.foto_pkh,
+      foto_kip: data?.foto_kip,
+      dokumen_prestasi: data?.dokumen_prestasi,
+    }));
+  }, [data]);
+
   return (
     <>
+      <Modal image={image} onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
       <>
         {" "}
+        <div cl>
+          <button
+            onClick={() => {
+              history.push("/admin/pendaftar");
+            }}
+            className="flex items-center space-x-10"
+          >
+            <ArrowLeft /> <span>Kembali</span>
+          </button>
+        </div>
         <div className="w-full   bg-white rounded-2xl py-1 lg:py-10 px-1 lg:px-5">
           <div className="text-center">
             <h2 className="text-3xl text-blue-400 font-bold uppercase">
-              DATA SISWA
+              REKAPAN DATA SISWA
             </h2>
           </div>
 
-          <div className="flex items-center justify-end">
-            <Button loading={loading} color="facebook" onClick={handleDownload}>
-              Download Rekap Pendaftaran
-            </Button>
+          <div className="text-lg leading-5 text-blue-900 flex items-center justify-center mt-5">
+            {data?.foto_profile ? (
+              <img
+                className="rounded-full shadow-lg transition duration-300 transform hover:scale-105 w-[200px] h-[200px] md:w-[200px] md:h-[200px]"
+                src={data?.foto_profile}
+              />
+            ) : (
+              <img
+                className="rounded-full shadow-lg transition duration-300 transform hover:scale-105 w-[200px] h-[200px] md:w-[200px] md:h-[200px]"
+                src={
+                  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                }
+              />
+            )}
           </div>
-         
+
           <FormikProvider value={Formik}>
             <form
               onSubmit={handleSubmit}
@@ -292,6 +351,45 @@ export default function DetailPendaftar() {
                   errors={errors.nomor_pendaftaran}
                   id={"nomor_pendaftaran"}
                   touched={touched.nomor_pendaftaran}
+                />
+                <InputReg
+                  focus={focus}
+                  setFocus={setFocus}
+                  handleBlur={handleBlur}
+                  handleChange={() => {}}
+                  isSubmitting={isSubmitting}
+                  value={values.gelombang}
+                  title={"Gelombang"}
+                  placeholder={"Muhammad"}
+                  errors={errors.gelombang}
+                  id={"gelombang"}
+                  touched={touched.gelombang}
+                />
+                <InputReg
+                  focus={focus}
+                  setFocus={setFocus}
+                  handleBlur={handleBlur}
+                  handleChange={() => {}}
+                  isSubmitting={isSubmitting}
+                  value={formatDateInd(values.created_at)}
+                  title={"Waktu Pendaftaran"}
+                  placeholder={"Muhammad"}
+                  errors={errors.created_at}
+                  id={"created_at"}
+                  touched={touched.created_at}
+                />
+                <InputReg
+                  focus={focus}
+                  setFocus={setFocus}
+                  handleBlur={handleBlur}
+                  handleChange={() => {}}
+                  isSubmitting={isSubmitting}
+                  value={formatDateInd(values.updated_at)}
+                  title={"Terakhir Perbaharui Data"}
+                  placeholder={"Muhammad"}
+                  errors={errors.updated_at}
+                  id={"updated_at"}
+                  touched={touched.updated_at}
                 />
 
                 <SelectReg
@@ -765,7 +863,9 @@ export default function DetailPendaftar() {
                     handleChange={handleChange}
                     isSubmitting={isSubmitting}
                     value={values.tempat_tinggal}
-                    title={"Jarak Rumah ke MAN 1 Kota Sukabumi"}
+                    title={
+                      "Jarak Rumah/Pondok/Kosan/Kontrakan ke MAN 1 Kota Sukabumi"
+                    }
                     placeholder={"cth. Sukabumi"}
                     errors={errors.tempat_tinggal}
                     id="tempat_tinggal"
@@ -1251,6 +1351,22 @@ export default function DetailPendaftar() {
                       {" "}
                       {"Tidak Berpenghasilan"}
                     </option>
+                    <option value={"kurang dari 1000000"}>
+                      {" "}
+                      {" Kurang dari Rp. 1.000.000"}
+                    </option>
+                    <option value={"kurang dari 2000000"}>
+                      {" "}
+                      {" Kurang dari Rp. 2.000.000"}
+                    </option>
+                    <option value={"kurang dari 3000000"}>
+                      {" "}
+                      {" Kurang dari Rp. 3.000.000"}
+                    </option>
+                    <option value={"kurang dari 4000000"}>
+                      {" "}
+                      {" Kurang dari Rp. 4.000.000"}
+                    </option>
                     <option value={"kurang dari 5000000"}>
                       {" "}
                       {" Kurang dari Rp. 5.000.000"}
@@ -1457,6 +1573,134 @@ export default function DetailPendaftar() {
                     id="nomor_wali"
                     touched={touched.nomor_wali}
                   /> */}
+              </Batas>
+
+              <Batas title={"Kelengkapan Dokumen"}>
+                <section className="flex items-center justify-end">
+                  {!!data?.nilai?.berkas_nilai === false ? (
+                    <button
+                      className="border flex items-center space-x-5 px-4 text-white bg-blue-400 py-2 text-lg font-bold rounded-lg hover:bg-blue-500"
+                      type="button"
+                      onClick={() => {
+                        Swal.fire({
+                          title:
+                            "<h2 style='font-size:18px'>Apakah Berkas yang diupload sudah sesuai?</h2>",
+                          icon: "warning", // Menambahkan ikon peringatan
+                          showDenyButton: true,
+                          showCancelButton: true,
+                          confirmButtonText: "Sesuai",
+                          denyButtonText: `Tidak Sesuai`,
+                          customClass: {
+                            title: "swal-title-small", // Tambahkan class kustom
+                          },
+                        }).then((result) => {
+                          /* Read more about isConfirmed, isDenied below */
+                          if (result.isConfirmed) {
+                            mutate.mutate({
+                              berkas_nilai: "Sesuai",
+                              id: id,
+                              berkas_keterangan: "Lulus",
+                              berkas_penilaian: name,
+                            });
+                          } else if (result.isDenied) {
+                            mutate.mutate({
+                              berkas_nilai: "Tidak Sesuai",
+                              id: id,
+                              berkas_keterangan: "Tidak Lulus",
+                              berkas_penilaian: name,
+                            });
+                          }
+                        });
+                      }}
+                    >
+                      <DocumentReportIcon className="h-8 w-8" />{" "}
+                      <h5>Penilaian Berkas </h5>
+                    </button>
+                  ) : (
+                    <div>
+                      <h2 className="text-green-500 font-bold">
+                        Berkas {data?.nilai?.berkas_nilai} dilakukan penilaian
+                        oleh {data?.nilai?.berkas_penilaian}
+                      </h2>
+                    </div>
+                  )}
+                </section>
+                <table className="w-full border-collapse border border-gray-300 mt-5">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="border border-gray-300 p-3">Dokumen</th>
+                      <th className="border border-gray-300 p-3">Deskripsi</th>
+
+                      <th className="border border-gray-300 p-3">Preview</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(files).map(([key, file]) => (
+                      <tr key={key} className="text-center">
+                        <td className="border border-gray-300 p-3 capitalize">
+                          {key === "foto_profile"
+                            ? "Foto Profil"
+                            : key === "foto_kks"
+                            ? "Kartu KKS"
+                            : key === "foto_pkh"
+                            ? "Kartu PKH"
+                            : key === "foto_kip"
+                            ? "Kartu KIP "
+                            : "Dokumen Prestasi"}
+                        </td>
+                        <td className="border border-gray-300 p-3 text-sm text-gray-600">
+                          {key === "foto_profile"
+                            ? "Upload Foto Data Diri dengan latar merah dan seragam sekolah/madrasah asal"
+                            : key === "foto_kks"
+                            ? "Upload Foto Kartu Keluarga Sejahtera/Kartu Perlindungan (Jika Ada dan Bagi Jalur Afirmasi)"
+                            : key === "foto_pkh"
+                            ? "Upload Foto Kartu Program Keluarga Harapan (Jika Ada dan Bagi Jalur Afirmasi)"
+                            : key === "foto_kip"
+                            ? "Upload Foto Kartu Kartu Indonesia Pintar (Jika Ada dan Bagi Jalur Afirmasi)"
+                            : "Upload Foto Dokumen Prestasi/Raport/Sertifikat/Lainnya (Digabungkan dalam 1 file PDF)(Bagi Jalur Prestasi)"}
+                        </td>
+
+                        <td className="border border-gray-300 p-3">
+                          {!!file === false ? (
+                            <span className="text-red-500 font-bold">
+                              Belum Upload
+                            </span>
+                          ) : file?.includes("pdf") ? (
+                            <a
+                              href={file}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-500 flex items-center gap-2"
+                            >
+                              <Eye size={20} /> Lihat PDF
+                            </a>
+                          ) : (
+                            <div className="w-20 h-20 rounded-lg overflow-hidden border border-gray-400 mx-auto">
+                              <img
+                                onClick={() => {
+                                  setImage(file);
+                                  return onOpen();
+                                }}
+                                src={file}
+                                alt={key}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Batas>
+
+              <Batas title={"Hasil CBT"}>
+                <Nilai
+                  values={values}
+                  handleChange={handleChange}
+                  isSubmitting={isSubmitting}
+                  setFieldValue={setFieldValue}
+                />
               </Batas>
 
               {/* //login */}

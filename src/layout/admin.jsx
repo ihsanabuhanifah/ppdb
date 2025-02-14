@@ -139,24 +139,7 @@ export default function LayoutPPDB() {
           </div>
         </div>
       </div>
-      <div className="fixed right-10 bottom-4 z-50">
-        <ReactWhatsapp number={"+6285888222457"} message={message}>
-          <Tooltip
-            fontSize="lg"
-            bg="gray.300"
-            color="black"
-            hasArrow
-            label="informasi PPDB"
-            aria-label="A tooltip"
-          >
-            <img
-              className="w-16 h-16 animate-bounce shadow-xl "
-              src={wa}
-              alt="whatsapp.png"
-            />
-          </Tooltip>
-        </ReactWhatsapp>
-      </div>
+     
     </React.Fragment>
   );
 }

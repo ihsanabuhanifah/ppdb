@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import bg from "../../image/bg.png";
-import bg2 from "../../image/bg.png";
+import bg from "../../image/bg.jpg";
+
 import image1 from "../../image/image.png";
 import wa from "../../image/wa.png";
 import Beranda from "./Section1";
@@ -299,14 +299,14 @@ export default function Layout() {
             <Beranda data={data} />
           </section> 
           <section
-            style={{ backgroundColor: "rgba(43,105,236, 0.9)" }}
+            // style={{ backgroundColor: "rgba(43,105,236, 0.9)" }}
             className="px-3 md:px-6 py-12"
           >
             <Section2 />
           </section>
           <section
             ref={dayaTampungRef}
-            className="px-3 md:px-6 py-12 bg-gray-50"
+            className="px-3 md:px-6 py-12 "
           >
             <JalurSeleksi />
           </section>
@@ -314,13 +314,13 @@ export default function Layout() {
             <Persyaratan />
           </section>
           <section
-            style={{ backgroundColor: "rgba(43,105,236, 0.9)" }}
+            // style={{ backgroundColor: "rgba(43,105,236, 0.9)" }}
             ref={timelineRef}
             className="px-3 md:px-6 py-12"
           >
             <Timeline />
           </section>
-          <section ref={alurRef} className="px-3 md:px-6 py-12 bg-gray-50">
+          <section ref={alurRef} className="px-3 md:px-6 py-12 ">
             <AlurPendaftaran />
           </section>
           <section ref={materiRef} className="px-3 md:px-6 py-12">

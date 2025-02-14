@@ -22,7 +22,7 @@ export const AdminPageProtected = ({ children, ...rest }) => {
     }
     
     if(result?.user?.roles[0].name === "user"){
-      return history.push("/ppdb/salam")
+      return history.push("/ppdb/dashboard")
     }
     return history.push(url)
    

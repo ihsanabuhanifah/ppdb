@@ -138,10 +138,13 @@ export const Resume = ({ data }) => {
             <Text style={{ fontWeight: 600, textAlign: "left", fontSize: 12 }}>
               REKAP ISIAN DATA PENDAFTAR
             </Text>
-            <Text style={{ fontWeight: 600, textAlign: "left", fontSize: 10 }}>
+            <Text style={{ fontWeight: 600, textAlign: "left", fontSize: 8 }}>
               Nomor Pendaftaran : {data.nomor_pendaftaran}
             </Text>
-            <Text style={{ fontWeight: 600, textAlign: "left", fontSize: 10 }}>
+            <Text style={{ fontWeight: 600, textAlign: "left", fontSize: 8 }}>
+              Gelombang : {data.gelombang}
+            </Text>
+            <Text style={{ fontWeight: 600, textAlign: "left", fontSize: 8 }}>
               Jenis Seleksi : {data.jalur_seleksi}
             </Text>
           </View>
@@ -201,7 +204,7 @@ export const Resume = ({ data }) => {
             <Description label="Kodepos" value={data.kodepos} />
             <Description label="Alamat" value={data.alamat} />
             <Description
-              label="Jarak Rumah ke MAN 1 Kota Sukabumi"
+              label="Jarak Rumah/Pondok/Kosan/Kontrakan ke MAN 1 Kota Sukabumi"
               value={data.tempat_tinggal}
             />
             <Description label="Transportasi" value={data.transportasi} />
@@ -366,72 +369,85 @@ export const Resume = ({ data }) => {
             )}
           </View>
 
-          <View style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-           
-            marginTop: space,
-          }}>
-          <View style={ { flex: 1, marginRight: 10 , marginTop : 100}}>
-            <Text style={{
-              fontSize : 6,
-              color : 'red',
-              marginBottom : 2,
-            }}>
-              * Foto pribadi dicetak berwarna dengan ukuran 2 x 3 dan ditempel
-              pada Dokumen Rekapan Isian Data ini
-            </Text>
-            <Text style={{
-              fontSize : 6,
-              color : 'red',
-              marginBottom : 2,
-            }}>
-            * Dokumen Rekapan Isian Data ini dicetak oleh masing-masing
-            Pendaftar dan diserahkan kepada Panitia saat Daftar Ulang
-            </Text>
-            <Text style={{
-              fontSize : 6,
-              color : 'red',
-              marginBottom : 2,
-            }}>
-            * Dokumen
-            Surat Pernyataan dicetak oleh masing-masing Pendaftar dan diserahkan
-            kepada Panitia saat Daftar Ulang 
-            </Text>
-            <Text style={{
-              fontSize : 6,
-              color : 'red',
-              marginBottom : 2,
-            }}>
-            * Dokumen pendukung bagi pendaftar
-            jalur Afirmasi atau Prestasi wajib diserahkan saat Daftar Ulang
-            </Text>
-            <Text style={{
-              fontSize : 6,
-              color : 'red'
-            }}>*Jika Pendaftar tidak melakukan Daftar Ulang sampai batas akhir
-            gelombang, maka akun Pendaftar akan dihapus oleh Panitia. Serta
-            wajib membuat akun ulang jika Pendaftar ingin mengikuti seleksi di
-            gelombang berikutnya.</Text>
-            
-          
-          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
 
-          {/* Pernyataan */}
-          <View style={[styles.signatureContainer, { flex: 1, marginLeft: 10 }]}>
-            {/* Kotak Foto */}
-            <View style={styles.photoBox}>
-              <Text>Pas Foto</Text>
+              marginTop: space,
+            }}
+          >
+            <View style={{ flex: 1, marginRight: 10, marginTop: 100 }}>
+              <Text
+                style={{
+                  fontSize: 6,
+                  color: "red",
+                  marginBottom: 2,
+                }}
+              >
+                * Foto pribadi dicetak berwarna dengan ukuran 2 x 3 dan ditempel
+                pada Dokumen Rekapan Isian Data ini
+              </Text>
+              <Text
+                style={{
+                  fontSize: 6,
+                  color: "red",
+                  marginBottom: 2,
+                }}
+              >
+                * Dokumen Rekapan Isian Data ini dicetak oleh masing-masing
+                Pendaftar dan diserahkan kepada Panitia saat Daftar Ulang
+              </Text>
+              <Text
+                style={{
+                  fontSize: 6,
+                  color: "red",
+                  marginBottom: 2,
+                }}
+              >
+                * Dokumen Surat Pernyataan dicetak oleh masing-masing Pendaftar
+                dan diserahkan kepada Panitia saat Daftar Ulang
+              </Text>
+              <Text
+                style={{
+                  fontSize: 6,
+                  color: "red",
+                  marginBottom: 2,
+                }}
+              >
+                * Dokumen pendukung bagi pendaftar jalur Afirmasi atau Prestasi
+                wajib diserahkan saat Daftar Ulang
+              </Text>
+              <Text
+                style={{
+                  fontSize: 6,
+                  color: "red",
+                }}
+              >
+                *Jika Pendaftar tidak melakukan Daftar Ulang sampai batas akhir
+                gelombang, maka akun Pendaftar akan dihapus oleh Panitia. Serta
+                wajib membuat akun ulang jika Pendaftar ingin mengikuti seleksi
+                di gelombang berikutnya (Jika kuota masih tersedia)
+              </Text>
             </View>
 
-            {/* Bagian Tanda Tangan */}
-            <View style={styles.signatureSection}>
-              <Text>Sukabumi, {formatMonth(new Date())}</Text>
-              <Text>Tanda Tangan:</Text>
+            {/* Pernyataan */}
+            <View
+              style={[styles.signatureContainer, { flex: 1, marginLeft: 10 }]}
+            >
+              {/* Kotak Foto */}
+              <View style={styles.photoBox}>
+                <Text>Pas Foto</Text>
+              </View>
 
-              <Text style={{ marginTop: 50 }}>({data.name})</Text>
+              {/* Bagian Tanda Tangan */}
+              <View style={styles.signatureSection}>
+                <Text>Sukabumi, {formatMonth(new Date())}</Text>
+                <Text>Tanda Tangan:</Text>
+
+                <Text style={{ marginTop: 50 }}>({data.name})</Text>
+              </View>
             </View>
-          </View>
           </View>
         </View>
       </Page>

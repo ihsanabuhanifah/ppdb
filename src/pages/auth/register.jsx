@@ -14,6 +14,7 @@ import Batas from "./Batas";
 import InputReg from "./Input";
 import SelectReg from "./Select";
 import TextAreaReg from "./TextArea";
+import Swal from "sweetalert2";
 const RegisterSchema = Yup.object().shape({
   name: Yup.string().required("Wajib diisi"),
   email: Yup.string()
@@ -68,27 +69,25 @@ export default function Register() {
     console.log(result);
     if (result.message === "Berhasil Membuat Akun") {
       localStorage.removeItem("register");
-      toast({
-        position: "top-right",
-        title: "Berhasil",
-        description: "Selamat Anda telah berhasil Registrasi",
-        status: "success",
-        duration: 4000,
-        isClosable: true,
+
+      Swal.fire({
+        title: "Berhasil!",
+        text: "Selamat Anda telah berhasil Registrasi",
+        icon: "success",
       });
+
       history.push("dashboard");
     }
     if (result.response.status === 401) {
       console.log(result.response);
       setErrorReg(result.response.data);
-      toast({
-        position: "top-right",
-        title: "Gagal",
-        description: result.response?.data?.message,
-        status: "error",
-        duration: 4000,
-        isClosable: true,
-      });
+
+       Swal.fire({
+              title: "Gagal",
+              text: result.response?.data?.message,
+              icon: "error"
+            });
+      
     }
   };
 
@@ -191,7 +190,6 @@ export default function Register() {
                   <option value={"PKBM"}>PKBM</option>
                   <option value={"PDF Wustha"}> PDF Wustha</option>
                   <option value={"PPS SPQ"}> PPS SPQ</option>
-                  
                 </SelectReg>
 
                 <InputReg

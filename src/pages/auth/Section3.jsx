@@ -11,7 +11,7 @@ export default function Section3() {
       <div className=" col-span-1 lg:col-span-3">
         {" "}
         <div className="text-center mb-8 rounded-3xl">
-          <h4 className="text-gray-700 text-4xl font-bold mb-2">
+          <h4 className="text-white text-4xl font-bold mb-2">
             Jalur Seleksi dan Daya Tampung
           </h4>
           <div className="w-20 h-1 bg-yellow-500 mx-auto"></div>

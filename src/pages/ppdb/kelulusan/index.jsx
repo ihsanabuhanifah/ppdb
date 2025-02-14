@@ -18,6 +18,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { pdf } from "@react-pdf/renderer";
 import { Resume } from "../pdf/resume.pdf";
 import { Button } from "semantic-ui-react";
+import Swal from "sweetalert2";
 const RegisterSchema = Yup.object().shape({
   name: Yup.string(),
   email: Yup.string().email("Format email tidak sesuai"),
@@ -112,26 +113,25 @@ export default function Register() {
     console.log("result", result);
     if (result.message === "Berhasil Menyimpan Data") {
       queryClient.invalidateQueries("detail");
-      toast({
-        position: "top-right",
-        title: "Berhasil",
-        description: "Berhasil Memperbaharui Data",
-        status: "success",
-        duration: 4000,
-        isClosable: true,
-      });
+
+
+       Swal.fire({
+              title: "Berhasil!",
+              text: "Berhasil Memperbaharui Data",
+              icon: "success"
+            });
+    
     }
     if (result.response.status === 401) {
       console.log(result.response);
       setErrorReg(result.response.data);
-      toast({
-        position: "top-right",
-        title: "Gagal",
-        description: result.response?.data?.message,
-        status: "error",
-        duration: 4000,
-        isClosable: true,
-      });
+
+       Swal.fire({
+              title: "Gagal",
+              text: result.response?.data?.message,
+              icon: "error"
+            });
+      
     }
   };
 
@@ -200,6 +200,7 @@ export default function Register() {
       nama_prestasi1: data?.nama_prestasi1,
       nama_prestasi2: data?.nama_prestasi2,
       nama_prestasi3: data?.nama_prestasi3,
+      gelombang: `Gelombang ${data?.gelombang}`,
 
       role: 2,
       is_batal: 0,
@@ -287,6 +288,19 @@ export default function Register() {
                   errors={errors.nomor_pendaftaran}
                   id={"nomor_pendaftaran"}
                   touched={touched.nomor_pendaftaran}
+                />
+                 <InputReg
+                  focus={focus}
+                  setFocus={setFocus}
+                  handleBlur={handleBlur}
+                  handleChange={() => {}}
+                  isSubmitting={isSubmitting}
+                  value={values.gelombang}
+                  title={"Gelombang"}
+                  placeholder={"Muhammad"}
+                  errors={errors.gelombang}
+                  id={"gelombang"}
+                  touched={touched.gelombang}
                 />
 
                 <SelectReg
@@ -760,7 +774,7 @@ export default function Register() {
                     handleChange={handleChange}
                     isSubmitting={isSubmitting}
                     value={values.tempat_tinggal}
-                    title={"Jarak Rumah ke MAN 1 Kota Sukabumi"}
+                    title={"Jarak Rumah/Pondok/Kosan/Kontrakan ke MAN 1 Kota Sukabumi"}
                     placeholder={"cth. Sukabumi"}
                     errors={errors.tempat_tinggal}
                     id="tempat_tinggal"
@@ -1245,6 +1259,22 @@ export default function Register() {
                     <option value={"Tidak Berpenghasilan"}>
                       {" "}
                       {"Tidak Berpenghasilan"}
+                    </option>
+                    <option value={"kurang dari 1000000"}>
+                      {" "}
+                      {" Kurang dari Rp. 1.000.000"}
+                    </option>
+                    <option value={"kurang dari 2000000"}>
+                      {" "}
+                      {" Kurang dari Rp. 2.000.000"}
+                    </option>
+                    <option value={"kurang dari 3000000"}>
+                      {" "}
+                      {" Kurang dari Rp. 3.000.000"}
+                    </option>
+                    <option value={"kurang dari 4000000"}>
+                      {" "}
+                      {" Kurang dari Rp. 4.000.000"}
                     </option>
                     <option value={"kurang dari 5000000"}>
                       {" "}

@@ -1,5 +1,5 @@
 import React from "react";
-import BackgroundImage from "./assets/bg.jpg";
+import BackgroundImage from "./assets/bg.png";
 import FotoProfile from "./assets/foto-profile.JPG";
 import ServiceImage1 from "./assets/service-image-1.png";
 import ServiceImage2 from "./assets/service-image-2.png";

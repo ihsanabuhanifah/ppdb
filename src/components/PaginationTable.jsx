@@ -1,42 +1,116 @@
-export default function PaginationTable() {
-  return (
-    <>
-      <div className="flex item-center justify-between text-blue-400 my-10">
-        <section>
-Menampilkan 1 dari 10 Pendaftar
-        </section>
-        <nav aria-label="Page navigation example">
-          <ul className="flex list-style-none">
-            <li className="page-item">
-              <button
-                className=" text-blue-400 page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300  text-gray-800 hover:text-gray-800 focus:shadow-none"
-              >
-                Previous
-              </button>
-            </li>
-            <li className="page-item">
-              <button className="text-blue-400 page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
-                1
-              </button>
-            </li>
-            <li className="page-item">
-              <button className="text-blue-400 page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
-                2
-              </button>
-            </li>
-            <li className="page-item">
-              <button className="text-blue-400 page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
-                3
-              </button>
-            </li>
-            <li className="page-item">
-              <button className="text-blue-400 page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
-                Next
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </>
+import React, { ChangeEvent, ReactNode } from "react";
+import clsx from "clsx";
+
+
+export const Pagination= ({
+  handlePageSize,
+  handlePage,
+  pagination,
+  page,
+  pageSize,
+}) => {
+
+  console.log("pagination", pagination)
+  console.log("page", pageSize)
+  function getPage(totalItems, currentPage, pageSize) {
+
+    console.log("hitunga", totalItems, currentPage, pageSize, pagination)
+    currentPage = currentPage;
+
+    pageSize = pageSize;
+
+    // calculate total pages
+    let totalPages = Math.ceil(totalItems / pageSize);
+
+    let startPage , endPage
+    if (totalPages <= 10) {
+      // less than 10 total pages so show all
+      startPage = 1;
+      endPage = totalPages;
+    } else {
+      // more than 10 total pages so calculate start and end pages
+      if (currentPage <= 6) {
+        startPage = 1;
+        endPage = 10;
+      } else if (currentPage + 4 >= totalPages) {
+        startPage = totalPages - 9;
+        endPage = totalPages;
+      } else {
+        startPage = currentPage - 5;
+        endPage = currentPage + 4;
+      }
+    }
+
+    // calculate start and end item indexes
+    let startIndex = (currentPage - 1) * pageSize;
+    let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
+
+    // create an array of pages to ng-repeat in the pager control
+    const pages = Array.from(
+      { length: endPage + 1 - startPage },
+      (_, i) => startPage + i
+    );
+
+    // return object with all pager properties required by the view
+    return {
+      totalItems: totalItems,
+      currentPage: currentPage,
+      pageSize: pageSize,
+      totalPages: totalPages,
+      startPage: startPage,
+      endPage: endPage,
+      startIndex: startIndex,
+      endIndex: endIndex,
+      pages: pages,
+    };
+  }
+  let pages = getPage(
+    pagination?.total || 0,
+    pagination?.page || 1,
+    pagination?.pageSize || 10
   );
-}
+
+
+  console.log("page", pages)
+
+  return (
+    <div className="flex items-center justify-between mt-6">
+      <div>
+        <select
+          value={pageSize}
+          onChange={handlePageSize}
+          className="px-2 py-1 text-sm text-blue-500 rounded-md  border"
+        >
+          <option value={1}>1</option>
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={25}>25</option>
+          <option value={50}>50</option>
+          <option value={100}>100</option>
+          <option value={200}>200</option>
+        </select>
+      </div>
+
+      <div className="items-center hidden md:flex gap-x-3">
+        {pages.pages.map((pageItem, index) => (
+          <button
+            key={index}
+            onClick={()=> {
+              handlePage(pageItem)
+            }}
+            className={clsx(
+              `px-4 py-2 rounded-full text-sm `,
+              {
+                "text-blue-500   bg-blue-100/60": page === pageItem,
+                "text-blue-500  border  border-blue-100/60": page !== pageItem,
+              },
+              {}
+            )}
+          >
+            {pageItem}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};

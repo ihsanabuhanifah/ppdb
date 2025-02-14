@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import bg from "../../image/bg.jpg";
+import bg from "../../image/bg.png";
 
 import image1 from "../../image/image.png";
 import wa from "../../image/wa.png";

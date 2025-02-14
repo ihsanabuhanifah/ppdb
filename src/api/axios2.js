@@ -28,4 +28,4 @@ let client = axios.create({
 export default client;
 
 // https://mysmk-be.herokuapp.com/api
-// http://localhost:8000/api
+// http://localhost:8000/ap

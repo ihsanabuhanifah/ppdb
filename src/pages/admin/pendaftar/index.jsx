@@ -16,7 +16,9 @@ import TableLoading from "../../../components/tableLoading";
 import Modal from "../../../components/Modal";
 import * as Yup from "yup";
 import Select from "react-select";
-import PaginationTable from "../../../components/PaginationTable";
+import PaginationTable, {
+  Pagination,
+} from "../../../components/PaginationTable";
 import { sendMessageBukti } from "../../../config/sendMessage";
 let fileSchema = Yup.object().shape({
   files: Yup.string().required("Bukti Transfer wajib di Upload"),
@@ -24,25 +26,14 @@ let fileSchema = Yup.object().shape({
 });
 export default function Pendaftar() {
   const [page, setPage] = React.useState(1);
-  const [show, setShow] = React.useState(false);
+
   const [per_page, setPer_page] = React.useState(100);
   const [isLoadingKonfirmasi, setIsLoadingKonfirmasi] = React.useState(false);
   const [keyword, setKeyword] = React.useState("");
-  const history = useHistory()
+  const history = useHistory();
   let debouncedKeyword = useDebounce(keyword, 500);
-  const [statusBukti, setStatusBukti] = React.useState("");
-  const [transfer, setTransfer] = React.useState(0);
-  let queryClient = useQueryClient();
-  const handleToggle = () => setShow(!show);
-  let initialValues = {
-    files: undefined,
-    nominal: "",
-    user_id: 0,
-    status: 1,
-  };
 
-  const onSubmit = async (values, { resetForm }) => {};
-  const { isLoading, data, isFetching } = useQuery(
+  const { data, isFetching } = useQuery(
     //query key
     [
       "list_user",
@@ -85,30 +76,8 @@ export default function Pendaftar() {
     }
   );
 
-  let toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const handleBatal = (id) => {
-    Swal.fire({
-      title: "Apakah yakin",
-      text: "",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const result = await updateBatal(id);
-          queryClient.invalidateQueries("list_user");
-          Swal.fire("Batal!", result.message, "success");
-        } catch {
-          Swal.fire("Batal!", "Ada Kesalahan", "error");
-        }
-      }
-    });
-  };
   return (
     <React.Fragment>
       <div className="text-blue-400 grid grid-cols-1 gap-5">
@@ -153,7 +122,7 @@ export default function Pendaftar() {
                   <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
                     Gelombang
                   </th>
-                 
+
                   <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
                     Nomor Utama
                   </th>
@@ -232,9 +201,9 @@ export default function Pendaftar() {
                       {dt.nisn}
                     </td>
                     <td className="px-6 py-4 text-center text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
-                     {dt.gelombang}
+                      {dt.gelombang}
                     </td>
-                    
+
                     <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
                       <ReactWhatsapp
                         number={formatNomorHp(dt.phone)}
@@ -253,45 +222,63 @@ export default function Pendaftar() {
                       {dt.asal_sekolah}
                     </td>
                     <td className="px-6 py-4 text-center text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
-                     {formatDateInd(dt.updated_at)}
+                      {formatDateInd(dt.updated_at)}
                     </td>
 
                     <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500  leading-5">
-                      <Button colorPalette="teal" variant="solid"  onClick={()=> {
-                        history.push(`pendaftar/${dt.id}/detail`)
-                      }}> Detail</Button>
+                      <Button
+                        colorPalette="teal"
+                        variant="solid"
+                        onClick={() => {
+                          history.push(`pendaftar/${dt.id}/detail`);
+                        }}
+                      >
+                        {" "}
+                        Detail
+                      </Button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <PaginationTable />
+            <Pagination
+             pagination={{
+              page : data?.data?.current_page,
+              total : data?.data?.total,
+              pageSize : Number(data?.data?.perpage || 10)
+             }}
+              page={page}
+              handlePage={(id) => {
+                setPage(id);
+              }}
+              pageSize={per_page}
+              handlePageSize={(e) => {
+                setPer_page(e.target.value);
+              }}
+            />
           </div>
         )}
 
         {/* table */}
       </div>
-      <Modal onOpen={onOpen} onClose={onClose} isOpen={isOpen}>
-       
-      </Modal>
+      <Modal onOpen={onOpen} onClose={onClose} isOpen={isOpen}></Modal>
     </React.Fragment>
   );
 }
 
-
 export const formatDateInd = (isoString) => {
-  if (!isoString) return '-';
+  if (!isoString) return "-";
 
   const date = new Date(isoString);
 
-  const options= {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
     hour12: false, // Format 24 jam
   };
 
-  return new Date(date).toLocaleDateString('id-ID', options);
+  return new Date(date).toLocaleDateString("id-ID", options);
 };

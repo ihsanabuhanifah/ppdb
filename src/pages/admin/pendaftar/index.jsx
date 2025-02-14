@@ -20,6 +20,7 @@ import PaginationTable, {
   Pagination,
 } from "../../../components/PaginationTable";
 import { sendMessageBukti } from "../../../config/sendMessage";
+import ExportExcel from "../../../components/ExportExcel";
 let fileSchema = Yup.object().shape({
   files: Yup.string().required("Bukti Transfer wajib di Upload"),
   nominal: Yup.string().required("Nominal wajib diisi"),
@@ -27,9 +28,10 @@ let fileSchema = Yup.object().shape({
 export default function Pendaftar() {
   const [page, setPage] = React.useState(1);
 
-  const [per_page, setPer_page] = React.useState(100);
+  const {onOpen, isOpen, onClose} = useDisclosure()
+  const [per_page, setPer_page] = React.useState(25);
   const [isLoadingKonfirmasi, setIsLoadingKonfirmasi] = React.useState(false);
-  const [keyword, setKeyword] = React.useState("");
+  const [ keyword, setKeyword] = React.useState("");
   const history = useHistory();
   let debouncedKeyword = useDebounce(keyword, 500);
 
@@ -76,7 +78,10 @@ export default function Pendaftar() {
     }
   );
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  
+
+
+ 
 
   return (
     <React.Fragment>
@@ -88,11 +93,21 @@ export default function Pendaftar() {
         </div>
         {/* table */}
 
-        <div className="p-1n ">
-          <TableHeader
-            setKeyword={setKeyword}
-            setPer_page={setPer_page}
-          ></TableHeader>
+        <div className="p-1 ">
+           <section className="flex items-center justify-between mb-5">
+                   <div className="ml-4 w-full flex items-center justify-between ">
+                     <input
+                       className="border px-3 lg:px-5 py-2 w-1/2 rounded-md"
+                       placeholder="Cari ... "
+                       type="text"
+                       onChange={(e) => {
+                         setKeyword(e.target.value);
+                       }}
+                     />
+         
+                   <ExportExcel fileName="Data_Pengguna.xlsx"/>
+                   </div>
+                 </section>
         </div>
         {isFetching ? (
           <TableLoading></TableLoading>
@@ -241,11 +256,13 @@ export default function Pendaftar() {
                 ))}
               </tbody>
             </table>
+
+           
             <Pagination
              pagination={{
               page : data?.data?.current_page,
               total : data?.data?.total,
-              pageSize : Number(data?.data?.perpage || 10)
+              pageSize : Number(data?.data?.per_page || 10)
              }}
               page={page}
               handlePage={(id) => {
@@ -253,6 +270,7 @@ export default function Pendaftar() {
               }}
               pageSize={per_page}
               handlePageSize={(e) => {
+                setPage(1)
                 setPer_page(e.target.value);
               }}
             />

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Upload, Eye, AlertCircle } from "lucide-react";
 import { getDetail, uploadFileFoto } from "../../../api/santri";
-import { useToast } from "@chakra-ui/react";
+
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useQuery } from "react-query";
+import { Spinner, useDisclosure, useToast, Text, Flex, Center, VStack,  } from "@chakra-ui/react";
 
 export default function Pengumuman() {
   const [files, setFiles] = useState({
@@ -39,7 +40,17 @@ export default function Pengumuman() {
     }));
   }, [data]);
 
-  console.log("Data", data);
+ 
+   if (isFetching) {
+       return (
+         <Center height="100vh">
+           <VStack spacing={4}>
+             <Spinner size="lg" />
+             <Text> Sedang Memuat Data...</Text>
+           </VStack>
+         </Center>
+       );
+     }
 
   return (
     <div className=" mx-auto bg-white rounded-2xl shadow-lg p-6">

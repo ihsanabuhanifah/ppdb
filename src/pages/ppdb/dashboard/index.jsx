@@ -76,7 +76,7 @@ export default function Dashboard() {
           </p>
           <ul className="mt-2 text-gray-700 text-sm space-y-1">
             <li>
-              <strong>WhatsApp:</strong> Pak Adi - 0857-9592-2861
+              <strong>WhatsApp:</strong>  Kontak Kesiswaan - (085718025089)
             </li>
             <li>
               <strong>Email:</strong> info-ppdb@man1kotasukabumi.web.id

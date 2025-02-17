@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Formik, useFormik, FormikProvider } from "formik";
 import * as Yup from "yup";
-import { useToast } from "@chakra-ui/react";
+import {Spinner, useDisclosure, useToast, Text, Flex, Center, VStack,   } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useHistory } from "react-router";
@@ -251,6 +251,18 @@ export default function Register() {
 
     // return onOpen();
   };
+
+
+  if (isFetching) {
+      return (
+        <Center height="100vh">
+          <VStack spacing={4}>
+            <Spinner size="lg" />
+            <Text> Sedang Memuat Data...</Text>
+          </VStack>
+        </Center>
+      );
+    }
   return (
     <>
       <>

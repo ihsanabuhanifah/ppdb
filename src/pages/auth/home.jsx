@@ -107,7 +107,7 @@ export default function Layout() {
           }`}
         >
           <div className="text-white font-semibold">
-            Kontak Panitia (Pak Adi: 085795922861)
+          Kontak Kesiswaan (085718025089)
           </div>
           <div className="space-x-4">
             {" "}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Upload, Eye, AlertCircle } from "lucide-react";
 import { getDetail, uploadFileFoto } from "../../../api/santri";
-import { Spinner, useToast } from "@chakra-ui/react";
+import {Spinner, useDisclosure, useToast, Text, Flex, Center, VStack,   } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useQuery, useQueryClient } from "react-query";
 import { pdf } from "@react-pdf/renderer";
@@ -108,11 +108,10 @@ export default function UploadDokumen() {
   };
 
   const handleDownload = async () => {
-    let res;
-
-    console.log("res", res);
+    
+   try{
     setLoading(true);
-    const blob = await pdf(<Resume data={data} foto={res} />).toBlob();
+    const blob = await pdf(<Resume data={data}  />).toBlob();
 
     const file = new Blob([blob], {
       type: "application/pdf",
@@ -121,10 +120,25 @@ export default function UploadDokumen() {
     const fileURL = URL.createObjectURL(file);
     setLoading(false);
     window.open(fileURL, "_blank"); // Buka di tab baru
+   }catch (err) {
+    console.log("err", err)
+   }
 
     // return onOpen();
   };
 
+
+
+  if (isFetching) {
+      return (
+        <Center height="100vh">
+          <VStack spacing={4}>
+            <Spinner size="lg" />
+            <Text> Sedang Memuat Data...</Text>
+          </VStack>
+        </Center>
+      );
+    }
   return (
     <div className=" mx-auto bg-white rounded-2xl shadow-lg p-6">
       <div className="text-center mb-5">

@@ -16,7 +16,7 @@ export default function Footer() {
               <p>Jl. Pramuka No.4, Gedongpanjang, Kec. Citamiang, Kota Sukabumi, Jawa Barat 43144
               </p>
               <p>
-                <strong>Kontak Panitia: </strong> :<span className="ml-2">085795922861 (Pak Adi)</span>
+                <strong>Kontak Panitia: </strong> :<span className="ml-2">085718025089 (Kesiswaan)</span>
               </p>
               <p><strong>Jam Pelayanan</strong> :  <span className="ml-2"> senin sd jum’at jam 07.30 sd 15.00 (Jam Kerja)</span></p>
              

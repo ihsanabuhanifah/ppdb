@@ -163,7 +163,7 @@ export default function LayoutPPDB() {
           <button  onClick={() => {
               setHidden(false);
             }} className="absolute right-5 top-1">x</button>
-          <ReactWhatsapp number={"+6285795922861"} message={""}>
+          <ReactWhatsapp number={"+6285718025089"} message={""}>
            <div className=" p-2 mt-4 flex items-center justify-center ">
            <img
              
@@ -172,7 +172,7 @@ export default function LayoutPPDB() {
              alt="whatsapp.png"
            />
            <p className="text-blue-400  ml-2 ">
-             Pak Adi (Panitia PPDB)
+           Kontak kesiswaan.
            </p>
            </div>
           </ReactWhatsapp>

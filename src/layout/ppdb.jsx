@@ -172,7 +172,7 @@ export default function LayoutPPDB() {
              alt="whatsapp.png"
            />
            <p className="text-blue-400  ml-2 ">
-           Kontak kesiswaan.
+           Kesiswaan MAN 1 Kota Sukabumi
            </p>
            </div>
           </ReactWhatsapp>

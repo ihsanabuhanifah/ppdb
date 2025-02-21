@@ -63,14 +63,39 @@ export default function Menu({ setHiddenMenu, hiddenMenu, setLogout }) {
   return (
     <React.Fragment>
       <nav className="h-5/6 lg:h-8/10">
-        <div className="grid grid-cols-1 gap-1  text-white">
+        <div className="grid-cols-1 gap-1 hidden lg:grid  text-white">
           {menus.map((menu, index) => {
             return (
               <React.Fragment>
               <button
                     key={index}
                     onClick={() => {
-                      // setHiddenMenu(!hiddenMenu);
+                     
+                      setMen(menu.to)
+
+                      return history.push(menu.to);
+                    }}
+                    className={`flex items-center text-md  lg:text-xl font-bold p-3 lg:px-4 lg:rounded-l-full ${
+                      menu.to === men
+                        ? "text-blue-400 font-bold bg-white whitespace-nowrap" 
+                        : ""
+                    }`}
+                  >
+                    {menu.icon}
+                    <p className="whitespace-nowrap">{menu.name}</p>
+                  </button>
+              </React.Fragment>
+            );
+          })}
+        </div>
+        <div className="grid-cols-1 gap-1  grid lg:hidden  text-white">
+          {menus.map((menu, index) => {
+            return (
+              <React.Fragment>
+              <button
+                    key={index}
+                    onClick={() => {
+                      setHiddenMenu(!hiddenMenu);
                       setMen(menu.to)
 
                       return history.push(menu.to);

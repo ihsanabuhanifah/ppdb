@@ -17,6 +17,7 @@ import DataAyah from "./pages/identitas/dataAyah";
 import DataIbu from "./pages/identitas/dataIbu";
 import DataWali from "./pages/identitas/dataWali";
 import Admin from "./layout/admin";
+import Home from "./pages/auth/home";
 
 import {
   SiswaPageProtected,
@@ -31,6 +32,10 @@ function App() {
   return (
     <main className="text-md h-screen">
       <Switch>
+      <Route exact path="/">
+          <Home></Home>
+        </Route>
+
         <Route path="/login">
           <Login></Login>
         </Route>

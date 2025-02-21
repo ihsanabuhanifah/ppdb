@@ -52,7 +52,7 @@ export default function Dashboard() {
             Silakan bergabung ke Grup Calon Peserta Didik Baru MAN 1 Kota Sukabumi dicopy-paste link berikut ini: https://chat.whatsapp.com/FBy4R4E4qahGj9kqZs04Fd
             <p>atau scan barcode berikut ini:</p>
             <p>
-              <img src="c:\xampp\htdocs\ppdb\src\image\grup.png" alt="grup" srcset=""/>
+              <img src="https://storage.devopsgeming.online/file-1740037117291.JPEG" width="300" alt="grup" class="justify-center" srcset=""/>
               </p>.
           </p>
         </div>

@@ -56,12 +56,12 @@ const Timeline = () => {
     { uraian: "Daftar Ulang", pelaksanaan: "9 April 2025 – 30 Juni 2025" }
   ];
   const dataGelombang3 = [
-    { uraian: "Pendaftaran Online/Offline PPDBM", pelaksanaan: "10 Juni - 9 Juli 2025" },
-    { uraian: "Verifikasi Berkas", pelaksanaan: "10 Juni - 9 Juli 2025" },
-    { uraian: "Seleksi CBT", pelaksanaan: "10 Juni - 9 Juli 2025" },
-    { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "10 Juni - 9 Juli 2025" },
+    { uraian: "Pendaftaran Online/Offline PPDBM", pelaksanaan: "1 - 2 Juli 2025" },
+    { uraian: "Verifikasi Berkas", pelaksanaan: "1 - 2 Juli 2025" },
+    { uraian: "Seleksi CBT", pelaksanaan: "3 - 4 Juli 2025" },
+    { uraian: "Pengumuman Hasil Seleksi CBT", pelaksanaan: "5 Juli 2025" },
     
-    { uraian: "Daftar Ulang", pelaksanaan: "10 Juni - 11 Juli 2025" }
+    { uraian: "Daftar Ulang", pelaksanaan: "9 - 10 Juli 2025" }
   ];
 
   return (

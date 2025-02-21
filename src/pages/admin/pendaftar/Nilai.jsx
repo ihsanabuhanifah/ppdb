@@ -25,128 +25,78 @@ export default function Nilai({
 
             <th className="border border-gray-300 p-3">Hafalan</th>
             <th className="border border-gray-300 p-3">Tulisan</th>
-            <th className="border border-gray-300 p-3">Skor Akhir</th>
-            <th className="border border-gray-300 p-3">Keterangan</th>
             <th className="border border-gray-300 p-3">Penilai</th>
           </tr>
         </thead>
         <tbody>
           <tr className="text-center">
             <td className="border border-gray-300 p-1 text-sm text-gray-600">
-              <input
+              <select
                placeholder="0"
                 value={values.cbt_bacaan}
                 name="cbt_bacaan"
-                onChange={(e) => {
-                  let newValue = e.target.value;
-
-                  // Pastikan hanya angka
-                  newValue = newValue.replace(/\D/g, "");
-
-                  // Konversi ke angka
-                  let numericValue =
-                    newValue === "" ? "" : parseInt(newValue, 10);
-
-                  // Batasi nilai antara 0 - 100
-                  if (numericValue > 100) numericValue = 100;
-                  if (numericValue < 0 || isNaN(numericValue)) numericValue = 0;
-
-                  handleChange({
-                    target: { name: "cbt_bacaan", value: numericValue },
-                  });
-                }}
-                className="border py-5 text-center text-lg "
-              />
-            </td>
-            <td className="border border-gray-300 p-1 text-sm text-gray-600">
-              <input
-               placeholder="0"
-                value={values.cbt_tajwid}
-                name="cbt_tajwid"
-                onChange={(e) => {
-                    let newValue = e.target.value;
-                
-                    // Pastikan hanya angka
-                    newValue = newValue.replace(/\D/g, "");
-                
-                    // Konversi ke angka
-                    let numericValue = newValue === "" ? "" : parseInt(newValue, 10);
-                
-                    // Batasi nilai antara 0 - 100
-                    if (numericValue > 100) numericValue = 100;
-                    if (numericValue < 0 || isNaN(numericValue)) numericValue = 0;
-                
-                    handleChange({ target: { name: "cbt_tajwid", value: numericValue } });
-                  }}
-                className="border py-5 text-center text-lg "
-              />
-            </td>
-            <td className="border border-gray-300 p-1 text-sm text-gray-600">
-              <input
-              placeholder="0"
-                value={values.cbt_hafalan}
-                name="cbt_hafalan"
-                onChange={(e) => {
-                    let newValue = e.target.value;
-                
-                    // Pastikan hanya angka
-                    newValue = newValue.replace(/\D/g, "");
-                
-                    // Konversi ke angka
-                    let numericValue = newValue === "" ? "" : parseInt(newValue, 10);
-                
-                    // Batasi nilai antara 0 - 100
-                    if (numericValue > 100) numericValue = 100;
-                    if (numericValue < 0 || isNaN(numericValue)) numericValue = 0;
-                
-                    handleChange({ target: { name: "cbt_hafalan", value: numericValue } });
-                  }}
-                className="border py-5 text-center text-lg "
-              />
-            </td>
-            <td className="border border-gray-300 p-1 text-sm text-gray-600">
-              <input
-               placeholder="0"
-                value={values.cbt_tulisan}
-                name="cbt_tulisan"
-                onChange={(e) => {
-                    let newValue = e.target.value;
-                
-                    // Pastikan hanya angka
-                    newValue = newValue.replace(/\D/g, "");
-                
-                    // Konversi ke angka
-                    let numericValue = newValue === "" ? "" : parseInt(newValue, 10);
-                
-                    // Batasi nilai antara 0 - 100
-                    if (numericValue > 100) numericValue = 100;
-                    if (numericValue < 0 || isNaN(numericValue)) numericValue = 0;
-                
-                    handleChange({ target: { name: "cbt_tulisan", value: numericValue } });
-                  }}
-                className="border py-5 text-center text-lg "
-              />
-            </td>
-            <td className="border border-gray-300 p-1 text-sm text-gray-600">
-              <input
-                value={values.cbt_nilai}
-                name="cbt_nilai"
-                // onChange={handleChange}
-                className="border py-5 text-center text-lg "
-              />
-            </td>
-            <td className="border border-gray-300 p-1 text-sm text-gray-600">
-              <select
-                value={values.cbt_keterangan}
-                name="cbt_keterangan"
                 onChange={handleChange}
                 className="border py-5 text-center text-lg "
               >
                 <option>Pilih</option>
-                <option value={"lulus"}>Lulus</option>
-                <option value={"tidak lulus"}>Tidak Lulus</option>
-              </select>
+                <option>Istimewa</option>
+                <option>Sangat Baik</option>
+                <option>Baik</option>
+                <option>Cukup Baik</option>
+                <option>Kurang Baik</option>
+                </select>
+              
             </td>
+            <td className="border border-gray-300 p-1 text-sm text-gray-600">
+              <select
+               placeholder="0"
+                value={values.cbt_tajwid}
+                name="cbt_tajwid"
+                onChange={handleChange}
+                className="border py-5 text-center text-lg "
+              >
+                <option>Pilih</option>
+                <option>Istimewa</option>
+                <option>Sangat Baik</option>
+                <option>Baik</option>
+                <option>Cukup Baik</option>
+                <option>Kurang Baik</option>
+                </select>
+              
+            </td>
+            <td className="border border-gray-300 p-1 text-sm text-gray-600">
+              <select
+                value={values.cbt_hafalan}
+                name="cbt_hafalan"
+                onChange={handleChange}
+                className="border py-5 text-center text-lg "
+              >
+                <option>Pilih</option>
+                <option>Istimewa</option>
+                <option>Sangat Baik</option>
+                <option>Baik</option>
+                <option>Cukup Baik</option>
+                <option>Kurang Baik</option>
+                </select>
+
+            </td>
+            <td className="border border-gray-300 p-1 text-sm text-gray-600">
+            <select
+               value={values.cbt_tulisan}
+                name="cbt_tulisan"
+                onChange={handleChange}
+                className="border py-5 text-center text-lg "
+              >
+                <option>Pilih</option>
+                <option>Istimewa</option>
+                <option>Sangat Baik</option>
+                <option>Baik</option>
+                <option>Cukup Baik</option>
+                <option>Kurang Baik</option>
+                </select>  
+              
+            </td>
+           
             <td className="border border-gray-300 p-1 text-sm text-gray-600">
               <select
                 value={values.cbt_penilaian}
@@ -154,9 +104,13 @@ export default function Nilai({
                 onChange={handleChange}
                 className="border py-5 text-center text-lg "
               >
-                <option>Pilih</option>
-                <option value={"Rusman"}>Rusman</option>
-               
+                <option value={"Rusman"}>Pilih</option>
+                <option value={"Rusman"}>Dian Suhendar, S.Pd., M.M.</option>
+                <option value={"Rusman"}>Ade Bunyamin, S.Pd.I., M.Ag.</option>
+                <option value={"Rusman"}>Evi Syahdati, S.Ps.I.</option>
+                <option value={"Rusman"}>Saevi Zulfiqor, S.Pd.</option>
+                <option value={"Rusman"}>Adi Teguh Imansyah, M.Pd.</option>
+                  
               </select>
             </td>
           </tr>

@@ -1587,7 +1587,7 @@ export default function DetailPendaftar() {
                   /> */}
               </Batas>
 
-              <Batas title={"Kelengkapan Dokumen"}>
+              <Batas title={"Pemeriksaan Dokumen"}>
                 <section className="flex items-center justify-end">
                   {!!data?.nilai?.berkas_nilai === false ? (
                     <button
@@ -1596,7 +1596,7 @@ export default function DetailPendaftar() {
                       onClick={() => {
                         Swal.fire({
                           title:
-                            "<h2 style='font-size:18px'>Apakah Berkas yang diupload sudah sesuai?</h2>",
+                            "<h2 style='font-size:18px'>Apakah Semua Berkas yang Diupload Sudah Sesuai dengan Jalur Seleksi yang Dipilih Pendaftar?</h2>",
                           icon: "warning", // Menambahkan ikon peringatan
                           showDenyButton: true,
                           showCancelButton: true,
@@ -1641,9 +1641,15 @@ export default function DetailPendaftar() {
                   <thead>
                     <tr className="bg-gray-100">
                       <th className="border border-gray-300 p-3">Dokumen</th>
+                      
                       <th className="border border-gray-300 p-3">Deskripsi</th>
 
                       <th className="border border-gray-300 p-3">Preview</th>
+
+                      <th className="border border-gray-300 p-3">Hasil Pemeriksaan</th>
+
+                      <th className="border border-gray-300 p-3">Verifikator</th>
+                    
                     </tr>
                   </thead>
                   <tbody>
@@ -1662,13 +1668,13 @@ export default function DetailPendaftar() {
                         </td>
                         <td className="border border-gray-300 p-3 text-sm text-gray-600">
                           {key === "foto_profile"
-                            ? "Upload Foto Data Diri dengan latar merah dan seragam sekolah/madrasah asal"
+                            ? "Upload Foto Data Diri dengan latar belakang merah dan menggunakan seragam sekolah/madrasah asal"
                             : key === "foto_kks"
-                            ? "Upload Foto Kartu Keluarga Sejahtera/Kartu Perlindungan (Jika Ada dan Bagi Jalur Afirmasi)"
+                            ? "Upload Foto Kartu Keluarga Sejahtera/Kartu Perlindungan (Jika Ada, dan Bagi Jalur Afirmasi)"
                             : key === "foto_pkh"
-                            ? "Upload Foto Kartu Program Keluarga Harapan (Jika Ada dan Bagi Jalur Afirmasi)"
+                            ? "Upload Foto Kartu Program Keluarga Harapan (Jika Ada, dan Bagi Jalur Afirmasi)"
                             : key === "foto_kip"
-                            ? "Upload Foto Kartu Kartu Indonesia Pintar (Jika Ada dan Bagi Jalur Afirmasi)"
+                            ? "Upload Foto Kartu Kartu Indonesia Pintar (Jika Ada, dan Bagi Jalur Afirmasi)"
                             : "Upload Foto Dokumen Prestasi/Raport/Sertifikat/Lainnya (Digabungkan dalam 1 file PDF)(Bagi Jalur Prestasi)"}
                         </td>
 
@@ -1700,13 +1706,37 @@ export default function DetailPendaftar() {
                             </div>
                           )}
                         </td>
+
+                        <td className="border border-gray-300 p-3 text-sm text-gray-600">
+                        <select
+                          onChange={handleChange}
+                          className="border py-5 text-center text-lg "
+                       >
+                          <option>Pilih</option>
+                          <option>Sesuai</option>
+                          <option>Tidak Sesuai</option>
+                          </select>
+                        </td>
+
+                        <td className="border border-gray-300 p-3 text-sm text-gray-600">
+                        <select
+                          onChange={handleChange}
+                          className="border py-5 text-center text-lg "
+                       >
+                          <option>Pilih</option>
+                          <option>Dra. Hj. Ratna Daniar, M.Pd.</option>
+                          <option>Suprijadi, S.Pd.</option>
+                          <option>Teddy Setiadi Gunawan, S.Pd.</option>
+                          <option>Asep Hamjah, S.Pd.</option>
+                          </select>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </Batas>
 
-              <Batas title={"Hasil CBT"}>
+              <Batas title={"Hasil Tes BTQ"}>
                 <Nilai
                   values={values}
                   handleChange={handleChange}

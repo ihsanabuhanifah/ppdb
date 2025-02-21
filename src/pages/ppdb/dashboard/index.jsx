@@ -49,8 +49,11 @@ export default function Dashboard() {
             "Langkah pertamamu menuju masa depan yang gemilang"
           </p>
           <p className="text-gray-600 text-center">
-            Setiap tahun, ribuan calon siswa sepertimu mencari sekolah terbaik.
-            Kamu telah membuat pilihan tepat dengan mengakses portal PPDB kami.
+            Silakan bergabung ke Grup Calon Peserta Didik Baru MAN 1 Kota Sukabumi dicopy-paste link berikut ini: https://chat.whatsapp.com/FBy4R4E4qahGj9kqZs04Fd
+            <p>atau scan barcode berikut ini:</p>
+            <p>
+              <img src="c:\xampp\htdocs\ppdb\src\image\grup.png" alt="grup" srcset=""/>
+              </p>.
           </p>
         </div>
 
@@ -76,7 +79,7 @@ export default function Dashboard() {
           </p>
           <ul className="mt-2 text-gray-700 text-sm space-y-1">
             <li>
-              <strong>WhatsApp:</strong>  Kesiswaan MAN 1 Kota Sukabumi - (085718025089)
+              <strong>WhatsApp:</strong> Kesiswaan MAN 1 Kota Sukabumi 085718025089
             </li>
             <li>
               <strong>Email:</strong> info-ppdb@man1kotasukabumi.web.id

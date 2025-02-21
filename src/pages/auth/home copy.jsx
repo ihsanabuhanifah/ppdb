@@ -69,7 +69,7 @@ export default function Layout() {
           }`}
         >
           <div className="text-white font-semibold">
-            Kontak Panitia (Pak Adi: 085795922861)
+            Kontak Panitia (Kesiswaan MAN 1 Kota Sukabumi: 085718025089)
           </div>
           <div className="space-x-4">
             {" "}
@@ -99,7 +99,7 @@ export default function Layout() {
               alt="Logo"
             />
             <h2 className="text-2xl font-bold hidden lg:block text-blue-400">
-              PPDB MAN 1 KOTA SUKABUMI
+              PPDB MAN 1 KOTA SUKABUMI 2025
             </h2>
           </section>
 

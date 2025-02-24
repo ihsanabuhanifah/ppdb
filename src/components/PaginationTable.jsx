@@ -89,6 +89,8 @@ export const Pagination= ({
           <option value={100}>100</option>
           <option value={200}>200</option>
         </select>
+
+        <span className="ml-5">dari {pagination.total} Pendaftar</span>
       </div>
 
       <div className="items-center hidden md:flex gap-x-3">

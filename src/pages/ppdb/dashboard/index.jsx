@@ -49,10 +49,19 @@ export default function Dashboard() {
             "Langkah pertamamu menuju masa depan yang gemilang"
           </p>
           <p className="text-gray-600 text-center">
-            Silakan bergabung ke Grup Calon Peserta Didik Baru MAN 1 Kota Sukabumi dicopy-paste link berikut ini: https://chat.whatsapp.com/FBy4R4E4qahGj9kqZs04Fd
+            Silakan untuk bergabung ke Grup CPD (Calon Peserta Didik)
+                    MAN 1 Kota Sukabumi 2025/2026.{" "}
+                    <a
+                      className="text-blue-300"
+                      target="_blank"
+                      href="https://chat.whatsapp.com/FBy4R4E4qahGj9kqZs04Fd"
+                    >
+                      https://chat.whatsapp.com/FBy4R4E4qahGj9kqZs04Fd
+                    </a>{" "}
+                  
             <p>atau scan barcode berikut ini:</p>
             <p>
-              <img src="https://storage.devopsgeming.online/file-1740037117291.JPEG" width="300" alt="grup" class="justify-center" srcset=""/>
+              <img src="https://storage.devopsgeming.online/file-1740037117291.JPEG" width="300" alt="grup" class="center" srcset=""/>
               </p>.
           </p>
         </div>

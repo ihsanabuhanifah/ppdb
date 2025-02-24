@@ -69,7 +69,7 @@ export default function Layout() {
           }`}
         >
           <div className="text-white font-semibold">
-            Kontak Panitia (Kesiswaan MAN 1 Kota Sukabumi: 085718025089)
+          Kesiswaan MAN 1 Kota Sukabumi(085718025089)
           </div>
           <div className="space-x-4">
             {" "}

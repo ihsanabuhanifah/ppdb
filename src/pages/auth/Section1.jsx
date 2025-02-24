@@ -61,9 +61,7 @@ export default function Section1({data}) {
       </div>
 
       <div>
-        {/* <h4 className="text-white text-center font-bold text-xl mb-10">
-          Kontak Panitia (Pak Adi: 085795922861)
-        </h4> */}
+       
       </div>
       <div className="flex items-center justify-center mt-5 space-x-4">
         <button  onClick={() => {

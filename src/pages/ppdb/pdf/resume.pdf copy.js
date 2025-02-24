@@ -11,17 +11,19 @@ import Image3 from "./image.png";
 
 const styles = StyleSheet.create({
   page: {
+   
     padding: 18,
-    fontSize: 8,
-    lineHeight: "1.28px",
+    fontSize: 5,
+    // lineHeight: "1.28px",
     position: "relative",
+    breakInside: "avoid",
   },
 
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 5,
+    marginBottom: 10,
   },
   profileImage: {
     width: 50,
@@ -29,7 +31,8 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   section: {
-    marginBottom: 5,
+    marginBottom: 10,
+    breakInside: "avoid",
   },
   title: {
     fontSize: 12,
@@ -276,179 +279,177 @@ export const Resume = ({ data }) => {
             />
           </View>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginTop: 5,
-          }}
-        ></View>
 
-        <Text
-          style={{
-            fontSize: 10,
-            fontWeight: 100,
-            textAlign: "center",
-            marginTop: 5,
-          }}
-        >
-          JALUR AFIRMASI
-        </Text>
-
-        <View
-          style={{
-           
-            marginTop: 2,
-          
-          }}
-        >
-          <Description
-            label="Nomor KKS"
-            value={data.nomor_kks}
-          />
-          <Description
-            label="Nomor PKH"
-            value={data.nomor_pkh}
-          />
-          <Description
-            label="Nomor KIP"
-            value={data.nomor_kip}
-          />
-        </View>
-        <Text
-          style={{
-            fontSize: 10,
-            fontWeight: 100,
-            textAlign: "center",
-            marginTop: 2,
-          }}
-        >
-          JALUR PRESTASI{" "}
-        </Text>
-
-        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-          {[1, 2, 3].map((index) => (
-            <View
-              key={index}
-              style={{ width: "50%", paddingRight: 5, marginTop: 4 }}
-            >
+        <View >
+          {data?.jalur_seleksi === "Jalur Afirmasi" && (
+            <>
+              {" "}
               <Text
                 style={{
-                  fontSize: 8,
-                  fontWeight: "bold",
-                  marginBottom: 5,
+                  fontSize: 10,
+                  fontWeight: 100,
+                  textAlign: "center",
+                  marginTop: 5,
                 }}
               >
-                Prestasi {index}
+                JALUR AFIRMASI{" "}
               </Text>
-              <Description
-                label="Nama Prestasi"
-                value={data[`nama_prestasi${index}`]}
-              />
-              <Description label="Tingkat" value={data[`tingkat${index}`]} />
-              <Description label="Juara" value={data[`juara_ke_${index}`]} />
-            </View>
-          ))}
-        </View>
+              <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+                {[
+                  {
+                    label:
+                      "Nomor Kartu Keluarga Sejahtera/Kartu Perlindungan Sosial",
+                    value: ": " + data.nomor_kks === null ? "" : data.nomor_kks,
+                  },
+                  {
+                    label: "Nomor Kartu Program Keluarga Harapan",
+                    value: ": " + data.nomor_pkh === null ? "" : data.nomor_pkh,
+                  },
+                  {
+                    label: "Nomor Kartu Indonesia Pintar",
+                    value: ": " + data.nomor_kip === null ? "" : data.nomor_kip,
+                  },
+                ].map((item, index) => (
+                  <View
+                    key={index}
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      marginBottom: 5,
+                    }}
+                  >
+                    {/* Label dengan lebar tetap */}
+                    <Text
+                      style={{
+                        width: 250, // Sesuaikan panjang maksimum label
+                        fontWeight: "bold",
+                        flexShrink: 0, // Agar label tidak wrap ke bawah
+                      }}
+                    >
+                      {item.label}
+                    </Text>
 
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
+                    {/* Value agar menyesuaikan */}
+                    <Text style={{ flex: 1 }}>{item.value}</Text>
+                  </View>
+                ))}
+              </View>
+            </>
+          )}
 
-            marginTop: space,
-          }}
-        >
-          <View style={{ flex: 1, marginRight: 10, marginTop: 20 }}>
-            <Text
-              style={{
-                fontSize: 6,
-                color: "red",
-                marginBottom: 2,
-              }}
-            >
-              * Seluruh berkas dimasukkan ke Map Warna Biru (Jalur Reguler), Map
-              Warna Hijau (Jalur Prestasi), dan Map Warna Kuning (Jalur
-              Afirmasi).
-            </Text>
-            <Text
-              style={{
-                fontSize: 6,
-                color: "red",
-                marginBottom: 2,
-              }}
-            >
-              * Materai Rp. 10.000 sebanyak 1 (satu) buah (Dibawa saat Daftar
-              Ulang)
-            </Text>
-            <Text
-              style={{
-                fontSize: 6,
-                color: "red",
-                marginBottom: 2,
-              }}
-            >
-              * Foto pribadi dicetak berwarna dengan ukuran 2 x 3 dan ditempel
-              pada Dokumen Rekapan Isian Data ini
-            </Text>
-            <Text
-              style={{
-                fontSize: 6,
-                color: "red",
-                marginBottom: 2,
-              }}
-            >
-              * Dokumen Rekapan Isian Data ini dicetak oleh masing-masing
-              Pendaftar dan diserahkan kepada Panitia saat Daftar Ulang
-            </Text>
-            <Text
-              style={{
-                fontSize: 6,
-                color: "red",
-                marginBottom: 2,
-              }}
-            >
-              * Dokumen Surat Pernyataan dicetak oleh masing-masing Pendaftar
-              dan diserahkan kepada Panitia saat Daftar Ulang
-            </Text>
-            <Text
-              style={{
-                fontSize: 6,
-                color: "red",
-                marginBottom: 2,
-              }}
-            >
-              * Dokumen pendukung bagi pendaftar jalur Afirmasi atau Prestasi
-              wajib diserahkan saat Daftar Ulang
-            </Text>
-            <Text
-              style={{
-                fontSize: 6,
-                color: "red",
-              }}
-            >
-              *Jika Pendaftar tidak melakukan Daftar Ulang sampai batas akhir
-              gelombang, maka akun Pendaftar akan dihapus oleh Panitia. Serta
-              wajib membuat akun ulang jika Pendaftar ingin mengikuti seleksi di
-              gelombang berikutnya (Jika kuota masih tersedia)
-            </Text>
+          <View>
+            {data?.jalur_seleksi === "Jalur Prestasi" && (
+              <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+                {[1, 2, 3].map((index) => (
+                  <View
+                    key={index}
+                    style={{ width: "50%", paddingRight: 5, marginTop: 4 }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 8,
+                        fontWeight: "bold",
+                        marginBottom: 5,
+                      }}
+                    >
+                      Prestasi {index}
+                    </Text>
+                    <Description
+                      label="Nama Prestasi"
+                      value={data[`nama_prestasi${index}`]}
+                    />
+                    <Description
+                      label="Tingkat"
+                      value={data[`tingkat${index}`]}
+                    />
+                    <Description
+                      label="Juara"
+                      value={data[`juara_ke_${index}`]}
+                    />
+                  </View>
+                ))}
+              </View>
+            )}
           </View>
 
-          {/* Pernyataan */}
           <View
-            style={[styles.signatureContainer, { flex: 1, marginLeft: 10 }]}
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+
+              marginTop: space,
+            }}
           >
-            {/* Kotak Foto */}
-            <View style={styles.photoBox}>
-              <Text>Pas Foto</Text>
+            <View style={{ flex: 1, marginRight: 10, marginTop: 10 }}>
+              <Text
+                style={{
+                  fontSize: 6,
+                  color: "red",
+                  marginBottom: 2,
+                }}
+              >
+                * Foto pribadi dicetak berwarna dengan ukuran 2 x 3 dan ditempel
+                pada Dokumen Rekapan Isian Data ini
+              </Text>
+              <Text
+                style={{
+                  fontSize: 6,
+                  color: "red",
+                  marginBottom: 2,
+                }}
+              >
+                * Dokumen Rekapan Isian Data ini dicetak oleh masing-masing
+                Pendaftar dan diserahkan kepada Panitia saat Daftar Ulang
+              </Text>
+              <Text
+                style={{
+                  fontSize: 6,
+                  color: "red",
+                  marginBottom: 2,
+                }}
+              >
+                * Dokumen Surat Pernyataan dicetak oleh masing-masing Pendaftar
+                dan diserahkan kepada Panitia saat Daftar Ulang
+              </Text>
+              <Text
+                style={{
+                  fontSize: 6,
+                  color: "red",
+                  marginBottom: 2,
+                }}
+              >
+                * Dokumen pendukung bagi pendaftar jalur Afirmasi atau Prestasi
+                wajib diserahkan saat Daftar Ulang
+              </Text>
+              <Text
+                style={{
+                  fontSize: 6,
+                  color: "red",
+                }}
+              >
+                *Jika Pendaftar tidak melakukan Daftar Ulang sampai batas akhir
+                gelombang, maka akun Pendaftar akan dihapus oleh Panitia. Serta
+                wajib membuat akun ulang jika Pendaftar ingin mengikuti seleksi
+                di gelombang berikutnya (Jika kuota masih tersedia)
+              </Text>
             </View>
 
-            {/* Bagian Tanda Tangan */}
-            <View style={styles.signatureSection}>
-              <Text>Sukabumi, {formatMonth(new Date())}</Text>
-              <Text>Tanda Tangan:</Text>
+            {/* Pernyataan */}
+            <View
+              style={[styles.signatureContainer, { flex: 1, marginLeft: 10 }]}
+            >
+              {/* Kotak Foto */}
+              <View style={styles.photoBox}>
+                <Text>Pas Foto</Text>
+              </View>
 
-              <Text style={{ marginTop: 50 }}>({data.name})</Text>
+              {/* Bagian Tanda Tangan */}
+              <View style={styles.signatureSection}>
+                <Text>Sukabumi, {formatMonth(new Date())}</Text>
+                <Text>Tanda Tangan:</Text>
+
+                <Text style={{ marginTop: 50 }}>({data.name})</Text>
+              </View>
             </View>
           </View>
         </View>

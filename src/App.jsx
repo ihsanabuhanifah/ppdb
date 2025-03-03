@@ -26,6 +26,7 @@ import {
 import { useSelector } from "react-redux";
 import LoadingPage from "./pages/auth/loadingPage,";
 import Home from "./pages/auth/home";
+import QuizPage from "./pages/ppdb/Tes-Akademik/Tes-BidangStudi";
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -61,9 +62,9 @@ function App() {
             <LoadingPage></LoadingPage>
           )}
         </TesPageProtected>
-        <TesPageProtected path="/tes/diniyah-dasar">
+        <TesPageProtected path="/tes-akademik">
           {isAuth ? (
-            <TestDiniyahDasar></TestDiniyahDasar>
+            <QuizPage></QuizPage>
           ) : (
             <LoadingPage></LoadingPage>
           )}

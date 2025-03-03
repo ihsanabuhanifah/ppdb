@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const QuizPage = () => {
+const TesAkademik = () => {
   const questions = [
     { id: 1, question: "Nabi Muhammad SAW. pernah tinggal dan hidup berdampingan dengan kaum kafir dan kaum musyrik Makkah. Hal tersebut menunjukan sikap. . . .", options: ["Moderat", "Toleransi", "Egois", "Otoriter"], answer: "Toleransi" },
     { id: 2, question: "Di Negara Indonesia warganya memiliki agama dan keyakinan yang berbeda-beda. Untuk mengatur kehidupan bersama diperlukan. . .", options: ["Kekuatan militer untuk memaksa para warga negaranya", "Peraturan untuk menekan warga yang tidak mau mengikuti kemauan minoritas", "Peraturan bersama dan menempatkan kedudukan yang sama di depan hukum", "Kebersamaan dalam menguasai parlemen"], answer: "Peraturan bersama dan menempatkan kedudukan yang sama di depan hukum" },
@@ -26,6 +26,8 @@ const QuizPage = () => {
   };
 
   const handleSubmit = async () => {
+
+    return console.log("answer", answers)
     try {
       await axios.post("https://api.example.com/save-answers", { answers, questions });
       setSubmitted(true);
@@ -91,4 +93,4 @@ const QuizPage = () => {
   );
 };
 
-export default QuizPage;
+export default TesAkademik;

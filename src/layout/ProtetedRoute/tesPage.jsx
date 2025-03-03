@@ -20,6 +20,8 @@ export const TesPageProtected = ({ children, ...rest }) => {
 
   const onLoaded = async (values) => {
     let result = await dispatch(authMe(values));
+
+    return history.push(url);
    
     if (result?.pendaftaran == 0) {
       return history.push("/ppdb/konfirmasi-pembayaran-ppdb");
@@ -43,7 +45,7 @@ export const TesPageProtected = ({ children, ...rest }) => {
       } else if (identitas.length === 3) {
         return history.push("/identitas/data-ibu");
       } else {
-        return history.push(url);
+       
       }
     }
   };

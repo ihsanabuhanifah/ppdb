@@ -60,9 +60,9 @@ export default function Dashboard() {
                     </a>{" "}
                   
             <p>atau scan barcode berikut ini:</p>
-            <p>
-              <img src="https://storage.devopsgeming.online/file-1740037117291.JPEG" width="300" alt="grup" class="center" srcset=""/>
-              </p>.
+            <div className="flex items-center justify-center mt-2">
+              <img className="text-center" src="https://storage.devopsgeming.online/file-1740037117291.JPEG" width="300" alt="grup" class="center" srcset=""/>
+              </div>.
           </p>
         </div>
 

@@ -64,7 +64,17 @@ export default function Dashboard() {
               <img className="text-center" src="https://storage.devopsgeming.online/file-1740037117291.JPEG" width="300" alt="grup" class="center" srcset=""/>
               </div>.
           </p>
-        </div>
+          <p className="text-gray-600 text-center">
+            Jika mengalami kesulitan dalam proses pendaftaran, silakan untuk tonton dan ikuti video tutorial pendaftaran pada link berikut ini:</p>
+           <p
+                      className="text-blue-300 text-center"
+                      target="_blank"
+                      href="https://youtu.be/gKLFC26B8pw?si=OmEt3XNH-JLur34C"
+                      rel="noopener noreferrer"
+                    >
+                      Klik Di Sini Untuk Menonton Video Tutorial Pendfataran
+                    </p>{" "}
+         </div>
 
         <div className="mt-6">
           <h3 className="text-lg font-bold text-gray-800 mb-3">

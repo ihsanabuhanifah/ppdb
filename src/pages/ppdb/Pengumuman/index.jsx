@@ -100,8 +100,6 @@ export default function Pengumuman() {
               <thead>
                 <tr className="bg-gray-100">
                   <th className="border border-gray-300 p-3">Seleksi</th>
-                  <th className="border border-gray-300 p-3">Nilai</th>
-
                   <th className="border border-gray-300 p-3">Keterangan</th>
                 </tr>
               </thead>
@@ -110,16 +108,24 @@ export default function Pengumuman() {
                   <td className="border border-gray-300 p-1 text-lg text-gray-600">
                     Berkas
                   </td>
-                  <td className="border uppercase border-gray-300 p-1 text-lg text-gray-600">
-                    {data?.nilai?.berkas_nilai || "-"}
-                  </td>
-                  <td className="border uppercase border-gray-300 p-1 text-lg text-gray-600"> {data?.nilai?.berkas_nilai === "Sesuai" ? "lulus" : "tidak lulus" || "-"}</td>
+                  <td className="border uppercase border-gray-300 p-1 text-lg text-gray-600"> {data?.nilai?.cbt_keterangan || "-"}</td>
                 </tr>
                 <tr className="text-center">
                   <td className="border border-gray-300 p-1 text-lg text-gray-600">
-                    CBT
+                    Tes Bidang Studi
                   </td>
-                  <td className="border uppercase border-gray-300 p-1 text-lg text-gray-600"> {data?.nilai?.cbt_nilai || "-"}</td>
+                  <td className="border uppercase border-gray-300 p-1 text-lg text-gray-600"> {data?.nilai?.cbt_keterangan || "-"}</td>
+                </tr>
+                <tr className="text-center">
+                  <td className="border border-gray-300 p-1 text-lg text-gray-600">
+                    Tes Potensi Akademik
+                  </td>
+                  <td className="border uppercase border-gray-300 p-1 text-lg text-gray-600"> {data?.nilai?.cbt_keterangan || "-"}</td>
+                </tr>
+                <tr className="text-center">
+                  <td className="border border-gray-300 p-1 text-lg text-gray-600">
+                    Wawancara Psikologi
+                  </td>
                   <td className="border uppercase border-gray-300 p-1 text-lg text-gray-600"> {data?.nilai?.cbt_keterangan || "-"}</td>
                 </tr>
               </tbody>

@@ -22,7 +22,7 @@ import { getMessaging, getToken } from "firebase/messaging";
 import { useSelector } from "react-redux";
 import Dokumen from "../pages/ppdb/dokumen";
 import Pengumuman from "../pages/ppdb/Pengumuman";
-import TesAkademik from "../pages/ppdb/Tes-Akademik/Tes-BidangStudi";
+import TesAkademik from "../pages/ppdb/Tes-Akademik/Tes-BidangStudi.jsx";
 export default function LayoutPPDB() {
   // const isPayment = useSelector((state) => state.auth.isPayment);
   const message = "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";

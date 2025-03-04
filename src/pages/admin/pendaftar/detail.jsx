@@ -1645,11 +1645,6 @@ export default function DetailPendaftar() {
                       <th className="border border-gray-300 p-3">Deskripsi</th>
 
                       <th className="border border-gray-300 p-3">Preview</th>
-
-                      <th className="border border-gray-300 p-3">Hasil Pemeriksaan</th>
-
-                      <th className="border border-gray-300 p-3">Verifikator</th>
-                    
                     </tr>
                   </thead>
                   <tbody>
@@ -1707,29 +1702,144 @@ export default function DetailPendaftar() {
                           )}
                         </td>
 
-                        <td className="border border-gray-300 p-3 text-sm text-gray-600">
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Batas>
+
+              <Batas title={"Tes Bidang Studi"}>
+                <table className="w-full border-collapse border border-gray-300 mt-5">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="border border-gray-300 p-3">Izinkan Tes?</th>
+                      
+                      <th className="border border-gray-300 p-3">Hasil Tes</th>
+
+                      <th className="border border-gray-300 p-3">Keterangan Tes</th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(files).map(([key, file]) => (
+                      <tr key={key} className="text-center">
+                        <td className="border border-gray-300 p-3 capitalize">
                         <select
                           onChange={handleChange}
                           className="border py-5 text-center text-lg "
                        >
                           <option>Pilih</option>
-                          <option>Sesuai</option>
-                          <option>Tidak Sesuai</option>
+                          <option>Izinkan</option>
+                          <option>Tidak Diizinkan</option>
+                          </select>
+                        </td>
+                        <td className="border border-gray-300 p-3 text-sm text-gray-600">
+                          /// Menampilkan angka yang diisi berdasakan hasil Tes Bidang Studi
+                        </td>
+
+                        <td className="border border-gray-300 p-3">
+                        <select
+                          onChange={handleChange}
+                          className="border py-5 text-center text-lg "
+                       >
+                          <option>Pilih</option>
+                          <option>Telah Melaksanakan</option>
+                          <option>Belum Melaksanakan</option>
                           </select>
                         </td>
 
-                        <td className="border border-gray-300 p-3 text-sm text-gray-600">
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Batas>
+
+              <Batas title={"Tes Potensi Akademik"}>
+                <table className="w-full border-collapse border border-gray-300 mt-5">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="border border-gray-300 p-3">Izinkan Tes?</th>
+                      
+                      <th className="border border-gray-300 p-3">Hasil Tes</th>
+
+                      <th className="border border-gray-300 p-3">Keterangan Tes</th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(files).map(([key, file]) => (
+                      <tr key={key} className="text-center">
+                        <td className="border border-gray-300 p-3 capitalize">
                         <select
                           onChange={handleChange}
                           className="border py-5 text-center text-lg "
                        >
                           <option>Pilih</option>
-                          <option>Dra. Hj. Ratna Daniar, M.Pd.</option>
-                          <option>Suprijadi, S.Pd.</option>
-                          <option>Teddy Setiadi Gunawan, S.Pd.</option>
-                          <option>Asep Hamjah, S.Pd.</option>
+                          <option>Izinkan</option>
+                          <option>Tidak Diizinkan</option>
                           </select>
                         </td>
+                        <td className="border border-gray-300 p-3 text-sm text-gray-600">
+                          /// Menampilkan nilai angka yang diisi berdasakan hasil Tes Potensi Akademik
+                        </td>
+
+                        <td className="border border-gray-300 p-3">
+                        <select
+                          onChange={handleChange}
+                          className="border py-5 text-center text-lg "
+                       >
+                          <option>Pilih</option>
+                          <option>Telah Melaksanakan</option>
+                          <option>Belum Melaksanakan</option>
+                          </select>
+                        </td>
+
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Batas>
+
+              <Batas title={"Wawancara Psikologi"}>
+                <table className="w-full border-collapse border border-gray-300 mt-5">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="border border-gray-300 p-3">Izinkan Tes?</th>
+                      
+                      <th className="border border-gray-300 p-3">Hasil Tes</th>
+
+                      <th className="border border-gray-300 p-3">Keterangan Tes</th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(files).map(([key, file]) => (
+                      <tr key={key} className="text-center">
+                        <td className="border border-gray-300 p-3 capitalize">
+                        <select
+                          onChange={handleChange}
+                          className="border py-5 text-center text-lg "
+                       >
+                          <option>Pilih</option>
+                          <option>Izinkan</option>
+                          <option>Tidak Diizinkan</option>
+                          </select>
+                        </td>
+                        <td className="border border-gray-300 p-3 text-sm text-gray-600">
+                          /// Menampilkan nilai angka yang diisi berdasakan hasil Wawancara Psikologi
+                        </td>
+
+                        <td className="border border-gray-300 p-3">
+                        <select
+                          onChange={handleChange}
+                          className="border py-5 text-center text-lg "
+                       >
+                          <option>Pilih</option>
+                          <option>Telah Melaksanakan</option>
+                          <option>Belum Melaksanakan</option>
+                          </select>
+                        </td>
+
                       </tr>
                     ))}
                   </tbody>

@@ -25,7 +25,7 @@ export default function Nilai({
 
             <th className="border border-gray-300 p-3">Hafalan</th>
             <th className="border border-gray-300 p-3">Tulisan</th>
-            <th className="border border-gray-300 p-3">Penilai</th>
+            <th className="border border-gray-300 p-3">Keterangan</th>
           </tr>
         </thead>
         <tbody>
@@ -105,13 +105,9 @@ export default function Nilai({
                 className="border py-5 text-center text-lg "
               >
                 <option value={"Rusman"}>Pilih</option>
-                <option value={"Rusman"}>Dian Suhendar, S.Pd., M.M.</option>
-                <option value={"Rusman"}>Ade Bunyamin, S.Pd.I., M.Ag.</option>
-                <option value={"Rusman"}>Evi Syahdati, S.Ps.I.</option>
-                <option value={"Rusman"}>Saevi Zulfiqor, S.Pd.</option>
-                <option value={"Rusman"}>Adi Teguh Imansyah, M.Pd.</option>
-                  
-              </select>
+                <option value={"Rusman"}>Telah Dites</option>
+                <option value={"Rusman"}>Belum Dites</option>
+                </select>
             </td>
           </tr>
         </tbody>

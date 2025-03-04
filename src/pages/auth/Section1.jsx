@@ -56,7 +56,7 @@ export default function Section1({data}) {
         </h2>
 
         <h4 className="text-white text-center font-bold text-xl mb-10">
-          Disiplin, Sukses, Berwawasan Islami
+          Silakan Unduh/Download Brosur dan Tonton Video Tutorial Pendaftaran
         </h4>
       </div>
 

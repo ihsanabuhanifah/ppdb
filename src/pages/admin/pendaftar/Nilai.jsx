@@ -6,15 +6,15 @@ export default function Nilai({
   handleChange,
   setFieldValue,
 }) {
-  useEffect(() => {
-    const akhir =
-      Number(values.cbt_bacaan || 0) +
-      Number(values.cbt_hafalan || 0) +
-      Number(values.cbt_tajwid || 0) +
-      Number(values.cbt_tulisan || 0);
+  // useEffect(() => {
+  //   const akhir =
+  //     Number(values.cbt_bacaan || 0) +
+  //     Number(values.cbt_hafalan || 0) +
+  //     Number(values.cbt_tajwid || 0) +
+  //     Number(values.cbt_tulisan || 0);
 
-    setFieldValue("cbt_nilai", akhir / 4);
-  }, [values]);
+  //   setFieldValue("cbt_nilai", akhir / 4);
+  // }, [values]);
   return (
     <section>
       <table className="w-full border-collapse border border-gray-300 mt-5">
@@ -39,11 +39,11 @@ export default function Nilai({
                 className="border py-5 text-center text-lg "
               >
                 <option>Pilih</option>
-                <option>Istimewa</option>
-                <option>Sangat Baik</option>
-                <option>Baik</option>
-                <option>Cukup Baik</option>
-                <option>Kurang Baik</option>
+                <option value={"Istimewa"}>Istimewa</option>
+                <option value={"Sangat Baik"}>Sangat Baik</option>
+                <option value={"Baik"}>Baik</option>
+                <option value={"Cukup Baik"}>Cukup Baik</option>
+                <option value={"Kurang Baik"}>Kurang Baik</option>
                 </select>
               
             </td>
@@ -56,11 +56,11 @@ export default function Nilai({
                 className="border py-5 text-center text-lg "
               >
                 <option>Pilih</option>
-                <option>Istimewa</option>
-                <option>Sangat Baik</option>
-                <option>Baik</option>
-                <option>Cukup Baik</option>
-                <option>Kurang Baik</option>
+                <option value={"Istimewa"}>Istimewa</option>
+                <option value={"Sangat Baik"}>Sangat Baik</option>
+                <option value={"Baik"}>Baik</option>
+                <option value={"Cukup Baik"}>Cukup Baik</option>
+                <option value={"Kurang Baik"}>Kurang Baik</option>
                 </select>
               
             </td>
@@ -72,11 +72,11 @@ export default function Nilai({
                 className="border py-5 text-center text-lg "
               >
                 <option>Pilih</option>
-                <option>Istimewa</option>
-                <option>Sangat Baik</option>
-                <option>Baik</option>
-                <option>Cukup Baik</option>
-                <option>Kurang Baik</option>
+                <option value={"Istimewa"}>Istimewa</option>
+                <option value={"Sangat Baik"}>Sangat Baik</option>
+                <option value={"Baik"}>Baik</option>
+                <option value={"Cukup Baik"}>Cukup Baik</option>
+                <option value={"Kurang Baik"}>Kurang Baik</option>
                 </select>
 
             </td>
@@ -88,11 +88,11 @@ export default function Nilai({
                 className="border py-5 text-center text-lg "
               >
                 <option>Pilih</option>
-                <option>Istimewa</option>
-                <option>Sangat Baik</option>
-                <option>Baik</option>
-                <option>Cukup Baik</option>
-                <option>Kurang Baik</option>
+                <option value={"Istimewa"}>Istimewa</option>
+                <option value={"Sangat Baik"}>Sangat Baik</option>
+                <option value={"Baik"}>Baik</option>
+                <option value={"Cukup Baik"}>Cukup Baik</option>
+                <option value={"Kurang Baik"}>Kurang Baik</option>
                 </select>  
               
             </td>
@@ -104,9 +104,9 @@ export default function Nilai({
                 onChange={handleChange}
                 className="border py-5 text-center text-lg "
               >
-                <option value={"Rusman"}>Pilih</option>
-                <option value={"Rusman"}>Telah Dites</option>
-                <option value={"Rusman"}>Belum Dites</option>
+                <option >Pilih</option>
+                <option value={"Telah Dites"}>Telah Dites</option>
+                <option value={"Belum dites"}>Belum Dites</option>
                 </select>
             </td>
           </tr>

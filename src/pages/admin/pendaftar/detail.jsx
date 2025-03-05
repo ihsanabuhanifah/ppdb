@@ -1727,8 +1727,8 @@ export default function DetailPendaftar() {
 
                       onClick={()=> {
                         Swal.fire({
-                          title: "Are you sure?",
-                          text: "You won't be able to revert this!",
+                          title: "Konfirmasi",
+                          text: "Apakah yakin akan memnuka tes ini?",
                           icon: "warning",
                           showCancelButton: true,
                           confirmButtonColor: "#3085d6",
@@ -1743,9 +1743,9 @@ export default function DetailPendaftar() {
                         });
                       }}
                         type="button"
-                        className="w-full border flex justify-center items-center text-white bg-green-400 h-16 text-lg font-bold rounded-md hover:bg-green-600"
+                        className="w-full border flex justify-center items-center text-white bg-blue-400 h-16 text-lg font-bold rounded-md hover:bg-blue-600"
                       >
-                       {mutate.isLoading ? <Loading/> : " Izinkan Tes"}
+                       {mutate.isLoading ? <Loading/> : " Buka Tes"}
                       </button>
                     </div>
                   </>

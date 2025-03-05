@@ -313,8 +313,8 @@ const TPA = () => {
                 disabled={mutate.isLoading}
                 onClick={() => {
                   Swal.fire({
-                    title: "Apakah yakin akan mengakhiri ujian?",
-                    text: "",
+                    title: "Konfirmasi",
+                    text: "Apakah yakin akan mengakhiri ujian?",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",

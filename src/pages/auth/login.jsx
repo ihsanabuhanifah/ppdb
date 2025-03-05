@@ -39,6 +39,7 @@ export default function Register() {
         icon: "success"
       });
       
+      console.log("result.user.roles[0].name", result.user.roles[0].name)
 
       if (result.user.roles[0].name === "admin") {
         return history.push("/admin/pendaftar");

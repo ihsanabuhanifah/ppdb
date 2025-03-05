@@ -3,7 +3,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Formik, useFormik, FormikProvider } from "formik";
 import * as Yup from "yup";
-import { Spinner, useDisclosure, useToast, Text, Flex, Center, VStack,  } from "@chakra-ui/react";
+import {
+  Spinner,
+  useDisclosure,
+  useToast,
+  Text,
+  Flex,
+  Center,
+  VStack,
+} from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useHistory } from "react-router";
@@ -18,6 +26,7 @@ import {
   getDetail,
   getDetailByAdmin,
   updateProfile,
+  useCreateTes,
   useNilaiBerkas,
 } from "../../../api/santri";
 import { useQuery, useQueryClient } from "react-query";
@@ -134,13 +143,14 @@ export default function DetailPendaftar() {
 
     {
       enabled: id !== undefined,
-      staleTime : 1000 * 60 * 60,
+      staleTime: 1000 * 60 * 60,
       keepPreviousData: true,
       select: (response) => response.data,
     }
   );
 
   const mutate = useNilaiBerkas();
+  const mutateTes = useCreateTes();
 
   const initialValues = {};
   const onSubmit = async (values) => {
@@ -167,6 +177,7 @@ export default function DetailPendaftar() {
 
   const formik = useFormik({
     initialValues: {
+      id:data?.id,
       name: data?.name || "",
       email: data?.email || "",
       phone: data?.phone || "",
@@ -241,6 +252,7 @@ export default function DetailPendaftar() {
       cbt_nilai: data?.nilai?.cbt_nilai,
       cbt_keterangan: data?.nilai?.cbt_keterangan,
       cbt_penilaian: data?.nilai?.cbt_penilaian,
+      tes: data?.tes,
 
       role: 2,
       is_batal: 0,
@@ -293,7 +305,6 @@ export default function DetailPendaftar() {
       dokumen_prestasi: data?.dokumen_prestasi,
     }));
   }, [data]);
-
 
   if (isFetching) {
     return (
@@ -1641,7 +1652,7 @@ export default function DetailPendaftar() {
                   <thead>
                     <tr className="bg-gray-100">
                       <th className="border border-gray-300 p-3">Dokumen</th>
-                      
+
                       <th className="border border-gray-300 p-3">Deskripsi</th>
 
                       <th className="border border-gray-300 p-3">Preview</th>
@@ -1701,7 +1712,6 @@ export default function DetailPendaftar() {
                             </div>
                           )}
                         </td>
-
                       </tr>
                     ))}
                   </tbody>
@@ -1709,141 +1719,90 @@ export default function DetailPendaftar() {
               </Batas>
 
               <Batas title={"Tes Bidang Studi"}>
-                <table className="w-full border-collapse border border-gray-300 mt-5">
-                  <thead>
-                    <tr className="bg-gray-100">
-                      <th className="border border-gray-300 p-3">Izinkan Tes?</th>
-                      
-                      <th className="border border-gray-300 p-3">Hasil Tes</th>
+                {console.log("Val", values.id)}
 
-                      <th className="border border-gray-300 p-3">Keterangan Tes</th>
-                    
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.entries(files).map(([key, file]) => (
-                      <tr key={key} className="text-center">
-                        <td className="border border-gray-300 p-3 capitalize">
-                        <select
-                          onChange={handleChange}
-                          className="border py-5 text-center text-lg "
-                       >
-                          <option>Pilih</option>
-                          <option>Izinkan</option>
-                          <option>Tidak Diizinkan</option>
-                          </select>
-                        </td>
-                        <td className="border border-gray-300 p-3 text-sm text-gray-600">
-                          /// Menampilkan angka yang diisi berdasakan hasil Tes Bidang Studi
-                        </td>
+                {values.tes === null ? (
+                  <>
+                    <div className="flex items-center justify-center mt-5">
+                      <button
 
-                        <td className="border border-gray-300 p-3">
-                        <select
-                          onChange={handleChange}
-                          className="border py-5 text-center text-lg "
-                       >
-                          <option>Pilih</option>
-                          <option>Telah Melaksanakan</option>
-                          <option>Belum Melaksanakan</option>
-                          </select>
-                        </td>
+                      onClick={()=> {
+                        Swal.fire({
+                          title: "Are you sure?",
+                          text: "You won't be able to revert this!",
+                          icon: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#3085d6",
+                          cancelButtonColor: "#d33",
+                          confirmButtonText: "Yes"
+                        }).then((result) => {
+                          if (result.isConfirmed) {
 
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </Batas>
+                            console.log("vales", values)
+                            mutateTes.mutate(values.id)
+                          }
+                        });
+                      }}
+                        type="button"
+                        className="w-full border flex justify-center items-center text-white bg-green-400 h-16 text-lg font-bold rounded-md hover:bg-green-600"
+                      >
+                       {mutate.isLoading ? <Loading/> : " Izinkan Tes"}
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    <table className="w-full border-collapse border border-gray-300 mt-5">
+                      <thead>
+                        <tr className="bg-gray-100">
+                          <th className="border border-gray-300 p-3">
+                            Nilai Tes Akademik
+                          </th>
+                          <th className="border border-gray-300 p-3">
+                            Jawab Tes Akademik
+                          </th>
 
-              <Batas title={"Tes Potensi Akademik"}>
-                <table className="w-full border-collapse border border-gray-300 mt-5">
-                  <thead>
-                    <tr className="bg-gray-100">
-                      <th className="border border-gray-300 p-3">Izinkan Tes?</th>
-                      
-                      <th className="border border-gray-300 p-3">Hasil Tes</th>
+                          <th className="border border-gray-300 p-3">
+                            Nilai Tes Bidang Studi
+                          </th>
+                          <th className="border border-gray-300 p-3">
+                            Jawaban Tes Bidang Studi
+                          </th>
 
-                      <th className="border border-gray-300 p-3">Keterangan Tes</th>
-                    
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.entries(files).map(([key, file]) => (
-                      <tr key={key} className="text-center">
-                        <td className="border border-gray-300 p-3 capitalize">
-                        <select
-                          onChange={handleChange}
-                          className="border py-5 text-center text-lg "
-                       >
-                          <option>Pilih</option>
-                          <option>Izinkan</option>
-                          <option>Tidak Diizinkan</option>
-                          </select>
-                        </td>
-                        <td className="border border-gray-300 p-3 text-sm text-gray-600">
-                          /// Menampilkan nilai angka yang diisi berdasakan hasil Tes Potensi Akademik
-                        </td>
-
-                        <td className="border border-gray-300 p-3">
-                        <select
-                          onChange={handleChange}
-                          className="border py-5 text-center text-lg "
-                       >
-                          <option>Pilih</option>
-                          <option>Telah Melaksanakan</option>
-                          <option>Belum Melaksanakan</option>
-                          </select>
-                        </td>
-
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </Batas>
-
-              <Batas title={"Wawancara Psikologi"}>
-                <table className="w-full border-collapse border border-gray-300 mt-5">
-                  <thead>
-                    <tr className="bg-gray-100">
-                      <th className="border border-gray-300 p-3">Izinkan Tes?</th>
-                      
-                      <th className="border border-gray-300 p-3">Hasil Tes</th>
-
-                      <th className="border border-gray-300 p-3">Keterangan Tes</th>
-                    
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.entries(files).map(([key, file]) => (
-                      <tr key={key} className="text-center">
-                        <td className="border border-gray-300 p-3 capitalize">
-                        <select
-                          onChange={handleChange}
-                          className="border py-5 text-center text-lg "
-                       >
-                          <option>Pilih</option>
-                          <option>Izinkan</option>
-                          <option>Tidak Diizinkan</option>
-                          </select>
-                        </td>
-                        <td className="border border-gray-300 p-3 text-sm text-gray-600">
-                          /// Menampilkan nilai angka yang diisi berdasakan hasil Wawancara Psikologi
-                        </td>
-
-                        <td className="border border-gray-300 p-3">
-                        <select
-                          onChange={handleChange}
-                          className="border py-5 text-center text-lg "
-                       >
-                          <option>Pilih</option>
-                          <option>Telah Melaksanakan</option>
-                          <option>Belum Melaksanakan</option>
-                          </select>
-                        </td>
-
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                          <th className="border border-gray-300 p-3">
+                            Nilai Wawancara
+                          </th>
+                          <th className="border border-gray-300 p-3">
+                            Jawaban Wawancara
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="text-center">
+                          <td className="border border-gray-300 p-3 capitalize">
+                            {data?.tes?.nilai_tes_akademik || "-"}
+                          </td>
+                          <td className="border border-gray-300 p-3 capitalize">
+                            -
+                          </td>
+                          <td className="border border-gray-300 p-3 capitalize">
+                            {data?.tes?.nilai_tes_bidang_studi || "-"}
+                          </td>
+                          <td className="border border-gray-300 p-3 capitalize">
+                            -
+                          </td>
+                          <td className="border border-gray-300 p-3 capitalize">
+                            {data?.tes?.nilai_wawancara || "-"}
+                          </td>
+                          <td className="border border-gray-300 p-3 capitalize">
+                            -
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </>
+                )}
               </Batas>
 
               <Batas title={"Hasil Tes BTQ"}>

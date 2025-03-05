@@ -1,16 +1,12 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios from "./axios";
-import {syncToken} from "./axios"
+import { syncToken } from "./axios";
 import Swal from "sweetalert2";
-
-
-
 
 export const uploadFileFoto = async (file, key) => {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("key", key);
-
 
   try {
     const response = await axios.post("/upload/profile", formData, {
@@ -19,10 +15,9 @@ export const uploadFileFoto = async (file, key) => {
 
     return response.data;
   } catch (error) {
-   return error
+    return error;
   }
 };
-
 
 export async function getDetail() {
   try {
@@ -51,7 +46,6 @@ export async function getJumlahPendaftaran() {
   }
 }
 
-
 export async function updateProfile(payload) {
   try {
     let response = await axios.put("/update-profile", payload);
@@ -60,9 +54,6 @@ export async function updateProfile(payload) {
     return err;
   }
 }
-
-
-
 
 export async function postSantiBaru(values) {
   try {
@@ -111,7 +102,7 @@ export async function uploadBuktiTransfer(values) {
 
   form.append("url_img", values["files"]);
   form.append("status", "0");
-  form.append("nominal" , parseFloat(values["nominal"]))
+  form.append("nominal", parseFloat(values["nominal"]));
   try {
     let response = await axios.post("/uploadBukti/save", form, {
       headers: {
@@ -125,16 +116,15 @@ export async function uploadBuktiTransfer(values) {
   }
 }
 
-
 export async function getBuktiTransfer() {
   let respone = await axios.get("/uploadBukti/user");
- console.log(respone)
-  return respone.data
+  console.log(respone);
+  return respone.data;
 }
 export async function detailBuktiTransfer() {
   let respone = await axios.get("/uploadBukti/detail");
- console.log(respone)
-  return respone.data
+  console.log(respone);
+  return respone.data;
 }
 
 //tes diniyah
@@ -147,17 +137,16 @@ export async function postTesDiniyyah(values) {
   }
 }
 
-
 export async function getTesDiniyah() {
   let respone = await axios.get("/tesDiniyahSaya/tes-saya");
- console.log(respone)
-  return respone.data
+  console.log(respone);
+  return respone.data;
 }
 
 //tes umum
 
 export async function postTesUmum(values) {
-  syncToken()
+  syncToken();
   try {
     let response = await axios.post("/tesMasuk/save", values);
     return response.data;
@@ -167,7 +156,7 @@ export async function postTesUmum(values) {
 }
 
 export async function putTesUmum(values) {
-  syncToken()
+  syncToken();
   try {
     let response = await axios.post("/tesMasuk/update", values);
     return response.data;
@@ -176,15 +165,11 @@ export async function putTesUmum(values) {
   }
 }
 export async function getTesUmum(kode) {
-  syncToken()
+  syncToken();
   let respone = await axios.get(`/tesMasuk/${kode}`);
- console.log(respone)
-  return respone.data
+  console.log(respone);
+  return respone.data;
 }
-
-
-
-
 
 export const fetchImageAsBase64 = async (url) => {
   try {
@@ -205,51 +190,187 @@ export const fetchImageAsBase64 = async (url) => {
   }
 };
 
-
-
-
-
-
 export async function postNilaiBerkas(values) {
   try {
     let response = await axios.post(`/berkas/${values.id}`, values);
     return response.data;
   } catch (err) {
+   
     return err;
   }
 }
 
 export const useNilaiBerkas = () => {
-
-  const queryClient = useQueryClient()
-
+  const queryClient = useQueryClient();
 
   const mutate = useMutation({
-    mutationFn : (values)=> postNilaiBerkas(values) ,
-    onSuccess : ()=> {
-
-      queryClient.invalidateQueries("users/detail/id")
+    mutationFn: (values) => postNilaiBerkas(values),
+    onSuccess: () => {
+      queryClient.invalidateQueries("users/detail/id");
       Swal.fire({
         title: "Penilaian Berkas Berhasil",
         icon: "success",
-        draggable: true
+        draggable: true,
       });
-      
     },
 
-    onError : ()=> {
+    onError: () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Something went wrong!",
-        footer: '<a href="#">Why do I have this issue?</a>'
+        footer: '<a href="#">Why do I have this issue?</a>',
       });
-      
-    }
-  })
+    },
+  });
 
-  return mutate
+  return mutate;
+};
+
+export async function createTes(id) {
+ 
+ 
+    let response = await axios.post(`/tes/${id}`);
+    console.log("tes berhalan", response)
+   
+    return response.data;
+  
 }
 
+export const useCreateTes = () => {
+  const queryClient = useQueryClient();
 
+  const mutate = useMutation({
+    mutationFn: (id) => createTes(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries("users/detail/id");
+      Swal.fire({
+        title: "Tes Berhasil dibuka",
+        icon: "success",
+        draggable: true,
+      });
+    },
+
+    onError: () => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    },
+  });
+
+  return mutate;
+};
+
+
+export async function updateTPA(values) {
  
+ 
+  let response = await axios.put(`/nilai/tpa`, values);
+  console.log("tes berhalan", response)
+ 
+  return response.data;
+
+}
+export const useSimpanTPA = () => {
+  const queryClient = useQueryClient();
+
+  const mutate = useMutation({
+    mutationFn: (values) => updateTPA(values),
+    onSuccess: () => {
+      queryClient.invalidateQueries("detail");
+      Swal.fire({
+        title: "Jawaban Berhasil Tersimpan",
+        icon: "success",
+        draggable: true,
+      });
+    },
+
+    onError: () => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    },
+  });
+
+  return mutate;
+};
+
+
+export async function updateStudi(values) {
+ 
+ 
+  let response = await axios.put(`/nilai/studi`, values);
+  console.log("tes berhalan", response)
+ 
+  return response.data;
+
+}
+export const useSimpanStudi = () => {
+  const queryClient = useQueryClient();
+
+  const mutate = useMutation({
+    mutationFn: (values) => updateStudi(values),
+    onSuccess: () => {
+      queryClient.invalidateQueries("detail");
+      Swal.fire({
+        title: "Jawaban Berhasil Tersimpan",
+        icon: "success",
+        draggable: true,
+      });
+    },
+
+    onError: () => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    },
+  });
+
+  return mutate;
+};
+
+
+export async function updateWawancara(values) {
+ 
+ 
+  let response = await axios.put(`/nilai/wawancara`, values);
+  console.log("tes berhalan", response)
+ 
+  return response.data;
+
+}
+export const useSimpanWawancara = () => {
+  const queryClient = useQueryClient();
+
+  const mutate = useMutation({
+    mutationFn: (values) => updateWawancara(values),
+    onSuccess: () => {
+      queryClient.invalidateQueries("detail");
+      Swal.fire({
+        title: "Jawaban Berhasil Tersimpan",
+        icon: "success",
+        draggable: true,
+      });
+    },
+
+    onError: () => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    },
+  });
+
+  return mutate;
+};

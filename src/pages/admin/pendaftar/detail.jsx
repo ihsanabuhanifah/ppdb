@@ -1717,8 +1717,7 @@ export default function DetailPendaftar() {
                   </tbody>
                 </table>
               </Batas>
-
-              <Batas title={"Tes Bidang Studi"}>
+              <Batas title={"Hasil Tes Bidang dan Wawancara "}>
                 {console.log("Val", values.id)}
 
                 {values.tes === null ? (

@@ -23,6 +23,9 @@ import { useSelector } from "react-redux";
 import Dokumen from "../pages/ppdb/dokumen";
 import Pengumuman from "../pages/ppdb/Pengumuman";
 import TesAkademik from "../pages/ppdb/Tes-Akademik/Tes-BidangStudi.jsx";
+import TesStudi from "../pages/ppdb/Tes-Akademik/Tes-BidangStudi.jsx";
+import Wawancara from "../pages/ppdb/Tes-Akademik/Wawancara.jsx";
+import TPA from "../pages/ppdb/Tes-Akademik/TPA.jsx";
 export default function LayoutPPDB() {
   // const isPayment = useSelector((state) => state.auth.isPayment);
   const message = "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
@@ -133,7 +136,13 @@ export default function LayoutPPDB() {
               </Route>
             
               <Route path="/ppdb/tes-akademik">
-                <TesAkademik></TesAkademik>
+                <TPA></TPA>
+              </Route>
+              <Route path="/ppdb/tes-bidang-studi">
+                <TesStudi></TesStudi>
+              </Route>
+              <Route path="/ppdb/wawancara">
+                <Wawancara></Wawancara>
               </Route>
              
               

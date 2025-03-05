@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const TesAkademik = () => {
+const TPA = () => {
   const questions = [
     { id: 1, question: "Apa persamaan kata dari kesahihan?", options: ["Kebenaran", "Kemantapan", "Kesalahan", "Kematangan"], answer: "Kebenaran" },
     { id: 2, question: "Apa sinonim dari kata terkenal?", options: ["Kaya", "Terhormat", "Populer", "Berani"], answer: "Populer" },
@@ -116,4 +116,4 @@ const TesAkademik = () => {
   );
 };
 
-export default TesAkademik;
+export default TPA;

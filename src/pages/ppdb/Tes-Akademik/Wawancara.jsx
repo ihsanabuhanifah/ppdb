@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const TesAkademik = () => {
+const Wawancara = () => {
   const questions = [
     { id: 1, question: "Apa yang ananda ketahui tentang MAN 1 Kota Sukabumi?", options: ["MAN 1 Kota Sukabumi terkenal dengan prestasi akademiknya", "MAN 1 Kota Sukabumi terkenal dengan prestasi non akademiknya", "MAN 1 Kota Sukabumi terkenal dengan prestasi akademik dan non akademik", "Saya tidak mengetahui tentang MAN 1 Kota Sukabumi"], answer: "MAN 1 Kota Sukabumi terkenal dengan prestasi akademik dan non akademik" },
     { id: 2, question: "Apa yang memotivasi ananda untuk melanjutkan ke MAN 1 Kota Sukabumi?", options: ["Karena MAN 1 Kota Sukabumi memiliki fasilitas lengkap dan guru yang berkualitas", "Karena MAN 1 Kota Sukabumi terdekat dari rumah", "Karena teman-teman saya mendaftar ke MAN 1 Kota Sukabumi", "Karena Madrasah mempunyai nilai plus dalam pembelajaran PAI serta guru yang berkualitas"], answer: "Karena Madrasah mempunyai nilai plus dalam pembelajaran PAI serta guru yang berkualitas" },
@@ -92,4 +92,4 @@ const TesAkademik = () => {
   );
 };
 
-export default TesAkademik;
+export default Wawancara;

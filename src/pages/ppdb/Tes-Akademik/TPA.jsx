@@ -153,60 +153,60 @@ const TPA = () => {
       id: 16,
       question: (
         <img
-          src="https://res.cloudinary.com/dgia2eql8/image/upload/v1700000000/6ccf1cd91168c3c4afc6c6c27bab9362.jpg"
+          src="https://res.cloudinary.com/deywagux7/image/upload/v1741221525/WhatsApp_Image_2025-03-05_at_08.37.05_hgy05o.jpg"
           alt="Soal Gambar"
           width="200"
         />
       ),
-      options: ["A", "B", "C", "D"],
+      options: ["A", "B", "C", "D", "E", "E"],
       answer: "B",
     },
     {
       id: 17,
       question: (
         <img
-          src="https://collection.cloudinary.com/dgia2eql8/1b995aa94af99ade86f4b7b0bbb357d4.jpg"
+          src="https://res.cloudinary.com/deywagux7/image/upload/v1741221616/74da0a20-73b6-46c3-81b7-e7ad768383e8.png"
           alt="Soal Gambar"
           width="200"
         />
       ),
-      options: ["A", "B", "C", "D"],
+      options: ["A", "B", "C", "D", "E"],
       answer: "C",
     },
     {
       id: 18,
       question: (
         <img
-          src="https://collection.cloudinary.com/dgia2eql8/9cca28c1cf1df2404f60e5f28a3e48ba.jpg"
+          src="https://res.cloudinary.com/deywagux7/image/upload/v1741221644/f16790cf-8617-4fea-97af-947b3c00491a.png"
           alt="Soal Gambar"
           width="200"
         />
       ),
-      options: ["A", "B", "C", "D"],
+      options: ["A", "B", "C", "D", "E"],
       answer: "C",
     },
     {
       id: 19,
       question: (
         <img
-          src="https://collection.cloudinary.com/dgia2eql8/eb87ef41164e44078322700d8157e69c.jpg"
+          src="https://res.cloudinary.com/deywagux7/image/upload/v1741221686/75224008-b815-4f0c-a5eb-7fdd17d39b66.png"
           alt="Soal Gambar"
           width="200"
         />
       ),
-      options: ["A", "B", "C", "D"],
+      options: ["A", "B", "C", "D", "E"],
       answer: "C",
     },
     {
       id: 20,
       question: (
         <img
-          src="https://collection.cloudinary.com/dgia2eql8/3210d31981f191b14b9caf52218b5187.jpg"
+          src="https://res.cloudinary.com/deywagux7/image/upload/v1741221720/506b0429-f20e-4c0a-8b19-26156703fe11.png"
           alt="Soal Gambar"
           width="200"
         />
       ),
-      options: ["A", "B", "C", "D"],
+      options: ["A", "B", "C", "D", "E"],
       answer: "B",
     },
   ];

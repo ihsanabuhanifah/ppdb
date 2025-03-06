@@ -90,6 +90,16 @@ export default function Dashboard() {
             <li>Simpan nomor pendaftaran dengan baik.</li>
           </ul>
         </div>
+        <div className="mt-6">
+          <h3 className="text-lg font-bold text-gray-800 mb-3">
+           Tutorial
+          </h3>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/gKLFC26B8pw" 
+    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe>
+
+        </div>
 
         <div className="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-md">
           <h4 className="font-semibold text-blue-700">Butuh Bantuan?</h4>

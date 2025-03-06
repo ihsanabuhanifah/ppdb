@@ -22,6 +22,7 @@ const TPA = () => {
     () => getDetail(),
 
     {
+      staleTime : 1000 * 60 * 60,
       keepPreviousData: true,
       select: (response) => response.data,
     }

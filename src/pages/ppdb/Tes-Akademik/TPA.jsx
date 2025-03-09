@@ -346,12 +346,15 @@ const TPA = () => {
 
 export default TPA;
 
-export function calculateScore(questions, userAnswers) {
-  let score = 0;
-  questions.forEach((q, index) => {
-    if (q.correctAnswer === userAnswers[index]) {
-      score += 1;
+
+
+export function calculateScore(questions, answers) {
+  let jumlahBenar = 0;
+  for (const question of questions) {
+    const jawabanUser = answers[question.id];
+    if (jawabanUser && jawabanUser === question.answer) {
+      jumlahBenar++;
     }
-  });
-  return score;
+  }
+  return jumlahBenar;
 }

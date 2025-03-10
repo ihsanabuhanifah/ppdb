@@ -86,7 +86,10 @@ export default function Pengumuman() {
             data?.nilai?.cbt_penilaian === "Telah Dites" ? (
               <>
                 <div className="text-center mt-5">
-                  <h1 className="text-gray-500 text-3xl font-bold">Selamat!</h1>
+                  <h1 className="text-gray-500 text-3xl font-bold">Selamat, {data?.name}!</h1>
+                  <div className="text-xl font-semibold text-gray-500  text-center mb-2">
+          Nomor Pendaftaran : <strong>{data?.nomor_pendaftaran}</strong>
+        </div>
                   <h3 className="text-gray-500 text-lg font-bold">
                     {" "}
                     Anda lolos seleksi Penerimaan Peserta Didik Baru MAN 1 Kota
@@ -163,6 +166,15 @@ export default function Pengumuman() {
                   <td className="border uppercase border-gray-300 p-1 text-lg text-gray-600">
                     {" "}
                     {data?.tes?.nilai_wawancara ? "Lulus" : "Tidak Lulus"}
+                  </td>
+                </tr>
+                <tr className="text-center">
+                  <td className="border border-gray-300 p-1 text-lg text-gray-600">
+                    Tes Baca Tulis Al-Qur'an
+                  </td>
+                  <td className="border uppercase border-gray-300 p-1 text-lg text-gray-600">
+                    {" "}
+                    {data?.nilai?.cbt_penilaian ? "Lulus" : "Tidak Lulus"}
                   </td>
                 </tr>
               </tbody>

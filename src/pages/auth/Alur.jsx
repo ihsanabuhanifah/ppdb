@@ -2,22 +2,12 @@ import { motion } from "framer-motion";
 import { CheckCircle, ClipboardList, LogIn, UserPlus, FileCheck, Calendar, Megaphone } from "lucide-react";
 
 const steps = [
-<<<<<<< HEAD
   { id: 1, title: "Buat Akun PPDBM", icon: <UserPlus size={24} />, desc: "Calon peserta didik baru membuat akun di situs PPDBM pada menu register." },
   { id: 2, title: "Login Akun PPDBM", icon: <LogIn size={24} />, desc: "Silahkan login menggunakan username dan password dari web PPDBM." },
   { id: 3, title: "Lengkapi Biodata", icon: <ClipboardList size={24} />, desc: "Melengkapi biodata dan berkas persyaratan yang dibutuhkan." },
   { id: 4, title: "Verifikasi Berkas", icon: <FileCheck size={24} />, desc: "Validasi berkas administrasi dilakukan secara online atau offline." },
   { id: 5, title: "Tes Seleksi", icon: <Calendar size={24} />, desc: "Calon peserta didik baru mengikuti tes seleksi sesuai jadwal." },
   { id: 6, title: "Pengumuman", icon: <Megaphone size={24} />, desc: "Peserta tes PPDBM dapat melihat hasil seleksi atau pengumuman di akun mereka." }
-=======
-  { id: 1, title: "Buat Akun PPDB", icon: <UserPlus size={24} />, desc: "Calon peserta didik baru membuat akun di situs PPDBM pada menu register." },
-  { id: 2, title: "Login Akun PPDB", icon: <LogIn size={24} />, desc: "Silahkan login menggunakan username dan password dari web PPDB." },
-  { id: 3, title: "Lengkapi Biodata", icon: <ClipboardList size={24} />, desc: "Melengkapi biodata dan berkas persyaratan yang dibutuhkan." },
-//   { id: 4, title: "Verifikasi Berkas", icon: <FileCheck size={24} />, desc: "Validasi berkas administrasi dilakukan secara online atau offline." },
-  { id: 5, title: "Tes Seleksi", icon: <Calendar size={24} />, desc: "Calon peserta didik baru mengikuti tes seleksi secara online di Portal PPDB." },
-  { id: 7, title: "Tes Wawancara", icon: <Calendar size={24} />, desc: "Calon peserta didik baru mengikuti tes wawancara secara online atau offline." },
-  { id: 6, title: "Pengumuman", icon: <Megaphone size={24} />, desc: "Peserta tes PPDB dapat melihat hasil seleksi atau pengumuman di akun masing-masing." }
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
 ];
 
 export default function AlurPendaftaran() {
@@ -50,8 +40,4 @@ export default function AlurPendaftaran() {
       </div>
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92

@@ -2,21 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-<<<<<<< HEAD
 import bg from "../../image/bg.png";
 
 import image1 from "../../image/image.png";
 import wa from "../../image/wa.png";
 import Beranda from "./Section1";
 import Section2 from "./Section2";
-=======
-import bg from "../../image/image.png";
-
-import image1 from "../../image/image.png";
-import wa from "../../image/wa.png";
-import Beranda from "./Beranda";
-
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
 import JalurSeleksi from "./Section3";
 import Persyaratan from "./Section4";
 import Timeline from "./Waktu";
@@ -27,13 +18,8 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import ReactWhatsapp from "react-whatsapp";
 import clsx from "clsx";
-<<<<<<< HEAD
 import { useQuery } from "react-query";
 import { getJumlahPendaftaran } from "../../api/santri";
-=======
-import Pencapaian from "./Pencapaian";
-
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
 export default function Layout() {
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -60,7 +46,6 @@ export default function Layout() {
     }
   };
 
-<<<<<<< HEAD
   const { isError, data, isFetching } = useQuery(
     //query key
     ["pendaftaran", []],
@@ -75,8 +60,6 @@ export default function Layout() {
 
   console.log("data", data)
 
-=======
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
   
 
   useEffect(() => {
@@ -107,29 +90,16 @@ export default function Layout() {
   return (
     <React.Fragment>
       <div
-<<<<<<< HEAD
         style={{
           backgroundImage: `url(${bg})`,
           backgroundAttachment: "fixed",
           backgroundSize: "cover",
           backgroundPosition: "center",
-=======
-      style={{
-        backgroundImage: `url(${bg})`,
-        backgroundAttachment: "fixed",
-        backgroundSize: "contain",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
         }}
         className="w-screen h-screen overflow-hidden "
       >
         <section
-<<<<<<< HEAD
           style={{ backgroundColor: "rgba(43,105,236, 0.9)" }}
-=======
-          style={{ backgroundColor: "rgb(22,165,88,0.9)" }}
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
           className={`items-center justify-between py-2 px-5  hidden lg:flex transition-all duration-500 ${
             scrollY < 100
               ? "opacity-100 h-auto translate-y-0"
@@ -137,13 +107,9 @@ export default function Layout() {
           }`}
         >
           <div className="text-white font-semibold">
-<<<<<<< HEAD
 
             Kontak Panitia (Kesiswaan MAN 1 Kota Sukabumi: 085718025089)
 
-=======
-          Kontak Panitia (085888222457)
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
           </div>
           <div className="space-x-4">
             {" "}
@@ -172,13 +138,8 @@ export default function Layout() {
               src={image1}
               alt="Logo"
             />
-<<<<<<< HEAD
             <h2 className="text-2xl font-bold hidden lg:block text-blue-400">
               PPDB MAN 1 KOTA SUKABUMI 2025
-=======
-            <h2 className="text-2xl font-bold hidden lg:block text-green-400">
-              PPDB SMK MADINATULQURAN
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
             </h2>
           </section>
 
@@ -186,17 +147,12 @@ export default function Layout() {
           <section className="hidden md:flex space-x-5">
             <button
               onClick={() => scrollToSection(berandaRef)}
-<<<<<<< HEAD
               className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
-=======
-              className="btn text-green-400 text-md hover:text-green-500 font-semibold"
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
             >
               Beranda
             </button>
             <button
               onClick={() => scrollToSection(dayaTampungRef)}
-<<<<<<< HEAD
               className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
             >
               Jalur Seleksi dan Kuota
@@ -210,27 +166,11 @@ export default function Layout() {
             <button
               onClick={() => scrollToSection(persyaratanRef)}
               className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
-=======
-              className="btn text-green-400 text-md hover:text-green-500 font-semibold"
-            >
-              Program Pendidikan
-            </button>
-            <button
-              onClick={() => scrollToSection(seleksiRef)}
-              className="btn text-green-400 text-md hover:text-green-500 font-semibold"
-            >
-             Pencapaian
-            </button>
-            <button
-              onClick={() => scrollToSection(persyaratanRef)}
-              className="btn text-green-400 text-md hover:text-green-500 font-semibold"
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
             >
               Persyaratan
             </button>
             <button
               onClick={() => scrollToSection(timelineRef)}
-<<<<<<< HEAD
               className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
             >
               Timeline
@@ -238,25 +178,12 @@ export default function Layout() {
             <button
               onClick={() => scrollToSection(alurRef)}
               className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
-=======
-              className="btn text-green-400 text-md hover:text-green-500 font-semibold"
-            >
-             Biaya Pendidikan
-            </button>
-            <button
-              onClick={() => scrollToSection(alurRef)}
-              className="btn text-green-400 text-md hover:text-green-500 font-semibold"
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
             >
               Alur Pendaftaran
             </button>
             <button
               onClick={() => scrollToSection(materiRef)}
-<<<<<<< HEAD
               className="btn text-blue-400 text-md hover:text-blue-500 font-semibold"
-=======
-              className="btn text-green-400 text-md hover:text-green-500 font-semibold"
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
             >
               Materi Tes
             </button>
@@ -266,15 +193,9 @@ export default function Layout() {
           <div className="md:hidden">
             <button onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? (
-<<<<<<< HEAD
                 <FaTimes className="text-blue-400 text-3xl" />
               ) : (
                 <FaBars className="text-blue-400 text-3xl" />
-=======
-                <FaTimes className="text-green-400 text-3xl" />
-              ) : (
-                <FaBars className="text-green-400 text-3xl" />
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
               )}
             </button>
           </div>
@@ -296,11 +217,7 @@ export default function Layout() {
                     scrollToSection(berandaRef);
                     setMenuOpen(false);
                   }}
-<<<<<<< HEAD
                   className="text-blue-400 text-xl rounded-xl"
-=======
-                  className="text-green-400 text-xl rounded-xl"
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
                 >
                   Beranda
                 </button>
@@ -309,28 +226,16 @@ export default function Layout() {
                     scrollToSection(dayaTampungRef);
                     setMenuOpen(false);
                   }}
-<<<<<<< HEAD
                   className="text-blue-400 text-xl rounded-xl"
                 >
                   Jalur Seleksi dan Kuota
                 </button>
-=======
-                  className="text-green-400 text-xl rounded-xl"
-                >
-                 Program Pendidikan
-                </button>
-                
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
                 <button
                   onClick={() => {
                     scrollToSection(persyaratanRef);
                     setMenuOpen(false);
                   }}
-<<<<<<< HEAD
                   className="text-blue-400 text-xl rounded-xl"
-=======
-                  className="text-green-400 text-xl rounded-xl"
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
                 >
                   Persyaratan
                 </button>
@@ -339,26 +244,16 @@ export default function Layout() {
                     scrollToSection(timelineRef);
                     setMenuOpen(false);
                   }}
-<<<<<<< HEAD
                   className="text-blue-400 text-xl rounded-xl"
                 >
                   Timeline
-=======
-                  className="text-green-400 text-xl rounded-xl"
-                >
-                 Biaya Pendidikan
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
                 </button>
                 <button
                   onClick={() => {
                     scrollToSection(alurRef);
                     setMenuOpen(false);
                   }}
-<<<<<<< HEAD
                   className="text-blue-400 text-xl rounded-xl"
-=======
-                  className="text-green-400 text-xl rounded-xl"
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
                 >
                   Alur Pendaftaran
                 </button>
@@ -367,11 +262,7 @@ export default function Layout() {
                     scrollToSection(materiRef);
                     setMenuOpen(false);
                   }}
-<<<<<<< HEAD
                   className="text-blue-400 text-xl rounded-xl"
-=======
-                  className="text-green-400 text-xl rounded-xl"
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
                 >
                   Materi Tes
                 </button>
@@ -380,11 +271,7 @@ export default function Layout() {
                   onClick={() => {
                     history.push("/login");
                   }}
-<<<<<<< HEAD
                   className="text-blue-400 text-xl rounded-xl"
-=======
-                  className="text-green-400 text-xl rounded-xl"
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
                 >
                   Masuk
                 </button>
@@ -392,11 +279,7 @@ export default function Layout() {
                   onClick={() => {
                     history.push("/register");
                   }}
-<<<<<<< HEAD
                   className="text-blue-400 text-xl rounded-xl"
-=======
-                  className="text-green-400 text-xl rounded-xl"
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
                 >
                   Daftar
                 </button>
@@ -412,7 +295,6 @@ export default function Layout() {
         >
           <section
             ref={berandaRef}
-<<<<<<< HEAD
             className="p-10"
             style={{ backgroundColor: "rgba(43,105,236, 0.9)" }}
           >
@@ -425,42 +307,16 @@ export default function Layout() {
             <Section2 />
           </section>
           <section
-=======
-            className="p-10  min-h-screen flex items-center justify-center"
-            style={{ backgroundColor: "rgb(22,165,88,0.9)" }}
-          >
-            <div><Beranda /></div>
-          </section> 
-         
-          <section
-        //    style={{ backgroundColor: "rgb(22,165,88,0.9)" }}
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
             ref={dayaTampungRef}
             className="px-3 md:px-6 py-12 "
           >
             <JalurSeleksi />
           </section>
-<<<<<<< HEAD
           <section ref={persyaratanRef} className="px-3 md:px-6 py-12">
             <Persyaratan />
           </section>
           <section
             // style={{ backgroundColor: "rgba(43,105,236, 0.9)" }}
-=======
-
-          <section
-            style={{ backgroundColor: "rgb(22,165,88,0.9)" }}
-            ref={seleksiRef}
-            className="px-3 md:px-6 py-12 "
-          >
-            <Pencapaian />
-          </section>
-          <section  style={{ backgroundColor: "rgb(22,165,88,0.9)" }}  ref={persyaratanRef} className="px-3 md:px-6 py-12">
-            <Persyaratan />
-          </section>
-          <section
-             style={{ backgroundColor: "rgb(22,165,88,0.9)" }}
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
             ref={timelineRef}
             className="px-3 md:px-6 py-12"
           >
@@ -479,8 +335,4 @@ export default function Layout() {
       </div>
     </React.Fragment>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92

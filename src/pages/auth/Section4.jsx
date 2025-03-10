@@ -12,11 +12,7 @@ export default function Section4() {
         <div className="w-20 h-1 bg-yellow-500 mx-auto"></div>
       </div>
       
-<<<<<<< HEAD
         <div className="grid grid-cols-1  md:grid-cols-2 gap-10">
-=======
-        <div className="grid grid-cols-1  gap-10">
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
           {/* Persyaratan Umum */}
           <section className="space-y-5 h-full">
             <motion.div
@@ -51,11 +47,7 @@ export default function Section4() {
                 ))}
               </ul>
             </motion.div>
-<<<<<<< HEAD
             <motion.div
-=======
-            {/* <motion.div
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
               className=" p-8 rounded-3xl bg-white  row-span-3 shadow-xl border border-white/20"
               whileHover={{
                 scale: 1.05,
@@ -79,17 +71,12 @@ export default function Section4() {
                   </li>
                 ))}
               </ul>
-<<<<<<< HEAD
             </motion.div>
-=======
-            </motion.div> */}
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
           </section>
           <section className="space-y-5 h-full ">
             
 
             {/* Persyaratan Khusus */}
-<<<<<<< HEAD
             <motion.div
               className=" p-8   rounded-3xl bg-white  backdrop-blur-lg shadow-xl border border-white/20"
               whileHover={{
@@ -150,17 +137,10 @@ export default function Section4() {
                 </ol>
               </div>
             </motion.div>
-=======
-           
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
           </section>
         </div>
       
      
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92

@@ -3,10 +3,6 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   mode : "jit",
-<<<<<<< HEAD
-  
-=======
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
   theme: {
     extend: {
      

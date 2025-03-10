@@ -55,10 +55,7 @@ export default function Section1({data}) {
           Sukabumi.
         </h2>
 
-        <h4 className="text-white text-center font-bold text-xl mb-10">
-          Silakan Unduh/Download Brosur dan Tonton Video Tutorial Pendaftaran
-        </h4>
-      </div>
+        </div>
 
       <div>
        

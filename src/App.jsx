@@ -26,7 +26,6 @@ import {
 } from "./layout/ProtetedRoute";
 import { useSelector } from "react-redux";
 import LoadingPage from "./pages/auth/loadingPage,";
-import Home from "./pages/auth/home";
 import QuizPage from "./pages/ppdb/Tes-Akademik/Tes-BidangStudi";
 
 function App() {
@@ -37,13 +36,9 @@ function App() {
       <Route exact path="/">
           <Home></Home>
         </Route>
-<<<<<<< HEAD
         <Route exact path="/home">
           <Home></Home>
         </Route>
-=======
-
->>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
         <Route path="/login">
           <Login></Login>
         </Route>

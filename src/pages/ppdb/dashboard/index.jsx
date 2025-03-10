@@ -49,8 +49,18 @@ export default function Dashboard() {
           <p className="text-lg font-medium text-gray-800 mb-2 text-center italic">
             "Langkah pertamamu menuju masa depan yang gemilang"
           </p>
+          
           <p className="text-gray-600 text-center">
-            Silakan untuk bergabung ke Grup CPD (Calon Peserta Didik)
+            Jika mengalami kesulitan dalam proses pendaftaran, silakan untuk tonton dan ikuti video tutorial pendaftaran pada link berikut ini:</p>
+            <div className="mt-6">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/gKLFC26B8pw" 
+    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe>
+        </div>
+         
+          <p className="text-gray-800 mb-3 text-center">
+            Silakan juga untuk bergabung ke Grup CPD (Calon Peserta Didik)
                     MAN 1 Kota Sukabumi 2025/2026.{" "}
                     <a
                       className="text-blue-300"
@@ -65,17 +75,7 @@ export default function Dashboard() {
               <img className="text-center" src="https://storage.devopsgeming.online/file-1740037117291.JPEG" width="300" alt="grup" class="center" srcset=""/>
               </div>.
           </p>
-          <p className="text-gray-600 text-center">
-            Jika mengalami kesulitan dalam proses pendaftaran, silakan untuk tonton dan ikuti video tutorial pendaftaran pada link berikut ini:</p>
-           <p
-                      className="text-blue-300 text-center"
-                      target="_blank"
-                      href="https://youtu.be/gKLFC26B8pw?si=OmEt3XNH-JLur34C"
-                      rel="noopener noreferrer"
-                    >
-                      Klik Di Sini Untuk Menonton Video Tutorial Pendfataran
-                    </p>{" "}
-         </div>
+          </div>
 
         <div className="mt-6">
           <h3 className="text-lg font-bold text-gray-800 mb-3">
@@ -91,17 +91,7 @@ export default function Dashboard() {
             <li>Simpan nomor pendaftaran dengan baik.</li>
           </ul>
         </div>
-        <div className="mt-6">
-          <h3 className="text-lg font-bold text-gray-800 mb-3">
-           Tutorial
-          </h3>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/gKLFC26B8pw" 
-    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-</iframe>
-
-        </div>
-
+        
         <div className="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-md">
           <h4 className="font-semibold text-blue-700">Butuh Bantuan?</h4>
           <p className="text-gray-700 text-sm mt-2">

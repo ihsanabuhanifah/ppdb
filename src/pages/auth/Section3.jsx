@@ -2,22 +2,39 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Aos from "aos";
 import "aos/dist/aos.css";
+<<<<<<< HEAD
+=======
+import { FaCheckCircle } from "react-icons/fa";
+>>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
 export default function Section3() {
   useEffect(function () {
     Aos.init();
   }, []);
   return (
+<<<<<<< HEAD
     <div className="grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3  gap-5 ">
       <div className=" col-span-1 lg:col-span-3">
         {" "}
         <div className="text-center mb-8 rounded-3xl">
           <h4 className="text-white text-4xl font-bold mb-2">
             Jalur Seleksi dan Daya Tampung
+=======
+    <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-2  gap-5 ">
+      <div className=" col-span-1 lg:col-span-2">
+        {" "}
+        <div className="text-center mb-8 rounded-3xl">
+          <h4 className="text-white text-4xl font-bold mb-2">
+            Program Pendidikan
+>>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
           </h4>
           <div className="w-20 h-1 bg-yellow-500 mx-auto"></div>
         </div>
       </div>
+<<<<<<< HEAD
      
+=======
+
+>>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
       <section>
         <div
           style={{
@@ -40,6 +57,7 @@ export default function Section3() {
             animate={{ opacity: [0, 1] }}
             transition={{ duration: 0.5 }}
           >
+<<<<<<< HEAD
             Jalur Prestasi
           </h4>
           <p className="text-gray-500  mt-5  text-justify">
@@ -53,6 +71,29 @@ export default function Section3() {
               Daya Tampung
             </h2>
             <p className=" mb-2 text-md italic">15% dari jumlah daya tampung</p>
+=======
+            Teknik Komputer dan Jaringan
+          </h4>
+          {/* <p className="text-gray-500 mb-5 mt-2  text-justify">Santri yang</p> */}
+
+          <div className="mt-5">
+            {[
+              "Hafalan Alqur'an 3 Juz dan Hadist Arba'in Nawawi",
+              "Beraqidah Ahlusunnah Wal Jama'ah",
+             
+              "Mengikuti dan Menyelesaikan program Cisco Academy",
+             
+              "Membuat Karya Tulis (e-book)",
+              "Menguasai Linux Fundamental",
+              "Mendapatkan Sertifikasi Internasional",
+              "Mendapatkan Sertifikasi Internasional",
+              
+            ].map((item, index) => (
+              <li key={index} className="flex items-center text-gray-500">
+                <FaCheckCircle className="text-green-400 mr-3" /> {item}
+              </li>
+            ))}
+>>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
           </div>
         </div>
       </section>
@@ -79,6 +120,7 @@ export default function Section3() {
             animate={{ opacity: [0, 1] }}
             transition={{ duration: 0.5 }}
           >
+<<<<<<< HEAD
             Jalur Reguler
           </h4>
           <p className="text-gray-500  mt-5  text-justify">
@@ -130,6 +172,27 @@ export default function Section3() {
               Daya Tampung
             </h2>
             <p className=" mb-2 text-md italic">15% dari jumlah daya tampung</p>
+=======
+            Rekayasa Perangkat Lunak
+          </h4>
+          <div className="mt-5">
+            {[
+              "Hafalan Alqur'an 3 Juz dan Hadist Arba'in Nawawi",
+              "Beraqidah Ahlusunnah Wal Jama'ah",
+             
+              "Mengikuti dan Menyelesaikan program Cisco Academy",
+             
+              "Mampu membuat aplikasi berbasis web",
+              "Mampu membuat aplikasi android",
+              "Mampu membuat game edukasi",
+              "Siap kerja menjadi Software Engineer",
+              
+            ].map((item, index) => (
+              <li key={index} className="flex items-center text-gray-500">
+                <FaCheckCircle className="text-green-400 mr-3" /> {item}
+              </li>
+            ))}
+>>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
           </div>
         </div>
       </section>

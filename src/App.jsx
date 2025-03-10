@@ -17,6 +17,7 @@ import DataAyah from "./pages/identitas/dataAyah";
 import DataIbu from "./pages/identitas/dataIbu";
 import DataWali from "./pages/identitas/dataWali";
 import Admin from "./layout/admin";
+import Home from "./pages/auth/home";
 
 import {
   SiswaPageProtected,
@@ -36,9 +37,13 @@ function App() {
       <Route exact path="/">
           <Home></Home>
         </Route>
+<<<<<<< HEAD
         <Route exact path="/home">
           <Home></Home>
         </Route>
+=======
+
+>>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
         <Route path="/login">
           <Login></Login>
         </Route>

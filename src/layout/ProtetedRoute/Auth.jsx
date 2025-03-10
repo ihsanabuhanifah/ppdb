@@ -30,7 +30,11 @@ export const AuthProtected = ({ children, ...rest }) => {
   if (Cookies.get("token-ppdb")) {
     return <Route {...rest}>{children}</Route>;
   } else {
+<<<<<<< HEAD
     return <Redirect to="/home" />;
+=======
+    return <Redirect to="/" />;
+>>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92
   }
 };
 

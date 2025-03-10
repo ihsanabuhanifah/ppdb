@@ -43,4 +43,8 @@ export default function Materi() {
      
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6f42bdf75996f098e8f4ff0060d0452d30ebef92

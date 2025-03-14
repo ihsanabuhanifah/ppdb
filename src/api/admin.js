@@ -8,6 +8,14 @@ export async function getUser({ page, per_page, keyword }) {
 
   return result.data;
 }
+export async function getUserLulus({ page, per_page, keyword }) {
+  console.log(per_page);
+  let result = await axios.get(
+    `/siswa/lulus?perpage=${per_page}&keywords=${keyword}&role=user&page=${page}&tahun_ajar=2025-2026`
+  );
+
+  return result.data;
+}
 
 export async function getAdmin() {
   let result = await axios.get(`/user?keyword=&role=admin`);

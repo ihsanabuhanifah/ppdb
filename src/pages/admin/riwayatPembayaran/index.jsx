@@ -1,44 +1,44 @@
 import React from "react";
 import { useQuery, useQueryClient } from "react-query";
-import { Collapse } from "@chakra-ui/react";
-import Pagination from "../../../components/Pagination";
-import PaginationInfo from "../../../components/paginationInfo";
-import TableHeader from "../../../components/TableHeader";
-import LoadingBar from "../../../components/loadingBar";
-import { Link, useHistory } from "react-router-dom";
-import ReactWhatsapp from "react-whatsapp";
-import { formatTanggal, formatNomorHp } from "../../../utils";
-import {
-  getJadwal,
-  updateStatusTes,
-  updateStatusKelulusan,
-  getBuktiAll,
-  getStatusBukti,
-} from "../../../api/admin";
+import { Button, Collapse, useDisclosure } from "@chakra-ui/react";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-import { formatDate } from "../../../utils";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import TableHeader from "../../../components/TableHeader";
+
+import { getUser, getUserLulus, updateBatal } from "../../../api/admin";
+import { konfirmBukti } from "../../../api/admin";
+import { formatDate, formatTanggal, formatNomorHp } from "../../../utils";
+import ReactWhatsapp from "react-whatsapp";
 import { useToast } from "@chakra-ui/react";
 import useDebounce from "../../../hooks/useDebounce";
-import swal from "sweetalert";
-import { formatRupiah } from "../../../utils/formatRupiah";
 import TableLoading from "../../../components/tableLoading";
+import Modal from "../../../components/Modal";
+import * as Yup from "yup";
+import Select from "react-select";
+import PaginationTable, {
+  Pagination,
+} from "../../../components/PaginationTable";
 import { sendMessageBukti } from "../../../config/sendMessage";
-export default function RiwayatPembayaran() {
+import ExportExcel from "../../../components/ExportExcel";
+let fileSchema = Yup.object().shape({
+  files: Yup.string().required("Bukti Transfer wajib di Upload"),
+  nominal: Yup.string().required("Nominal wajib diisi"),
+});
+export default function UserLulus() {
   const [page, setPage] = React.useState(1);
-  const [per_page, setPer_page] = React.useState(100);
+
+  const {onOpen, isOpen, onClose} = useDisclosure()
+  const [per_page, setPer_page] = React.useState(25);
   const [isLoadingKonfirmasi, setIsLoadingKonfirmasi] = React.useState(false);
-  const [isLoadingKelulusan, setIsLoadingKelulusan] = React.useState(false);
-  const [keyword, setKeyword] = React.useState("");
-  const [indexSelect, setIndexSelect] = React.useState(null);
-  const [indexKelulusan, setIndexKelulusan] = React.useState(null);
+  const [ keyword, setKeyword] = React.useState("");
+  const history = useHistory();
   let debouncedKeyword = useDebounce(keyword, 500);
-  const [statusBukti, setStatusBukti] = React.useState("");
-  let queryClient = useQueryClient();
-  const { isLoading, isError, data, isFetching } = useQuery(
+
+  const { data, isFetching } = useQuery(
     //query key
     [
-      "pembayaran_ppdb",
+      "list_user_lulus",
       {
         page: page,
         per_page: per_page,
@@ -47,7 +47,7 @@ export default function RiwayatPembayaran() {
     ],
 
     () =>
-      getBuktiAll({
+      getUserLulus({
         page: page,
         per_page: per_page,
         keyword: debouncedKeyword,
@@ -55,276 +55,248 @@ export default function RiwayatPembayaran() {
 
     {
       keepPreviousData: true,
+      staleTime: 1000 * 60 * 10,
       select: (response) => {
         let result = response.data;
-
-        let total = 0;
+        let options = [];
+        let bukti = 0;
+        result?.data?.forEach((rs) => {
+          options.push({
+            value: rs?.id,
+            label: rs?.name,
+          });
+          if (rs?.bukti !== null) {
+            bukti = bukti + 1;
+          }
+        });
         return {
           data: result,
-          // bukti: bukti,
+          bukti: bukti,
+          options: options,
         };
       },
     }
   );
 
-  let toast = useToast();
-  const updateStatus = async (id) => {
-    let result = await getStatusBukti(id);
+  
 
-    queryClient.invalidateQueries("pembayaran_ppdb");
-    if (result?.status === "success") {
-      toast({
-        position: "top-right",
-        title: "Berhasil",
-        description: "Update Status",
-        status: "success",
-        duration: 4000,
-        isClosable: true,
-      });
-      setIsLoadingKonfirmasi(false);
-      setIndexSelect(null);
-    }
-  };
-  const updateStatusLulus = async (id, status) => {
-    let result = await updateStatusKelulusan(id, status);
 
-    queryClient.invalidateQueries("jadwal_tes");
-    if (result?.status === "success") {
-      toast({
-        position: "top-right",
-        title: "Berhasil",
-        description: "Update Status",
-        status: "success",
-        duration: 4000,
-        isClosable: true,
-      });
-      setIsLoadingKelulusan(false);
-      setIndexKelulusan(null);
-    }
-  };
-
-  console.log(data);
+ 
 
   return (
-    <div className="text-green-500 grid grid-cols-1 gap-5 ">
-      <div className="border-b-2 pb-10">
-        <h1 className="text-2xl  font-semibold">
-          DAFTAR JADWAL TES PPDB MAN 1 KOTA SUKABUMI
-        </h1>
-      </div>
-      {/* table */}
-      <div className="p-1 ">
-     
-        <div className="flex justify-end">
-          <ReactHTMLTableToExcel
-            id="test-table-xls-button"
-            className="btn border py-2 px-3 font-bold  rounded-md bg-green-500 text-white"
-            table="table-to-xls"
-            filename={`Data-Transfer-PPDB-SMKMQ ${formatDate(new Date())}`}
-            sheet="tablexls"
-            buttonText="Import ke Excel"
-          />
+    <React.Fragment>
+      <div className="text-blue-400 grid grid-cols-1 gap-5">
+        <div className="border-b-2 pb-10">
+          <h1 className="text-2xl  font-semibold">
+            DAFTAR  LULUS PPDB MAN 1 KOTA SUKABUMI
+          </h1>
         </div>
-      </div>
-      {isFetching ? (
-        <TableLoading></TableLoading>
-      ) : (
-        <div className="overflow-auto">
-          <table id="table-to-xls" className="p-1 w-full ">
-            <thead>
-              <tr className="uppercase">
-                <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">No</div>
-                </th>
+        {/* table */}
 
-                <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">
-                    Nama Siswa
-                  </div>
-                </th>
-                <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">
-                    Sekolah Asal
-                  </div>
-                </th>
-                <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">
-                    Nama Ayah
-                  </div>
-                </th>
-                <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">
-                    Nomor Handphone
-                  </div>
-                </th>
-                <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">
-                    Status Validasi
-                  </div>
-                </th>
-                <th className="px-6 py-4 whitespace-no-wrap border-b text-left  text-green-500 border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">Bukti</div>
-                </th>
-                <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500  border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">
-                    Diperiksa Oleh
-                  </div>
-                </th>
-                <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500  border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">
-                    Nominal
-                  </div>
-                </th>
-                <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">
-                    Keterangan
-                  </div>
-                </th>
-                <th className="px-6 py-4 whitespace-no-wrap border-b text-left text-green-500 border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">
-                    Tanggal Transfer
-                  </div>
-                </th>
+        <div className="p-1 ">
+           <section className="flex items-center justify-between mb-5">
+                   <div className="ml-4 w-full flex items-center justify-between ">
+                     <input
+                       className="border px-3 lg:px-5 py-2 w-1/2 rounded-md"
+                       placeholder="Cari ... "
+                       type="text"
+                       onChange={(e) => {
+                         setKeyword(e.target.value);
+                       }}
+                     />
+         
+                   <ExportExcel fileName="Data_Pengguna.xlsx"/>
+                   </div>
+                 </section>
+        </div>
+        {isFetching ? (
+          <TableLoading></TableLoading>
+        ) : (
+          <div className="p-1  overflow-auto ">
+            <table className="min-w-full relative ">
+              <thead>
+                <tr className="uppercase">
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-400 tracking-wider">
+                    No
+                  </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-400 tracking-wider">
+                    Foto
+                  </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-400 tracking-wider">
+                    Nomor Pendaftaran
+                  </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-400 tracking-wider">
+                    Jalur Seleksi
+                  </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Nama Lengkap
+                  </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    NISN
+                  </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Gelombang
+                  </th>
 
-                {/* <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-green-500 tracking-wider">
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Nomor Utama
+                  </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Jenis Sekolah
+                  </th>
+
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Asal Sekolah
+                  </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Diperbaharui
+                  </th>
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
+                    Detail
+                  </th>
+                  {/* <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-400 tracking-wider">
                   Created_At
                 </th> */}
-              </tr>
-            </thead>{" "}
-            <tbody className="bg-white relative">
-              {}
-              {data?.data?.data?.data?.map((dt, index) => (
-                <tr key={index} className="hover:bg-gray-200">
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                    <div className="flex items-center">
-                      <div>
-                        <div className="text-sm leading-5 text-gray-800">
-                          {(page - 1) * per_page + index + 1}
+                </tr>
+              </thead>{" "}
+              <tbody className="bg-white relative">
+                {data?.data?.data?.length === 0 && (
+                  <tr>
+                    <td
+                      className="text-red-500 text-2xl flex items-center justify-center "
+                      colSpan={"20"}
+                      rowSpan={"20"}
+                    >
+                      Data Tidak Ditemukan
+                    </td>
+                  </tr>
+                )}
+                {data?.data?.data?.map((dt, index) => (
+                  <tr
+                    key={index}
+                    className={` ${
+                      Number(dt.is_batal) === 1
+                        ? "bg-red-300"
+                        : "hover:bg-gray-200"
+                    }`}
+                  >
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                      <div className="flex items-center">
+                        <div>
+                          <div className="text-lg leading-5 text-gray-800">
+                            {(page - 1) * per_page + index + 1}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </td>
+                    </td>
 
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                    <div className="text-sm leading-5 text-blue-900">
-                      {dt?.name_siswa}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                    <div className="text-sm leading-5 text-blue-900">
-                      {dt?.asal_sekolah}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                    <div className="text-sm leading-5 text-blue-900">
-                      {dt?.name_ayah}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                    <ReactWhatsapp
-                      number={formatNomorHp(dt?.phone)}
-                      message={"bismillah"}
-                    >
-                      <p className="hover:text-green-500 hover:font-bold hover:text-lg">
-                        {formatNomorHp(dt?.phone)}
-                      </p>
-                    </ReactWhatsapp>
-                  </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                      <div className="text-lg leading-5 text-blue-900">
+                        {dt.foto_profile ? (
+                          <img
+                            className="h-20 w-20 bg-gray-400 border rounded-full"
+                            src={dt.foto_profile}
+                          />
+                        ) : (
+                          <div className="h-20 w-20 bg-gray-400 border rounded-full"></div>
+                        )}
+                      </div>
+                    </td>
 
-                  <td className="px-6 py-4  border-b text-blue-900 border-gray-500 text-sm leading-5">
-                    {dt.bukti === null ? (
-                      "-"
-                    ) : (
-                      <button
-                        disabled={dt?.status === 0 ? false : true}
+                    <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
+                      {dt.nomor_pendaftaran}
+                    </td>
+                    <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
+                      {dt.jalur_seleksi || "-"}
+                    </td>
+                    <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
+                      {dt.name}
+                    </td>
+                    <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
+                      {dt.nisn}
+                    </td>
+                    <td className="px-6 py-4 text-center text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
+                      {dt.gelombang}
+                    </td>
+
+                    <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
+                      <ReactWhatsapp
+                        number={formatNomorHp(dt.phone)}
+                        message={"bismillah"}
+                      >
+                        <p className="hover:text-blue-400 hover:font-bold hover:text-lg">
+                          {formatNomorHp(dt.phone)}
+                        </p>
+                      </ReactWhatsapp>
+                    </td>
+
+                    <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
+                      {dt.jenis_sekolah}
+                    </td>
+                    <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
+                      {dt.asal_sekolah}
+                    </td>
+                    <td className="px-6 py-4 text-center text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500 leading-5">
+                      {formatDateInd(dt.updated_at)}
+                    </td>
+
+                    <td className="px-6 py-4 text-lg whitespace-no-wrap border-b text-gray-700 border-gray-500  leading-5">
+                      <Button
+                        colorPalette="teal"
+                        variant="solid"
                         onClick={() => {
-                          setIsLoadingKonfirmasi(true);
-                          updateStatus(dt?.id);
-                          sendMessageBukti(dt?.device);
+                          history.push(`pendaftar/${dt.id}/detail`);
                         }}
-                        className={`0 font-bold p-2 ${
-                          dt?.status === 0
-                            ? "bg-red-500 hover:bg-red-500"
-                            : "bg-green-500 hover:bg-green-600"
-                        } rounded-md text-white`}
                       >
-                        {isLoadingKonfirmasi
-                          ? "Memperbaharui"
-                          : dt?.status === 0
-                          ? "Belum"
-                          : "Sudah"}
-                      </button>
-                    )}
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                    <div className="text-sm leading-5 text-blue-900">
-                      <a
-                        target="_blank"
-                        className="hover:text-green-500 font-bold"
-                        href={dt.url_img}
-                      >
-                        Lihat Bukti
-                      </a>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                    <div className="text-sm leading-5 text-blue-900">
-                      {dt?.approved_by}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                    <div className="text-sm leading-5 text-blue-900">
-                      {dt?.nominal === null
-                        ? formatRupiah(350000)
-                        : formatRupiah(dt?.nominal)}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                    <div className="text-sm leading-5 text-blue-900">
-                      {dt?.nominal === 350000
-                        ? "Uang Pendaftaran"
-                        : "Pembayaran Uang Masuk"}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                    <div className="text-sm leading-5 text-blue-900">
-                      {formatDate(dt?.created_at)}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-              <tr className="hover:bg-gray-200 text-xl font-bold">
-                <td
-                  colSpan={7}
-                  className="px-6 py-4  whitespace-no-wrap border-b border-gray-500"
-                >
-                  <div className="text-sm text-center  leading-5 text-green-500">
-                    TOTAL PEMBAYARAN
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div className="text-sm leading-5 text-green-500">
-                    {/* {formatRupiah(total)} */}
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="flex items-center justify-between mt-5 text-green-500">
-            <PaginationInfo
-              totalItems={5}
-              currentPage={1}
+                        {" "}
+                        Detail
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+           
+            <Pagination
+             pagination={{
+              page : data?.data?.current_page,
+              total : data?.data?.total,
+              pageSize : Number(data?.data?.per_page || 10)
+             }}
+              page={page}
+              handlePage={(id) => {
+                setPage(id);
+              }}
               pageSize={per_page}
-            ></PaginationInfo>
-            {/* <Pagination
-            totalItems={20}
-            currentPage={1} 
-            pageSize={pageSize}
-          ></Pagination> */}
+              handlePageSize={(e) => {
+                setPage(1)
+                setPer_page(e.target.value);
+              }}
+            />
           </div>
-        </div>
-      )}
-      {/* table */}
-    </div>
+        )}
+
+        {/* table */}
+      </div>
+      <Modal onOpen={onOpen} onClose={onClose} isOpen={isOpen}></Modal>
+    </React.Fragment>
   );
 }
+
+export const formatDateInd = (isoString) => {
+  if (!isoString) return "-";
+
+  const date = new Date(isoString);
+
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false, // Format 24 jam
+  };
+
+  return new Date(date).toLocaleDateString("id-ID", options);
+};

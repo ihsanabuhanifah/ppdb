@@ -136,7 +136,7 @@ export default function LayoutPPDB() {
               <Route path="/admin/jadwal-tes" exact>
                 <JadwalTes></JadwalTes>
               </Route>
-              <Route path="/admin/riwayat-pembayaran" exact>
+              <Route path="/admin/statistik" exact>
                 <RiwayatPembayaran></RiwayatPembayaran>
               </Route>
             </Switch>

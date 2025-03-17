@@ -24,6 +24,12 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
       disabled : true,
       icon : <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
     },
+    {
+      to: "/admin/statistik",
+      name: "Statistik",
+      disabled : true,
+      icon : <AcademicCapIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
+    },
     // {
     //   to: "/admin/nilai",
     //   name: "Nilai",

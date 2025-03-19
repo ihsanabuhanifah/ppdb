@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {LogoutIcon, AcademicCapIcon } from "@heroicons/react/outline";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
   const isPayment = useSelector((state) => state.auth.isPayment);
+  let [active, setActive] = useState("")
   const menus = [
    
     {
@@ -58,6 +59,14 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
   ];
   
  let history = useHistory()
+
+ useEffect(()=> {
+ if(history.location.pathname){
+  setActive(history.location.pathname)
+ }
+ },[history.location.pathname])
+
+ console.log("history.location.pathname", history.location.pathname)
   return (
     <React.Fragment>
       <nav className="h-5/6 lg:h-8/10">
@@ -71,9 +80,11 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
                   // if(menu.disabled === false){
                   //   return history.push("/ppdb/konfirmasi-pembayaran-ppdb")
                   // }
+
+                  setActive(menu.to)
                   return history.push(menu.to)
                 }}
-                className={`flex items-center text-md  lg:text-sm font-bold p-3 lg:px-4 lg:rounded-l-full ${history.location.pathname === menu.to ? "text-blue-400 font-bold bg-white" : ""}`}
+                className={`flex items-center text-md  lg:text-sm font-bold p-3 lg:px-4 lg:rounded-l-full ${active === menu.to ? "text-blue-400 font-bold bg-white" : ""}`}
               
                
                

@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import TableHeader from "../../../components/TableHeader";
 
-import { getUser, getUserLulus, updateBatal } from "../../../api/admin";
+import { getUser, getUserLulus,  } from "../../../api/admin";
 import { konfirmBukti } from "../../../api/admin";
 import { formatDate, formatTanggal, formatNomorHp } from "../../../utils";
 import ReactWhatsapp from "react-whatsapp";
@@ -20,7 +20,7 @@ import PaginationTable, {
   Pagination,
 } from "../../../components/PaginationTable";
 import { sendMessageBukti } from "../../../config/sendMessage";
-import ExportExcel from "../../../components/ExportExcel";
+import ExportExcel from "../../../components/ExportExcelLulus";
 let fileSchema = Yup.object().shape({
   files: Yup.string().required("Bukti Transfer wajib di Upload"),
   nominal: Yup.string().required("Nominal wajib diisi"),

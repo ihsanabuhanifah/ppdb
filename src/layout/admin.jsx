@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import RiwayatPembayaran from "../pages/admin/riwayatPembayaran";
 import DetailPendaftar from "../pages/admin/pendaftar/detail";
 import UserLulus from "../pages/admin/pendaftar/lulus";
+import Sekolah from "../pages/admin/sekolah";
 export default function LayoutPPDB() {
   const id = useSelector((state) => state.auth.id);
   const message =
@@ -138,6 +139,9 @@ export default function LayoutPPDB() {
               </Route>
               <Route path="/admin/statistik" exact>
                 <RiwayatPembayaran></RiwayatPembayaran>
+              </Route>
+              <Route path="/admin/sekolah" exact>
+                <Sekolah></Sekolah>
               </Route>
             </Switch>
           </div>

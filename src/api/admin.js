@@ -17,6 +17,16 @@ export async function getUserLulus({ page, per_page, keyword }) {
   return result.data;
 }
 
+
+export async function getSekolah() {
+  
+  let result = await axios.get(
+    `/sekolah/statistik`
+  );
+
+  return result.data;
+}
+
 export async function getAdmin() {
   let result = await axios.get(`/user?keyword=&role=admin`);
 

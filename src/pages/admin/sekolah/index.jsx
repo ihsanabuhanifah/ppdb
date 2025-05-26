@@ -57,7 +57,7 @@ export default function Sekolah() {
   );
 
 
-  console.log("DAta seola", data?.data)
+
 
   
 

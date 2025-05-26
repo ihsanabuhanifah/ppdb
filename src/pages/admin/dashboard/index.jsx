@@ -161,7 +161,7 @@ export default function Dashboard() {
             return console.log(show);
           }}
         >
-          Statistik Pendaftar PPDB Tahun Pelajaran 2023/2024
+           Pendaftar PPDB Tahun Pelajaran 2023/2024
         </button>
        
           <div className="grid grid-cols-3 gap-5">

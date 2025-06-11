@@ -23,7 +23,7 @@ import { useSelector } from "react-redux";
 export default function LayoutPPDB() {
   // const isPayment = useSelector((state) => state.auth.isPayment);
   const message = "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
-  const [hiddenMenu, setHiddenMenu] = React.useState(true);
+  const [hiddenMenu, setHiddenMenu] = React.useState(false);
   const [logout, setLogout] = React.useState(false);
   const [hidden, setHidden] = React.useState(false);
   const id = useSelector((state) => state.auth.id);

@@ -23,7 +23,7 @@ export default function LayoutPPDB() {
   const id = useSelector((state) => state.auth.id);
   const message =
     "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftaran , Tahap Selanjutnya bagaimana ? Mohon Informasinya";
-  const [hiddenMenu, setHiddenMenu] = React.useState(true);
+  const [hiddenMenu, setHiddenMenu] = React.useState(false);
   const [logout, setLogout] = React.useState(false);
   let history = useHistory();
   React.useEffect(() => {

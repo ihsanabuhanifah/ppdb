@@ -25,7 +25,7 @@ export default function Layout({ children }) {
           <div className="absolute inset-0 bg-black opacity-50"></div>
         </div> */}
         {/* Header */}
-        <header className="h-[10%] lg:h-[8%] flex items-center justify-between  w-full z-10 px-5 bg-green-500 py-2">
+        <header className="h-[10%] lg:h-[8%] flex items-center justify-between  w-[100%] z-10 px-5 bg-green-500 py-2">
           <section className="flex items-center space-x-5">
           <img
               className="rounded-full h-20 w-20 p-4 "
@@ -33,7 +33,7 @@ export default function Layout({ children }) {
               alt="Logo"
             />
            <h2 className="text-2xl font-bold hidden lg:block text-white">
-              PPDB MAN 1 KOTA SUKABUMI
+              PPDB SMK MADINATULQURAN
             </h2>
           </section>
 

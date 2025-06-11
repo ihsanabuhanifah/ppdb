@@ -55,7 +55,7 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
               <button
               key={index}
                 onClick={() => {
-                  setHiddenMenu(!hiddenMenu);
+                  // setHiddenMenu(!hiddenMenu);
                   if(menu.disabled === false){
                     return history.push("/ppdb/konfirmasi-pembayaran-ppdb")
                   }

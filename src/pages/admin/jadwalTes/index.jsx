@@ -60,6 +60,7 @@ export default function JadwalTes() {
 
     {
       staleTime: 1000 * 60 * 10,
+       refetchOnWindowFocus : false,
       keepPreviousData: true,
       select: (response) => {
         let dataAwal = response.data;

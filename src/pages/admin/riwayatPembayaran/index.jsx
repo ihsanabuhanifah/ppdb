@@ -54,6 +54,8 @@ export default function RiwayatPembayaran() {
       }),
 
     {
+        staleTime: 1000 * 60 * 10,
+       refetchOnWindowFocus : false,
       keepPreviousData: true,
       select: (response) => {
         let result = response.data

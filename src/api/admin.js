@@ -124,3 +124,14 @@ export async function updateBatal(id) {
 
   return result.data;
 }
+
+
+
+export async function getStatistik() {
+  
+  let result = await axios.get(
+    `/kuota/statistik?tahun_ajar=2025-2026&role=user`
+  );
+
+  return result.data;
+}

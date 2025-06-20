@@ -91,7 +91,7 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
                
               >
                 {menu.icon}
-                <p>{menu.name}</p>
+                <p className=" whitespace-nowrap">{menu.name}</p>
               </button>
             );
           })}

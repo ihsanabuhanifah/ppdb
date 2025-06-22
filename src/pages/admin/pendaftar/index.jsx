@@ -21,6 +21,7 @@ import PaginationTable, {
 } from "../../../components/PaginationTable";
 import { sendMessageBukti } from "../../../config/sendMessage";
 import ExportExcel from "../../../components/ExportExcel";
+import ModalRegister from "./Register";
 let fileSchema = Yup.object().shape({
   files: Yup.string().required("Bukti Transfer wajib di Upload"),
   nominal: Yup.string().required("Nominal wajib diisi"),
@@ -29,6 +30,7 @@ export default function Pendaftar() {
   const [page, setPage] = React.useState(1);
 
   const {onOpen, isOpen, onClose} = useDisclosure()
+  const register = useDisclosure()
   const [per_page, setPer_page] = React.useState(25);
   const [isLoadingKonfirmasi, setIsLoadingKonfirmasi] = React.useState(false);
   const [ keyword, setKeyword] = React.useState("");
@@ -85,6 +87,8 @@ export default function Pendaftar() {
 
   return (
     <React.Fragment>
+
+      <ModalRegister isOpen={register.isOpen} onOpen={register.onOpen} onClose={register.onClose}/>
       <div className="text-blue-400 grid grid-cols-1 gap-5">
         <div className="border-b-2 pb-10">
           <h1 className="text-2xl  font-semibold">
@@ -95,7 +99,7 @@ export default function Pendaftar() {
 
         <div className="p-1 ">
            <section className="flex items-center justify-between mb-5">
-                   <div className="ml-4 w-full flex items-center justify-between ">
+                   <div className="ml-4 w-full flex items-center  space-x-5 ">
                      <input
                        className="border px-3 lg:px-5 py-2 w-1/2 rounded-md"
                        placeholder="Cari ... "
@@ -104,6 +108,10 @@ export default function Pendaftar() {
                          setKeyword(e.target.value);
                        }}
                      />
+
+                     <Button onClick={()=> {
+                      register.onOpen()
+                     }} colorSchema="teal" >Tambah Pendaftar</Button>
          
                    <ExportExcel fileName="Data_Pengguna.xlsx"/>
                    </div>

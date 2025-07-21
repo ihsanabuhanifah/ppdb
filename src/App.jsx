@@ -26,14 +26,15 @@ import {
 } from "./layout/ProtetedRoute";
 import { useSelector } from "react-redux";
 import LoadingPage from "./pages/auth/loadingPage,";
+import VueLanding from "./components/Vue";
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   return (
     <main className="text-md h-screen">
       <Switch>
-      <Route exact path="/">
-          <Home></Home>
+        <Route exact path="/">
+          <VueLanding></VueLanding>
         </Route>
 
         <Route path="/login">

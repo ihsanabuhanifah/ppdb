@@ -10,6 +10,7 @@ import qs from "qs";
 
 let client = axios.create({
   baseURL: `https://ppdb-be.devopsgeming.online/api`,
+  // baseURL: `http://localhost:8000/api`,
   headers,
   paramsSerializer: function (params) {
     return qs.stringify(params, { encode: false, skipNulls: true });

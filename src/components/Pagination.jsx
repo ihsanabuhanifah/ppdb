@@ -85,18 +85,7 @@ function Pagination({
     <div className="flex justify-between items-center text-sm">
       <div>
         <ul className="flex pl-0 list-none rounded my-2">
-          <li
-            onClick={() =>
-              pager.currentPage == 1
-                ? null
-                : onChangePage(pager.currentPage - 1)
-            }
-            className="relative  block py-2 px-3 leading-tight bg-white border border-gray-200 text-gray-700 border-r-0 ml-0 rounded-l hover:bg-lightBlue-50"
-          >
-            <a className="cursor-pointer">
-              Prev
-            </a>
-          </li>
+          
 
           {pager.pages.map((page, index) => (
             <PaginationItem
@@ -108,18 +97,7 @@ function Pagination({
             </PaginationItem>
           ))}
 
-          <li
-            onClick={() =>
-              pager.endPage == pager.currentPage
-                ? null
-                : onChangePage(pager.currentPage + 1)
-            }
-            className="relative block py-2 px-3 leading-tight bg-white border border-gray-200 text-gray-700 rounded-r hover:bg-lightBlue-50"
-          >
-            <a className="cursor-pointer">
-              Next
-            </a>
-          </li>
+        
         </ul>
       </div>
     </div>

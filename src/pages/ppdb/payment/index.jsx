@@ -88,7 +88,7 @@ export default function Payment() {
               <div className="ml-5 col-span-6 lg:col-span-4">
                 <button className="font-bold" onClick={onCopy}>
                   {" "}
-                  {value}
+                141801000600567
                 </button>
               </div>
               {hasCopied ? (
@@ -108,7 +108,7 @@ export default function Payment() {
               </div>
 
               <div className="ml-5 col-span-6 lg:col-span-4">
-                (147) Bank Muamalat
+                (002) BRI
               </div>
             </div>
             <div className="grid grid-cols-12 font-bold mt-5 lg:mt-2 ">
@@ -118,7 +118,7 @@ export default function Payment() {
               </div>
 
               <div className="ml-5 col-span-6 lg:col-span-4">
-                YYS PESANTREN WISATA AL-ISLAM (PONPES MADINATULQURAN)
+                SMK MADINATULQURAN
               </div>
             </div>
           </div>

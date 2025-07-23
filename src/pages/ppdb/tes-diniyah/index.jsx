@@ -136,7 +136,8 @@ export default function TesDiniyah() {
                 </span>{" "}
                 <span className="italic text-md text-red-500">(wajib)</span>
               </label>
-              <select
+              <input
+              type="date"
                 className="w-full text-lg  border py-4 px-5 focus:bg-blue-100 "
                 id="tanggal"
                 name="tanggal"
@@ -146,18 +147,8 @@ export default function TesDiniyah() {
                 value={values.tanggal}
                 error={errors.tanggal && touched.tanggal}
               >
-                <option>Pilih {}</option> 
-                {tanggalTes &&
-                  tanggalTes.map((item, index) => {
-                  
-                      return (
-                        <option key={index} value={item.value}>
-                          {item.label}
-                        </option>
-                      );
-                    
-                  })}
-              </select>
+              
+              </input>
             </div>
 
             <div className="mt-5">

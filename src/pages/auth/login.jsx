@@ -80,8 +80,8 @@ export default function Register() {
     <Layout page="login">
       <div className="w-full px-3 lg:px-12 grid grid-cols-1 gap-5">
         <div>
-        <h3 className="text-xl lg:text-3xl font-bold uppercase "><span className="text-gray-500">Masuk Portal</span> <span className="text-green-500"> PPDB</span></h3>
-          <p className="text-lg lg:text-xl italic text-green-500">Silahkan Melakukan Login</p>
+        <h3 className="text-xl lg:text-3xl font-bold uppercase "><span className="text-gray-500">Masuk Portal</span> <span className="text-[#1E046C]"> PPDB</span></h3>
+          <p className="text-lg lg:text-xl italic text-[#1E046C]">Silahkan Melakukan Login</p>
         </div>
         <Formik
           initialValues={initialValues}
@@ -105,7 +105,7 @@ export default function Register() {
                 }}
                 className="mt-3 flex flex-col border shadow-md px-5 py-3 relative"
               >
-                <label className="font-bold text-green-500" htmlFor="email">
+                <label className="font-bold text-[#1E046C]" htmlFor="email">
                   Alamat Email
                 </label>
                 <input
@@ -121,7 +121,7 @@ export default function Register() {
                   disabled={isSubmitting}
                 />
                 {focus === "email" ? (
-                  <div className="bg-green-500 w-2 h-full absolute bottom-0  left-0"></div>
+                  <div className="bg-[#1E046C] w-2 h-full absolute bottom-0  left-0"></div>
                 ) : (
                   ""
                 )}
@@ -138,7 +138,7 @@ export default function Register() {
                 }}
                 className="mt-3 flex flex-col border shadow-md px-5 py-3 relative"
               >
-                <label className="font-bold text-green-500" htmlFor="password">
+                <label className="font-bold text-[#1E046C]" htmlFor="password">
                   Password
                 </label>
                 <input
@@ -154,7 +154,7 @@ export default function Register() {
                   disabled={isSubmitting}
                 />
                 {focus === "password" ? (
-                  <div className="bg-green-500 w-2 h-full absolute bottom-0  left-0"></div>
+                  <div className="bg-[#1E046C] w-2 h-full absolute bottom-0  left-0"></div>
                 ) : (
                   ""
                 )}
@@ -169,7 +169,7 @@ export default function Register() {
               <button
                 disabled={isSubmitting}
                   type="submit"
-                  className="w-full border flex justify-center items-center text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
+                  className="w-full border flex justify-center items-center text-white bg-[#1E046C] h-16 text-lg font-bold rounded-md "
                 >
                   {isLoading ? (<Loading/>) : "Masuk"}
                 </button>
@@ -179,16 +179,11 @@ export default function Register() {
         </Formik>
         <p className="text-center font-semibold">
           Belum Daftar?{" "}
-          <Link className="text-green-500 text-lg font-bold" to="/register">
+          <Link className="text-[#1E046C] text-lg font-bold" to="/register">
             Mendaftar
           </Link>{" "}
         </p>
-        <p className="text-center font-semibold">
-          
-          <Link className="text-green-500 text-lg font-bold" to="/lupa-password">
-            Lupa Password ?
-          </Link>{" "}
-        </p>
+        
        
       </div>
     </Layout>

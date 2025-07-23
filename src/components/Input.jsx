@@ -21,7 +21,7 @@ export default function input({
       className="mt-3  items-center"
     >
       <label
-        className="font-bold text-green-500 "
+        className="font-bold text-[#1E046C] "
         htmlFor={id}
       >
         <span className="uppercase">{label}</span> {required ? (<span className="italic text-md text-red-500">(wajib)</span>) : ""}

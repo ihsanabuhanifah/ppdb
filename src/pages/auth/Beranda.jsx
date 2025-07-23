@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Section1() {
   const [welcomeText, setWelcomeText] = useState("");
-  const fullText = "PPDB SMK MADINATULQURAN 2025/2026";
+  const fullText = "PMB SMK MADINATULQURAN 2025/2026";
  
   const history = useHistory();
 

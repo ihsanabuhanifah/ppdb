@@ -97,10 +97,10 @@ export default function DataSiswa() {
   return (
     <Identitas>
       <div className="mb-6 pb-5 ">
-        <h1 className="text-xl lg:text-4xl font-bold uppercase text-green-500">
+        <h1 className="text-xl lg:text-4xl font-bold uppercase text-[#1E046C]">
           Lengkapi Data Santri
         </h1>
-        <p className="text-green-500 text-sm lg:text-xl font-semibold italic mt-1">
+        <p className="text-[#1E046C] text-sm lg:text-xl font-semibold italic mt-1">
           Silahkan lengkapi data santri di pada form di bawah
         </p>
       </div>
@@ -201,7 +201,7 @@ export default function DataSiswa() {
             </div>
             <div>
               <div className="mt-3  items-center">
-                <label className="font-bold  text-green-500 " htmlFor="jurusan">
+                <label className="font-bold  text-[#1E046C] " htmlFor="jurusan">
                   <span className="uppercase">Jurusan dipilih</span>{" "}
                   <span className="italic text-md text-red-500">(wajib)</span>
                 </label>
@@ -225,7 +225,7 @@ export default function DataSiswa() {
             <div>
               <div className="mt-3  items-center">
                 <label
-                  className="font-bold  text-green-500 "
+                  className="font-bold  text-[#1E046C] "
                   htmlFor="jenis_kelamin"
                 >
                   <span className="uppercase">Jenis Kelamin santri</span>{" "}
@@ -254,7 +254,7 @@ export default function DataSiswa() {
             <div>
               <div className="mt-3  items-center">
                 <label
-                  className="font-bold  text-green-500 "
+                  className="font-bold  text-[#1E046C] "
                   htmlFor="pihak_yg_dihubungi"
                 >
                   <span className="uppercase"> Pihak yang dihubungi</span>{" "}
@@ -288,7 +288,7 @@ export default function DataSiswa() {
 
             <div className="col-span-1 lg:col-span-3 ">
               <label
-                className="font-bold uppercase text-green-500 "
+                className="font-bold uppercase text-[#1E046C] "
                 htmlFor="pihak_yg_dihubungi"
               >
                 <span className="uppercase">Alamat</span>{" "}
@@ -325,7 +325,7 @@ export default function DataSiswa() {
             <div className="col-start-1 lg:col-start-3">
               <button
                 type="submit"
-                className="w-full border flex items-center justify-center text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
+                className="w-full border flex items-center justify-center text-white bg-[#1E046C] h-16 text-lg font-bold rounded-md hover:bg-green-600"
               >
                 {isLoading ? <Loading></Loading> : " Simpan dan Lanjutkan"}
               </button>

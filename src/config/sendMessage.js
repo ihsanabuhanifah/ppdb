@@ -6,7 +6,7 @@ export const sendMessageJam = async (token, name) => {
     priority: "high",
     soundName: "default",
     notification: {
-      title: "PPDB SMK MADINATULQURAN",
+      title: "PMB SMK MADINATULQURAN",
       body: `Konfirmasi jam tes online, Alhamdulilah jadwal tes online sudah dibuat `,
       icon : "https://res.cloudinary.com/smk-madinatul-quran/image/upload/v1633820893/ce4h2qg7y3dl1kpbjlsr.png",
       image:
@@ -30,7 +30,7 @@ export const sendMessageBukti = async (token, name) => {
     priority: "high",
     soundName: "default",
     notification: {
-      title: "PPDB SMK MADINATULQURAN",
+      title: "PMB SMK MADINATULQURAN",
       body:  `Konfirmasi bukti Transfer, Alhamdulilah bukti transfer sudah di konfirmasi`,
       icon : "https://res.cloudinary.com/smk-madinatul-quran/image/upload/v1633820893/ce4h2qg7y3dl1kpbjlsr.png",
       image:

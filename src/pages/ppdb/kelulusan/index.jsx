@@ -53,8 +53,8 @@ export default function Kelulusan() {
             <div className="flex items-center justify-center">
               <div className="mt-5">
                 <h1 className="text-center font-bold text-lg ">
-                  Pengumuman PPDB SMK MADINATULQURAN <br /> Tahun Pelajaran
-                  2024/2025
+                  Pengumuman PMB SMK MADINATULQURAN <br /> Tahun Pelajaran
+                  2026/2027
                 </h1>
                 <p className="mt-5 font-semibold text-justify">
                   Berdasarkan Hasil tes dan wawancara yang telah dilaksanakan
@@ -75,9 +75,9 @@ export default function Kelulusan() {
                       Untuk tahapan selanjutnya, wali santri bisa langsung
                       melakukan pembayaran ke rekening di bawah ini sejumlah
                       uang{" "}
-                      <span className="font-bold">Rp. 18.500.000 ,000</span> (
+                      <span className="font-bold">Rp. 14.500.000 ,000</span> (
                       <span className="italic font-medium">
-                        Delapan belas juta lima ratus ribu rupiah
+                        Empat belas juta lima ratus ribu rupiah
                       </span>
                       ) dan kemudian mengupload bukti pembayaran di Pembayaran
                       atau klik{" "}
@@ -112,7 +112,7 @@ export default function Kelulusan() {
                     <div className="ml-5 col-span-6 lg:col-span-4">
                       <button className="font-bold" onClick={onCopy}>
                         {" "}
-                        {value}
+                        141801000600567
                       </button>
                     </div>
                     {hasCopied ? (
@@ -132,7 +132,7 @@ export default function Kelulusan() {
                     </div>
 
                     <div className="ml-5 col-span-6 lg:col-span-4">
-                      (147) Bank Muamalat
+                      (002) Bank BRI
                     </div>
                   </div>
                   <div className="grid grid-cols-12 font-bold mt-5 lg:mt-2 ">
@@ -142,60 +142,12 @@ export default function Kelulusan() {
                     </div>
 
                     <div className="ml-5 col-span-6 lg:col-span-4">
-                    YYS PESANTREN WISATA AL-ISLAM (PONPES MADINATULQURAN)
+                   SMK MADINATULQURAN
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-5">
-                  <div className="grid grid-cols-7 border  ">
-                    <div className="col-span-1 border  text-center font-bold py-3 bg-gray-200">
-                      Tahap
-                    </div>
-                    <div className="col-span-3  border text-center font-bold py-3 bg-gray-200">
-                      Nominal
-                    </div>
-                    <div className="col-span-3 border  text-center font-bold py-3 bg-gray-200 ">
-                      Tenggang Waktu
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-7  ">
-                    <div className="col-span-1 border  text-center py-1">1</div>
-                    <div className="col-span-3 border   text-center py-1">
-                      Rp. 5.000.000,00
-                    </div>
-                    <div className="col-span-3  border  text-center py-1">
-                      31 Oktober 2023
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-7  ">
-                    <div className="col-span-1 border  text-center py-1">2</div>
-                    <div className="col-span-3 border  text-center py-1">
-                      Rp. 5.000.000,00
-                    </div>
-                    <div className="col-span-3 border  text-center py-1">
-                      31 Desember 2023
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-7  ">
-                    <div className="col-span-1 border  text-center py-1">3</div>
-                    <div className="col-span-3 border  text-center py-1">
-                      Rp. 5.000.000,00
-                    </div>
-                    <div className="col-span-3 border  text-center py-1">
-                      28 Februari 2023
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-7  ">
-                    <div className="col-span-1 border  text-center py-1">3</div>
-                    <div className="col-span-3 border  text-center py-1">
-                      Rp. 3.500.000,00
-                    </div>
-                    <div className="col-span-3 border  text-center py-1">
-                      31 Mei 2023
-                    </div>
-                  </div>
-                </div>
+              
 
                 <div className="p-4 mt-5 shadow-sm text-red-500 font-bold italic">
                   <h1>Note :</h1>

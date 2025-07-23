@@ -18,7 +18,7 @@ export default function Dashboard() {
             Assalamualikum Warohmatullahi Wabarokatuh{" "}
           </span>{" "}
           <br />
-          <span className="text-green-500 font-semibold text-lg">
+          <span className="text-[#1E046C] font-semibold text-lg">
             Akh {name}
           </span>
         </h4>
@@ -56,7 +56,7 @@ export default function Dashboard() {
           <p>
             {" "}
             {isPayment === true ? (
-              <span className="bg-green-400 hover:bg-green-500 py-2 px-5 font-bold rounded-md text-white">
+              <span className="bg-green-400 hover:bg-[#1E046C] py-2 px-5 font-bold rounded-md text-white">
                 Terkonfirmasi
               </span>
             ) : isPayment === false ? (

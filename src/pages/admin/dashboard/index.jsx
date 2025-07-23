@@ -148,7 +148,7 @@ export default function Dashboard() {
       <div className="text-green-500 grid grid-cols-1 gap-5">
         <div className="border-b-2 pb-10">
           <h1 className="text-2xl  font-semibold">
-            DAFTAR USER PORTAL PPDB SMK MADINATULQURAN
+            DAFTAR USER PORTAL PMB SMK MADINATULQURAN
           </h1>
         </div>
         {/* table */}

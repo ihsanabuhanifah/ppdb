@@ -43,7 +43,35 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
   return (
     <React.Fragment>
       <nav className="h-5/6 lg:h-8/10">
-        <div className="grid grid-cols-1 gap-1  text-white">
+        <div className="md:grid lg:grid grid-cols-1 gap-1  hidden text-white">
+          {menus.map((menu, index) => {
+            return (
+              <React.Fragment>
+                {menu.name === "Pembayaradd" && isLulus !== "1" ?  "" : (<button
+              key={index}
+                onClick={() => {
+
+                  if(menu.disabled === "belum_transfer"){
+                    return history.push("/ppdb/konfirmasi-pembayaran-ppdb")
+                  }else if(menu.disabled === false){
+                    return history.push("/ppdb/dashboard")
+                  }
+                  return history.push(menu.to)
+                }}
+                className={`flex items-center text-md  lg:text-xl font-bold p-3 lg:px-4 lg:rounded-l-full ${history.location.pathname === menu.to ? "text-green-500 font-bold bg-white" : ""}`}
+              
+               
+               
+              >
+                {menu.icon}
+                <p>{menu.name}</p>
+              </button>)}
+                </React.Fragment>
+            );
+          })}
+        </div>
+
+         <div className="grid grid-cols-1 gap-1  md:hidden lg:hidden  text-white">
           {menus.map((menu, index) => {
             return (
               <React.Fragment>

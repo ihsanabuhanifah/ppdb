@@ -124,7 +124,7 @@ export default function Layout() {
               alt="Logo"
             />
             <h2 className="text-2xl font-bold hidden lg:block text-green-400">
-              PPDB SMK MADINATULQURAN
+              PMB SMK MADINATULQURAN
             </h2>
           </section>
 

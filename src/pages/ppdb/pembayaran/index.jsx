@@ -227,21 +227,7 @@ export default function Pembayaran() {
                     </td>
                   </tr>
                 ))}
-                <tr className="hover:bg-gray-200 text-xl font-bold">
-                  <td
-                    colSpan={3}
-                    className="px-6 py-4  whitespace-no-wrap border-b border-gray-500"
-                  >
-                    <div className="text-sm text-center  leading-5 text-green-500">
-                      TOTAL PEMBAYARAN
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                    <div className="text-sm leading-5 text-green-500">
-                      {formatRupiah(total)}
-                    </div>
-                  </td>
-                </tr>
+              
               </tbody>
             </table>
           )}

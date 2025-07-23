@@ -72,11 +72,11 @@ export default function DataSiswa() {
   return (
     <Identitas>
       <div className="mb-6 pb-5 ">
-        <h1 className="text-xl lg:text-4xl font-bold  text-green-500">
+        <h1 className="text-xl lg:text-4xl font-bold  text-[#1E046C]">
           <span  className="uppercase">Lengkapi Data wali Santri</span> 
           <span className="text-md ml-4 italic text-red-500">(Tidak Wajib)</span>
         </h1>
-        <p className="text-green-500 text-sm lg:text-xl font-semibold italic mt-1">
+        <p className="text-[#1E046C] text-sm lg:text-xl font-semibold italic mt-1">
           Silahkan lengkapi data wali santri di pada form di bawah <p>Jika tidak ada wali silahkan lanjutkan ke dashboard</p> 
         </p>
       </div>
@@ -257,7 +257,7 @@ export default function DataSiswa() {
             <div>
               <div className="mt-3  items-center">
                 <label
-                  className="font-bold  text-green-500 "
+                  className="font-bold  text-[#1E046C] "
                   htmlFor="penghasilan_wali"
                 >
                   <span className="uppercase">Penghasilan wali</span>{" "}
@@ -307,7 +307,7 @@ export default function DataSiswa() {
             <div className="col-start-1 lg:col-start-2">
               <button
                 type="submit"
-                className="w-full border flex items-center justify-center text-white bg-green-300 h-16 text-lg font-bold rounded-md hover:bg-green-600"
+                className="w-full border flex items-center justify-center text-white bg-blue-400 h-16 text-lg font-bold rounded-md hover:bg-green-600"
               >
                 {isLoading ? <Loading></Loading> : " Simpan dan Lanjutkan"}
               </button>
@@ -318,7 +318,7 @@ export default function DataSiswa() {
                 onClick={()=> {
                     history.push("/ppdb/salam")
                 }}
-                className="w-full border flex items-center justify-center text-white bg-green-500 h-16 text-lg font-bold rounded-md hover:bg-green-600"
+                className="w-full border flex items-center justify-center text-white bg-[#1E046C] h-16 text-lg font-bold rounded-md hover:bg-green-600"
               >
                   Lanjut Ke Dashbord
                 

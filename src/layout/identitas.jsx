@@ -36,7 +36,7 @@ export default function Identitas({ children }) {
             </button>
           </div>
         </div>
-        <div className="h-5/6 overflow-y-auto">{children}</div>
+        <div className="h-5/6 ">{children}</div>
       </div>
     </React.Fragment>
   );

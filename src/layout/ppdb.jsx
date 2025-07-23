@@ -73,7 +73,7 @@ export default function LayoutPPDB() {
         <header className=" lg:hidden text-xl text-white font-bold flex items-center justify-between bg-green-500 px-5 py-2 border-b lg:border-none pb-3 lg:pb-0">
           <h1>
             {" "}
-            PPDB <br />{" "}
+            PMB <br />{" "}
             <span className="hidden lg:block">SMK MADINATULQURAN</span>
           </h1>
           <button
@@ -98,7 +98,7 @@ export default function LayoutPPDB() {
             <header className=" hidden lg:block text-lg text-white font-bold  items-center justify-between border-b lg:border-none pb-3 lg:pb-0">
               <h1>
                 {" "}
-                PPDB <br />{" "}
+                PMB <br />{" "}
                 <span className="hidden lg:block">SMK MADINATULQURAN</span>
               </h1>
             </header>

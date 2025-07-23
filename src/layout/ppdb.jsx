@@ -20,6 +20,7 @@ import { Tooltip } from "@chakra-ui/react";
 import TesDiniyah from "../pages/ppdb/tes-diniyah";
 import { getMessaging, getToken } from "firebase/messaging";
 import { useSelector } from "react-redux";
+
 export default function LayoutPPDB() {
   // const isPayment = useSelector((state) => state.auth.isPayment);
   const message = "Bismilah, Assalamualaikum Warohmatullahi Wabarokatuh. Saya sudah melakukan pendaftan , Tahap Selanjutnya bagaimana ? Mohon Informasinya";

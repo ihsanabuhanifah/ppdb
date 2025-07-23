@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import LoadingPage from "../pages/auth/loadingPage,";
 import AlertLogout from "../components/AlertLogout";
 import Cookies from "js-cookie";
+
 export default function Identitas({ children }) {
   const isAuth = useSelector((state) => state.auth.isAuth);
   const [logout, setLogout] = React.useState(false);

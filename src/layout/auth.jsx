@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactWhatsapp from "react-whatsapp";
 import wa from "../image/wa.png";
 import image1 from "../image/image.png";
@@ -12,12 +12,30 @@ export default function Layout({ children }) {
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const path = history.location.pathname;
+  console.log("jis", history);
+  // Efek untuk handle reload pada route tertentu
+  useEffect(() => {
+    if (path === "/") {
+    window.location.href = path; // Gunakan full page reload
+    }
+  }, []);
+
+  
+
+  // Fungsi navigasi yang dimodifikasi
+  const handleNavigation = (path) => {
+    if (path === "/" || path === "/login" || path === "/register") {
+      window.location.href = path; // Gunakan full page reload
+    } else {
+      history.push(path); // Gunakan normal navigation untuk route lain
+    }
+    setMenuOpen(false);
+  };
+
   return (
     <React.Fragment>
-      <div
-        
-        className="w-screen h-screen overflow-auto "
-      >
+      <div className="w-screen h-screen overflow-auto ">
         {/* <div
           className="absolute inset-0 bg-cover bg-center"
          
@@ -27,12 +45,12 @@ export default function Layout({ children }) {
         {/* Header */}
         <header className="h-[10%] lg:h-[8%] flex items-center justify-between  w-[100%] z-10 px-5 bg-green-500 py-2">
           <section className="flex items-center space-x-5">
-          <img
+            <img
               className="rounded-full h-20 w-20 p-4 "
               src={image1}
               alt="Logo"
             />
-           <h2 className="text-2xl font-bold hidden lg:block text-white">
+            <h2 className="text-2xl font-bold hidden lg:block text-white">
               PPDB SMK MADINATULQURAN
             </h2>
           </section>
@@ -40,21 +58,20 @@ export default function Layout({ children }) {
           {/* Menu untuk Desktop */}
           <section className="hidden md:flex space-x-5">
             <button
-              onClick={() => history.push("/")}
+              onClick={() => handleNavigation("/")}
               className="btn text-white text-md hover:text-green-500 font-semibold"
             >
               Beranda
             </button>
-
             <button
-              onClick={() => history.push("login")}
-              className="btn text-white text-md hover:text-green-500 font-semibold "
+              onClick={() => handleNavigation("/login")}
+              className="btn text-white text-md hover:text-green-500 font-semibold"
             >
               Login
             </button>
             <button
-              onClick={() => history.push("register")}
-              className="btn text-white text-md hover:text-green-500 font-semibold "
+              onClick={() => handleNavigation("/register")}
+              className="btn text-white text-md hover:text-green-500 font-semibold"
             >
               Register
             </button>
@@ -83,21 +100,21 @@ export default function Layout({ children }) {
               className="md:hidden absolute top-[0%] z-50 h-screen w-full bg-white shadow-lg py-5"
             >
               <div className="flex flex-col items-center space-y-5">
-              <button
+                <button
                   onClick={() => {
                     history.push("home");
                     setMenuOpen(false);
                   }}
                   className="text-white text-xl rounded-xl"
                 >
-                  Beranda
+                  Home
                 </button>
                 <button
                   onClick={() => {
                     history.push("login");
                     setMenuOpen(false);
                   }}
-                   className="text-green-400 text-xl rounded-xl"
+                  className="text-green-400 text-xl rounded-xl"
                 >
                   Masuk
                 </button>
@@ -116,7 +133,7 @@ export default function Layout({ children }) {
         </AnimatePresence>
 
         {/* Konten Utama */}
-        <section  className="  pt-20 items-center h-[90%] w-full overflow-auto">
+        <section className="  pt-20 items-center h-[90%] w-full overflow-auto">
           {children}
         </section>
       </div>

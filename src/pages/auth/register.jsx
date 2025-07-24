@@ -344,7 +344,7 @@ export default function Register() {
                 <button
                   disabled={isSubmitting}
                   type="submit"
-                  className="w-full border flex justify-center items-center text-white bg-[#1E046C] h-16 text-lg font-bold rounded-md hover:bg-[rgb(30,4,108)]"
+                  className="w-full mt-5 border flex justify-center items-center text-white bg-[#1E046C] h-16 text-lg font-bold rounded-md hover:bg-[rgb(30,4,108)]"
                 >
                   {isLoading ? <Loading /> : "Daftar"}
                 </button>

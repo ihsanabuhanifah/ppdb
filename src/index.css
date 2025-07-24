@@ -168,3 +168,9 @@
   html {
     scroll-padding-top: 85px; 
   }
+
+
+  input[type="checkbox"]:checked {
+  background-color: #1E046C;
+  border-color: #1E046C;
+}

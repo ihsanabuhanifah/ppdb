@@ -24,6 +24,9 @@ const RegisterSchema = Yup.object().shape({
     .min(8, "Konfirmasi Password minimal 8 karakter")
     .oneOf([Yup.ref("password")], "Password dan Password Konfirmasi tidak sama")
     .required("Password Wajib diisi"),
+  informasi: Yup.array()
+    .min(1, "Pilih setidaknya 1 sumber informasi")
+    .required("Sumber informasi wajib dipilih"),
 });
 export default function Register() {
   const [focus, setFocus] = React.useState("");
@@ -40,9 +43,13 @@ export default function Register() {
     password: "",
     password_confirmation: "",
     role: 2,
+    informasi: [], // Array untuk menyimpan pilihan checkbox
   };
   const onSubmit = async (values) => {
-    let result = await dispatch(authRegister(values));
+    let result = await dispatch(authRegister({
+      ...values,
+       informasi: values.informasi.join(', '), // Contoh: "Teman, Sosial Media"
+    }));
     console.log(result);
     if (result.message === "Berhasil Membuat Akun") {
       toast({
@@ -70,12 +77,15 @@ export default function Register() {
   };
   return (
     <Layout page="register">
-    
       <div className="w-full px-3 lg:px-10 grid grid-cols-1 gap-5">
-    
         <div>
-          <h3 className="text-xl lg:text-3xl font-bold uppercase "><span className="text-gray-500">Daftar</span> <span className="text-[#1E046C]"> PPDB</span></h3>
-          <p className="text-md lg:text-xl italic text-[#1E046C]">Silahkan Melakukan pendaftran disini</p>
+          <h3 className="text-xl lg:text-3xl font-bold uppercase ">
+            <span className="text-gray-500">Daftar</span>{" "}
+            <span className="text-[#1E046C]"> PPDB</span>
+          </h3>
+          <p className="text-md lg:text-xl italic text-[#1E046C]">
+            Silahkan Melakukan pendaftran disini
+          </p>
         </div>
         <Formik
           initialValues={initialValues}
@@ -144,9 +154,8 @@ export default function Register() {
                   error={errors.email && touched.email}
                   disabled={isSubmitting}
                   onChange={(e) => {
-            
-                    setFieldValue("email",e.target.value)
-                    return setErrorReg()
+                    setFieldValue("email", e.target.value);
+                    return setErrorReg();
                   }}
                   onBlur={handleBlur}
                   value={values.email}
@@ -182,8 +191,8 @@ export default function Register() {
                   disabled={isSubmitting}
                   error={errors.phone && touched.phone}
                   onChange={(e) => {
-                    setFieldValue("phone", e.target.value)
-                    return setErrorReg()
+                    setFieldValue("phone", e.target.value);
+                    return setErrorReg();
                   }}
                   onBlur={handleBlur}
                   value={values.phone}
@@ -273,6 +282,57 @@ export default function Register() {
                 )}
 
               <div>
+                {/* Tambahkan setelah field password confirmation */}
+                <div className="mt-3 border shadow-md px-5 py-3">
+                  <label className="font-bold text-[#1E046C] block mb-3">
+                    Dari mana Anda mengetahui informasi ini? (Wajib pilih
+                    minimal 1)
+                  </label>
+
+                  <div className="grid grid-cols-1 gap-2">
+                    {[
+                      "Teman",
+                      "Sosial Media",
+                      "Brosur",
+                      "Sekolah",
+                      "Tetangga",
+                      "Alumni",
+                      "Facebook",
+                      "Youtube",
+                      "Instagram",
+                      "Tiktok",
+                      "Lainnya",
+                    ].map((option) => (
+                      <div key={option} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          id={`informasi-${option}`}
+                          checked={values.informasi.includes(option)}
+                          onChange={() => {
+                            const newInformasi = values.informasi.includes(
+                              option
+                            )
+                              ? values.informasi.filter(
+                                  (item) => item !== option
+                                )
+                              : [...values.informasi, option];
+                            setFieldValue("informasi", newInformasi);
+                          }}
+                          className="h-5 w-5 text-[#1E046C] focus:ring-[#1E046C]"
+                        />
+                        <label htmlFor={`informasi-${option}`} className="ml-2">
+                          {option}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {errors.informasi && touched.informasi && (
+                  <p className="text-red-500 italic font-bold text-sm mt-1">
+                    {errors.informasi}
+                  </p>
+                )}
                 {errorReg?.message && (
                   <p className="text-red-500 italic font-bold  text-sm mb-5 mt-1">
                     {errorReg?.message?.split(",").map((er, index) => (
@@ -282,11 +342,11 @@ export default function Register() {
                 )}
 
                 <button
-                disabled={isSubmitting}
+                  disabled={isSubmitting}
                   type="submit"
                   className="w-full border flex justify-center items-center text-white bg-[#1E046C] h-16 text-lg font-bold rounded-md hover:bg-[rgb(30,4,108)]"
                 >
-                  {isLoading ? (<Loading/>) : "Daftar"}
+                  {isLoading ? <Loading /> : "Daftar"}
                 </button>
               </div>
             </form>

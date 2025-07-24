@@ -286,11 +286,16 @@ export default function Pendaftar() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-green-500 uppercase tracking-wider">
                     Batal
                   </th>
+                   <th className="px-6 py-3 text-left text-xs font-medium text-green-500 uppercase tracking-wider">
+                    Informasi
+                  </th>
                 </tr>
               </thead>
 
+
+{console.log("DAa", data?.data)}
               <tbody className="bg-white divide-y divide-gray-200">
-                {data?.data?.data?.map((dt, index) => (
+                {data?.data?.map((dt, index) => (
                   <tr
                     key={index}
                     className={
@@ -392,6 +397,9 @@ export default function Pendaftar() {
                           Batal
                         </Button>
                       )}
+                    </td>
+                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {dt?.informasi || "-"}
                     </td>
                   </tr>
                 ))}

@@ -20,6 +20,7 @@ import { getMessaging, getToken } from "firebase/messaging";
 import { useSelector } from "react-redux";
 
 import RiwayatPembayaran from "../pages/admin/riwayatPembayaran";
+import DetailSantri from "../pages/admin/pendaftar/detailSantri";
 export default function LayoutPPDB() {
   const id = useSelector((state) => state.auth.id);
   const message =
@@ -120,8 +121,11 @@ export default function LayoutPPDB() {
               <Route path="/admin/dashboard" exact>
                 <Dashboard></Dashboard>
               </Route>
-              <Route path="/admin/pendaftar">
+              <Route exact path="/admin/pendaftar">
                 <Pendaftar></Pendaftar>
+              </Route>
+               <Route path="/admin/pendaftar/:id">
+                <DetailSantri></DetailSantri>
               </Route>
               <Route path="/admin/nilai" exact>
                 <Nilai></Nilai>

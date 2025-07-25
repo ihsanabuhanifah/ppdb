@@ -12,9 +12,9 @@ export default function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1E046C] to-[#4A00E0]">
+    <div className="min-h-screen bg-[#1E046C] ">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-white/10 shadow-lg">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#647c98] backdrop-blur-md border-b border-white/10 shadow-lg">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <section className="flex items-center space-x-4">
             <img

@@ -200,6 +200,7 @@ export default function Payment() {
                           value={values.file}
                           variant="file"
                           type="file"
+                           accept="image/*"
                           error={errors?.files && touched?.files}
                           onChange={(event) => {
                             setFieldValue(

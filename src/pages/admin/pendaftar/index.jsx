@@ -25,6 +25,7 @@ import Modal from "../../../components/Modal";
 import * as Yup from "yup";
 import Select from "react-select";
 import Pagination from "../../../components/Pagination"; // Updated pagination component
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 let fileSchema = Yup.object().shape({
   files: Yup.string().required("Bukti Transfer wajib di Upload"),
@@ -46,8 +47,7 @@ export default function Pendaftar() {
   const [keyword, setKeyword] = React.useState("");
   const [selectedYear, setSelectedYear] = React.useState(academicYears[3]); // Default to current year
   let debouncedKeyword = useDebounce(keyword, 500);
-  const [statusBukti, setStatusBukti] = React.useState("");
-  const [transfer, setTransfer] = React.useState(0);
+ const history = useHistory()
   let queryClient = useQueryClient();
   const handleToggle = () => setShow(!show);
   let initialValues = {
@@ -289,11 +289,12 @@ export default function Pendaftar() {
                    <th className="px-6 py-3 text-left text-xs font-medium text-green-500 uppercase tracking-wider">
                     Informasi
                   </th>
+                 
                 </tr>
               </thead>
 
 
-{console.log("DAa", data?.data)}
+
               <tbody className="bg-white divide-y divide-gray-200">
                 {data?.data?.map((dt, index) => (
                   <tr
@@ -305,10 +306,18 @@ export default function Pendaftar() {
                     }
                   >
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {(page - 1) * per_page + index + 1}
+                   {(page - 1) * per_page + index + 1}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {dt.name} {dt?.device === null ? "" : "-R"}
+                   <Button
+                          onClick={() => {
+                            history.push(`/admin/pendaftar/${dt.id}`)
+                          }}
+                          colorScheme="blue"
+                          size="sm"
+                        >
+                          {dt.name} 
+                        </Button>      
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {dt.email}
@@ -401,6 +410,7 @@ export default function Pendaftar() {
                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {dt?.informasi || "-"}
                     </td>
+                    
                   </tr>
                 ))}
               </tbody>
@@ -515,6 +525,7 @@ export default function Pendaftar() {
                             value={values.file}
                             variant="file"
                             type="file"
+                             accept="image/*"
                             error={errors?.files && touched?.files}
                             onChange={(event) => {
                               setFieldValue(

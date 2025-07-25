@@ -1,5 +1,6 @@
+import { useQuery } from "react-query";
 import axios from "./axios";
-import {syncToken} from "./axios"
+import { syncToken } from "./axios";
 export async function postSantiBaru(values) {
   try {
     let response = await axios.post("/dataSiswa/save", values);
@@ -47,7 +48,7 @@ export async function uploadBuktiTransfer(values) {
 
   form.append("url_img", values["files"]);
   form.append("status", "0");
-  form.append("nominal" , parseFloat(values["nominal"]))
+  form.append("nominal", parseFloat(values["nominal"]));
   try {
     let response = await axios.post("/uploadBukti/save", form, {
       headers: {
@@ -61,16 +62,15 @@ export async function uploadBuktiTransfer(values) {
   }
 }
 
-
 export async function getBuktiTransfer() {
   let respone = await axios.get("/uploadBukti/user");
- console.log(respone)
-  return respone.data
+  console.log(respone);
+  return respone.data;
 }
 export async function detailBuktiTransfer() {
   let respone = await axios.get("/uploadBukti/detail");
- console.log(respone)
-  return respone.data
+  console.log(respone);
+  return respone.data;
 }
 
 //tes diniyah
@@ -83,17 +83,16 @@ export async function postTesDiniyyah(values) {
   }
 }
 
-
 export async function getTesDiniyah() {
   let respone = await axios.get("/tesDiniyahSaya/tes-saya");
- console.log(respone)
-  return respone.data
+  console.log(respone);
+  return respone.data;
 }
 
 //tes umum
 
 export async function postTesUmum(values) {
-  syncToken()
+  syncToken();
   try {
     let response = await axios.post("/tesMasuk/save", values);
     return response.data;
@@ -103,7 +102,7 @@ export async function postTesUmum(values) {
 }
 
 export async function putTesUmum(values) {
-  syncToken()
+  syncToken();
   try {
     let response = await axios.post("/tesMasuk/update", values);
     return response.data;
@@ -112,8 +111,35 @@ export async function putTesUmum(values) {
   }
 }
 export async function getTesUmum(kode) {
-  syncToken()
+  syncToken();
   let respone = await axios.get(`/tesMasuk/${kode}`);
- console.log(respone)
-  return respone.data
+  console.log(respone);
+  return respone.data;
 }
+
+export async function getDetail(id) {
+  syncToken();
+  let respone = await axios.get(`/user/detail/${id}`);
+  console.log(respone);
+  return respone.data;
+}
+
+export const useGetDetailSantri = (id) => {
+  const { isLoading, data, isFetching } = useQuery(
+    [
+      "/user/detail",
+      {
+        id,
+      },
+    ],
+    () => getDetail(id),
+    {
+      keepPreviousData: true,
+      staleTime: 1000 * 60 * 10,
+      enabled : id !== undefined,
+      select: (response) => response.data,
+    }
+  );
+
+  return {isLoading, data, isFetching}
+};

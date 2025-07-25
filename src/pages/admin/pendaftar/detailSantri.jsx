@@ -173,7 +173,7 @@ export default function DetailSantri() {
                             <div>
                                 <p className="text-sm text-gray-500">Jurusan</p>
                                 <p className="font-medium">
-                                    {data.calon_siswa?.jurusan === 1 ? "IPA" : data.calon_siswa?.jurusan === 2 ? "IPS" : "-"}
+                                    {data.calon_siswa?.jurusan === 1 ? "Rekayasa Perangkat Lunak" : data.calon_siswa?.jurusan === 2 ? "Teknik Komputer Jaringan" : "-"}
                                 </p>
                             </div>
                         </div>

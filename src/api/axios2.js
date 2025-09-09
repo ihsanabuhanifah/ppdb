@@ -5,7 +5,7 @@ import qs from "qs";
 
 
 let client = axios.create({
-  baseURL: `http://psb-online.herokuapp.com/api`,
+  baseURL: `https://ppdb-be.smkmadinatulquran.sch.id/api`,
  
 });
 

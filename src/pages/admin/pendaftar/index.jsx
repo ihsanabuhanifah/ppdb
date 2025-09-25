@@ -375,7 +375,9 @@ export default function Pendaftar() {
                       {dt?.bukti?.approved_by || "-"}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {dt?.tes_diniyyah === null ? (
+
+                      {console.log("dut", dt)}
+                      {!!dt?.tes_diniyyah === false ? (
                         <span className="text-red-500 italic">
                           Belum Membuat Jadwal
                         </span>

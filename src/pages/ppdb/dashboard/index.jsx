@@ -39,16 +39,17 @@ export default function Dashboard() {
           <ol className="list-decimal ml-5">
             <li>Tes pelajaran umum yang bisa dikerjakan secara online </li>
             <li>
-              Tes Baca Alquran, Hafalan serta Wawancara untuk Santri dan Wali
+              Tes Baca Alquran, Hafalan serta Wawancara
               Santri
             </li>
+            <li>Wawancara untuk santri dan wali santri</li>
           </ol>
         </p>
 
         {isPayment !== 'belum_transfer' ? (
           ""
         ) : (
-          <Payment2/>
+          <Payment2 />
         )}
         <div className="mt-5 border w-full p-10 text-center">
           <p className="font-bold">Status Pembayaran Pendaftran PSB </p>
@@ -70,7 +71,7 @@ export default function Dashboard() {
             )}
           </p>
         </div>
-       
+
         <div className="flex items-center justify-end mt-5">
           Hormat Kami,
           <br />
@@ -80,7 +81,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-    
+
     </div>
   );
 }

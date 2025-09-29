@@ -46,7 +46,7 @@ export default function LayoutPPDB() {
         "BIJnu5Rq_eI-nulWKTQ-TwbADc44bfyXZ4oolgf0L-36kdAwHJQKyh-QEaHcALMv4fl5xyohUNsrir-ppoingM4",
     })
       .then((currentToken) => {
-        deviceUpdate(id,currentToken)
+        deviceUpdate(id, currentToken)
       })
       .catch((err) => {
         console.log("An error occurred while retrieving token. ", err);
@@ -91,9 +91,8 @@ export default function LayoutPPDB() {
         </header>
         <div className="grid grid-cols-1 relative lg:grid-cols-12 w-full h-full bg-green-500 px-2  lg:px-6 lg:pt-6  ">
           <div
-            className={`lg:col-span-2 absolute z-50 lg:static w-full ${
-              hiddenMenu ? "transform -translate-x-full lg:transform " : "transform -translate-x-0 transition  duration-500"
-            } lg:block h-full py-5 pl-1  bg-green-500`}
+            className={`lg:col-span-2 absolute z-50 lg:static w-full ${hiddenMenu ? "transform -translate-x-full lg:transform " : "transform -translate-x-0 transition  duration-500"
+              } lg:block h-full py-5 pl-1  bg-green-500`}
           >
             <header className=" hidden lg:block text-lg text-white font-bold  items-center justify-between border-b lg:border-none pb-3 lg:pb-0">
               <h1>
@@ -117,7 +116,7 @@ export default function LayoutPPDB() {
             className="lg:col-span-10 h-9/10 lg:h-full mt-5 lg:mt-0 bg-white px-5 p-10 lg:p-10 rounded-xl overflow-y-auto"
           >
             <Switch>
-            <Route path="/ppdb/pengumuman-kelulusan">
+              <Route path="/ppdb/pengumuman-kelulusan">
                 <Kelulusan></Kelulusan>
               </Route>
               <Route path="/ppdb/salam">
@@ -131,21 +130,21 @@ export default function LayoutPPDB() {
                 <TesUmum></TesUmum>
               </Route>
               <Route path="/ppdb/tes-diniyah-dan-interview">
-            <TesDiniyah></TesDiniyah>
+                <TesDiniyah></TesDiniyah>
               </Route>
               <Route path="/ppdb/konfirmasi-pembayaran-ppdb">
-              <Payment></Payment>
-                
-                
+                <Payment></Payment>
+
+
               </Route>
               <Redirect from="/ppdb" to="/ppdb/salam" />
             </Switch>
           </div>
         </div>
       </div>
-      
+
       <div className="fixed right-10 bottom-4 z-50">
-      <Tooltip
+        <Tooltip
           fontSize="lg"
           bg="gray.300"
           color="black"
@@ -157,43 +156,42 @@ export default function LayoutPPDB() {
             onClick={() => {
               setHidden(true);
             }}
-            className={`w-16 h-16 animate-bounce shadow-xl ${
-              hidden ? "hidden" : "block"
-            }`}
+            className={`w-16 h-16 animate-bounce shadow-xl ${hidden ? "hidden" : "block"
+              }`}
             src={wa}
             alt="whatsapp.png"
           />
         </Tooltip>
         <div className={`${hidden ? "block" : "hidden"} relative  px-5 py-5 grid grid-cols-1 gap-4 shadow-lg border bg-white `}>
-          <button  onClick={() => {
-              setHidden(false);
-            }} className="absolute right-5 top-1">x</button>
-          <ReactWhatsapp number={"+6285888222457"} message={message}>
-           <div className=" p-2 mt-4 flex items-center justify-center ">
-           <img
-             
-             className={`w-4 h-4 shadow-xl `}
-             src={wa}
-             alt="whatsapp.png"
-           />
-           <p className="text-green-500  ml-2 ">
-             Hubungi Ustadz. Dedi
-           </p>
-           </div>
+          <button onClick={() => {
+            setHidden(false);
+          }} className="absolute right-5 top-1">x</button>
+          <ReactWhatsapp number={"+6285545182776"} message={message}>
+            <div className=" p-2 mt-4 flex items-center justify-center ">
+              <img
+
+                className={`w-4 h-4 shadow-xl `}
+                src={wa}
+                alt="whatsapp.png"
+              />
+              <p className="text-green-500  ml-2 ">
+                Hubungi Ustadz. Dedi
+              </p>
+            </div>
           </ReactWhatsapp>
-          
+
           <ReactWhatsapp number={"+62895320050324"} message={message}>
-           <div className=" p-2 flex items-center justify-center ">
-           <img
-             
-             className={`w-4 h-4 shadow-xl `}
-             src={wa}
-             alt="whatsapp.png"
-           />
-           <p className="text-green-500  ml-2 ">
-           Hubungi Ustadz. Ihsan
-           </p>
-           </div>
+            <div className=" p-2 flex items-center justify-center ">
+              <img
+
+                className={`w-4 h-4 shadow-xl `}
+                src={wa}
+                alt="whatsapp.png"
+              />
+              <p className="text-green-500  ml-2 ">
+                Hubungi Ustadz. Ihsan
+              </p>
+            </div>
           </ReactWhatsapp>
         </div>
       </div>

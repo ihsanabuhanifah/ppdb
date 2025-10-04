@@ -110,6 +110,7 @@ export default function Pendaftar() {
     let result = await konfirmBukti(id);
     queryClient.invalidateQueries("provider_document");
     queryClient.invalidateQueries("list_user");
+    setIsLoadingKonfirmasi(false);
     if (result?.status === "success") {
       toast({
         position: "top-right",

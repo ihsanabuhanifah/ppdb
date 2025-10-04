@@ -87,11 +87,10 @@ export default function LayoutPPDB() {
         </header>
         <div className="grid grid-cols-1 relative lg:grid-cols-12 w-full h-full bg-green-500 px-2  lg:px-6 lg:pt-6  ">
           <div
-            className={`lg:col-span-1 absolute z-50 lg:static w-full ${
-              hiddenMenu
+            className={`lg:col-span-1 absolute z-50 lg:static w-full ${hiddenMenu
                 ? "transform -translate-x-full lg:transform "
                 : "transform -translate-x-0 transition  duration-500"
-            } lg:block h-full py-5 pl-1  bg-green-500`}
+              } lg:block h-full py-5 pl-1  bg-green-500`}
           >
             <header className=" hidden lg:block text-sm text-white font-bold items-center justify-between border-b lg:border-none pb-3 lg:pb-0">
               <h1>
@@ -124,7 +123,7 @@ export default function LayoutPPDB() {
               <Route exact path="/admin/pendaftar">
                 <Pendaftar></Pendaftar>
               </Route>
-               <Route path="/admin/pendaftar/:id">
+              <Route path="/admin/pendaftar/:id">
                 <DetailSantri></DetailSantri>
               </Route>
               <Route path="/admin/nilai" exact>
@@ -141,7 +140,7 @@ export default function LayoutPPDB() {
         </div>
       </div>
       <div className="fixed right-10 bottom-4 z-50">
-        <ReactWhatsapp number={"+6285888222457"} message={message}>
+        <ReactWhatsapp number={"+6285545182776"} message={message}>
           <Tooltip
             fontSize="lg"
             bg="gray.300"

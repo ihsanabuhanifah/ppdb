@@ -33,7 +33,7 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
     },
     {
       to: "/ppdb/tes-diniyah-dan-interview",
-      name: "Tes Diniyah",
+      name: "Tes Wawancara",
       disabled : isPayment,
       icon : <BookOpenIcon className="lg:h-8 lg:w-8 w-5 h-5 mr-5" />
     },
@@ -50,12 +50,6 @@ export default function Menu({ setHiddenMenu, hiddenMenu , setLogout}) {
                 {menu.name === "Pembayaradd" && isLulus !== "1" ?  "" : (<button
               key={index}
                 onClick={() => {
-
-                  if(menu.disabled === "belum_transfer"){
-                    return history.push("/ppdb/konfirmasi-pembayaran-ppdb")
-                  }else if(menu.disabled === false){
-                    return history.push("/ppdb/dashboard")
-                  }
                   return history.push(menu.to)
                 }}
                 className={`flex items-center text-md  lg:text-xl font-bold p-3 lg:px-4 lg:rounded-l-full ${history.location.pathname === menu.to ? "text-green-500 font-bold bg-white" : ""}`}

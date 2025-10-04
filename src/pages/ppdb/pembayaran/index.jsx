@@ -198,7 +198,7 @@ export default function Pembayaran() {
                       <div className="text-sm leading-5 text-green-900">
                         {dt.status === 1 ? (
                           <p className="text-green-500 p-3 font-bold text-white">
-                            firmasi Admin
+                            Konfirmasi Admin
                           </p>
                         ) : (
                           <p className="text-red-500 p-3 font-bold text-white">

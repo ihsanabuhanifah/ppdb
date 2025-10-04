@@ -66,7 +66,7 @@ export default function TesDiniyah() {
     }
   };
 
-  console.log(jadwal);
+ 
   return (
     <section className="text-gray-600">
       <Formik
